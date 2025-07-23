@@ -57,10 +57,10 @@
 		E71CA97B2E310F45000AFDE0 /* TravelSchedule */ = {
 			isa = PBXGroup;
 			children = (
-				E71CA98C2E312162000AFDE0 /* Resources */,
-				E71CA9782E310F45000AFDE0 /* Assets.xcassets */,
-				E71CA9792E310F45000AFDE0 /* ContentView.swift */,
 				E71CA97A2E310F45000AFDE0 /* TravelScheduleApp.swift */,
+				E71CA9992E312C9F000AFDE0 /* Views */,
+				E71CA9982E312C98000AFDE0 /* Services */,
+				E71CA98C2E312162000AFDE0 /* Resources */,
 			);
 			path = TravelSchedule;
 			sourceTree = "<group>";
@@ -68,6 +68,7 @@
 		E71CA98C2E312162000AFDE0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E71CA9782E310F45000AFDE0 /* Assets.xcassets */,
 				E71CA98D2E31217E000AFDE0 /* OpenAPI */,
 			);
 			path = Resources;
@@ -80,6 +81,21 @@
 				E71CA98E2E312185000AFDE0 /* openapi.yaml */,
 			);
 			path = OpenAPI;
+			sourceTree = "<group>";
+		};
+		E71CA9982E312C98000AFDE0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E71CA9992E312C9F000AFDE0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E71CA9792E310F45000AFDE0 /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
