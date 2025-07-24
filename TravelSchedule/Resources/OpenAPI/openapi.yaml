@@ -45,8 +45,7 @@ paths:
         description: json или xml
         required: false
         schema:
-          type: string
-          enum: [xml, json]
+          $ref: '#/components/schemas/ResponseFormat'
       - name: lang
         in: query
         description: lang
@@ -93,18 +92,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Stations'
+                $ref: '#/components/schemas/NearestStations'
 components:
   schemas:
-    Stations:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        stations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Station'
+    ResponseFormat:
+      type: string
+      enum: [json, xml]
+      default: json
     Pagination:
       type: object
       properties:
@@ -114,11 +108,20 @@ components:
           type: integer
         offset:
           type: integer
+    NearestStations:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        stations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Station'
     Station:
       type: object
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/PointType'
         title:
           type: string
         short_title:
@@ -136,7 +139,7 @@ components:
         station_type_name:
           type: string
         transport_type:
-          type: string
+          $ref: '#/components/schemas/TransportType'
         distance:
           type: number
         majority:
@@ -173,6 +176,9 @@ components:
         - sea
         - river
         - helicopter
+    PointType:
+      type: string
+      enum: [station, settlement]
     Schedule:
       type: object
       properties:
