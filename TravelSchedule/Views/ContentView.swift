@@ -18,7 +18,7 @@ struct ContentView: View {
         }
         .padding()
         .onAppear {
-//            getNearestStations()
+            getNearestStations()
         }
     }
     
@@ -34,7 +34,7 @@ struct ContentView: View {
                     distance: 50
                 )
                 print("stations:")
-                print(stations.stations, separator: "\n-------------------\n")
+                print(stations.stations!.map {$0.title})
             } catch {
                 print("error: \(error)")
             }

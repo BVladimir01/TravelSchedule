@@ -46,12 +46,47 @@ paths:
         required: false
         schema:
           type: string
+          enum: [xml, json]
       - name: lang
         in: query
         description: lang
         required: false
         schema:
           type: string
+      - name: station_types
+        in: query
+        description: Типы запрашиваемых станций
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/StationType'
+      - name: transport_types
+        in: query
+        description: Типы транспортного средства
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransportType'
+      - name: offset
+        in: query
+        description: Смещение относительно первого результата поиска.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        description: Максимальное количество результатов поиска в ответе.
+        required: false
+        schema:
+          type: integer
+          default: 100
       responses:
         "200":
           description: success
@@ -97,7 +132,7 @@ components:
         lng:
           type: number
         station_type:
-          type: string
+          $ref: '#/components/schemas/StationType'
         station_type_name:
           type: string
         transport_type:
@@ -108,6 +143,36 @@ components:
           type: integer
         type_choices:
           $ref: '#/components/schemas/Schedule'
+    StationType:
+      type: string
+      enum:
+        - station
+        - platform
+        - stop
+        - checkpoint
+        - post
+        - crossing
+        - overtaking_point
+        - train_station
+        - airport
+        - bust_station
+        - bus_stop
+        - unknown
+        - port
+        - port_point
+        - wharf
+        - river_port
+        - marine_station
+    TransportType:
+      type: string
+      enum:
+        - plane
+        - train
+        - suburban
+        - bus
+        - sea
+        - river
+        - helicopter
     Schedule:
       type: object
       properties:
