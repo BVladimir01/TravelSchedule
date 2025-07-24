@@ -87,12 +87,41 @@ paths:
           type: integer
           default: 100
       responses:
-        "200":
+        200:
           description: success
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NearestStations'
+  /v3.0/copyright/:
+    get:
+      tags:
+      - getCopyright
+      summary: Копирайт Яндекс Расписаний
+      operationId: getCopyright
+      parameters:
+      - name: apikey
+        in: query
+        description: API key
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: query
+        description: json или xml
+        required: false
+        schema:
+          type: string
+          default: json
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CopyrightResponse'
+      
+  
 components:
   schemas:
     ResponseFormat:
@@ -186,3 +215,38 @@ components:
           type: string
         touch_url:
           type: string
+    CopyrightResponse:
+      type: object
+      properties:
+        copyright:
+          $ref: '#/components/schemas/Copyright'
+    Copyright:
+      type: object
+      properties:
+        logo_vm:
+          type: string
+          description: Вертикальный монохромный баннер.
+        url:
+          type: string
+        logo_vd:
+          type: string
+        logo_hy:
+          type: string
+        logo_hd:
+          type: string
+        logo_vy:
+          type: string
+        text:
+          type: string
+        logo_hm:
+          type: string
+          
+        
+        
+        
+        
+        
+        
+        
+      
+      

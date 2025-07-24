@@ -9,6 +9,10 @@ import SwiftUI
 import OpenAPIURLSession
 
 struct ContentView: View {
+    
+    let client: APIProtocol
+    let apiKey: String
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -19,14 +23,15 @@ struct ContentView: View {
         .padding()
         .onAppear {
 //            getNearestStations()
+            getCopyright()
         }
     }
     
     func getNearestStations() {
         Task {
             do {
-                let client = try Client(serverURL: Servers.Server1.url(), transport: URLSessionTransport())
-                let service = NearestStationsService(client: client, apiKey: "f5fad011-aeea-4dab-a7a8-872458a66b1f")
+                let service = NearestStationsService(client: client,
+                                                     apiKey: apiKey)
                 print("fetching stations...")
                 let stations = try await service.getNearestStations(
                     lat: 59.864177,
@@ -40,8 +45,26 @@ struct ContentView: View {
             }
         }
     }
+    
+    func getCopyright() {
+        Task {
+            do {
+                let service = CopyrightService(client: client,
+                                               apiKey: apiKey)
+                print("fetching copyright...")
+                let copyright = try await service.getCopyright()
+                print("copyright:")
+                print(copyright.copyright?.text)
+            } catch {
+                print("error: \(error)")
+            }
+        }
+    }
+    
 }
 
 #Preview {
-    ContentView()
+    let client = try! Client(serverURL: Servers.Server1.url(), transport: URLSessionTransport())
+    let apiKey = "f5fad011-aeea-4dab-a7a8-872458a66b1f"
+    ContentView(client: client, apiKey: apiKey)
 }

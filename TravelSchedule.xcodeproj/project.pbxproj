@@ -15,6 +15,7 @@
 		E71CA98F2E312190000AFDE0 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E71CA98E2E312185000AFDE0 /* openapi.yaml */; };
 		E71CA9932E312200000AFDE0 /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E71CA9922E3121FB000AFDE0 /* openapi-generator-config.yaml */; };
 		E71CA9A32E312DEA000AFDE0 /* NearestStationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CA9A22E312DE2000AFDE0 /* NearestStationsService.swift */; };
+		E71CA9C52E32AFB6000AFDE0 /* CopyrightService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CA9C42E32AFAF000AFDE0 /* CopyrightService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		E71CA98E2E312185000AFDE0 /* openapi.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = "<group>"; };
 		E71CA9922E3121FB000AFDE0 /* openapi-generator-config.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = "<group>"; };
 		E71CA9A22E312DE2000AFDE0 /* NearestStationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestStationsService.swift; sourceTree = "<group>"; };
+		E71CA9C42E32AFAF000AFDE0 /* CopyrightService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyrightService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 		E71CA9982E312C98000AFDE0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E71CA9C42E32AFAF000AFDE0 /* CopyrightService.swift */,
 				E71CA9A22E312DE2000AFDE0 /* NearestStationsService.swift */,
 			);
 			path = Services;
@@ -186,6 +189,7 @@
 				E71CA97D2E310F45000AFDE0 /* ContentView.swift in Sources */,
 				E71CA97E2E310F45000AFDE0 /* TravelScheduleApp.swift in Sources */,
 				E71CA9A32E312DEA000AFDE0 /* NearestStationsService.swift in Sources */,
+				E71CA9C52E32AFB6000AFDE0 /* CopyrightService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
