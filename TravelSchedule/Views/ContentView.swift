@@ -23,7 +23,7 @@ struct ContentView: View {
         .padding()
         .onAppear {
 //            getNearestStations()
-            getCopyright()
+//            getCopyright()
         }
     }
     
@@ -32,16 +32,18 @@ struct ContentView: View {
             do {
                 let service = NearestStationsService(client: client,
                                                      apiKey: apiKey)
-                print("fetching stations...")
+                print("fetching stations...",
+                      terminator: "\n------------------\n")
                 let stations = try await service.getNearestStations(
                     lat: 59.864177,
                     lng: 30.319163,
                     distance: 50
                 )
-                print("stations:")
-                print(stations.stations!.map {$0.title})
+                print("stations:", stations.stations!.map {$0.title},
+                      terminator: "\n------------------\n")
             } catch {
-                print("error: \(error)")
+                print("error: \(error)",
+                      terminator: "\n------------------\n")
             }
         }
     }
@@ -51,12 +53,14 @@ struct ContentView: View {
             do {
                 let service = CopyrightService(client: client,
                                                apiKey: apiKey)
-                print("fetching copyright...")
+                print("fetching copyright...",
+                      terminator: "\n------------------\n")
                 let copyright = try await service.getCopyright()
-                print("copyright:")
-                print(copyright.copyright?.text)
+                print("copyright:", copyright.copyright?.text,
+                      terminator: "\n------------------\n")
             } catch {
-                print("error: \(error)")
+                print("error: \(error)",
+                      terminator: "\n------------------\n")
             }
         }
     }

@@ -16,76 +16,16 @@ paths:
       summary: Список ближайших станций
       operationId: getNearestStations
       parameters:
-      - name: apikey
-        in: query
-        description: API key
-        required: true
-        schema:
-          type: string
-      - name: lat
-        in: query
-        description: широта
-        required: true
-        schema:
-          type: number
-      - name: lng
-        in: query
-        description: долгота
-        required: true
-        schema:
-          type: number
-      - name: distance
-        in: query
-        description: радиус охвата
-        required: true
-        schema:
-          type: integer
-      - name: format
-        in: query
-        description: json или xml
-        required: false
-        schema:
-          $ref: '#/components/schemas/ResponseFormat'
-      - name: lang
-        in: query
-        description: lang
-        required: false
-        schema:
-          type: string
-      - name: station_types
-        in: query
-        description: Типы запрашиваемых станций
-        required: false
-        style: form
-        explode: false
-        schema:
-          type: array
-          items:
-            $ref: '#/components/schemas/StationType'
-      - name: transport_types
-        in: query
-        description: Типы транспортного средства
-        required: false
-        style: form
-        explode: false
-        schema:
-          type: array
-          items:
-            $ref: '#/components/schemas/TransportType'
-      - name: offset
-        in: query
-        description: Смещение относительно первого результата поиска.
-        required: false
-        schema:
-          type: integer
-          default: 0
-      - name: limit
-        in: query
-        description: Максимальное количество результатов поиска в ответе.
-        required: false
-        schema:
-          type: integer
-          default: 100
+      - $ref: '#/components/parameters/APIKeyParam'
+      - $ref: '#/components/parameters/LatParam'
+      - $ref: '#/components/parameters/LngParam'
+      - $ref: '#/components/parameters/DistanceParam'
+      - $ref: '#/components/parameters/FormatParam'
+      - $ref: '#/components/parameters/LangParam'
+      - $ref: '#/components/parameters/StationTypesParam'
+      - $ref: '#/components/parameters/TransportTypesParam'
+      - $ref: '#/components/parameters/OffsetParam'
+      - $ref: '#/components/parameters/LimitParam'
       responses:
         200:
           description: success
@@ -100,19 +40,8 @@ paths:
       summary: Копирайт Яндекс Расписаний
       operationId: getCopyright
       parameters:
-      - name: apikey
-        in: query
-        description: API key
-        required: true
-        schema:
-          type: string
-      - name: format
-        in: query
-        description: json или xml
-        required: false
-        schema:
-          type: string
-          default: json
+      - $ref: '#/components/parameters/APIKeyParam'
+      - $ref: '#/components/parameters/FormatParam'
       responses:
         200:
           description: success
@@ -120,14 +49,98 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CopyrightResponse'
+
       
   
 components:
+  parameters:
+    APIKeyParam:
+      name: apikey
+      in: query
+      description: API key
+      required: true
+      schema:
+        type: string
+    FormatParam:
+      name: format
+      in: query
+      description: json or xml
+      schema:
+        type: string
+        enum: [json, xml]
+        default: json
+    LangParam:
+      name: lang
+      in: query
+      description: Язык возвращаемой информации
+      required: false
+      schema:
+        type: string
+        default: ru_RU
+    LatParam:
+      name: lat
+      in: query
+      description: широта
+      required: true
+      schema:
+        type: number
+    LngParam:
+      name: lng
+      in: query
+      description: долгота
+      required: true
+      schema:
+        type: number
+    DistanceParam:
+      name: distance
+      in: query
+      description: радиус охвата
+      required: true
+      schema:
+        type: integer
+    StationTypesParam:
+      name: station_types
+      in: query
+      description: Типы запрашиваемых станций
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/StationType'
+    TransportTypesParam:
+      name: transport_types
+      in: query
+      description: Типы транспортного средства
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/TransportType'
+    OffsetParam:
+      name: offset
+      in: query
+      description: Смещение относительно первого результата поиска.
+      required: false
+      schema:
+        type: integer
+        default: 0
+    LimitParam:
+      name: limit
+      in: query
+      description: Максимальное количество результатов поиска в ответе.
+      required: false
+      schema:
+        type: integer
+        default: 100
+      
+    
+    
+    
   schemas:
-    ResponseFormat:
-      type: string
-      enum: [json, xml]
-      default: json
     Pagination:
       type: object
       properties:
