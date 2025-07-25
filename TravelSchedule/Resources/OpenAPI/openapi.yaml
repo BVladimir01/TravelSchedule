@@ -218,7 +218,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ScheduleResponse'
-  
+  /v3.0/search/:
+    get:
+      tags:
+        - searchSchedules
+      summary: Расписание рейсов между станциями
+      operationId: searchSchedules
+      parameters:
+        - $ref: '#/components/parameters/APIKeyParam'
+        - name: from
+          in: query
+          required: true
+          description: Код станции отправления
+          schema:
+            type: string
+        - name: to
+          in: query
+          required: true
+          description: Код станции прибытия
+          schema:
+            type: string
+        - $ref: '#/components/parameters/FormatParam'
+        - $ref: '#/components/parameters/LangParam'
+        - $ref: '#/components/parameters/DateParam'
+        - $ref: '#/components/parameters/TransportTypesParam'
+        - $ref: '#/components/parameters/SystemParam'
+        - $ref: '#/components/parameters/ShowSystemsParam'
+        - $ref: '#/components/parameters/OffsetParam'
+        - $ref: '#/components/parameters/LimitParam'
+        - name: add_days_mask
+          in: query
+          required: false
+          description: Признак, который указывает, что для каждой нитки в ответе следует вернуть календарь хождения — элемент schedule, вложенный в элемент segment.
+          schema:
+            type: boolean
+        - $ref: '#/components/parameters/ResultTimeZoneParam'
+        - name: transfers
+          in: query
+          required: false
+          description: Признак, разрешающий добавить к результатам поиска маршруты с пересадками
+          schema:
+            type: boolean
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        
 components:
   parameters:
     APIKeyParam:
@@ -325,6 +373,7 @@ components:
       schema:
         type: string
         enum: [yandex, esr, all]
+        default: yandex
     ResultTimeZoneParam:
       name: result_timezone
       in: query
@@ -965,12 +1014,297 @@ components:
           type: string
           description: Название направления (расшифровка кода) в свободной форме
           
-    
-    
-        
-        
-          
-        
+    SearchResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        interval_segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchIntervalSegment'
+          description: Список интервальных рейсов, движение по которым идет регулярно, но без определенного расписания
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchSegment'
+          description: Список найденных рейсов
+        search:
+          $ref: '#/components/schemas/SearchInfo'
+    SearchIntervalSegment:
+      type: object
+      properties:
+        from:
+          $ref: '#/components/schemas/SearchSegmentFrom'
+        thread:
+          $ref: '#/components/schemas/SearchSegmentThread'
+        departure_platform:
+          type: string
+          description: Номер платформы станции отправления
+        stops:
+          type: string
+          description: Станции следования рейса, на которых совершается остановка. Описывается в свободной форме.
+        departure_terminal:
+          type: string
+          description: Название терминала станции отправления
+        to:
+          $ref: '#/components/schemas/SearchSegmentTo'
+        has_transfers:
+          type: boolean
+          description: Признак наличия пересадок по ходу рейса
+        tickets_info:
+          $ref: '#/components/schemas/SearchSegmentTicketsInfo'
+        duration:
+          type: integer
+          description: Продолжительность рейса (в секундах)
+        arrival_terminal:
+          type: string
+          description: Название терминала станции прибытия
+        start_date:
+          type: string
+          description: Дата отправления рейса
+        arrival_platform:
+          type: string
+          description: Номер платформы станции прибытия
+    SearchSegmentFrom:
+      type: object
+      description: Информация о станции отправления рейса
+      properties:
+        code:
+          type: string
+          description: Код пункта отправления в системе кодирования Яндекс Расписаний
+        title:
+          type: string
+          description: Название пункта отправления
+        station_type:
+          $ref: '#/components/schemas/StationType'
+        station_type_name:
+          type: string
+          description: Название типа пункта отправления, зависит от языка ответа
+        popular_title:
+          type: string
+          description: Общепринятое название пункта отправления
+        short_title:
+          type: string
+          description: Короткое название пункта отправления
+        transport_type:
+          $ref: '#/components/schemas/TransportType'
+        type:
+          type: string
+          description: Вид пункта отправления
+          enum: [station, settlement]
+    SearchSegmentThread:
+      type: object
+      description: Информация о нитке рейса
+      properties:
+        uid:
+          type: string
+          description: Идентификатор нитки, принятый в Яндекс Расписаниях.
+        title:
+          type: string
+          description: Название нитки
+        interval:
+          $ref: '#/components/schemas/SearchSegmentThreadInterval'
+        number:
+          type: string
+          description: Номер рейса
+        short_title:
+          type: string
+          description: Короткое название нитки
+        thread_method_link:
+          type: string
+          description: URL запроса информации о нитке с идентификатором, указанным в ключе uid
+        carrier:
+          $ref: '#/components/schemas/SearchSegmentCarrier'
+        transport_type:
+          $ref: '#/components/schemas/TransportType'
+        vehicle:
+          type: string
+          description: Название транспортного средства
+        transport_subtype:
+          $ref: '#/components/schemas/TransportSubtype'
+        express_type:
+          type: string
+          description: Признак экспресса или аэроэкспресса
+          enum:
+            - express
+            - aeroexpress
+    SearchSegmentThreadInterval:
+      type: object
+      description: Информация о движении по интервальной нитке
+      properties:
+        density:
+          type: string
+          description: Описание периодичности движения в свободной форме.
+        end_time:
+          type: string
+          description: Дата и время окончания движения по нитке. Всегда указывается в часовом поясе станции отправления.
+        begin_time:
+          type: string
+          description: Дата и время начала движения по нитке. Всегда указывается в часовом поясе станции отправления.
+    SearchSegmentCarrier:
+      type: object
+      description: Информация о перевозчике
+      properties:
+        code:
+          type: integer
+          description: Код перевозчика в системе кодирования Яндекс Расписаний
+        contacts:
+          type: string
+          description: Контактная информация, в свободной форме
+        url:
+          type: string
+          description: Ссылка на сайт перевозчика
+        logo_svg:
+          type: string
+          description: Ссылка на используемый Яндексом логотип перевозчика в формате SVG
+        title:
+          type: string
+          description: Название перевозчика
+        phone:
+          type: string
+          description: Контактный номер телефона перевозчика
+        codes:
+          $ref: '#/components/schemas/CarrierCodes'
+        address:
+          type: string
+          description: Юридический адрес перевозчика
+        logo:
+          type: string
+          description: Ссылка на используемый Яндексом логотип перевозчика в растровом формате
+        email:
+          type: string
+          description: Электронный почтовый адрес перевозчика
+    SearchSegmentTo:
+      type: object
+      description: Информация о станции прибытия рейса
+      properties:
+        code:
+          type: string
+          description: Код станции прибытия в системе кодирования Яндекс Расписаний
+        title:
+          type: string
+          description: Название станции прибытия
+        station_type:
+          $ref: '#/components/schemas/StationType'
+        station_type_name:
+          type: string
+          description: Название типа пункта отправления, зависит от языка ответа
+        popular_title:
+          type: string
+          description: Общепринятое название пункта отправления
+        short_title:
+          type: string
+          description: Короткое название пункта отправления
+        transport_type:
+          $ref: '#/components/schemas/TransportType'
+        type:
+          type: string
+          description: Вид пункта отправления
+          enum: [station, settlement]
+    SearchSegmentTicketsInfo:
+      type: object
+      description: Информация о доступных типах билетов и их цене
+      properties:
+        et_marker:
+          type: boolean
+          description: Признак возможности купить электронный билет
+        places:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchSegmentTicketPlace'
+          description: Доступные типы и цена билетов
+    SearchSegmentTicketPlace:
+      type: object
+      properties:
+        currency:
+          type: string
+          description: Идентификатор валюты, в которой указана цена
+        price:
+          type: object
+          description: Цена билета
+          properties:
+            cents:
+              type: integer
+              description: Целое число дополнительных единиц валюты (например, копеек или центов)
+            whole:
+              type: integer
+              description: Целое число основных единиц валюты (например, рублей)
+        name:
+          type: string
+          description: Название типа билета (например, «эконом»)
+    SearchSegment:
+      type: object
+      properties:
+        arrival:
+          type: string
+          description: Время прибытия, в формате ISO 8601
+        from:
+          $ref: '#/components/schemas/SearchSegmentFrom'
+        thread:
+          $ref: '#/components/schemas/SearchSegmentThread'
+        departure_platform:
+          type: string
+          description: Номер платформы станции отправления
+        departure:
+          type: string
+          description: Время отправления, в формате ISO 8601
+        stops:
+          type: string
+          description: Станции следования рейса, на которых совершается остановка. Описывается в свободной форме.
+        departure_terminal:
+          type: string
+          description: Название терминала станции отправления
+        to:
+          $ref: '#/components/schemas/SearchSegmentTo'
+        has_transfers:
+          type: boolean
+          description: Признак наличия пересадок по ходу рейса
+        tickets_info:
+          $ref: '#/components/schemas/SearchSegmentTicketsInfo'
+        duration:
+          type: integer
+          description: Продолжительность рейса (в секундах)
+        arrival_terminal:
+          type: string
+          description: Название терминала станции прибытия
+        start_date:
+          type: string
+          description: Дата отправления рейса
+        arrival_platform:
+          type: string
+          description: Номер платформы станции прибытия
+    SearchInfo:
+      type: object
+      description: Указанная в запросе дата, пункт отправления и пункт прибытия
+      properties:
+        date:
+          type: string
+          description: Дата, на которую получен список рейсов, в формате «YYYY-MM-DD»
+        to:
+          $ref: '#/components/schemas/SearchInfoFromTo'
+        from:
+          $ref: '#/components/schemas/SearchInfoFromTo'
+    SearchInfoFromTo:
+      type: object
+      description: Информация об указанном в запросе пункте отправления/назначения
+      properties:
+        code:
+          type: string
+          description: Код пункта отправления/назначения в системе кодирования Яндекс Расписаний
+        type:
+          type: string
+          description: Вид пункта отправления/назначения
+          enum: [station, settlement]
+        popular_title:
+          type: string
+          description: Общепринятое название пункта отправления/назначения
+        short_title:
+          type: string
+          description: Короткое название пункта отправления/назначения
+        title:
+          type: string
+          description: Название пункта отправления/назначения
         
         
         

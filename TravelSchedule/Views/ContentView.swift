@@ -36,6 +36,7 @@ struct ContentView: View {
 //            getNearestSettlement()
 //            getThread()
 //            getSchedules()
+//            searchSchedules()
         }
     }
     
@@ -166,6 +167,24 @@ struct ContentView: View {
                 print("fetching schedules",
                       terminator: printTerminator)
                 let schedules = try await service.getSchedules(for: "s9600213")
+                print("schedules:", schedules,
+                      terminator: printTerminator)
+            } catch {
+                print("error: \(error)",
+                      terminator: printTerminator)
+            }
+        }
+    }
+    
+    private func searchSchedules() {
+        Task {
+            do {
+                let service = SearchService(client: client,
+                                            apiKey: apiKey)
+                print("fetching schedules",
+                      terminator: printTerminator)
+                let schedules = try await service.getSchedules(from: "c146",
+                                                               to: "c213")
                 print("schedules:", schedules,
                       terminator: printTerminator)
             } catch {
