@@ -10,8 +10,15 @@ import OpenAPIURLSession
 
 struct ContentView: View {
     
-    let client: APIProtocol
-    let apiKey: String
+    private let client: APIProtocol
+    private let apiKey: String
+    
+    let printTerminator = "\n------------------\n"
+    
+    init(client: APIProtocol, apiKey: String) {
+        self.client = client
+        self.apiKey = apiKey
+    }
     
     var body: some View {
         VStack {
@@ -24,43 +31,67 @@ struct ContentView: View {
         .onAppear {
 //            getNearestStations()
 //            getCopyright()
+            getAllStations()
         }
     }
     
-    func getNearestStations() {
+    private func performRequests() {
+        getNearestStations()
+        getCopyright()
+        getAllStations()
+    }
+    
+    private func getNearestStations() {
         Task {
             do {
                 let service = NearestStationsService(client: client,
                                                      apiKey: apiKey)
                 print("fetching stations...",
-                      terminator: "\n------------------\n")
+                      terminator: printTerminator)
                 let stations = try await service.getNearestStations(
                     lat: 59.864177,
                     lng: 30.319163,
                     distance: 50
                 )
                 print("stations:", stations.stations!.map {$0.title},
-                      terminator: "\n------------------\n")
+                      terminator: printTerminator)
             } catch {
                 print("error: \(error)",
-                      terminator: "\n------------------\n")
+                      terminator: printTerminator)
             }
         }
     }
     
-    func getCopyright() {
+    private func getCopyright() {
         Task {
             do {
                 let service = CopyrightService(client: client,
                                                apiKey: apiKey)
                 print("fetching copyright...",
-                      terminator: "\n------------------\n")
+                      terminator: printTerminator)
                 let copyright = try await service.getCopyright()
-                print("copyright:", copyright.copyright?.text,
-                      terminator: "\n------------------\n")
+                print("copyright:", copyright.copyright,
+                      terminator: printTerminator)
             } catch {
                 print("error: \(error)",
-                      terminator: "\n------------------\n")
+                      terminator: printTerminator)
+            }
+        }
+    }
+    
+    private func getAllStations() {
+        Task {
+            do {
+                let service = AllStationsService(client: client,
+                                                 apiKey: apiKey)
+                print("fetching all stations",
+                      terminator: printTerminator)
+                let allStations = try await service.getAllStations()
+                print("all stations:", allStations,
+                      terminator: printTerminator)
+            } catch {
+                print("error: \(error)",
+                      terminator: printTerminator)
             }
         }
     }

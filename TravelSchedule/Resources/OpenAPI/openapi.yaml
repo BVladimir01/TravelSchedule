@@ -5,9 +5,6 @@ info:
   version: 3.0.0
 servers:
 - url: https://api.rasp.yandex.net
-tags:
-- name: Список ближайших станций
-  description: Список ближайших станций
 paths:
   /v3.0/nearest_stations/:
     get:
@@ -32,7 +29,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NearestStations'
+                $ref: '#/components/schemas/NearestStationsResponse'
   /v3.0/copyright/:
     get:
       tags:
@@ -49,8 +46,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CopyrightResponse'
-
-      
+  /v3.0/stations_list/:
+    get:
+      tags:
+      - getAllStations
+      summary: Список всех доступных станций
+      operationId: getAllStations
+      parameters:
+      - $ref: '#/components/parameters/APIKeyParam'
+      - $ref: '#/components/parameters/LangParam'
+      - $ref: '#/components/parameters/FormatParam'
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllStationsResponse'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/AllStationsResponse'
   
 components:
   parameters:
@@ -136,10 +151,7 @@ components:
       schema:
         type: integer
         default: 100
-      
-    
-    
-    
+
   schemas:
     Pagination:
       type: object
@@ -150,7 +162,7 @@ components:
           type: integer
         offset:
           type: integer
-    NearestStations:
+    NearestStationsResponse:
       type: object
       properties:
         pagination:
@@ -158,8 +170,8 @@ components:
         stations:
           type: array
           items:
-            $ref: '#/components/schemas/Station'
-    Station:
+            $ref: '#/components/schemas/NearestStation'
+    NearestStation:
       type: object
       properties:
         type:
@@ -200,7 +212,7 @@ components:
         - overtaking_point
         - train_station
         - airport
-        - bust_station
+        - bus_station
         - bus_stop
         - unknown
         - port
@@ -215,9 +227,9 @@ components:
         - train
         - suburban
         - bus
-        - sea
-        - river
         - helicopter
+        - water
+        - sea
     PointType:
       type: string
       enum: [station, settlement]
@@ -253,9 +265,93 @@ components:
           type: string
         logo_hm:
           type: string
+    AllStationsResponse:
+      type: object
+      properties:
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+    Country:
+      type: object
+      properties:
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Region'
+        codes:
+          $ref: '#/components/schemas/PointCodes'
+        title:
+          type: string
+          description: Название страны.
+    Region:
+      type: object
+      properties:
+        settlements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Settlement'
+        codes:
+          $ref: '#/components/schemas/PointCodes'
+        title:
+          type: string
+          description: Название региона
+    Settlement:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Название населенного пункта
+        codes:
+          $ref: '#/components/schemas/PointCodes'
+        stations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Station'
+    Station:
+      type: object
+      properties:
+        direction:
+          type: string
+          description: Направление движения поездов, на котором находится станция
+        codes:
+          $ref: '#/components/schemas/StationCodes'
+        station_type:
+          #$ref: '#/components/schemas/StationType'
+          type: string
+        title:
+          type: string
+          description: Название станции
+        transport_type:
+          $ref: '#/components/schemas/TransportType'
+        latitude:
+          oneOf:
+            - type: number
+            - type: string
+          description: Широта станции
+        longitude:
+          oneOf:
+            - type: number
+            - type: string
+          description: Долгота станции
+    StationCodes:
+      type: object
+      properties:
+        esr_code:
+          type: string
+          description: Код железнодорожной станции в системе кодирования ЕСР
+        yandex_code:
+          type: string
+          description: Код в системе кодирования Яндекс Расписаний
+    PointCodes:
+      type: object
+      properties:
+        yandex_code:
+          type: string
+    
+        
+        
           
-        
-        
         
         
         

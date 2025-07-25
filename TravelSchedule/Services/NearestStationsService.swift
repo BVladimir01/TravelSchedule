@@ -5,7 +5,7 @@
 //  Created by Vladimir on 23.07.2025.
 //
 
-typealias NearestStations = Components.Schemas.NearestStations
+typealias NearestStations = Components.Schemas.NearestStationsResponse
 
 
 protocol NearestStationsServiceProtocol {
