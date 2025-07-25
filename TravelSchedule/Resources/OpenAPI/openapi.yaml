@@ -166,13 +166,7 @@ paths:
           description: Дата, на которую необходимо получить список станций следования
           schema:
             type: string
-        - name: show_systems
-          in: query
-          required: false
-          description: Cистема кодирования, в которой необходимо получить коды станций
-          schema:
-            type: string
-            enum: [yandex, esr, all]
+        - $ref: '#/components/parameters/ShowSystemsParam'
       responses:
         200:
           description: success
@@ -180,7 +174,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Thread'
-        
+  /v3.0/schedule/:
+    get:
+      tags:
+        - getSchedules
+      summary: Расписание рейсов по станции
+      operationId: getSchedules
+      parameters:
+        - $ref: '#/components/parameters/APIKeyParam'
+        - name: station
+          in: query
+          required: true
+          description: Код станции
+          schema:
+            type: string
+        - $ref: '#/components/parameters/LangParam'
+        - $ref: '#/components/parameters/FormatParam'
+        - $ref: '#/components/parameters/DateParam'
+        - $ref: '#/components/parameters/TransportTypesParam'
+        - name: direction
+          in: query
+          required: false
+          description: Код направления, по которому необходимо получить список рейсов электричек по станции
+          schema:
+            type: string
+        - name: event
+          in: query
+          required: false
+          description: Событие, для которого нужно отфильтровать нитки в расписании
+          schema:
+            type:
+              string
+            enum:
+              - departure
+              - arrival
+        - $ref: '#/components/parameters/SystemParam'
+        - $ref: '#/components/parameters/ShowSystemsParam'
+        - $ref: '#/components/parameters/ResultTimeZoneParam'
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleResponse'
   
 components:
   parameters:
@@ -259,6 +296,42 @@ components:
       schema:
         type: integer
         default: 100
+    DateParam:
+      name: date
+      in: query
+      description: Дата, на которую необходимо получить список рейсов
+      required: false
+      schema:
+        type: string
+    SystemParam:
+      name: system
+      in: query
+      required: false
+      description: Система кодирования, в которой указывается код станции
+      schema:
+        type: string
+        enum:
+          - yandex
+          - iata
+          - sirena
+          - express
+          - esr
+        default: yandex
+    ShowSystemsParam:
+      name: show_systems
+      in: query
+      required: false
+      description: Cистема кодирования, в которой необходимо получить коды станций
+      schema:
+        type: string
+        enum: [yandex, esr, all]
+    ResultTimeZoneParam:
+      name: result_timezone
+      in: query
+      required: false
+      description: Часовой пояс, для которого следует указывать даты и времена в ответе. Часовые пояса следует указывать с помощью идентификаторов базы данных tz.
+      schema:
+        type: string
 
   schemas:
     Pagination:
@@ -270,6 +343,7 @@ components:
           type: integer
         offset:
           type: integer
+    
     NearestStationsResponse:
       type: object
       properties:
@@ -307,7 +381,7 @@ components:
         majority:
           type: integer
         type_choices:
-          $ref: '#/components/schemas/Schedule'
+          $ref: '#/components/schemas/TypeChoices'
     StationType:
       type: string
       enum:
@@ -341,13 +415,21 @@ components:
     PointType:
       type: string
       enum: [station, settlement]
-    Schedule:
+    TypeChoices:
       type: object
       properties:
+        schedule:
+          type: object
+          properties:
+            desktop_url:
+              type: string
+            touch_url:
+              type: string
         desktop_url:
           type: string
         touch_url:
           type: string
+    
     CopyrightResponse:
       type: object
       properties:
@@ -373,6 +455,7 @@ components:
           type: string
         logo_hm:
           type: string
+    
     AllStationsResponse:
       type: object
       properties:
@@ -456,6 +539,7 @@ components:
       properties:
         yandex_code:
           type: string
+    
     CarrierResponse:
       type: object
       properties:
@@ -497,6 +581,7 @@ components:
           description: Электронный почтовый адрес перевозчика
     CarrierCodes:
       type: object
+      description: Список кодов перевозчика в других системах кодирования
       properties:
         icao:
           type: string
@@ -507,6 +592,7 @@ components:
         iata:
           type: string
           description: Код перевозчика в системе кодирования IATA
+    
     NearestSettlement:
       type: object
       properties:
@@ -537,6 +623,7 @@ components:
           enum:
             - station
             - settlement
+    
     Thread:
       type: object
       properties:
@@ -729,6 +816,157 @@ components:
         title:
           type: string
           description: Описание подтипа транспорта на естественном языке
+    
+    ScheduleResponse:
+      type: object
+      properties:
+        date:
+          type: string
+          description: Дата, на которую получен список рейсов
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        station:
+          $ref: '#/components/schemas/ScheduleStation'
+        schedule:
+          type: array
+          items:
+            $ref: '#/components/schemas/Schedule'
+        schedule_direction:
+          $ref: '#/components/schemas/ScheduleDirection'
+        directions:
+          $ref: '#/components/schemas/ScheduleDirections'
+    ScheduleStation:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Код станции в системе кодирования Яндекс Расписаний
+        station_type:
+          $ref: '#/components/schemas/StationType'
+        station_type_name:
+          type: string
+          description: Название типа станции, зависит от языка ответа
+        title:
+          type: string
+          description: Название станции
+        popular_title:
+          type: string
+          description: Общепринятое название станции
+        short_title:
+          type: string
+          description: Короткое название станции
+        codes:
+          $ref: '#/components/schemas/ScheduleStationCodes'
+        transport_type:
+          $ref: '#/components/schemas/TransportType'
+        type:
+          type: string
+          description: Вид станции
+    ScheduleStationCodes:
+      type: object
+      description: Список кодов станции в других системах кодирования
+      properties:
+        yandex:
+          type: string
+          description: Код станции в системе кодирования Яндекс Расписаний
+        esr:
+          type: string
+          description: Код станции в системе кодирования ЕСР
+    Schedule:
+      type: object
+      properties:
+        except_days:
+          type: string
+          description: Дни, в которые нитка не курсирует
+        arrival:
+          type: string
+          description: Время прибытия, в формате ISO 8601
+        thread:
+          $ref: '#/components/schemas/ScheduleThread'
+        is_fuzzy:
+          type: boolean
+          description: Признак неточности времени отправления и времени прибытия
+        days:
+          type: string
+          description: Дни курсирования нитки.
+        stops:
+          type: string
+          description: Станции следования рейса, на которых совершается остановка. Описывается в свободной форме
+        departure:
+          type: string
+          description: Время отправления, в формате ISO 8601
+        terminal:
+          type: string
+          description: Терминал аэропорта
+        platform:
+          type: string
+          description: Платформа или путь, с которого отправляется рейс
+    ScheduleThread:
+      type: object
+      description: Информация о нитке
+      properties:
+        uid:
+          type: string
+          description: Идентификатор нитки, принятый в Яндекс Расписаниях.
+        title:
+          type: string
+          description: Название нитки
+        number:
+          type: string
+          description: Номер рейса
+        short_title:
+          type: string
+          description: Короткое название нитки
+        carrier:
+          $ref: '#/components/schemas/ScheduleCarrier'
+        transport_type:
+          $ref: '#/components/schemas/TransportType'
+        vehicle:
+          type: string
+          description: Название транспортного средства
+        transport_sybtype:
+          $ref: '#/components/schemas/TransportSubtype'
+        express_type:
+          type: string
+          description: Признак экспресса или аэроэкспресса
+          enum:
+            - express
+            - aeroexpress
+    ScheduleCarrier:
+      type: object
+      description: Информация о перевозчике
+      properties:
+        code:
+          type: integer
+          description: Код перевозчика в системе кодирования Яндекс Расписаний
+        codes:
+          $ref: '#/components/schemas/CarrierCodes'
+        title:
+          type: string
+          description: Название перевозчика
+    ScheduleDirection:
+      type: object
+      description: Код и название запрошенного направления рейсов
+      properties:
+        code:
+          type: string
+          description: Код направления
+        title:
+          type: string
+          description: Название направления
+    ScheduleDirections:
+      type: object
+      description: Код направления
+      properties:
+        code:
+          type: string
+          description: Код направления
+        title:
+          type: string
+          description: Название направления (расшифровка кода) в свободной форме
+          
+    
+    
         
         
           

@@ -34,7 +34,8 @@ struct ContentView: View {
 //            getAllStations()
 //            getCarrier()
 //            getNearestSettlement()
-            getThread()
+//            getThread()
+//            getSchedules()
         }
     }
     
@@ -147,8 +148,25 @@ struct ContentView: View {
                                             apiKey: apiKey)
                 print("fetching thread",
                       terminator: printTerminator)
-                let thread = try await service.getThread(id: "038AA_tis")
+                let thread = try await service.getThread(id: "SU-1484_250725_c26_12")
                 print("thread:", thread,
+                      terminator: printTerminator)
+            } catch {
+                print("error: \(error)",
+                      terminator: printTerminator)
+            }
+        }
+    }
+    
+    private func getSchedules() {
+        Task {
+            do {
+                let service = ScheduleService(client: client,
+                                              apiKey: apiKey)
+                print("fetching schedules",
+                      terminator: printTerminator)
+                let schedules = try await service.getSchedules(for: "s9600213")
+                print("schedules:", schedules,
                       terminator: printTerminator)
             } catch {
                 print("error: \(error)",
