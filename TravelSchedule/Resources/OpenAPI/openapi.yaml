@@ -66,6 +66,43 @@ paths:
             text/html:
               schema:
                 $ref: '#/components/schemas/AllStationsResponse'
+  /v3.0/carrier/:
+    get:
+      tags:
+      - getCarrier
+      summary: Информация о перевозчике
+      operationId: getCarrier
+      parameters:
+      - $ref: '#/components/parameters/APIKeyParam'
+      - name: code
+        in: query
+        required: true
+        description: Код перевозчика
+        schema:
+          type: string
+      - name: system
+        in: query
+        required: false
+        description: Система кодирования, в которой указывается код перевозчика в запросе
+        schema:
+          type: string
+          default: yandex
+          enum:
+            - yandex
+            - iata
+            - sirena
+            - express
+            - esr
+      - $ref: '#/components/parameters/LangParam'
+      - $ref: '#/components/parameters/FormatParam'
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarrierResponse'
+  
   
 components:
   parameters:
@@ -348,6 +385,57 @@ components:
       properties:
         yandex_code:
           type: string
+    CarrierResponse:
+      type: object
+      properties:
+        carriers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Carrier'
+          description: Список перевозчиков
+        carrier:
+          $ref: '#/components/schemas/Carrier'
+    Carrier:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Код перевозчика в указанной системе кодирования
+        contacts:
+          type: string
+          description: Контактная информация, в свободной форме
+        url:
+          type: string
+          description: Ссылка на сайт перевозчика
+        title:
+          type: string
+          description: Название перевозчика
+        phone:
+          type: string
+          description: Контактный номер телефона перевозчика
+        codes:
+          $ref: '#/components/schemas/CarrierCodes'
+        address:
+          type: string
+          description: Юридический адрес перевозчика
+        logo:
+          type: string
+          description: Ссылка на используемый Яндексом логотип перевозчика в растровом формате
+        email:
+          type: string
+          description: Электронный почтовый адрес перевозчика
+    CarrierCodes:
+      type: object
+      properties:
+        icao:
+          type: string
+          description: Код перевозчика в системе кодирования ICAO
+        sirena:
+          type: string
+          description: Код перевозчика в системе кодирования Sirena
+        iata:
+          type: string
+          description: Код перевозчика в системе кодирования IATA
     
         
         

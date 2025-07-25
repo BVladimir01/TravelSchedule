@@ -17,6 +17,7 @@
 		E71CA9A32E312DEA000AFDE0 /* NearestStationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CA9A22E312DE2000AFDE0 /* NearestStationsService.swift */; };
 		E71CA9C52E32AFB6000AFDE0 /* CopyrightService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CA9C42E32AFAF000AFDE0 /* CopyrightService.swift */; };
 		E71CA9D82E33553D000AFDE0 /* AllStationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CA9D42E335537000AFDE0 /* AllStationsService.swift */; };
+		E71CAA0D2E3381D8000AFDE0 /* CarrierService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CAA092E3381D1000AFDE0 /* CarrierService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		E71CA9A22E312DE2000AFDE0 /* NearestStationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestStationsService.swift; sourceTree = "<group>"; };
 		E71CA9C42E32AFAF000AFDE0 /* CopyrightService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyrightService.swift; sourceTree = "<group>"; };
 		E71CA9D42E335537000AFDE0 /* AllStationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsService.swift; sourceTree = "<group>"; };
+		E71CAA092E3381D1000AFDE0 /* CarrierService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrierService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 		E71CA9982E312C98000AFDE0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E71CAA092E3381D1000AFDE0 /* CarrierService.swift */,
 				E71CA9D42E335537000AFDE0 /* AllStationsService.swift */,
 				E71CA9C42E32AFAF000AFDE0 /* CopyrightService.swift */,
 				E71CA9A22E312DE2000AFDE0 /* NearestStationsService.swift */,
@@ -189,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E71CAA0D2E3381D8000AFDE0 /* CarrierService.swift in Sources */,
 				E71CA97D2E310F45000AFDE0 /* ContentView.swift in Sources */,
 				E71CA97E2E310F45000AFDE0 /* TravelScheduleApp.swift in Sources */,
 				E71CA9D82E33553D000AFDE0 /* AllStationsService.swift in Sources */,

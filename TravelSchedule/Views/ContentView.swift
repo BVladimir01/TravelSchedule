@@ -31,7 +31,8 @@ struct ContentView: View {
         .onAppear {
 //            getNearestStations()
 //            getCopyright()
-            getAllStations()
+//            getAllStations()
+            getCarrier()
         }
     }
     
@@ -70,7 +71,7 @@ struct ContentView: View {
                 print("fetching copyright...",
                       terminator: printTerminator)
                 let copyright = try await service.getCopyright()
-                print("copyright:", copyright.copyright,
+                print("copyright:", copyright,
                       terminator: printTerminator)
             } catch {
                 print("error: \(error)",
@@ -96,7 +97,25 @@ struct ContentView: View {
         }
     }
     
+    private func getCarrier() {
+        Task {
+            do {
+                let service = CarrierService(client: client,
+                                             apiKey: apiKey)
+                print("fetching carrier",
+                      terminator: printTerminator)
+                let carrierResponse = try await service.getCarrier()
+                print("carrier:", carrierResponse,
+                      terminator: printTerminator)
+            } catch {
+                print("error: \(error)",
+                      terminator: printTerminator)
+            }
+        }
+    }
+    
 }
+
 
 #Preview {
     let client = try! Client(serverURL: Servers.Server1.url(), transport: URLSessionTransport())
