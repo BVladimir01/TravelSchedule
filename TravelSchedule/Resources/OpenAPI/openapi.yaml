@@ -16,7 +16,12 @@ paths:
       - $ref: '#/components/parameters/APIKeyParam'
       - $ref: '#/components/parameters/LatParam'
       - $ref: '#/components/parameters/LngParam'
-      - $ref: '#/components/parameters/DistanceParam'
+      - name: distance
+        in: query
+        description: радиус охвата
+        required: true
+        schema:
+          type: integer
       - $ref: '#/components/parameters/FormatParam'
       - $ref: '#/components/parameters/LangParam'
       - $ref: '#/components/parameters/StationTypesParam'
@@ -69,32 +74,32 @@ paths:
   /v3.0/carrier/:
     get:
       tags:
-      - getCarrier
+        - getCarrier
       summary: Информация о перевозчике
       operationId: getCarrier
       parameters:
-      - $ref: '#/components/parameters/APIKeyParam'
-      - name: code
-        in: query
-        required: true
-        description: Код перевозчика
-        schema:
-          type: string
-      - name: system
-        in: query
-        required: false
-        description: Система кодирования, в которой указывается код перевозчика в запросе
-        schema:
-          type: string
-          default: yandex
-          enum:
-            - yandex
-            - iata
-            - sirena
-            - express
-            - esr
-      - $ref: '#/components/parameters/LangParam'
-      - $ref: '#/components/parameters/FormatParam'
+        - $ref: '#/components/parameters/APIKeyParam'
+        - name: code
+          in: query
+          required: true
+          description: Код перевозчика
+          schema:
+            type: string
+        - name: system
+          in: query
+          required: false
+          description: Система кодирования, в которой указывается код перевозчика в запросе
+          schema:
+            type: string
+            default: yandex
+            enum:
+              - yandex
+              - iata
+              - sirena
+              - express
+              - esr
+        - $ref: '#/components/parameters/LangParam'
+        - $ref: '#/components/parameters/FormatParam'
       responses:
         200:
           description: success
@@ -102,6 +107,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CarrierResponse'
+  /v3.0/nearest_settlement/:
+    get:
+      tags:
+        - getNearestSettlement
+      summary: Ближайший город
+      operationId: getNeaerstSettlement
+      parameters:
+        - $ref: '#/components/parameters/APIKeyParam'
+        - $ref: '#/components/parameters/LngParam'
+        - $ref: '#/components/parameters/LatParam'
+        - name: distance
+          in: query
+          required: true
+          description: Радиус, в котором следует искать ближайший город, в километрах
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/LangParam'
+        - $ref: '#/components/parameters/FormatParam'
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NearestSettlement'
   
   
 components:
@@ -143,13 +173,6 @@ components:
       required: true
       schema:
         type: number
-    DistanceParam:
-      name: distance
-      in: query
-      description: радиус охвата
-      required: true
-      schema:
-        type: integer
     StationTypesParam:
       name: station_types
       in: query
@@ -436,6 +459,36 @@ components:
         iata:
           type: string
           description: Код перевозчика в системе кодирования IATA
+    NearestSettlement:
+      type: object
+      properties:
+        distance:
+          type: number
+          description: Расстояние до найденного города, в километрах
+        code:
+          type: string
+          description: Код города в системе кодирования Яндекс Расписаний
+        title:
+          type: string
+          description: Название города
+        popular_title:
+          type: string
+          description: Общепринятое название города
+        short_title:
+          type: string
+          description: Краткое название города
+        lat:
+          type: number
+          description: Широта, на которой находится город
+        lng:
+          type: number
+          description: Долгота, на которой находится город
+        type:
+          type: string
+          description: Тип транспортного пункта
+          enum:
+            - station
+            - settlement
     
         
         

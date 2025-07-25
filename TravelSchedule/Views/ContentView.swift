@@ -32,7 +32,8 @@ struct ContentView: View {
 //            getNearestStations()
 //            getCopyright()
 //            getAllStations()
-            getCarrier()
+//            getCarrier()
+            getNearestSettlement()
         }
     }
     
@@ -106,6 +107,27 @@ struct ContentView: View {
                       terminator: printTerminator)
                 let carrierResponse = try await service.getCarrier()
                 print("carrier:", carrierResponse,
+                      terminator: printTerminator)
+            } catch {
+                print("error: \(error)",
+                      terminator: printTerminator)
+            }
+        }
+    }
+    
+    private func getNearestSettlement() {
+        Task {
+            do {
+                let service = NearestSettlementService(client: client,
+                                                       apiKey: apiKey)
+                print("fetching nearest settlement",
+                      terminator: printTerminator)
+                let nearestSettlement = try await service.getNearestSettlement(
+                    lat: 50.440046,
+                    lng: 40.4882367,
+                    distance: 50
+                )
+                print("nearest settlement:", nearestSettlement,
                       terminator: printTerminator)
             } catch {
                 print("error: \(error)",
