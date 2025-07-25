@@ -19,6 +19,7 @@
 		E71CA9D82E33553D000AFDE0 /* AllStationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CA9D42E335537000AFDE0 /* AllStationsService.swift */; };
 		E71CAA0D2E3381D8000AFDE0 /* CarrierService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CAA092E3381D1000AFDE0 /* CarrierService.swift */; };
 		E71CAA172E338D67000AFDE0 /* NearestSettlementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CAA162E338D5C000AFDE0 /* NearestSettlementService.swift */; };
+		E71CAA222E33B1E1000AFDE0 /* ThreadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CAA212E33B1DD000AFDE0 /* ThreadService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		E71CA9D42E335537000AFDE0 /* AllStationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsService.swift; sourceTree = "<group>"; };
 		E71CAA092E3381D1000AFDE0 /* CarrierService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrierService.swift; sourceTree = "<group>"; };
 		E71CAA162E338D5C000AFDE0 /* NearestSettlementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestSettlementService.swift; sourceTree = "<group>"; };
+		E71CAA212E33B1DD000AFDE0 /* ThreadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 		E71CA9982E312C98000AFDE0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E71CAA212E33B1DD000AFDE0 /* ThreadService.swift */,
 				E71CAA162E338D5C000AFDE0 /* NearestSettlementService.swift */,
 				E71CAA092E3381D1000AFDE0 /* CarrierService.swift */,
 				E71CA9D42E335537000AFDE0 /* AllStationsService.swift */,
@@ -202,6 +205,7 @@
 				E71CA9D82E33553D000AFDE0 /* AllStationsService.swift in Sources */,
 				E71CA9A32E312DEA000AFDE0 /* NearestStationsService.swift in Sources */,
 				E71CA9C52E32AFB6000AFDE0 /* CopyrightService.swift in Sources */,
+				E71CAA222E33B1E1000AFDE0 /* ThreadService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

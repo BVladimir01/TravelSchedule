@@ -34,6 +34,7 @@ struct ContentView: View {
 //            getAllStations()
 //            getCarrier()
 //            getNearestSettlement()
+            getThread()
         }
     }
     
@@ -131,6 +132,23 @@ struct ContentView: View {
                     distance: 50
                 )
                 print("nearest settlement:", nearestSettlement,
+                      terminator: printTerminator)
+            } catch {
+                print("error: \(error)",
+                      terminator: printTerminator)
+            }
+        }
+    }
+    
+    private func getThread() {
+        Task {
+            do {
+                let service = ThreadService(client: client,
+                                            apiKey: apiKey)
+                print("fetching thread",
+                      terminator: printTerminator)
+                let thread = try await service.getThread(id: "038AA_tis")
+                print("thread:", thread,
                       terminator: printTerminator)
             } catch {
                 print("error: \(error)",

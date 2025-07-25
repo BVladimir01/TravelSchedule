@@ -132,7 +132,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NearestSettlement'
-  
+  /v3.0/thread/:
+    get:
+      tags:
+        - getThread
+      summary: Список станций следования
+      operationId: getThread
+      parameters:
+        - $ref: '#/components/parameters/APIKeyParam'
+        - name: uid
+          in: query
+          required: true
+          description: Идентификатор нитки в Яндекс Расписаниях
+          schema:
+            type: string
+        - name: from
+          in: query
+          required: false
+          description: Код станции отправления
+          schema:
+            type: string
+        - name: to
+          in: query
+          required: false
+          description: Код станции прибытия
+          schema:
+            type: string
+        - $ref: '#/components/parameters/LangParam'
+        - $ref: '#/components/parameters/FormatParam'
+        - name: date
+          in: query
+          required: false
+          description: Дата, на которую необходимо получить список станций следования
+          schema:
+            type: string
+        - name: show_systems
+          in: query
+          required: false
+          description: Cистема кодирования, в которой необходимо получить коды станций
+          schema:
+            type: string
+            enum: [yandex, esr, all]
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Thread'
+        
   
 components:
   parameters:
@@ -489,7 +537,198 @@ components:
           enum:
             - station
             - settlement
-    
+    Thread:
+      type: object
+      properties:
+        except_days:
+          type: string
+          description: Дни, в которые нитка не курсирует
+        arrival_date:
+          type: string
+          description: Дата прибытия на станцию, указанную в параметре to
+        from:
+          type: string
+          description: Пункт отправления, указанный в параметре from
+        uid:
+          type: string
+          description: Идентификатор нитки, принятый в Яндекс Расписаниях.
+        title:
+          type: string
+          description: Название нитки
+        interval:
+          $ref: '#/components/schemas/ThreadInterval'
+        departure_date:
+          type: string
+          description: Дата отправления со станции, указанной в параметре from
+        start_time:
+          type: string
+          description: Время отправления с первой станции следования по местному времени станции
+        number:
+          type: string
+          description: Номер рейса
+        short_title:
+          type: string
+          description: Название нитки, составленное из коротких названий первой и последней станций следования
+        days:
+          type: string
+          description: Дни курсирования нитки
+        to:
+          type: string
+          description: Пункт прибытия, указанный в параметре to
+        carrier:
+          $ref: '#/components/schemas/ThreadCarrier'
+        transport_type:
+          $ref: '#/components/schemas/TransportType'
+        stops:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreadStop'
+          description: Список станций следования
+        vehicle:
+          type: string
+          description: Название транспортного средства
+        start_date:
+          type: string
+          description: Дата отправления с первой станции следования
+        transport_subtype:
+          $ref: '#/components/schemas/TransportSubtype'
+        express_type:
+          type: string
+          description: Признак экспресса или аэроэкспресса
+          enum:
+            - express
+            - aeroexpress
+    ThreadCarrier:
+      type: object
+      description: Информация о перевозчике.
+      properties:
+        code:
+          type: integer
+          description: Код перевозчика в системе кодирования Яндекс Расписаний
+        title:
+          type: string
+          description: Название перевозчика
+        codes:
+          type: object
+          description: Список кодов перевозчика в других системах кодирования
+          properties:
+            icao:
+              type: string
+              description: Код перевозчика в системе кодирования ICAO
+            sirena:
+              type: string
+              description: Код перевозчика в системе кодирования Sirena
+            iata:
+              type: string
+              description: Код перевозчика в системе кодирования IATA
+    ThreadInterval:
+      type: object
+      description: Информация о движении по интервальной нитке
+      properties:
+        density:
+          type: string
+          description: Описание периодичности движения в свободной форме
+        end_time:
+          type: string
+          description: Дата и время окончания движения по нитке
+        begin_time:
+          type: string
+          description: Дата и время начала движения по нитке
+    ThreadStop:
+      type: object
+      properties:
+        arrival:
+          type: string
+          description: Время прибытия, в формате ISO 8601
+        departure:
+          type: string
+          description: Время отправления, в формате ISO 8601
+        duration:
+          type: integer
+          description: Время в пути между станциями (в секундах)
+        stop_time:
+          type: integer
+          description: Продолжительность остановки (в секундах)
+        terminal:
+          type: string
+          description: Терминал аэропорта
+        platform:
+          type: string
+          description: Платформа или путь, с которого отправляется рейс
+        station:
+          $ref: '#/components/schemas/ThreadStation'
+    ThreadStation:
+      type: object
+      properties:
+        codes:
+          $ref: '#/components/schemas/ThreadStationCodes'
+        title:
+          type: string
+          description: Название станции
+        station_type:
+          $ref: '#/components/schemas/StationType'
+        station_type_name:
+          type: string
+          description: Название типа станции, зависит от языка ответа
+        popular_title:
+          type: string
+          description: Общепринятое название станции
+        short_title:
+          type: string
+          description: Короткое название станции
+        code:
+          type: string
+          description: Код станции в системе кодирования Яндекс Расписаний
+        type:
+          type: string
+          description: Вид станции
+    ThreadStationCodes:
+      type: object
+      description: Список кодов станции в других системах кодирования
+      properties:
+        express:
+          type: string
+          description: Код станции в системе кодирования Экспресс-3
+        yandex:
+          type: string
+          description: Код станции в системе кодирования Яндекс Расписаний
+        esr:
+          type: string
+          description: Код станции в системе кодирования ЕСР
+    TransportSubtype:
+      type: object
+      properties:
+        color:
+          type: string
+          description: Основной цвет транспортного средства в шестнадцатеричном формате
+        code:
+          type: string
+          description: Код подтипа транспорта
+          enum:
+            - helicopter
+            - rex
+            - sputnik
+            - skiarrow
+            - shezh
+            - skirus
+            - city
+            - kalina
+            - vostok
+            - prostoryaltaya
+            - 14vag
+            - last
+            - exprdal
+            - volzhex
+            - stdplus
+            - express
+            - skor
+            - fiztekh
+            - vag6
+            - river
+            - sea
+        title:
+          type: string
+          description: Описание подтипа транспорта на естественном языке
         
         
           
