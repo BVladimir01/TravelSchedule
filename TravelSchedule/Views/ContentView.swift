@@ -29,14 +29,7 @@ struct ContentView: View {
         }
         .padding()
         .onAppear {
-//            getNearestStations()
-//            getCopyright()
-//            getAllStations()
-//            getCarrier()
-//            getNearestSettlement()
-//            getThread()
-//            getSchedules()
-//            searchSchedules()
+            performRequests()
         }
     }
     
@@ -46,6 +39,9 @@ struct ContentView: View {
         getAllStations()
         getCarrier()
         getNearestSettlement()
+        getThread()
+        getSchedules()
+        searchSchedules()
     }
     
     private func getNearestStations() {
@@ -60,7 +56,7 @@ struct ContentView: View {
                     lng: 30.319163,
                     distance: 50
                 )
-                print("stations:", stations.stations!.map {$0.title},
+                print("stations:", stations,
                       terminator: printTerminator)
             } catch {
                 print("error: \(error)",

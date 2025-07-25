@@ -268,6 +268,7 @@ paths:
                 $ref: '#/components/schemas/SearchResponse'
         
 components:
+
   parameters:
     APIKeyParam:
       name: apikey
@@ -383,8 +384,10 @@ components:
         type: string
 
   schemas:
+  
     Pagination:
       type: object
+      description: Информация о постраничном выводе
       properties:
         total:
           type: integer
@@ -392,6 +395,38 @@ components:
           type: integer
         offset:
           type: integer
+    StationType:
+      type: string
+      description: Тип станции
+      enum:
+        - station
+        - platform
+        - stop
+        - checkpoint
+        - post
+        - crossing
+        - overtaking_point
+        - train_station
+        - airport
+        - bus_station
+        - bus_stop
+        - unknown
+        - port
+        - port_point
+        - wharf
+        - river_port
+        - marine_station
+    TransportType:
+      type: string
+      description: Основной тип транспорта
+      enum:
+        - plane
+        - train
+        - suburban
+        - bus
+        - helicopter
+        - water
+        - sea
     
     NearestStationsResponse:
       type: object
@@ -400,13 +435,15 @@ components:
           $ref: '#/components/schemas/Pagination'
         stations:
           type: array
+          description: Список станций
           items:
             $ref: '#/components/schemas/NearestStation'
     NearestStation:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/PointType'
+          type: string
+          enum: [station, settlement]
         title:
           type: string
         short_title:
@@ -431,53 +468,31 @@ components:
           type: integer
         type_choices:
           $ref: '#/components/schemas/TypeChoices'
-    StationType:
-      type: string
-      enum:
-        - station
-        - platform
-        - stop
-        - checkpoint
-        - post
-        - crossing
-        - overtaking_point
-        - train_station
-        - airport
-        - bus_station
-        - bus_stop
-        - unknown
-        - port
-        - port_point
-        - wharf
-        - river_port
-        - marine_station
-    TransportType:
-      type: string
-      enum:
-        - plane
-        - train
-        - suburban
-        - bus
-        - helicopter
-        - water
-        - sea
-    PointType:
-      type: string
-      enum: [station, settlement]
     TypeChoices:
       type: object
+      description: Типы расписаний, доступные для станции
       properties:
         schedule:
-          type: object
-          properties:
-            desktop_url:
-              type: string
-            touch_url:
-              type: string
+          $ref: '#/components/schemas/ScheduleURLS'
+        tablo:
+          $ref: '#/components/schemas/ScheduleURLS'
+        train:
+          $ref: '#/components/schemas/ScheduleURLS'
+        suburban:
+          $ref: '#/components/schemas/ScheduleURLS'
+        aeroex:
+          $ref: '#/components/schemas/ScheduleURLS'
+    ScheduleURLS:
+      type: object
+      description: Ссылки на мобильную и десктопную версию расписания
+      properties:
         desktop_url:
           type: string
+          description: Ссылка на десктопную версию расписания
         touch_url:
           type: string
+          description: Ссылка на мобильную версию расписания
+    
     
     CopyrightResponse:
       type: object
@@ -486,24 +501,32 @@ components:
           $ref: '#/components/schemas/Copyright'
     Copyright:
       type: object
+      description: Данные о баннерах Яндекс Расписаний
       properties:
         logo_vm:
           type: string
-          description: Вертикальный монохромный баннер.
+          description: Вертикальный монохромный баннер
         url:
           type: string
+          description: URL Яндекс Расписаний
         logo_vd:
           type: string
+          description: Вертикальный черно-белый баннер
         logo_hy:
           type: string
+          description: Горизонтальный цветной баннер
         logo_hd:
           type: string
+          description: Горизонтальный черно-белый баннер
         logo_vy:
           type: string
+          description: Вертикальный цветной баннер
         text:
           type: string
+          description: Уведомительный текст
         logo_hm:
           type: string
+          description: Горизонтальный монохромный баннер.
     
     AllStationsResponse:
       type: object
@@ -512,6 +535,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Country'
+          description: Список стран
     Country:
       type: object
       properties:
@@ -519,11 +543,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Region'
+          description: Список регионов страны
         codes:
           $ref: '#/components/schemas/PointCodes'
         title:
           type: string
-          description: Название страны.
+          description: Название страны
     Region:
       type: object
       properties:
@@ -531,6 +556,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Settlement'
+          description: Список населенных пунктов региона
         codes:
           $ref: '#/components/schemas/PointCodes'
         title:
@@ -548,6 +574,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Station'
+          description: Список станций в населенном пункте
     Station:
       type: object
       properties:
@@ -557,8 +584,8 @@ components:
         codes:
           $ref: '#/components/schemas/StationCodes'
         station_type:
-          #$ref: '#/components/schemas/StationType'
           type: string
+          description: Тип станции
         title:
           type: string
           description: Название станции
@@ -576,6 +603,7 @@ components:
           description: Долгота станции
     StationCodes:
       type: object
+      description: Список кодов станции
       properties:
         esr_code:
           type: string
@@ -585,6 +613,7 @@ components:
           description: Код в системе кодирования Яндекс Расписаний
     PointCodes:
       type: object
+      description: Коды региона. На данный момент используется только система кодирования Яндекс Расписаний
       properties:
         yandex_code:
           type: string
