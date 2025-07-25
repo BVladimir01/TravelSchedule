@@ -33,7 +33,7 @@ struct ContentView: View {
 //            getCopyright()
 //            getAllStations()
 //            getCarrier()
-            getNearestSettlement()
+//            getNearestSettlement()
         }
     }
     
@@ -41,6 +41,8 @@ struct ContentView: View {
         getNearestStations()
         getCopyright()
         getAllStations()
+        getCarrier()
+        getNearestSettlement()
     }
     
     private func getNearestStations() {
@@ -105,7 +107,8 @@ struct ContentView: View {
                                              apiKey: apiKey)
                 print("fetching carrier",
                       terminator: printTerminator)
-                let carrierResponse = try await service.getCarrier()
+                let carrierResponse = try await service.getCarrier(code: "SU",
+                                                                   system: .iata)
                 print("carrier:", carrierResponse,
                       terminator: printTerminator)
             } catch {

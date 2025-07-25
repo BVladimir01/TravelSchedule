@@ -6,10 +6,11 @@
 //
 
 typealias CarrierResponse = Components.Schemas.CarrierResponse
+typealias CarrierCodeSystem = Operations.getCarrier.Input.Query.systemPayload
 
 
 protocol CarrierServiceProtocol {
-    func getCarrier() async throws -> CarrierResponse
+    func getCarrier(code: String, system: CarrierCodeSystem) async throws -> CarrierResponse
 }
 
 
@@ -23,8 +24,8 @@ struct CarrierService: CarrierServiceProtocol {
         self.apiKey = apiKey
     }
     
-    func getCarrier() async throws -> CarrierResponse {
-        let query = Operations.getCarrier.Input.Query(apikey: apiKey, code: "SU", system: .iata)
+    func getCarrier(code: String, system: CarrierCodeSystem) async throws -> CarrierResponse {
+        let query = Operations.getCarrier.Input.Query(apikey: apiKey, code: code, system: system)
         let request = try await client.getCarrier(query: query)
         return try request.ok.body.json
     }
