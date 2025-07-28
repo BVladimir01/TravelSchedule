@@ -15,15 +15,13 @@ protocol CopyrightServiceProtocol {
 struct CopyrightService: CopyrightServiceProtocol {
     
     private let client: APIProtocol
-    private let apiKey: String
     
-    init(client: APIProtocol, apiKey: String) {
+    init(client: APIProtocol) {
         self.client = client
-        self.apiKey = apiKey
     }
     
     func getCopyright() async throws -> Copyright{
-        let query = Operations.getCopyright.Input.Query(apikey: apiKey)
+        let query = Operations.getCopyright.Input.Query()
         let response = try await client.getCopyright(query: query)
         return try response.ok.body.json
     }

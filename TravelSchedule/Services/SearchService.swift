@@ -16,15 +16,13 @@ protocol SearchServiceProtocol {
 struct SearchService: SearchServiceProtocol {
     
     private let client: APIProtocol
-    private let apiKey: String
     
-    init(client: APIProtocol, apiKey: String) {
+    init(client: APIProtocol) {
         self.client = client
-        self.apiKey = apiKey
     }
     
     func getSchedules(from departure: String, to destination: String) async throws -> SearchResponse {
-        let query = Operations.searchSchedules.Input.Query(apikey: apiKey, from: departure, to: destination)
+        let query = Operations.searchSchedules.Input.Query(from: departure, to: destination)
         let request = try await client.searchSchedules(query: query)
         return try request.ok.body.json
     }

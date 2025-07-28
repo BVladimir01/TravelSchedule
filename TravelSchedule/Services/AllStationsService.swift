@@ -20,15 +20,13 @@ protocol AllStationsServiceProtocol {
 struct AllStationsService: AllStationsServiceProtocol {
     
     private let client: APIProtocol
-    private let apiKey: String
     
-    init(client: APIProtocol, apiKey: String) {
+    init(client: APIProtocol) {
         self.client = client
-        self.apiKey = apiKey
     }
     
     func getAllStations() async throws -> AllStations {
-        let query = Operations.getAllStations.Input.Query(apikey: apiKey)
+        let query = Operations.getAllStations.Input.Query()
         let request = try await client.getAllStations(query: query)
         let body = try request.ok.body
         switch body {

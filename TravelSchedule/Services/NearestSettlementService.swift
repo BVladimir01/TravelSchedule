@@ -16,15 +16,13 @@ protocol NearestSettlementServiceProtocol {
 struct NearestSettlementService: NearestSettlementServiceProtocol {
     
     private let client: APIProtocol
-    private let apiKey: String
     
-    init(client: APIProtocol, apiKey: String) {
+    init(client: APIProtocol) {
         self.client = client
-        self.apiKey = apiKey
     }
     
     func getNearestSettlement(lat: Double, lng: Double, distance: Int) async throws -> NearestSettlement {
-        let query = Operations.getNeaerstSettlement.Input.Query(apikey: apiKey, lng: lng, lat: lat, distance: distance)
+        let query = Operations.getNeaerstSettlement.Input.Query(lng: lng, lat: lat, distance: distance)
         let request = try await client.getNeaerstSettlement(query: query)
         return try request.ok.body.json
     }

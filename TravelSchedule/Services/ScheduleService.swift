@@ -16,15 +16,13 @@ protocol ScheduleServiceProtocol {
 struct ScheduleService: ScheduleServiceProtocol {
     
     private let client: APIProtocol
-    private let apiKey: String
     
-    init(client: APIProtocol, apiKey: String) {
+    init(client: APIProtocol) {
         self.client = client
-        self.apiKey = apiKey
     }
     
     func getSchedules(for station: String) async throws -> ScheduleResponse {
-        let query = Operations.getSchedules.Input.Query(apikey: apiKey, station: station)
+        let query = Operations.getSchedules.Input.Query(station: station)
         let request = try await client.getSchedules(query: query)
         return try request.ok.body.json
     }

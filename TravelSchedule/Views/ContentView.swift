@@ -11,13 +11,11 @@ import OpenAPIURLSession
 struct ContentView: View {
     
     private let client: APIProtocol
-    private let apiKey: String
     
     let printTerminator = "\n------------------\n"
     
-    init(client: APIProtocol, apiKey: String) {
+    init(client: APIProtocol) {
         self.client = client
-        self.apiKey = apiKey
     }
     
     var body: some View {
@@ -29,7 +27,8 @@ struct ContentView: View {
         }
         .padding()
         .onAppear {
-            performRequests()
+//            performRequests()
+            getCopyright()
         }
     }
     
@@ -47,8 +46,7 @@ struct ContentView: View {
     private func getNearestStations() {
         Task {
             do {
-                let service = NearestStationsService(client: client,
-                                                     apiKey: apiKey)
+                let service = NearestStationsService(client: client)
                 print("fetching stations...",
                       terminator: printTerminator)
                 let stations = try await service.getNearestStations(
@@ -68,8 +66,7 @@ struct ContentView: View {
     private func getCopyright() {
         Task {
             do {
-                let service = CopyrightService(client: client,
-                                               apiKey: apiKey)
+                let service = CopyrightService(client: client)
                 print("fetching copyright...",
                       terminator: printTerminator)
                 let copyright = try await service.getCopyright()
@@ -85,8 +82,7 @@ struct ContentView: View {
     private func getAllStations() {
         Task {
             do {
-                let service = AllStationsService(client: client,
-                                                 apiKey: apiKey)
+                let service = AllStationsService(client: client)
                 print("fetching all stations",
                       terminator: printTerminator)
                 let allStations = try await service.getAllStations()
@@ -102,8 +98,7 @@ struct ContentView: View {
     private func getCarrier() {
         Task {
             do {
-                let service = CarrierService(client: client,
-                                             apiKey: apiKey)
+                let service = CarrierService(client: client)
                 print("fetching carrier",
                       terminator: printTerminator)
                 let carrierResponse = try await service.getCarrier(code: "SU",
@@ -120,8 +115,7 @@ struct ContentView: View {
     private func getNearestSettlement() {
         Task {
             do {
-                let service = NearestSettlementService(client: client,
-                                                       apiKey: apiKey)
+                let service = NearestSettlementService(client: client)
                 print("fetching nearest settlement",
                       terminator: printTerminator)
                 let nearestSettlement = try await service.getNearestSettlement(
@@ -141,8 +135,7 @@ struct ContentView: View {
     private func getThread() {
         Task {
             do {
-                let service = ThreadService(client: client,
-                                            apiKey: apiKey)
+                let service = ThreadService(client: client)
                 print("fetching thread",
                       terminator: printTerminator)
                 let thread = try await service.getThread(id: "SU-1484_250725_c26_12")
@@ -158,8 +151,7 @@ struct ContentView: View {
     private func getSchedules() {
         Task {
             do {
-                let service = ScheduleService(client: client,
-                                              apiKey: apiKey)
+                let service = ScheduleService(client: client)
                 print("fetching schedules",
                       terminator: printTerminator)
                 let schedules = try await service.getSchedules(for: "s9600213")
@@ -175,8 +167,7 @@ struct ContentView: View {
     private func searchSchedules() {
         Task {
             do {
-                let service = SearchService(client: client,
-                                            apiKey: apiKey)
+                let service = SearchService(client: client)
                 print("fetching schedules",
                       terminator: printTerminator)
                 let schedules = try await service.getSchedules(from: "c146",
@@ -194,7 +185,8 @@ struct ContentView: View {
 
 
 #Preview {
-    let client = try! Client(serverURL: Servers.Server1.url(), transport: URLSessionTransport())
     let apiKey = "f5fad011-aeea-4dab-a7a8-872458a66b1f"
-    ContentView(client: client, apiKey: apiKey)
+    let apiKeyMiddleware = APIKeyMiddleware(apiKey: apiKey)
+    let client = try! Client(serverURL: Servers.Server1.url(), transport: URLSessionTransport(), middlewares: [apiKeyMiddleware])
+    ContentView(client: client)
 }

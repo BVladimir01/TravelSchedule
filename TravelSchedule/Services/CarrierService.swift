@@ -17,15 +17,13 @@ protocol CarrierServiceProtocol {
 struct CarrierService: CarrierServiceProtocol {
     
     private let client: APIProtocol
-    private let apiKey: String
     
-    init(client: APIProtocol, apiKey: String) {
+    init(client: APIProtocol) {
         self.client = client
-        self.apiKey = apiKey
     }
     
     func getCarrier(code: String, system: CarrierCodeSystem) async throws -> CarrierResponse {
-        let query = Operations.getCarrier.Input.Query(apikey: apiKey, code: code, system: system)
+        let query = Operations.getCarrier.Input.Query(code: code, system: system)
         let request = try await client.getCarrier(query: query)
         return try request.ok.body.json
     }

@@ -16,15 +16,13 @@ protocol NearestStationsServiceProtocol {
 struct NearestStationsService: NearestStationsServiceProtocol {
     
     private let client: APIProtocol
-    private let apiKey: String
     
-    init(client: APIProtocol, apiKey: String) {
+    init(client: APIProtocol) {
         self.client = client
-        self.apiKey = apiKey
     }
     
     func getNearestStations(lat: Double, lng: Double, distance: Int) async throws -> NearestStations {
-        let query = Operations.getNearestStations.Input.Query(apikey: apiKey, lat: lat, lng: lng, distance: distance)
+        let query = Operations.getNearestStations.Input.Query(lat: lat, lng: lng, distance: distance)
         let response = try await client.getNearestStations(query: query)
         return try response.ok.body.json
     }

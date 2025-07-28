@@ -16,15 +16,13 @@ protocol ThreadServiceProtocol {
 struct ThreadService: ThreadServiceProtocol {
     
     private let client: APIProtocol
-    private let apiKey: String
     
-    init(client: APIProtocol, apiKey: String) {
+    init(client: APIProtocol) {
         self.client = client
-        self.apiKey = apiKey
     }
     
     func getThread(id: String) async throws -> RouteThread {
-        let query = Operations.getThread.Input.Query(apikey: apiKey, uid: id, show_systems: .all)
+        let query = Operations.getThread.Input.Query(uid: id, show_systems: .all)
         let request = try await client.getThread(query: query)
         return try request.ok.body.json
     }

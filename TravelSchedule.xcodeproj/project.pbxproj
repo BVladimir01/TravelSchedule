@@ -22,6 +22,7 @@
 		E71CAA222E33B1E1000AFDE0 /* ThreadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CAA212E33B1DD000AFDE0 /* ThreadService.swift */; };
 		E71CAA282E33CCE1000AFDE0 /* ScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CAA272E33CCDC000AFDE0 /* ScheduleService.swift */; };
 		E71CAA332E33E833000AFDE0 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CAA322E33E82B000AFDE0 /* SearchService.swift */; };
+		E71CAA4B2E379072000AFDE0 /* APIKeyMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CAA472E379068000AFDE0 /* APIKeyMiddleware.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		E71CAA212E33B1DD000AFDE0 /* ThreadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadService.swift; sourceTree = "<group>"; };
 		E71CAA272E33CCDC000AFDE0 /* ScheduleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleService.swift; sourceTree = "<group>"; };
 		E71CAA322E33E82B000AFDE0 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
+		E71CAA472E379068000AFDE0 /* APIKeyMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyMiddleware.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		E71CA9982E312C98000AFDE0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E71CAA472E379068000AFDE0 /* APIKeyMiddleware.swift */,
 				E71CAA322E33E82B000AFDE0 /* SearchService.swift */,
 				E71CAA272E33CCDC000AFDE0 /* ScheduleService.swift */,
 				E71CAA212E33B1DD000AFDE0 /* ThreadService.swift */,
@@ -211,6 +214,7 @@
 				E71CA97E2E310F45000AFDE0 /* TravelScheduleApp.swift in Sources */,
 				E71CA9D82E33553D000AFDE0 /* AllStationsService.swift in Sources */,
 				E71CA9A32E312DEA000AFDE0 /* NearestStationsService.swift in Sources */,
+				E71CAA4B2E379072000AFDE0 /* APIKeyMiddleware.swift in Sources */,
 				E71CAA332E33E833000AFDE0 /* SearchService.swift in Sources */,
 				E71CA9C52E32AFB6000AFDE0 /* CopyrightService.swift in Sources */,
 				E71CAA222E33B1E1000AFDE0 /* ThreadService.swift in Sources */,
