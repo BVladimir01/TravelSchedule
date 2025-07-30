@@ -23,15 +23,8 @@ final class ViewModel: ObservableObject {
     func stations(of city: String) -> [String] {
         citiesStations[city] ?? []
     }
-
-    func city(for selection: Selection) -> String? {
-        switch selection {
-        case .origin:
-            originLocation.city
-        case .destination:
-            destinationLocation.city
-        }
-    }
+    
+    var latestSelectedCity: String? = nil
     
     @Published var originLocation = Location()
     @Published var destinationLocation = Location()

@@ -24,20 +24,21 @@ struct ScheduleNavigationRootView: View {
                     .padding(.horizontal, 16)
                     .padding(.bottom, 16)
                 if viewModel.searchIsEnabled {
-                    searchButton
+                    searchThreadsButton
                 }
             }
             .navigationDestination(for: Destination.self) { destination in
                 switch destination {
                 case .city(selection: let selection):
-                    ItemSelectionView(destinationType: .station(selection: selection), items: viewModel.cities) { city in
+                    CitySelectionView(cities: viewModel.cities, onCitySelection: { city in
                         viewModel.selectCity(city, for: selection)
-                    }
+                        viewModel.latestSelectedCity = city
+                    })
                 case .station(selection: let selection):
-                    if let currentCity = viewModel.city(for: selection) {
-                        ItemSelectionView(destinationType: .station(selection: selection), items: viewModel.stations(of: currentCity)) { station in
+                    if let latestSelectedCity = viewModel.latestSelectedCity {
+                        StationSelectionView(stations: viewModel.stations(of: latestSelectedCity), onStationSelection: { station in
                             viewModel.selectStation(station, for: selection)
-                        }
+                        })
                     } else {
                         EmptyView()
                     }
@@ -116,7 +117,7 @@ struct ScheduleNavigationRootView: View {
         }
     }
     
-    private var searchButton: some View {
+    private var searchThreadsButton: some View {
         Button { } label: {
             Text("Найти")
                 .padding(.vertical, 20)
