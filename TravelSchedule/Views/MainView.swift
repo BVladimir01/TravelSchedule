@@ -30,10 +30,9 @@ struct MainView: View {
     
     private var content: some View {
         TabView(selection: $selectedTab) {
-            Text("ScheduleNavigationStack")
+            ScheduleNavigationRootView()
                 .tabItem {
                     Image(.schedule)
-                        .tint(.red)
                 }
                 .tag(Tab.schedule)
             SettingsView()

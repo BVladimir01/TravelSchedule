@@ -25,6 +25,12 @@
 		E71CAA4B2E379072000AFDE0 /* APIKeyMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CAA472E379068000AFDE0 /* APIKeyMiddleware.swift */; };
 		E74DCC622E39F68B00A0C415 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74DCC612E39F68B00A0C415 /* LaunchScreen.storyboard */; };
 		E74DCC8D2E3A115E00A0C415 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74DCC8B2E3A115C00A0C415 /* SettingsView.swift */; };
+		E74DCC982E3A134D00A0C415 /* ScheduleNavigationRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74DCC942E3A133F00A0C415 /* ScheduleNavigationRootView.swift */; };
+		E74DCCA62E3A142E00A0C415 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74DCCA22E3A142A00A0C415 /* ViewModel.swift */; };
+		E74DCCAC2E3A14C600A0C415 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74DCCAB2E3A148200A0C415 /* Location.swift */; };
+		E74DCCB02E3A157100A0C415 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74DCCAF2E3A156900A0C415 /* TimeInterval.swift */; };
+		E7CB388A2E3A296C00099A59 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB38862E3A291300099A59 /* Selection.swift */; };
+		E7CB38AE2E3A327D00099A59 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB38AD2E3A327D00099A59 /* Destination.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +51,12 @@
 		E71CAA472E379068000AFDE0 /* APIKeyMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyMiddleware.swift; sourceTree = "<group>"; };
 		E74DCC612E39F68B00A0C415 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E74DCC8B2E3A115C00A0C415 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		E74DCC942E3A133F00A0C415 /* ScheduleNavigationRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNavigationRootView.swift; sourceTree = "<group>"; };
+		E74DCCA22E3A142A00A0C415 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		E74DCCAB2E3A148200A0C415 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		E74DCCAF2E3A156900A0C415 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
+		E7CB38862E3A291300099A59 /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
+		E7CB38AD2E3A327D00099A59 /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +92,8 @@
 			isa = PBXGroup;
 			children = (
 				E71CA97A2E310F45000AFDE0 /* TravelScheduleApp.swift */,
+				E74DCCAA2E3A147D00A0C415 /* Models */,
+				E74DCC9C2E3A142000A0C415 /* ViewModel */,
 				E71CA9992E312C9F000AFDE0 /* Views */,
 				E71CA9982E312C98000AFDE0 /* Services */,
 				E71CA98C2E312162000AFDE0 /* Resources */,
@@ -125,10 +139,38 @@
 		E71CA9992E312C9F000AFDE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E74DCC942E3A133F00A0C415 /* ScheduleNavigationRootView.swift */,
 				E74DCC8B2E3A115C00A0C415 /* SettingsView.swift */,
 				E71CA9792E310F45000AFDE0 /* MainView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		E74DCC9C2E3A142000A0C415 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E74DCCA22E3A142A00A0C415 /* ViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E74DCCAA2E3A147D00A0C415 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E7CB38A82E3A326A00099A59 /* NavigationModels */,
+				E74DCCAF2E3A156900A0C415 /* TimeInterval.swift */,
+				E74DCCAB2E3A148200A0C415 /* Location.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E7CB38A82E3A326A00099A59 /* NavigationModels */ = {
+			isa = PBXGroup;
+			children = (
+				E7CB38862E3A291300099A59 /* Selection.swift */,
+				E7CB38AD2E3A327D00099A59 /* Destination.swift */,
+			);
+			path = NavigationModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,10 +262,16 @@
 				E71CAA282E33CCE1000AFDE0 /* ScheduleService.swift in Sources */,
 				E71CA97E2E310F45000AFDE0 /* TravelScheduleApp.swift in Sources */,
 				E71CA9D82E33553D000AFDE0 /* AllStationsService.swift in Sources */,
+				E74DCCA62E3A142E00A0C415 /* ViewModel.swift in Sources */,
+				E74DCCAC2E3A14C600A0C415 /* Location.swift in Sources */,
 				E71CA9A32E312DEA000AFDE0 /* NearestStationsService.swift in Sources */,
 				E71CAA4B2E379072000AFDE0 /* APIKeyMiddleware.swift in Sources */,
 				E71CAA332E33E833000AFDE0 /* SearchService.swift in Sources */,
+				E7CB388A2E3A296C00099A59 /* Selection.swift in Sources */,
+				E74DCC982E3A134D00A0C415 /* ScheduleNavigationRootView.swift in Sources */,
 				E74DCC8D2E3A115E00A0C415 /* SettingsView.swift in Sources */,
+				E7CB38AE2E3A327D00099A59 /* Destination.swift in Sources */,
+				E74DCCB02E3A157100A0C415 /* TimeInterval.swift in Sources */,
 				E71CA9C52E32AFB6000AFDE0 /* CopyrightService.swift in Sources */,
 				E71CAA222E33B1E1000AFDE0 /* ThreadService.swift in Sources */,
 			);

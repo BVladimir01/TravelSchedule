@@ -6,7 +6,11 @@
 //
 
 
-struct Location {
-    var city: String?
-    var station: String?
+struct Location: CustomStringConvertible {
+    var city: String
+    var station: String
+    
+    var description: String {
+        "\(city) (\(station))"
+    }
 }
