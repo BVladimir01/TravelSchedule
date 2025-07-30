@@ -23,6 +23,7 @@
 		E71CAA282E33CCE1000AFDE0 /* ScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CAA272E33CCDC000AFDE0 /* ScheduleService.swift */; };
 		E71CAA332E33E833000AFDE0 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CAA322E33E82B000AFDE0 /* SearchService.swift */; };
 		E71CAA4B2E379072000AFDE0 /* APIKeyMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CAA472E379068000AFDE0 /* APIKeyMiddleware.swift */; };
+		E74DCC622E39F68B00A0C415 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74DCC612E39F68B00A0C415 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		E71CAA272E33CCDC000AFDE0 /* ScheduleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleService.swift; sourceTree = "<group>"; };
 		E71CAA322E33E82B000AFDE0 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		E71CAA472E379068000AFDE0 /* APIKeyMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyMiddleware.swift; sourceTree = "<group>"; };
+		E74DCC612E39F68B00A0C415 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				E71CA9782E310F45000AFDE0 /* Assets.xcassets */,
+				E74DCC612E39F68B00A0C415 /* LaunchScreen.storyboard */,
 				E71CA98D2E31217E000AFDE0 /* OpenAPI */,
 			);
 			path = Resources;
@@ -195,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E71CA97C2E310F45000AFDE0 /* Assets.xcassets in Resources */,
+				E74DCC622E39F68B00A0C415 /* LaunchScreen.storyboard in Resources */,
 				E71CA98F2E312190000AFDE0 /* openapi.yaml in Resources */,
 				E71CA9932E312200000AFDE0 /* openapi-generator-config.yaml in Resources */,
 			);
@@ -365,6 +369,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
@@ -398,6 +403,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
