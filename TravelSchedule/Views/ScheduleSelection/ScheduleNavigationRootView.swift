@@ -115,7 +115,7 @@ struct ScheduleNavigationRootView: View {
     
     private var swapButton: some View {
         Button {
-            
+            viewModel.swapLocationTypes()
         } label: {
             Circle()
                 .fill(.ypWhite)
@@ -128,7 +128,9 @@ struct ScheduleNavigationRootView: View {
     }
     
     private var searchThreadsButton: some View {
-        Button { } label: {
+        Button {
+            viewModel.searchThreads()
+        } label: {
             Text("Найти")
                 .padding(.vertical, 20)
                 .padding(.horizontal, 47.5)

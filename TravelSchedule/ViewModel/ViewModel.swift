@@ -70,4 +70,13 @@ final class ViewModel: ObservableObject {
         path = []
     }
     
+    func swapLocationTypes() {
+        let temporary = originLocation
+        originLocation = destinationLocation
+        destinationLocation = temporary
+    }
+    
+    func searchThreads() {
+        path.append(.threadSelection)
+    }
 }
