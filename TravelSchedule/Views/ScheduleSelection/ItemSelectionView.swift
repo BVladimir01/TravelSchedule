@@ -10,22 +10,22 @@ import SwiftUI
 
 struct ItemSelectionView<Item: CustomStringConvertible & Hashable>: View {
     
-    @ObservedObject private var viewModel: ViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var searchText: String = ""
     
     private let destinationType: Destination
     private let items: [Item]
+    private let onItemSelection: (Item) -> ()
     
     private var displayedItems: [Item] {
         guard !searchText.isEmpty else { return items }
         return items.filter { $0.description.lowercased().contains(searchText.lowercased()) }
     }
     
-    init(viewModel: ViewModel, destinationType: Destination, items: [Item]) {
-        self.viewModel = viewModel
+    init(destinationType: Destination, items: [Item], onItemSelection: @escaping (Item) -> ()) {
         self.destinationType = destinationType
         self.items = items
+        self.onItemSelection = onItemSelection
     }
     
     var body: some View {
@@ -48,7 +48,9 @@ struct ItemSelectionView<Item: CustomStringConvertible & Hashable>: View {
     private var itemsList: some View {
         VStack {
             ForEach(displayedItems, id: \.self) { item in
-                NavigationLink(value: destinationType) {
+                Button {
+                    onItemSelection(item)
+                } label: {
                     rowView(for: item)
                 }
                 .padding(.horizontal, 16)

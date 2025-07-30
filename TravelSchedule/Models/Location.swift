@@ -6,11 +6,16 @@
 //
 
 
-struct Location: CustomStringConvertible {
-    var city: String
-    var station: String
+struct Location {
+    var city: String?
+    var station: String?
     
-    var description: String {
-        "\(city) (\(station))"
+    var description: String? {
+        guard let city, let station else { return nil }
+        return "\(city) (\(station))"
+    }
+    
+    var isDefined: Bool {
+        city != nil && station != nil
     }
 }

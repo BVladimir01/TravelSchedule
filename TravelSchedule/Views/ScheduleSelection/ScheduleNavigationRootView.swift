@@ -30,9 +30,17 @@ struct ScheduleNavigationRootView: View {
             .navigationDestination(for: Destination.self) { destination in
                 switch destination {
                 case .city(selection: let selection):
-                    ItemSelectionView(viewModel: viewModel, destinationType: .station(selection: selection), items: ["Moscow", "Kazan", "SPb", "Sochi"])
+                    ItemSelectionView(destinationType: .station(selection: selection), items: viewModel.cities) { city in
+                        viewModel.selectCity(city, for: selection)
+                    }
                 case .station(selection: let selection):
-                    ItemSelectionView(viewModel: viewModel, destinationType: .thread, items: ["station 1", "station 2", "station 3", "station 4"])
+                    if let currentCity = viewModel.city(for: selection) {
+                        ItemSelectionView(destinationType: .station(selection: selection), items: viewModel.stations(of: currentCity)) { station in
+                            viewModel.selectStation(station, for: selection)
+                        }
+                    } else {
+                        EmptyView()
+                    }
                 case .thread:
                     Text("Thread selection")
                 }
@@ -73,20 +81,24 @@ struct ScheduleNavigationRootView: View {
     }
     
     private var originTextField: some View {
-        NavigationLink(value: Destination.city(selection: .origin)) {
+        Button {
+            viewModel.selectOriginLocation()
+        } label: {
             HStack {
-                Text(viewModel.originLocation?.description ?? "Откуда")
-                    .foregroundStyle(viewModel.originLocation == nil ? Color.ypGray : Color.ypBlack)
+                Text(viewModel.originLocation.description ?? "Откуда")
+                    .foregroundStyle(viewModel.originLocation.description == nil ? Color.ypGray : Color.ypBlack)
                 Spacer()
             }
         }
     }
     
     private var destinationTextField: some View {
-        NavigationLink(value: Destination.city(selection: .destination)) {
+        Button {
+            viewModel.selectDestinationLocation()
+        } label: {
             HStack {
-                Text(viewModel.destinationLocation?.description ?? "Куда")
-                    .foregroundStyle(viewModel.destinationLocation == nil ? Color.ypGray : Color.ypBlack)
+                Text(viewModel.destinationLocation.description ?? "Куда")
+                    .foregroundStyle(viewModel.destinationLocation.description == nil ? Color.ypGray : Color.ypBlack)
                 Spacer()
             }
         }

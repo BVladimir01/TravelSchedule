@@ -178,8 +178,8 @@
 		E7CB38BF2E3A474E00099A59 /* ScheduleSelection */ = {
 			isa = PBXGroup;
 			children = (
-				E7CB391E2E3A56A100099A59 /* ItemSelectionView.swift */,
 				E74DCC942E3A133F00A0C415 /* ScheduleNavigationRootView.swift */,
+				E7CB391E2E3A56A100099A59 /* ItemSelectionView.swift */,
 			);
 			path = ScheduleSelection;
 			sourceTree = "<group>";
