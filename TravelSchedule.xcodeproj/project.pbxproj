@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E71CA97C2E310F45000AFDE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E71CA9782E310F45000AFDE0 /* Assets.xcassets */; };
-		E71CA97D2E310F45000AFDE0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CA9792E310F45000AFDE0 /* ContentView.swift */; };
+		E71CA97D2E310F45000AFDE0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CA9792E310F45000AFDE0 /* MainView.swift */; };
 		E71CA97E2E310F45000AFDE0 /* TravelScheduleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CA97A2E310F45000AFDE0 /* TravelScheduleApp.swift */; };
 		E71CA9862E3118CF000AFDE0 /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = E71CA9852E3118CF000AFDE0 /* OpenAPIRuntime */; };
 		E71CA9892E3118F4000AFDE0 /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = E71CA9882E3118F4000AFDE0 /* OpenAPIURLSession */; };
@@ -29,7 +29,7 @@
 /* Begin PBXFileReference section */
 		E71CA96A2E310DED000AFDE0 /* TravelSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E71CA9782E310F45000AFDE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E71CA9792E310F45000AFDE0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E71CA9792E310F45000AFDE0 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E71CA97A2E310F45000AFDE0 /* TravelScheduleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelScheduleApp.swift; sourceTree = "<group>"; };
 		E71CA98E2E312185000AFDE0 /* openapi.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = "<group>"; };
 		E71CA9922E3121FB000AFDE0 /* openapi-generator-config.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 		E71CA9992E312C9F000AFDE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E71CA9792E310F45000AFDE0 /* ContentView.swift */,
+				E71CA9792E310F45000AFDE0 /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -213,7 +213,7 @@
 			files = (
 				E71CAA172E338D67000AFDE0 /* NearestSettlementService.swift in Sources */,
 				E71CAA0D2E3381D8000AFDE0 /* CarrierService.swift in Sources */,
-				E71CA97D2E310F45000AFDE0 /* ContentView.swift in Sources */,
+				E71CA97D2E310F45000AFDE0 /* MainView.swift in Sources */,
 				E71CAA282E33CCE1000AFDE0 /* ScheduleService.swift in Sources */,
 				E71CA97E2E310F45000AFDE0 /* TravelScheduleApp.swift in Sources */,
 				E71CA9D82E33553D000AFDE0 /* AllStationsService.swift in Sources */,
