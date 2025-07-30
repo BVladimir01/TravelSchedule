@@ -24,6 +24,7 @@
 		E71CAA332E33E833000AFDE0 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CAA322E33E82B000AFDE0 /* SearchService.swift */; };
 		E71CAA4B2E379072000AFDE0 /* APIKeyMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71CAA472E379068000AFDE0 /* APIKeyMiddleware.swift */; };
 		E74DCC622E39F68B00A0C415 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74DCC612E39F68B00A0C415 /* LaunchScreen.storyboard */; };
+		E74DCC8D2E3A115E00A0C415 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74DCC8B2E3A115C00A0C415 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		E71CAA322E33E82B000AFDE0 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		E71CAA472E379068000AFDE0 /* APIKeyMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyMiddleware.swift; sourceTree = "<group>"; };
 		E74DCC612E39F68B00A0C415 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E74DCC8B2E3A115C00A0C415 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 		E71CA9992E312C9F000AFDE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E74DCC8B2E3A115C00A0C415 /* SettingsView.swift */,
 				E71CA9792E310F45000AFDE0 /* MainView.swift */,
 			);
 			path = Views;
@@ -220,6 +223,7 @@
 				E71CA9A32E312DEA000AFDE0 /* NearestStationsService.swift in Sources */,
 				E71CAA4B2E379072000AFDE0 /* APIKeyMiddleware.swift in Sources */,
 				E71CAA332E33E833000AFDE0 /* SearchService.swift in Sources */,
+				E74DCC8D2E3A115E00A0C415 /* SettingsView.swift in Sources */,
 				E71CA9C52E32AFB6000AFDE0 /* CopyrightService.swift in Sources */,
 				E71CAA222E33B1E1000AFDE0 /* ThreadService.swift in Sources */,
 			);

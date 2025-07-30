@@ -36,7 +36,7 @@ struct MainView: View {
                         .tint(.red)
                 }
                 .tag(Tab.schedule)
-            Text("SettingsView")
+            SettingsView()
                 .tabItem {
                     Image(.settings)
                 }
