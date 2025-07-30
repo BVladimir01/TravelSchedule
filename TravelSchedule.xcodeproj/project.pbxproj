@@ -139,8 +139,8 @@
 		E71CA9992E312C9F000AFDE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E74DCC942E3A133F00A0C415 /* ScheduleNavigationRootView.swift */,
-				E74DCC8B2E3A115C00A0C415 /* SettingsView.swift */,
+				E7CB38CD2E3A476700099A59 /* Settings */,
+				E7CB38BF2E3A474E00099A59 /* ScheduleSelection */,
 				E71CA9792E310F45000AFDE0 /* MainView.swift */,
 			);
 			path = Views;
@@ -171,6 +171,22 @@
 				E7CB38AD2E3A327D00099A59 /* Destination.swift */,
 			);
 			path = NavigationModels;
+			sourceTree = "<group>";
+		};
+		E7CB38BF2E3A474E00099A59 /* ScheduleSelection */ = {
+			isa = PBXGroup;
+			children = (
+				E74DCC942E3A133F00A0C415 /* ScheduleNavigationRootView.swift */,
+			);
+			path = ScheduleSelection;
+			sourceTree = "<group>";
+		};
+		E7CB38CD2E3A476700099A59 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				E74DCC8B2E3A115C00A0C415 /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
