@@ -31,7 +31,7 @@
 		E74DCCB02E3A157100A0C415 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74DCCAF2E3A156900A0C415 /* TimeInterval.swift */; };
 		E7CB388A2E3A296C00099A59 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB38862E3A291300099A59 /* Selection.swift */; };
 		E7CB38AE2E3A327D00099A59 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB38AD2E3A327D00099A59 /* Destination.swift */; };
-		E7CB38EA2E3A497200099A59 /* CitySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB38E62E3A495B00099A59 /* CitySelectionView.swift */; };
+		E7CB39222E3A56C100099A59 /* ItemSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB391E2E3A56A100099A59 /* ItemSelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,7 +58,7 @@
 		E74DCCAF2E3A156900A0C415 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		E7CB38862E3A291300099A59 /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		E7CB38AD2E3A327D00099A59 /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
-		E7CB38E62E3A495B00099A59 /* CitySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySelectionView.swift; sourceTree = "<group>"; };
+		E7CB391E2E3A56A100099A59 /* ItemSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,7 +178,7 @@
 		E7CB38BF2E3A474E00099A59 /* ScheduleSelection */ = {
 			isa = PBXGroup;
 			children = (
-				E7CB38E62E3A495B00099A59 /* CitySelectionView.swift */,
+				E7CB391E2E3A56A100099A59 /* ItemSelectionView.swift */,
 				E74DCC942E3A133F00A0C415 /* ScheduleNavigationRootView.swift */,
 			);
 			path = ScheduleSelection;
@@ -285,6 +285,7 @@
 				E74DCCAC2E3A14C600A0C415 /* Location.swift in Sources */,
 				E71CA9A32E312DEA000AFDE0 /* NearestStationsService.swift in Sources */,
 				E71CAA4B2E379072000AFDE0 /* APIKeyMiddleware.swift in Sources */,
+				E7CB39222E3A56C100099A59 /* ItemSelectionView.swift in Sources */,
 				E71CAA332E33E833000AFDE0 /* SearchService.swift in Sources */,
 				E7CB388A2E3A296C00099A59 /* Selection.swift in Sources */,
 				E74DCC982E3A134D00A0C415 /* ScheduleNavigationRootView.swift in Sources */,
@@ -293,7 +294,6 @@
 				E74DCCB02E3A157100A0C415 /* TimeInterval.swift in Sources */,
 				E71CA9C52E32AFB6000AFDE0 /* CopyrightService.swift in Sources */,
 				E71CAA222E33B1E1000AFDE0 /* ThreadService.swift in Sources */,
-				E7CB38EA2E3A497200099A59 /* CitySelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,9 +30,9 @@ struct ScheduleNavigationRootView: View {
             .navigationDestination(for: Destination.self) { destination in
                 switch destination {
                 case .city(selection: let selection):
-                    Text("City selection for \(selection)")
+                    ItemSelectionView(viewModel: viewModel, destinationType: .station(selection: selection), items: ["Moscow", "Kazan", "SPb", "Sochi"])
                 case .station(selection: let selection):
-                    Text("Station selection for \(selection)")
+                    ItemSelectionView(viewModel: viewModel, destinationType: .thread, items: ["station 1", "station 2", "station 3", "station 4"])
                 case .thread:
                     Text("Thread selection")
                 }
