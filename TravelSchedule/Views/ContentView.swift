@@ -28,7 +28,7 @@ struct ContentView: View {
         .padding()
         .onAppear {
 //            performRequests()
-            getCopyright()
+//            getCopyright()
         }
     }
     
