@@ -1,0 +1,19 @@
+//
+//  ViewModel.swift
+//  TravelSchedule
+//
+//  Created by Vladimir on 30.07.2025.
+//
+
+import SwiftUI
+
+
+final class ViewModel: ObservableObject {
+    
+    @Published var originLocation: Location? = nil
+    @Published var destinationLocation: Location? = nil
+    
+    @Published var selectedIntervals: [TimeInterval] = []
+    @Published var allowTransfers = false
+    
+}
