@@ -16,6 +16,8 @@ final class ViewModel: ObservableObject {
     @Published var selectedIntervals: [TimeInterval] = []
     @Published var allowTransfers = false
     
+    @Published var path: [Destination] = []
+    
     var searchIsEnabled: Bool {
         return (originLocation?.city != nil &&
                 originLocation?.station != nil &&

@@ -12,14 +12,12 @@ struct ScheduleNavigationRootView: View {
     
     @ObservedObject private var viewModel: ViewModel
     
-    @State private var path: [Destination] = []
-    
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
     }
     
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $viewModel.path) {
             VStack {
                 locationsSelector
                     .padding(.top, 20)
