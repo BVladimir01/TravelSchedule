@@ -34,7 +34,7 @@ struct ScheduleNavigationRootView: View {
                 case .stationSelection(locationType: let locationType):
                     stationSelectionPage(for: locationType)
                 case .threadSelection:
-                    Text("ThredSelectionPage")
+                    ThreadSelectionView(originLocation: viewModel.originLocation, destinationLocation: viewModel.destinationLocation)
                 }
             }
             .navigationTitle("TravelSchedule")
