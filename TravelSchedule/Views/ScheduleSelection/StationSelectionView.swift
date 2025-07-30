@@ -27,11 +27,19 @@ struct StationSelectionView: View {
     }
     
     var body: some View {
-        VStack {
-            ChevronItemListView(items: displayedStations, onItemSelection: { station in
-                onStationSelection(station)
-            })
-            Spacer()
+        Group {
+            if displayedStations.isEmpty {
+                Text("Станция не найдена")
+                    .foregroundStyle(.ypBlack)
+                    .font(.system(size: 24, weight: .bold))
+            } else {
+                VStack {
+                    ChevronItemListView(items: displayedStations, onItemSelection: { station in
+                        onStationSelection(station)
+                    })
+                    Spacer()
+                }
+            }
         }
         .navigationTitle(Text("Выбор станции"))
         .navigationBarTitleDisplayMode(.inline)

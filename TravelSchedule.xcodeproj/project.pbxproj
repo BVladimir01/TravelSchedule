@@ -98,10 +98,10 @@
 			isa = PBXGroup;
 			children = (
 				E71CA97A2E310F45000AFDE0 /* TravelScheduleApp.swift */,
-				E7CB397D2E3A9C3600099A59 /* ReusableViews */,
-				E74DCCAA2E3A147D00A0C415 /* Models */,
-				E74DCC9C2E3A142000A0C415 /* ViewModel */,
 				E71CA9992E312C9F000AFDE0 /* Views */,
+				E74DCC9C2E3A142000A0C415 /* ViewModel */,
+				E74DCCAA2E3A147D00A0C415 /* Models */,
+				E7CB397D2E3A9C3600099A59 /* ReusableViews */,
 				E71CA9982E312C98000AFDE0 /* Services */,
 				E71CA98C2E312162000AFDE0 /* Resources */,
 			);
@@ -146,9 +146,9 @@
 		E71CA9992E312C9F000AFDE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E71CA9792E310F45000AFDE0 /* MainView.swift */,
 				E7CB38CD2E3A476700099A59 /* Settings */,
 				E7CB38BF2E3A474E00099A59 /* ScheduleSelection */,
-				E71CA9792E310F45000AFDE0 /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -183,9 +183,9 @@
 		E7CB38BF2E3A474E00099A59 /* ScheduleSelection */ = {
 			isa = PBXGroup;
 			children = (
-				E7CB39742E3A9A0D00099A59 /* StationSelectionView.swift */,
-				E7CB396F2E3A9A0600099A59 /* CitySelectionView.swift */,
 				E74DCC942E3A133F00A0C415 /* ScheduleNavigationRootView.swift */,
+				E7CB396F2E3A9A0600099A59 /* CitySelectionView.swift */,
+				E7CB39742E3A9A0D00099A59 /* StationSelectionView.swift */,
 			);
 			path = ScheduleSelection;
 			sourceTree = "<group>";

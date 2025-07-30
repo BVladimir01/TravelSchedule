@@ -26,11 +26,19 @@ struct CitySelectionView: View {
     }
     
     var body: some View {
-        VStack {
-            ChevronItemListView(items: displayedCities, onItemSelection: { city in
-                onCitySelection(city)
-            })
-            Spacer()
+        Group {
+            if displayedCities.isEmpty {
+                Text("Город не найден")
+                    .foregroundStyle(.ypBlack)
+                    .font(.system(size: 24, weight: .bold))
+            } else {
+                VStack {
+                    ChevronItemListView(items: displayedCities, onItemSelection: { city in
+                        onCitySelection(city)
+                    })
+                    Spacer()
+                }
+            }
         }
         .navigationTitle(Text("Выбор города"))
         .navigationBarTitleDisplayMode(.inline)
