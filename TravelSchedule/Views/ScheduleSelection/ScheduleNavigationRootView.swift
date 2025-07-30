@@ -27,35 +27,43 @@ struct ScheduleNavigationRootView: View {
                     searchThreadsButton
                 }
             }
-            .navigationDestination(for: Destination.self) { destination in
-                switch destination {
-                case .city(selection: let selection):
-                    CitySelectionView(cities: viewModel.cities, onCitySelection: { city in
-                        viewModel.selectCity(city, for: selection)
-                        viewModel.latestSelectedCity = city
-                    })
-                case .station(selection: let selection):
-                    if let latestSelectedCity = viewModel.latestSelectedCity {
-                        StationSelectionView(stations: viewModel.stations(of: latestSelectedCity), onStationSelection: { station in
-                            viewModel.selectStation(station, for: selection)
-                        })
-                    } else {
-                        EmptyView()
-                    }
-                case .thread:
-                    Text("Thread selection")
+            .navigationDestination(for: PageType.self) { pageType in
+                switch pageType {
+                case .citySelection(locationType: let locationType):
+                    citySelectionPage(for: locationType)
+                case .stationSelection(locationType: let locationType):
+                    stationSelectionPage(for: locationType)
+                case .threadSelection:
+                    Text("ThredSelectionPage")
                 }
-                
             }
             .navigationTitle("TravelSchedule")
             Spacer()
         }
     }
     
+    private func citySelectionPage(for locationType: LocationType) -> some View {
+        CitySelectionView(cities: viewModel.cities,
+                          onCitySelection: { city in
+            viewModel.selectCity(city, for: locationType)
+        })
+    }
+    
+    @ViewBuilder
+    private func stationSelectionPage(for locationType: LocationType) -> some View {
+        if let selectedCity = viewModel.city(of: locationType) {
+            StationSelectionView(stations: viewModel.stations(of: selectedCity), onStationSelection: { station in
+                viewModel.selectStation(station, for: locationType)
+            })
+        } else {
+            EmptyView()
+        }
+    }
+    
     private var locationsSelector: some View {
         HStack(spacing: 16) {
             textFields
-            changeButton
+            swapButton
         }
         .padding(16)
         .background {
@@ -83,7 +91,7 @@ struct ScheduleNavigationRootView: View {
     
     private var originTextField: some View {
         Button {
-            viewModel.selectOriginLocation()
+            viewModel.searchCity(for: .origin)
         } label: {
             HStack {
                 Text(viewModel.originLocation.description ?? "Откуда")
@@ -95,7 +103,7 @@ struct ScheduleNavigationRootView: View {
     
     private var destinationTextField: some View {
         Button {
-            viewModel.selectDestinationLocation()
+            viewModel.searchCity(for: .destination)
         } label: {
             HStack {
                 Text(viewModel.destinationLocation.description ?? "Куда")
@@ -105,8 +113,10 @@ struct ScheduleNavigationRootView: View {
         }
     }
     
-    private var changeButton: some View {
-        Button { } label: {
+    private var swapButton: some View {
+        Button {
+            
+        } label: {
             Circle()
                 .fill(.ypWhite)
                 .frame(width: 36, height: 36)

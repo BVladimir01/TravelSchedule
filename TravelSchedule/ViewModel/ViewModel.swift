@@ -24,7 +24,14 @@ final class ViewModel: ObservableObject {
         citiesStations[city] ?? []
     }
     
-    var latestSelectedCity: String? = nil
+    func city(of locationType: LocationType) -> String? {
+        switch locationType {
+        case .origin:
+            return originLocation.city
+        case .destination:
+            return destinationLocation.city
+        }
+    }
     
     @Published var originLocation = Location()
     @Published var destinationLocation = Location()
@@ -32,35 +39,29 @@ final class ViewModel: ObservableObject {
     @Published var selectedIntervals: [TimeInterval] = []
     @Published var allowTransfers = false
     
-    @Published var path: [Destination] = []
+    @Published var path: [PageType] = []
     
     var searchIsEnabled: Bool {
-        return (originLocation.city != nil &&
-                originLocation.station != nil &&
-                destinationLocation.city != nil &&
-                destinationLocation.station != nil)
+        return (originLocation.isDefined &&
+                destinationLocation.isDefined)
     }
     
-    func selectDestinationLocation() {
-        path.append(.city(selection: .destination))
+    func searchCity(for locationType: LocationType) {
+        path.append(.citySelection(locationType: locationType))
     }
     
-    func selectOriginLocation() {
-        path.append((.city(selection: .origin)))
-    }
-    
-    func selectCity(_ city: String, for selection: Selection) {
-        switch selection {
+    func selectCity(_ city: String, for locationType: LocationType) {
+        switch locationType {
         case .origin:
             originLocation.city = city
         case .destination:
             destinationLocation.city = city
         }
-        path.append(.station(selection: selection))
+        path.append(.stationSelection(locationType: locationType))
     }
     
-    func selectStation(_ station: String, for selection: Selection) {
-        switch selection {
+    func selectStation(_ station: String, for locationType: LocationType) {
+        switch locationType {
         case .origin:
             originLocation.station = station
         case .destination:
