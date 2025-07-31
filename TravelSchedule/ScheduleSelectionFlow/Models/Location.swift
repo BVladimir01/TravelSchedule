@@ -6,7 +6,7 @@
 //
 
 
-struct Location {
+struct Location: Hashable {
     var city: String?
     var station: String?
     

@@ -44,6 +44,7 @@
 		E7CB3ADA2E3B6CBB00099A59 /* TimeSpecifierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AD82E3B6CAF00099A59 /* TimeSpecifierView.swift */; };
 		E7CB3AE52E3B6DF400099A59 /* TimeIntervalMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AE22E3B6DEF00099A59 /* TimeIntervalMapper.swift */; };
 		E7CB3AEB2E3B6E0400099A59 /* TimeIntervalUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AEA2E3B6DFF00099A59 /* TimeIntervalUIModel.swift */; };
+		E7CB3B212E3BEE0100099A59 /* CarrierDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3B1E2E3BEDF600099A59 /* CarrierDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		E7CB3AD82E3B6CAF00099A59 /* TimeSpecifierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpecifierView.swift; sourceTree = "<group>"; };
 		E7CB3AE22E3B6DEF00099A59 /* TimeIntervalMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalMapper.swift; sourceTree = "<group>"; };
 		E7CB3AEA2E3B6DFF00099A59 /* TimeIntervalUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalUIModel.swift; sourceTree = "<group>"; };
+		E7CB3B1E2E3BEDF600099A59 /* CarrierDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrierDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +233,7 @@
 				E7CB3A982E3B564800099A59 /* ThreadsViewModel.swift */,
 				E7CB39BB2E3AB40300099A59 /* ThreadSelectionView.swift */,
 				E7CB3AD82E3B6CAF00099A59 /* TimeSpecifierView.swift */,
+				E7CB3B1E2E3BEDF600099A59 /* CarrierDetailView.swift */,
 			);
 			path = ThreadSelection;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				E71CAA0D2E3381D8000AFDE0 /* CarrierService.swift in Sources */,
 				E71CA97D2E310F45000AFDE0 /* MainView.swift in Sources */,
 				E71CAA282E33CCE1000AFDE0 /* ScheduleService.swift in Sources */,
+				E7CB3B212E3BEE0100099A59 /* CarrierDetailView.swift in Sources */,
 				E71CA97E2E310F45000AFDE0 /* TravelScheduleApp.swift in Sources */,
 				E71CA9D82E33553D000AFDE0 /* AllStationsService.swift in Sources */,
 				E74DCCA62E3A142E00A0C415 /* ScheduleNavigationViewModel.swift in Sources */,

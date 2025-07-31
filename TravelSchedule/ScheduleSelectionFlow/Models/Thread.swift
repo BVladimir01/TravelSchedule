@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Thread {
+struct Thread: Hashable {
     let departureTime: Date
     let arrivalTime: Date
     let hasTransfers: Bool

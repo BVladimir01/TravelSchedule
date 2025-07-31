@@ -10,7 +10,7 @@ import HTTPTypes
 
 final class ThreadsViewModel: ObservableObject {
     
-    @Published private var threads: [Thread] = [
+    @Published private(set) var threads: [Thread] = [
         .init(departureTime: Date.now.addingTimeInterval(-50000),
               arrivalTime: Date.now,
               hasTransfers: true,
@@ -39,11 +39,9 @@ final class ThreadsViewModel: ObservableObject {
     }
     
     private let threadMapper = ThreadModelMapper()
-    
-    var threadUIModels: [ThreadUIModel] {
-        threads.map { thread in
-            threadMapper.map(thread)
-        }
+
+    func threadUIModel(for thread: Thread) -> ThreadUIModel {
+        threadMapper.map(thread)
     }
     
 }

@@ -27,8 +27,12 @@ struct ThreadSelectionView: View {
         ZStack(alignment: .bottom) {
             VStack(spacing: 16) {
                 titleLabel
-                ForEach(viewModel.threadUIModels, id: \.self) { thread in
-                    rowView(for: thread)
+                ForEach(viewModel.threads, id: \.self) { thread in
+                    NavigationLink {
+                        CarrierDetailView(carrier: thread.carrier)
+                    } label: {
+                        rowView(for: viewModel.threadUIModel(for: thread))
+                    }
                 }
                 Spacer()
             }

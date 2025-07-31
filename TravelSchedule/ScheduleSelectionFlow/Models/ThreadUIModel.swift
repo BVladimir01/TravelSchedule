@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ThreadUIModel: Hashable {
+struct ThreadUIModel {
     let carrierLogoURL: String
     let carrierTitle: String
     let departureTime: String
