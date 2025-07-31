@@ -10,7 +10,7 @@ import OpenAPIURLSession
 
 struct MainView: View {
     
-    @StateObject private var viewModel = ViewModel()
+    @StateObject private var viewModel = ScheduleNavigationViewModel()
     
     @State private var selectedTab: Tab = .schedule
     @Environment(\.colorScheme) private var colorScheme

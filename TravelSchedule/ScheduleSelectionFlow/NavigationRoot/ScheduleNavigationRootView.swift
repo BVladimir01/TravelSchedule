@@ -10,9 +10,9 @@ import SwiftUI
 
 struct ScheduleNavigationRootView: View {
     
-    @ObservedObject private var viewModel: ViewModel
+    @ObservedObject private var viewModel: ScheduleNavigationViewModel
     
-    init(viewModel: ViewModel) {
+    init(viewModel: ScheduleNavigationViewModel) {
         self.viewModel = viewModel
     }
     
@@ -146,5 +146,5 @@ struct ScheduleNavigationRootView: View {
 
 
 #Preview {
-    ScheduleNavigationRootView(viewModel: ViewModel())
+    ScheduleNavigationRootView(viewModel: ScheduleNavigationViewModel())
 }

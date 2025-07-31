@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-final class ViewModel: ObservableObject {
+final class ScheduleNavigationViewModel: ObservableObject {
     
     private let citiesStations = [
         "Moscow" : ["Yaroslavskiy", "Kazanskiy", "Belorusskiy"],
