@@ -39,6 +39,12 @@ struct TimeSpecifierView: View {
             }
         }
         .padding(.horizontal, 16)
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                NavigationBackButton()
+            }
+        }
     }
     
     private func timeIntervalSelectionRow(for interval: TimeInterval) -> some View {
