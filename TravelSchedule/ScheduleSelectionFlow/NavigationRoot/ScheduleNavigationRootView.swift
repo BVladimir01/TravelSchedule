@@ -10,11 +10,7 @@ import SwiftUI
 
 struct ScheduleNavigationRootView: View {
     
-    @ObservedObject private var viewModel: ScheduleNavigationViewModel
-    
-    init(viewModel: ScheduleNavigationViewModel) {
-        self.viewModel = viewModel
-    }
+    @StateObject private var viewModel = ScheduleNavigationViewModel()
     
     var body: some View {
         NavigationStack(path: $viewModel.path) {
@@ -146,5 +142,5 @@ struct ScheduleNavigationRootView: View {
 
 
 #Preview {
-    ScheduleNavigationRootView(viewModel: ScheduleNavigationViewModel())
+    ScheduleNavigationRootView()
 }
