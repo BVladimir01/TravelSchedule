@@ -38,4 +38,5 @@ struct ThreadModelMapper {
                              duration: durationFormatter.string(from: thread.departureTime, to: thread.arrivalTime) ?? "",
                              departureDate: departureDateFormatter.string(from: thread.departureTime))
     }
+    
 }

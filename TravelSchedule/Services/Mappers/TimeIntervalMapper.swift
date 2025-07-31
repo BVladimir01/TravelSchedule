@@ -21,14 +21,14 @@ struct TimeIntervalMapper {
         let startString: String?
         let endString: String?
         
-        var start = DateComponents(hour: timeInterval.start.hour, minute: timeInterval.start.minutes)
+        let start = DateComponents(hour: timeInterval.start.hour, minute: timeInterval.start.minutes)
         if let startDate = Calendar.current.date(from: start) {
             startString = formatter.string(from: startDate)
         } else {
             startString = nil
         }
         
-        var end = DateComponents(hour: timeInterval.end.hour, minute: timeInterval.end.minutes)
+        let end = DateComponents(hour: timeInterval.end.hour, minute: timeInterval.end.minutes)
         if let endDate = Calendar.current.date(from: end) {
             endString = formatter.string(from: endDate)
         } else {
