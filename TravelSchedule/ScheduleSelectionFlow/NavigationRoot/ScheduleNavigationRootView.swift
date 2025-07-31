@@ -31,6 +31,8 @@ struct ScheduleNavigationRootView: View {
                     stationSelectionPage(for: locationType)
                 case .threadSelection:
                     ThreadSelectionView(originLocation: viewModel.originLocation, destinationLocation: viewModel.destinationLocation)
+                default:
+                    EmptyView()
                 }
             }
             .navigationTitle("TravelSchedule")

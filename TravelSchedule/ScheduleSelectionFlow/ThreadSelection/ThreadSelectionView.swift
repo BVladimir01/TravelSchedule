@@ -37,6 +37,14 @@ struct ThreadSelectionView: View {
                 .padding(.horizontal, 16)
                 .padding(.bottom, 24)
         }
+        .navigationDestination(for: PageType.self) { pageType in
+            switch pageType {
+            case .timeSpecification:
+                TimeSpecifierView(selection: $viewModel.timeSpecification, allowsTransfers: $viewModel.allowTransfers)
+            default:
+                EmptyView()
+            }
+        }
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -53,9 +61,7 @@ struct ThreadSelectionView: View {
     }
     
     private var specifyTimeButton: some View {
-        Button {
-            
-        } label: {
+        NavigationLink(value: PageType.timeSpecification) {
             Text("Уточнить время")
                 .foregroundStyle(.ypWhiteUniversal)
                 .font(.system(size: 17, weight: .bold))

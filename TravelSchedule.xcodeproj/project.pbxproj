@@ -41,6 +41,9 @@
 		E7CB3A9F2E3B568100099A59 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3A9E2E3B567C00099A59 /* Thread.swift */; };
 		E7CB3AA82E3B5BC100099A59 /* Carrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AA72E3B5BBF00099A59 /* Carrier.swift */; };
 		E7CB3ABA2E3B5EF400099A59 /* ThreadModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AB92E3B5EEE00099A59 /* ThreadModelMapper.swift */; };
+		E7CB3ADA2E3B6CBB00099A59 /* TimeSpecifierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AD82E3B6CAF00099A59 /* TimeSpecifierView.swift */; };
+		E7CB3AE52E3B6DF400099A59 /* TimeIntervalMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AE22E3B6DEF00099A59 /* TimeIntervalMapper.swift */; };
+		E7CB3AEB2E3B6E0400099A59 /* TimeIntervalUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AEA2E3B6DFF00099A59 /* TimeIntervalUIModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +80,9 @@
 		E7CB3A9E2E3B567C00099A59 /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		E7CB3AA72E3B5BBF00099A59 /* Carrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carrier.swift; sourceTree = "<group>"; };
 		E7CB3AB92E3B5EEE00099A59 /* ThreadModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadModelMapper.swift; sourceTree = "<group>"; };
+		E7CB3AD82E3B6CAF00099A59 /* TimeSpecifierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpecifierView.swift; sourceTree = "<group>"; };
+		E7CB3AE22E3B6DEF00099A59 /* TimeIntervalMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalMapper.swift; sourceTree = "<group>"; };
+		E7CB3AEA2E3B6DFF00099A59 /* TimeIntervalUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalUIModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,11 +190,12 @@
 			children = (
 				E7CB3AA72E3B5BBF00099A59 /* Carrier.swift */,
 				E7CB3A9E2E3B567C00099A59 /* Thread.swift */,
+				E7CB39B52E3AB36600099A59 /* ThreadUIModel.swift */,
 				E74DCCAF2E3A156900A0C415 /* TimeInterval.swift */,
+				E7CB3AEA2E3B6DFF00099A59 /* TimeIntervalUIModel.swift */,
 				E74DCCAB2E3A148200A0C415 /* Location.swift */,
 				E7CB38862E3A291300099A59 /* LocationType.swift */,
 				E7CB38AD2E3A327D00099A59 /* PageType.swift */,
-				E7CB39B52E3AB36600099A59 /* ThreadUIModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -223,6 +230,7 @@
 			children = (
 				E7CB3A982E3B564800099A59 /* ThreadsViewModel.swift */,
 				E7CB39BB2E3AB40300099A59 /* ThreadSelectionView.swift */,
+				E7CB3AD82E3B6CAF00099A59 /* TimeSpecifierView.swift */,
 			);
 			path = ThreadSelection;
 			sourceTree = "<group>";
@@ -246,6 +254,7 @@
 		E7CB3AB82E3B5EE800099A59 /* Mappers */ = {
 			isa = PBXGroup;
 			children = (
+				E7CB3AE22E3B6DEF00099A59 /* TimeIntervalMapper.swift */,
 				E7CB3AB92E3B5EEE00099A59 /* ThreadModelMapper.swift */,
 			);
 			path = Mappers;
@@ -346,12 +355,14 @@
 				E71CA9D82E33553D000AFDE0 /* AllStationsService.swift in Sources */,
 				E74DCCA62E3A142E00A0C415 /* ScheduleNavigationViewModel.swift in Sources */,
 				E74DCCAC2E3A14C600A0C415 /* Location.swift in Sources */,
+				E7CB3AE52E3B6DF400099A59 /* TimeIntervalMapper.swift in Sources */,
 				E7CB3ABA2E3B5EF400099A59 /* ThreadModelMapper.swift in Sources */,
 				E7CB39DF2E3B343E00099A59 /* NavigationBackButton.swift in Sources */,
 				E71CA9A32E312DEA000AFDE0 /* NearestStationsService.swift in Sources */,
 				E71CAA4B2E379072000AFDE0 /* APIKeyMiddleware.swift in Sources */,
 				E7CB39BF2E3AB40900099A59 /* ThreadSelectionView.swift in Sources */,
 				E7CB39222E3A56C100099A59 /* ChevronItemListView.swift in Sources */,
+				E7CB3AEB2E3B6E0400099A59 /* TimeIntervalUIModel.swift in Sources */,
 				E71CAA332E33E833000AFDE0 /* SearchService.swift in Sources */,
 				E7CB388A2E3A296C00099A59 /* LocationType.swift in Sources */,
 				E74DCC982E3A134D00A0C415 /* ScheduleNavigationRootView.swift in Sources */,
@@ -360,6 +371,7 @@
 				E7CB38AE2E3A327D00099A59 /* PageType.swift in Sources */,
 				E74DCCB02E3A157100A0C415 /* TimeInterval.swift in Sources */,
 				E71CA9C52E32AFB6000AFDE0 /* CopyrightService.swift in Sources */,
+				E7CB3ADA2E3B6CBB00099A59 /* TimeSpecifierView.swift in Sources */,
 				E7CB39B62E3AB37500099A59 /* ThreadUIModel.swift in Sources */,
 				E71CAA222E33B1E1000AFDE0 /* ThreadService.swift in Sources */,
 			);

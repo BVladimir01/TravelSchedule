@@ -9,4 +9,5 @@ enum PageType: Hashable {
     case citySelection(locationType: LocationType)
     case stationSelection(locationType: LocationType)
     case threadSelection
+    case timeSpecification
 }

@@ -6,6 +6,8 @@
 //
 
 import Foundation
+
+
 struct ThreadModelMapper {
     
     private let timeFormatter: DateFormatter = {
