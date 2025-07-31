@@ -60,6 +60,16 @@ struct ThreadSelectionView: View {
             Text("Уточнить время")
                 .foregroundStyle(.ypWhiteUniversal)
                 .font(.system(size: 17, weight: .bold))
+                .overlay(alignment: .trailing) {
+                    if viewModel.isSearchSpecified {
+                        Circle()
+                            .fill(.ypRed)
+                            .frame(width: 8, height: 8)
+                            .offset(x: 12)
+                    } else {
+                        EmptyView()
+                    }
+                }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 20)
                 .background {

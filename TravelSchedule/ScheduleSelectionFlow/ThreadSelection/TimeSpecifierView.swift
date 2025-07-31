@@ -24,7 +24,15 @@ struct TimeSpecifierView: View {
     var body: some View {
         VStack(spacing: 16) {
             timeSpecification
+            transferSelection
             Spacer()
+        }
+        .padding(.horizontal, 16)
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                NavigationBackButton()
+            }
         }
     }
     
@@ -36,13 +44,6 @@ struct TimeSpecifierView: View {
                 ForEach(timeIntervals, id: \.self) { interval in
                     timeIntervalSelectionRow(for: interval)
                 }
-            }
-        }
-        .padding(.horizontal, 16)
-        .navigationBarBackButtonHidden()
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                NavigationBackButton()
             }
         }
     }
@@ -65,6 +66,38 @@ struct TimeSpecifierView: View {
             }
         }
         .padding(.vertical, 16)
+    }
+    
+    private var transferSelection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Показывать варианты с пересадками")
+                .font(.system(size: 24, weight: .bold))
+                .foregroundStyle(.ypBlack)
+            VStack {
+                HStack(spacing: 4) {
+                    Text("Да")
+                    Spacer()
+                    Button {
+                        allowsTransfers = true
+                    } label: {
+                        Image(allowsTransfers ? .radioButtonOn : .radioButtonOff)
+                            .tint(.ypBlack)
+                    }
+                }
+                .padding(.vertical, 19)
+                HStack(spacing: 4) {
+                    Text("Нет")
+                    Spacer()
+                    Button {
+                        allowsTransfers = false
+                    } label: {
+                        Image(allowsTransfers ? .radioButtonOff : .radioButtonOn)
+                            .tint(.ypBlack)
+                    }
+                }
+                .padding(.vertical, 19)
+            }
+        }
     }
     
     private func stringRepresentation(of interval: TimeInterval) -> String {

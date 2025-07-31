@@ -34,6 +34,10 @@ final class ThreadsViewModel: ObservableObject {
     @Published var timeSpecification: Set<TimeInterval> = []
     @Published var allowTransfers = true
     
+    var isSearchSpecified: Bool {
+        !timeSpecification.isEmpty || !allowTransfers
+    }
+    
     private let threadMapper = ThreadModelMapper()
     
     var threadUIModels: [ThreadUIModel] {
