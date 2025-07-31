@@ -36,6 +36,7 @@
 		E7CB39772E3A9A1100099A59 /* StationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB39742E3A9A0D00099A59 /* StationSelectionView.swift */; };
 		E7CB39B62E3AB37500099A59 /* ThreadPresentationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB39B52E3AB36600099A59 /* ThreadPresentationInfo.swift */; };
 		E7CB39BF2E3AB40900099A59 /* ThreadSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB39BB2E3AB40300099A59 /* ThreadSelectionView.swift */; };
+		E7CB39DF2E3B343E00099A59 /* NavigationBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB39DB2E3B343800099A59 /* NavigationBackButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		E7CB39742E3A9A0D00099A59 /* StationSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSelectionView.swift; sourceTree = "<group>"; };
 		E7CB39B52E3AB36600099A59 /* ThreadPresentationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadPresentationInfo.swift; sourceTree = "<group>"; };
 		E7CB39BB2E3AB40300099A59 /* ThreadSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSelectionView.swift; sourceTree = "<group>"; };
+		E7CB39DB2E3B343800099A59 /* NavigationBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBackButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +209,7 @@
 		E7CB397D2E3A9C3600099A59 /* ReusableViews */ = {
 			isa = PBXGroup;
 			children = (
+				E7CB39DB2E3B343800099A59 /* NavigationBackButton.swift */,
 				E7CB391E2E3A56A100099A59 /* ChevronItemListView.swift */,
 			);
 			path = ReusableViews;
@@ -305,6 +308,7 @@
 				E71CA9D82E33553D000AFDE0 /* AllStationsService.swift in Sources */,
 				E74DCCA62E3A142E00A0C415 /* ViewModel.swift in Sources */,
 				E74DCCAC2E3A14C600A0C415 /* Location.swift in Sources */,
+				E7CB39DF2E3B343E00099A59 /* NavigationBackButton.swift in Sources */,
 				E71CA9A32E312DEA000AFDE0 /* NearestStationsService.swift in Sources */,
 				E71CAA4B2E379072000AFDE0 /* APIKeyMiddleware.swift in Sources */,
 				E7CB39BF2E3AB40900099A59 /* ThreadSelectionView.swift in Sources */,

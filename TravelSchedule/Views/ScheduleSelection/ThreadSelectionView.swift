@@ -34,7 +34,7 @@ struct ThreadSelectionView: View {
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
-                backButton
+                NavigationBackButton()
             }
         }
     }
@@ -60,15 +60,6 @@ struct ThreadSelectionView: View {
                         .fill(.ypBlue)
                 }
         }
-    }
-    
-    private var backButton: some View {
-        Button {
-            dismiss()
-        } label: {
-            Image(.back)
-        }
-        .tint(.ypBlack)
     }
     
 }

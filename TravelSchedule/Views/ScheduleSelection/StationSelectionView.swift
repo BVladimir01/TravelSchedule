@@ -46,19 +46,10 @@ struct StationSelectionView: View {
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
-                backButton
+                NavigationBackButton()
             }
         }
         .searchable(text: $searchText, placement: .automatic, prompt: Text("Введите запрос"))
     }
     
-    private var backButton: some View {
-        Button {
-            dismiss()
-        } label: {
-            Image(.back)
-        }
-        .tint(.ypBlack)
-    }
-
 }
