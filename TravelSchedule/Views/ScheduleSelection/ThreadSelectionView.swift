@@ -16,6 +16,13 @@ struct ThreadSelectionView: View {
     private let originLocation: Location
     private let destinationLocation: Location
     
+    private let thread = ThreadPresentationInfo(
+        logoURL: "https://company.rzd.ru/api/media/resources/1603629",
+        departure: Date.now.addingTimeInterval(-50000),
+        arrival: Date.now,
+        hasTransfers: true,
+        companyName: "РЖД")
+    
     init(originLocation: Location, destinationLocation: Location) {
         self.originLocation = originLocation
         self.destinationLocation = destinationLocation
@@ -23,10 +30,13 @@ struct ThreadSelectionView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            VStack {
+            VStack(spacing: 16) {
                 titleLabel
+                rowView(for: thread)
+                rowView(for: thread)
                 Spacer()
             }
+            .padding(.horizontal, 16)
             specifyTimeButton
                 .padding(.horizontal, 16)
                 .padding(.bottom, 24)
@@ -44,7 +54,6 @@ struct ThreadSelectionView: View {
         Text("\(originLocation.description ?? "") → \(destinationLocation.description ?? "")")
             .foregroundStyle(.ypBlack)
             .font(.system(size: 24, weight: .bold))
-            .padding(16)
     }
     
     private var specifyTimeButton: some View {
@@ -52,7 +61,7 @@ struct ThreadSelectionView: View {
             
         } label: {
             Text("Уточнить время")
-                .foregroundStyle(.ypWhite)
+                .foregroundStyle(.ypWhiteUniversal)
                 .font(.system(size: 17, weight: .bold))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 20)
@@ -60,6 +69,85 @@ struct ThreadSelectionView: View {
                     RoundedRectangle(cornerRadius: 16)
                         .fill(.ypBlue)
                 }
+        }
+    }
+    
+    private func rowView(for thread: ThreadPresentationInfo) -> some View {
+        VStack(alignment: .leading) {
+            HStack(spacing: 8) {
+                logoImage(url: thread.logoURL ?? "")
+                    .frame(width: 38, height: 38)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(thread.companyName)
+                        .foregroundStyle(.ypBlackUniversal)
+                        .font(.system(size: 17, weight: .regular))
+                    if thread.hasTransfers {
+                        Text("Пересадка")
+                            .foregroundStyle(.ypRed)
+                            .font(.system(size: 12, weight: .regular))
+                    }
+                }
+            }
+            .padding(.horizontal, 14)
+            .padding(.top, 14)
+            .padding(.bottom, 4)
+            HStack(spacing: 5) {
+                HStack(spacing: 4) {
+                    Text(thread.departureTime)
+                        .foregroundStyle(.ypBlackUniversal)
+                        .font(.system(size: 17, weight: .regular))
+                    divider
+                }
+                Text(thread.duration)
+                    .foregroundStyle(.ypBlackUniversal)
+                    .font(.system(size: 12, weight: .regular))
+                HStack(spacing: 4) {
+                    divider
+                    Text(thread.arrivaleTime)
+                        .foregroundStyle(.ypBlackUniversal)
+                        .font(.system(size: 17, weight: .regular))
+                }
+            }
+            .padding(14)
+        }
+        .background {
+            RoundedRectangle(cornerRadius: 24)
+                .fill(.ypLightGray)
+        }
+        .overlay(alignment: .topTrailing) {
+            Text(thread.departureDay)
+                .foregroundStyle(.ypBlackUniversal)
+                .font(.system(size: 12, weight: .regular))
+                .padding(.top, 15)
+                .padding(.trailing, 7)
+            
+        }
+    }
+    
+    private var divider: some View {
+        Rectangle()
+            .fill(.ypGray)
+            .frame(height: 1)
+            .frame(maxWidth: .infinity)
+    }
+    
+    private func logoImage(url: String) -> some View {
+        AsyncImage(url: URL(string: url)) { phase in
+            switch phase {
+            case .empty:
+                ProgressView()
+                    .tint(.ypBlackUniversal)
+            case .success(let image):
+                image
+                    .resizable()
+                    .scaledToFit()
+            case .failure:
+                Image(systemName: "photo.circle")
+                    .resizable()
+                    .scaledToFit()
+            @unknown default:
+                ProgressView()
+            }
         }
     }
     
