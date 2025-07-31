@@ -49,6 +49,7 @@ struct StationSelectionView: View {
                 NavigationBackButton()
             }
         }
+        .toolbar(.hidden, for: .tabBar)
         .searchable(text: $searchText, placement: .automatic, prompt: Text("Введите запрос"))
     }
     

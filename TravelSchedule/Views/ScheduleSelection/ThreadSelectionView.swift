@@ -37,6 +37,7 @@ struct ThreadSelectionView: View {
                 NavigationBackButton()
             }
         }
+        .toolbar(.hidden, for: .tabBar)
     }
     
     private var titleLabel: some View {

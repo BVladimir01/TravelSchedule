@@ -18,7 +18,7 @@ struct MainView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             content
-            divider
+//            divider
         }
     }
     
