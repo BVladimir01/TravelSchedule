@@ -12,4 +12,6 @@ struct Thread {
     let arrivalTime: Date
     let hasTransfers: Bool
     let carrier: Carrier
+    let origin: Location
+    let destination: Location
 }

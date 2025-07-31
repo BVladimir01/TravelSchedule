@@ -16,12 +16,7 @@ struct ThreadSelectionView: View {
     private let originLocation: Location
     private let destinationLocation: Location
     
-    private let thread = ThreadPresentationInfo(
-        logoURL: "https://company.rzd.ru/api/media/resources/1603629",
-        departure: Date.now.addingTimeInterval(-50000),
-        arrival: Date.now,
-        hasTransfers: true,
-        companyName: "РЖД")
+    @StateObject private var viewModel = ThreadsViewModel()
     
     init(originLocation: Location, destinationLocation: Location) {
         self.originLocation = originLocation
@@ -32,8 +27,9 @@ struct ThreadSelectionView: View {
         ZStack(alignment: .bottom) {
             VStack(spacing: 16) {
                 titleLabel
-                rowView(for: thread)
-                rowView(for: thread)
+                ForEach(viewModel.threadUIModels, id: \.self) { thread in
+                    rowView(for: thread)
+                }
                 Spacer()
             }
             .padding(.horizontal, 16)
@@ -72,13 +68,13 @@ struct ThreadSelectionView: View {
         }
     }
     
-    private func rowView(for thread: ThreadPresentationInfo) -> some View {
+    private func rowView(for thread: ThreadUIModel) -> some View {
         VStack(alignment: .leading) {
             HStack(spacing: 8) {
-                logoImage(url: thread.logoURL ?? "")
+                logoImage(url: thread.carrierLogoURL)
                     .frame(width: 38, height: 38)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(thread.companyName)
+                    Text(thread.carrierTitle)
                         .foregroundStyle(.ypBlackUniversal)
                         .font(.system(size: 17, weight: .regular))
                     if thread.hasTransfers {
@@ -103,7 +99,7 @@ struct ThreadSelectionView: View {
                     .font(.system(size: 12, weight: .regular))
                 HStack(spacing: 4) {
                     divider
-                    Text(thread.arrivaleTime)
+                    Text(thread.arrivalTime)
                         .foregroundStyle(.ypBlackUniversal)
                         .font(.system(size: 17, weight: .regular))
                 }
@@ -115,7 +111,7 @@ struct ThreadSelectionView: View {
                 .fill(.ypLightGray)
         }
         .overlay(alignment: .topTrailing) {
-            Text(thread.departureDay)
+            Text(thread.departureDate)
                 .foregroundStyle(.ypBlackUniversal)
                 .font(.system(size: 12, weight: .regular))
                 .padding(.top, 15)

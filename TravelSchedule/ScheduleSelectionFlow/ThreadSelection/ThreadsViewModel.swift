@@ -11,26 +11,32 @@ import HTTPTypes
 final class ThreadsViewModel: ObservableObject {
     
     @Published private var threads: [Thread] = [
-        .init(departureTime: Date.now,
-              arrivalTime: Date.now.addingTimeInterval(-50000),
+        .init(departureTime: Date.now.addingTimeInterval(-50000),
+              arrivalTime: Date.now,
               hasTransfers: true,
               carrier: .init(title: "РЖД",
                              email: "i.lozgkina@yandex.ru",
                              phone: "+7 (904) 329-27-71",
-                             logoURL: "https://company.rzd.ru/api/media/resources/1603629")),
-        
-            .init(departureTime: Date.now.addingTimeInterval(-120000),
-                  arrivalTime: Date.now.addingTimeInterval(-118000),
-                  hasTransfers: true,
-                  carrier: .init(title: "Some company",
-                                 email: "Some email",
-                                 phone: "Some phone",
-                                 logoURL: "https://company.rzd.ru/api/media/resources/1603629")),
+                             logoURL: "https://company.rzd.ru/api/media/resources/1603629"),
+             origin: Location(),
+             destination: Location()),
+            .init(departureTime: Date.now.addingTimeInterval(-10120000),
+                  arrivalTime: Date.now.addingTimeInterval(-10110000),
+                  hasTransfers: false,
+                  carrier: .init(title: "РЖД",
+                                 email: "i.lozgkina@yandex.ru",
+                                 phone: "+7 (904) 329-27-71",
+                                 logoURL: "https://company.rzd.ru/api/media/resources/1603629"),
+                 origin: Location(),
+                 destination: Location()),
     ]
     
-    init(request: HTTPRequest) {
-        
-    }
+    private let threadMapper = ThreadModelMapper()
     
+    var threadUIModels: [ThreadUIModel] {
+        threads.map { thread in
+            threadMapper.map(thread)
+        }
+    }
     
 }
