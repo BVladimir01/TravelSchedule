@@ -37,6 +37,9 @@
 		E7CB39B62E3AB37500099A59 /* ThreadPresentationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB39B52E3AB36600099A59 /* ThreadPresentationInfo.swift */; };
 		E7CB39BF2E3AB40900099A59 /* ThreadSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB39BB2E3AB40300099A59 /* ThreadSelectionView.swift */; };
 		E7CB39DF2E3B343E00099A59 /* NavigationBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB39DB2E3B343800099A59 /* NavigationBackButton.swift */; };
+		E7CB3A9B2E3B564F00099A59 /* ThreadsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3A982E3B564800099A59 /* ThreadsViewModel.swift */; };
+		E7CB3A9F2E3B568100099A59 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3A9E2E3B567C00099A59 /* Thread.swift */; };
+		E7CB3AA82E3B5BC100099A59 /* Carrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AA72E3B5BBF00099A59 /* Carrier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +72,9 @@
 		E7CB39B52E3AB36600099A59 /* ThreadPresentationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadPresentationInfo.swift; sourceTree = "<group>"; };
 		E7CB39BB2E3AB40300099A59 /* ThreadSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSelectionView.swift; sourceTree = "<group>"; };
 		E7CB39DB2E3B343800099A59 /* NavigationBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBackButton.swift; sourceTree = "<group>"; };
+		E7CB3A982E3B564800099A59 /* ThreadsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsViewModel.swift; sourceTree = "<group>"; };
+		E7CB3A9E2E3B567C00099A59 /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
+		E7CB3AA72E3B5BBF00099A59 /* Carrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carrier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,15 +142,7 @@
 		E71CA9982E312C98000AFDE0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				E71CAA472E379068000AFDE0 /* APIKeyMiddleware.swift */,
-				E71CAA322E33E82B000AFDE0 /* SearchService.swift */,
-				E71CAA272E33CCDC000AFDE0 /* ScheduleService.swift */,
-				E71CAA212E33B1DD000AFDE0 /* ThreadService.swift */,
-				E71CAA162E338D5C000AFDE0 /* NearestSettlementService.swift */,
-				E71CAA092E3381D1000AFDE0 /* CarrierService.swift */,
-				E71CA9D42E335537000AFDE0 /* AllStationsService.swift */,
-				E71CA9C42E32AFAF000AFDE0 /* CopyrightService.swift */,
-				E71CA9A22E312DE2000AFDE0 /* NearestStationsService.swift */,
+				E7CB3AAF2E3B5D9800099A59 /* Requests */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -181,6 +179,8 @@
 		E7CB3A422E3B53A300099A59 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E7CB3AA72E3B5BBF00099A59 /* Carrier.swift */,
+				E7CB3A9E2E3B567C00099A59 /* Thread.swift */,
 				E74DCCAF2E3A156900A0C415 /* TimeInterval.swift */,
 				E74DCCAB2E3A148200A0C415 /* Location.swift */,
 				E7CB38862E3A291300099A59 /* LocationType.swift */,
@@ -218,9 +218,26 @@
 		E7CB3A842E3B547100099A59 /* ThreadSelection */ = {
 			isa = PBXGroup;
 			children = (
+				E7CB3A982E3B564800099A59 /* ThreadsViewModel.swift */,
 				E7CB39BB2E3AB40300099A59 /* ThreadSelectionView.swift */,
 			);
 			path = ThreadSelection;
+			sourceTree = "<group>";
+		};
+		E7CB3AAF2E3B5D9800099A59 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				E71CA9A22E312DE2000AFDE0 /* NearestStationsService.swift */,
+				E71CAA472E379068000AFDE0 /* APIKeyMiddleware.swift */,
+				E71CAA322E33E82B000AFDE0 /* SearchService.swift */,
+				E71CAA272E33CCDC000AFDE0 /* ScheduleService.swift */,
+				E71CAA212E33B1DD000AFDE0 /* ThreadService.swift */,
+				E71CAA162E338D5C000AFDE0 /* NearestSettlementService.swift */,
+				E71CAA092E3381D1000AFDE0 /* CarrierService.swift */,
+				E71CA9D42E335537000AFDE0 /* AllStationsService.swift */,
+				E71CA9C42E32AFAF000AFDE0 /* CopyrightService.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,7 +323,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7CB3AA82E3B5BC100099A59 /* Carrier.swift in Sources */,
 				E7CB39712E3A9A0A00099A59 /* CitySelectionView.swift in Sources */,
+				E7CB3A9F2E3B568100099A59 /* Thread.swift in Sources */,
 				E7CB39772E3A9A1100099A59 /* StationSelectionView.swift in Sources */,
 				E71CAA172E338D67000AFDE0 /* NearestSettlementService.swift in Sources */,
 				E71CAA0D2E3381D8000AFDE0 /* CarrierService.swift in Sources */,
@@ -325,6 +344,7 @@
 				E7CB388A2E3A296C00099A59 /* LocationType.swift in Sources */,
 				E74DCC982E3A134D00A0C415 /* ScheduleNavigationRootView.swift in Sources */,
 				E74DCC8D2E3A115E00A0C415 /* SettingsView.swift in Sources */,
+				E7CB3A9B2E3B564F00099A59 /* ThreadsViewModel.swift in Sources */,
 				E7CB38AE2E3A327D00099A59 /* PageType.swift in Sources */,
 				E74DCCB02E3A157100A0C415 /* TimeInterval.swift in Sources */,
 				E71CA9C52E32AFB6000AFDE0 /* CopyrightService.swift in Sources */,
