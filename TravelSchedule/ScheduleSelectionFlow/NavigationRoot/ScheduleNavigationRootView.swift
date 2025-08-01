@@ -91,7 +91,6 @@ struct ScheduleNavigationRootView: View {
                     .fill(.ypWhite)
                     .frame(height: 96)
             }
-            .border(.blue)
     }
     
     private var originTextField: some View {
@@ -101,6 +100,7 @@ struct ScheduleNavigationRootView: View {
             HStack {
                 Text(viewModel.description(for: .origin) ?? "Откуда")
                     .foregroundStyle(viewModel.isDefined(locationType: .origin) ? Color.ypBlack : Color.ypGray)
+                    .lineLimit(1)
                 Spacer()
             }
         }
@@ -113,6 +113,7 @@ struct ScheduleNavigationRootView: View {
             HStack {
                 Text(viewModel.description(for: .destination) ?? "Куда")
                     .foregroundStyle(viewModel.isDefined(locationType: .destination) ? Color.ypBlack : Color.ypGray)
+                    .lineLimit(1)
                 Spacer()
             }
         }
