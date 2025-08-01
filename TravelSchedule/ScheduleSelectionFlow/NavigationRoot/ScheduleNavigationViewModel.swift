@@ -10,23 +10,32 @@ import SwiftUI
 
 final class ScheduleNavigationViewModel: ObservableObject {
     
+    @Published private(set) var loadingState: CitiesLoadingState = .idle
+    
     @Published var originCity: String?
     @Published var originStation: String?
     @Published var destinationCity: String?
     @Published var destinationStation: String?
     
     @Published var path: [PageType] = []
+    @Published var _cities: [City] = []
     
-    private let allStationsProvider: AllStationsProvider
+    private let allCitiesProvider: AllCitiesProvider
     
     init(client: APIProtocol) {
-        allStationsProvider = AllStationsProvider(client: client)
+        allCitiesProvider = AllCitiesProvider(client: client)
         startFetching()
     }
     
     private func startFetching() {
         Task {
-            await allStationsProvider.loadStations()
+            loadingState = .loading
+            do {
+                _cities = try await allCitiesProvider.fetchCities()
+                loadingState = .success
+            } catch {
+                loadingState = .error(error)
+            }
         }
     }
     
