@@ -13,7 +13,11 @@ struct MainView: View {
     @State private var selectedTab: Tab = .schedule
     @Environment(\.colorScheme) private var colorScheme
     
-    @StateObject private var scheduleNavigationViewModel = ScheduleNavigationViewModel()
+    @StateObject private var scheduleNavigationViewModel: ScheduleNavigationViewModel
+    
+    init(client: APIProtocol) {
+        self._scheduleNavigationViewModel = StateObject(wrappedValue: ScheduleNavigationViewModel(client: client))
+    }
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -56,5 +60,8 @@ extension MainView {
 }
 
 #Preview {
-    MainView()
+    let apiKey = "f5fad011-aeea-4dab-a7a8-872458a66b1f"
+    let apiKeyMiddleware = APIKeyMiddleware(apiKey: apiKey)
+    let client = try! Client(serverURL: Servers.Server1.url(), transport: URLSessionTransport(), middlewares: [apiKeyMiddleware])
+    MainView(client: client)
 }

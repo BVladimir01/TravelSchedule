@@ -17,6 +17,16 @@ final class ScheduleNavigationViewModel: ObservableObject {
     
     @Published var path: [PageType] = []
     
+    private let allStationsProvider: AllStationsProvider
+    
+    init(client: APIProtocol) {
+        allStationsProvider = AllStationsProvider(client: client)
+    }
+    
+    func startFetching() async {
+        await allStationsProvider.loadStations()
+    }
+    
     private let citiesStations = [
         "Moscow" : ["Yaroslavskiy", "Kazanskiy", "Belorusskiy"],
         "SPB" : ["station 1", "station 2", "station 3"],

@@ -8,6 +8,7 @@
 import SwiftUI
 
 
+
 struct ScheduleNavigationRootView: View {
     
     @ObservedObject private var viewModel: ScheduleNavigationViewModel
@@ -43,6 +44,12 @@ struct ScheduleNavigationRootView: View {
             }
             .navigationTitle("TravelSchedule")
             Spacer()
+        }
+        .onAppear {
+            Task {
+                print("start fetching")
+                await viewModel.startFetching()
+            }
         }
     }
     
@@ -150,5 +157,8 @@ struct ScheduleNavigationRootView: View {
 
 
 #Preview {
-    ScheduleNavigationRootView(viewModel: ScheduleNavigationViewModel())
+//    let apiKey = "f5fad011-aeea-4dab-a7a8-872458a66b1f"
+//    let apiKeyMiddleware = APIKeyMiddleware(apiKey: apiKey)
+//    let client = try! Client(serverURL: Servers.Server1.url(), transport: URLSessionTransport(), middlewares: [apiKeyMiddleware])
+//    ScheduleNavigationRootView(viewModel: ScheduleNavigationViewModel())
 }
