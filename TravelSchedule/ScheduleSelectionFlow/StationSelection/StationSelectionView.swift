@@ -19,8 +19,7 @@ struct StationSelectionView: View {
     private var displayedStations: [Station] {
         guard !searchText.isEmpty else { return stations }
         return stations.filter { station in
-            guard let title = station.title else { return true }
-            return title.lowercased().contains(searchText.lowercased())
+            return station.title.lowercased().contains(searchText.lowercased())
         }
     }
     

@@ -39,10 +39,10 @@ final class StationsAndCitiesProvider {
     }
     
     private func renderSettlement(_ settlement: Components.Schemas.Settlement) {
-        let city = mapper.map(city: settlement)
+        guard let city = mapper.map(city: settlement) else { return }
         guard let stations = settlement.stations else { return }
         cities.append(city)
-        self.stations[city] = stations.map { mapper.map(station: $0) }
+        self.stations[city] = stations.compactMap { mapper.map(station: $0) }
     }
     
 }

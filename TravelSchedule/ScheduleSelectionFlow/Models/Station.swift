@@ -7,16 +7,16 @@
 
 struct Station: Hashable, CustomStringConvertible {
     
-    let title: String?
+    let title: String
     let codes: Codes
     
     struct Codes: Hashable {
         let esr_code: String?
-        let yandex_code: String?
+        let yandex_code: String
     }
     
     var description: String {
-        title ?? ""
+        title
     }
     
 }

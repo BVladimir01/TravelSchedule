@@ -19,8 +19,7 @@ struct CitySelectionView: View {
     private var displayedCities: [City] {
         guard !searchText.isEmpty else { return cities }
         return cities.filter { city in
-            guard let title = city.title else { return true }
-            return title.lowercased().contains(searchText.lowercased())
+            return city.title.lowercased().contains(searchText.lowercased())
         }
     }
     
