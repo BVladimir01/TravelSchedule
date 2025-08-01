@@ -12,18 +12,18 @@ final class ScheduleNavigationViewModel: ObservableObject {
     
     @Published private(set) var loadingState: CitiesLoadingState = .idle
     
-    @Published var originCity: String?
-    @Published var originStation: String?
-    @Published var destinationCity: String?
-    @Published var destinationStation: String?
+    @Published var originCity: City?
+    @Published var originStation: Station?
+    @Published var destinationCity: City?
+    @Published var destinationStation: Station?
     
     @Published var path: [PageType] = []
-    @Published var _cities: [City] = []
     
-    private let allCitiesProvider: AllCitiesProvider
+    
+    private let stationsAndCitiesProvider: StationsAndCitiesProvider
     
     init(client: APIProtocol) {
-        allCitiesProvider = AllCitiesProvider(client: client)
+        stationsAndCitiesProvider = StationsAndCitiesProvider(client: client)
         startFetching()
     }
     
@@ -31,7 +31,7 @@ final class ScheduleNavigationViewModel: ObservableObject {
         Task {
             loadingState = .loading
             do {
-                _cities = try await allCitiesProvider.fetchCities()
+                try await stationsAndCitiesProvider.fetchCitiesAndStations()
                 loadingState = .success
             } catch {
                 loadingState = .error(error)
@@ -63,28 +63,18 @@ final class ScheduleNavigationViewModel: ObservableObject {
     }
 
     func description(for locationType: LocationType) -> String? {
-        let city: String?
-        let station: String?
+        let cityTitle: String?
+        let stationTitle: String?
         switch locationType {
         case .origin:
-            if let originCity, let originStation {
-                city = originCity
-                station = originStation
-            } else {
-                city = nil
-                station = nil
-            }
+                cityTitle = originCity?.title
+                stationTitle = originStation?.title
         case .destination:
-            if let destinationCity, let destinationStation {
-                city = destinationCity
-                station = destinationStation
-            } else {
-                city = nil
-                station = nil
-            }
+            cityTitle = destinationCity?.title
+            stationTitle = destinationStation?.title
         }
-        if let city, let station {
-            return "\(city) (\(station))"
+        if let cityTitle, let stationTitle {
+            return "\(cityTitle) (\(stationTitle))"
         } else {
             return nil
         }
@@ -99,15 +89,15 @@ final class ScheduleNavigationViewModel: ObservableObject {
         }
     }
     
-    var cities: [String] {
-        Array(citiesStations.keys)
+    var cities: [City] {
+        stationsAndCitiesProvider.cities
     }
     
-    func stations(of city: String) -> [String] {
-        citiesStations[city] ?? []
+    func stations(of city: City) -> [Station] {
+        stationsAndCitiesProvider.stations(of: city)
     }
     
-    func city(of locationType: LocationType) -> String? {
+    func city(of locationType: LocationType) -> City? {
         switch locationType {
         case .origin:
             return originCity
@@ -117,14 +107,18 @@ final class ScheduleNavigationViewModel: ObservableObject {
     }
     
     var searchIsEnabled: Bool {
-        return [originCity, originStation, destinationCity, destinationStation].allSatisfy { $0 != nil }
+        return (originCity != nil &&
+                originStation != nil &&
+                destinationCity != nil &&
+                destinationStation != nil
+                )
     }
     
     func searchCity(for locationType: LocationType) {
         path.append(.citySelection(locationType: locationType))
     }
     
-    func selectCity(_ city: String, for locationType: LocationType) {
+    func selectCity(_ city: City, for locationType: LocationType) {
         switch locationType {
         case .origin:
             originCity = city
@@ -134,7 +128,7 @@ final class ScheduleNavigationViewModel: ObservableObject {
         path.append(.stationSelection(locationType: locationType))
     }
     
-    func selectStation(_ station: String, for locationType: LocationType) {
+    func selectStation(_ station: Station, for locationType: LocationType) {
         switch locationType {
         case .origin:
             originStation = station

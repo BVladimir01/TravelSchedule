@@ -162,8 +162,8 @@ struct ThreadSelectionView: View {
 
 
 #Preview {
-    ThreadSelectionView(origin: Location(city: "some city",
-                                         station: "some station"),
-                        destination: Location(city: "Test city",
-                                              station: "test station"))
+//    ThreadSelectionView(origin: Location(city: "some city",
+//                                         station: "some station"),
+//                        destination: Location(city: "Test city",
+//                                              station: "test station"))
 }

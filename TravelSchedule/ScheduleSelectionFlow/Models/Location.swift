@@ -7,6 +7,6 @@
 
 
 struct Location: Hashable {
-    var city: String
-    var station: String
+    var city: City
+    var station: Station
 }

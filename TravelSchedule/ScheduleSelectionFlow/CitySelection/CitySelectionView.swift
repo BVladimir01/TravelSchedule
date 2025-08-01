@@ -12,15 +12,18 @@ struct CitySelectionView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var searchText: String = ""
     
-    private let cities: [String]
-    private let onCitySelection: (String) -> ()
+    private let cities: [City]
+    private let onCitySelection: (City) -> ()
     
-    private var displayedCities: [String] {
+    private var displayedCities: [City] {
         guard !searchText.isEmpty else { return cities }
-        return cities.filter { $0.description.lowercased().contains(searchText.lowercased()) }
+        return cities.filter { city in
+            guard let title = city.title else { return true }
+            return title.lowercased().contains(searchText.lowercased())
+        }
     }
     
-    init(cities: [String], onCitySelection: @escaping (String) -> Void) {
+    init(cities: [City], onCitySelection: @escaping (City) -> ()) {
         self.cities = cities
         self.onCitySelection = onCitySelection
     }

@@ -13,15 +13,18 @@ struct StationSelectionView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var searchText: String = ""
     
-    private let stations: [String]
-    private let onStationSelection: (String) -> ()
+    private let stations: [Station]
+    private let onStationSelection: (Station) -> ()
     
-    private var displayedStations: [String] {
+    private var displayedStations: [Station] {
         guard !searchText.isEmpty else { return stations }
-        return stations.filter { $0.description.lowercased().contains(searchText.lowercased()) }
+        return stations.filter { station in
+            guard let title = station.title else { return true }
+            return title.lowercased().contains(searchText.lowercased())
+        }
     }
     
-    init(stations: [String], onStationSelection: @escaping (String) -> Void) {
+    init(stations: [Station], onStationSelection: @escaping (Station) -> ()) {
         self.stations = stations
         self.onStationSelection = onStationSelection
     }

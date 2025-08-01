@@ -17,7 +17,7 @@ final class StationsAndCitiesProvider {
         self.allStationsService = AllStationsService(client: client)
     }
     
-    func fetchCities() async throws {
+    func fetchCitiesAndStations() async throws {
         guard let countries = try? await allStationsService.getAllStations().countries else {
             throw AllStationsFetchingError.serverError
         }
