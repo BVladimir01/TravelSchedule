@@ -28,6 +28,7 @@ struct TimeSpecifierView: View {
             Spacer()
         }
         .padding(.horizontal, 16)
+        .padding(.top, 16)
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
