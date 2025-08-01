@@ -10,6 +10,11 @@ import SwiftUI
 
 final class ScheduleNavigationViewModel: ObservableObject {
     
+    @Published var originLocation = Location()
+    @Published var destinationLocation = Location()
+    
+    @Published var path: [PageType] = []
+    
     private let citiesStations = [
         "Moscow" : ["Yaroslavskiy", "Kazanskiy", "Belorusskiy"],
         "SPB" : ["station 1", "station 2", "station 3"],
@@ -32,14 +37,6 @@ final class ScheduleNavigationViewModel: ObservableObject {
             return destinationLocation.city
         }
     }
-    
-    @Published var originLocation = Location()
-    @Published var destinationLocation = Location()
-    
-    @Published var selectedIntervals: [TimeInterval] = []
-    @Published var allowTransfers = false
-    
-    @Published var path: [PageType] = []
     
     var searchIsEnabled: Bool {
         return (originLocation.isDefined &&
