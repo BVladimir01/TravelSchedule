@@ -19,14 +19,16 @@ struct ChevronItemListView<Item: CustomStringConvertible & Hashable>: View {
     }
     
     var body: some View {
-        VStack {
-            ForEach(items, id: \.self) { item in
-                Button {
-                    onItemSelection(item)
-                } label: {
-                    rowView(for: item)
+        ScrollView {
+            LazyVStack {
+                ForEach(items, id: \.self) { item in
+                    Button {
+                        onItemSelection(item)
+                    } label: {
+                        rowView(for: item)
+                    }
+                    .padding(.horizontal, 16)
                 }
-                .padding(.horizontal, 16)
             }
         }
     }
