@@ -10,6 +10,14 @@ import HTTPTypes
 
 final class ThreadsViewModel: ObservableObject {
     
+    private let origin: Location
+    private let destination: Location
+    
+    init(origin: Location, destination: Location) {
+        self.origin = origin
+        self.destination = destination
+    }
+    
     @Published private(set) var threads: [Thread] = [
         .init(departureTime: Date.now.addingTimeInterval(-50000),
               arrivalTime: Date.now,
@@ -18,8 +26,8 @@ final class ThreadsViewModel: ObservableObject {
                              email: "i.lozgkina@yandex.ru",
                              phone: "+7 (904) 329-27-71",
                              logoURL: "https://company.rzd.ru/api/media/resources/1603629"),
-             origin: Location(),
-             destination: Location()),
+             origin: Location(city: "some city", station: "some station"),
+             destination: Location(city: "some city", station: "some station")),
             .init(departureTime: Date.now.addingTimeInterval(-10120000),
                   arrivalTime: Date.now.addingTimeInterval(-10110000),
                   hasTransfers: false,
@@ -27,8 +35,8 @@ final class ThreadsViewModel: ObservableObject {
                                  email: "i.lozgkina@yandex.ru",
                                  phone: "+7 (904) 329-27-71",
                                  logoURL: "https://company.rzd.ru/api/media/resources/1603629"),
-                 origin: Location(),
-                 destination: Location()),
+                 origin: Location(city: "some city", station: "some station"),
+                 destination: Location(city: "some city", station: "some station")),
     ]
     
     @Published var timeSpecification: Set<TimeInterval> = []
@@ -42,6 +50,10 @@ final class ThreadsViewModel: ObservableObject {
 
     func threadUIModel(for thread: Thread) -> ThreadUIModel {
         threadMapper.map(thread)
+    }
+    
+    var navigationBarTitle: String {
+        "\(origin.city) (\(origin.station)) → \(destination.city) (\(destination.station))"
     }
     
 }

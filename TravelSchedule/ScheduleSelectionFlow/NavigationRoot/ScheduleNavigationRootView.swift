@@ -11,7 +11,6 @@ import SwiftUI
 struct ScheduleNavigationRootView: View {
     
     @ObservedObject private var viewModel: ScheduleNavigationViewModel
-    @StateObject private var threadsViewModel = ThreadsViewModel()
     
     init(viewModel: ScheduleNavigationViewModel) {
         self.viewModel = viewModel
@@ -35,9 +34,11 @@ struct ScheduleNavigationRootView: View {
                 case .stationSelection(locationType: let locationType):
                     stationSelectionPage(for: locationType)
                 case .threadSelection:
-                    ThreadSelectionView(originLocation: viewModel.originLocation,
-                                        destinationLocation: viewModel.destinationLocation,
-                                        viewModel: threadsViewModel)
+                    if let origin = viewModel.location(of: .origin),
+                       let destination = viewModel.location(of: .destination) {
+                        ThreadSelectionView(origin: origin,
+                                            destination: destination)
+                    }
                 }
             }
             .navigationTitle("TravelSchedule")
@@ -97,8 +98,8 @@ struct ScheduleNavigationRootView: View {
             viewModel.searchCity(for: .origin)
         } label: {
             HStack {
-                Text(viewModel.originLocation.description ?? "Откуда")
-                    .foregroundStyle(viewModel.originLocation.description == nil ? Color.ypGray : Color.ypBlack)
+                Text(viewModel.description(for: .origin) ?? "Откуда")
+                    .foregroundStyle(viewModel.isDefined(locationType: .origin) ? Color.ypBlack : Color.ypGray)
                 Spacer()
             }
         }
@@ -109,8 +110,8 @@ struct ScheduleNavigationRootView: View {
             viewModel.searchCity(for: .destination)
         } label: {
             HStack {
-                Text(viewModel.destinationLocation.description ?? "Куда")
-                    .foregroundStyle(viewModel.destinationLocation.description == nil ? Color.ypGray : Color.ypBlack)
+                Text(viewModel.description(for: .destination) ?? "Куда")
+                    .foregroundStyle(viewModel.isDefined(locationType: .destination) ? Color.ypBlack : Color.ypGray)
                 Spacer()
             }
         }

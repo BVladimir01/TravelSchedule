@@ -7,15 +7,6 @@
 
 
 struct Location: Hashable {
-    var city: String?
-    var station: String?
-    
-    var description: String? {
-        guard let city, let station else { return nil }
-        return "\(city) (\(station))"
-    }
-    
-    var isDefined: Bool {
-        city != nil && station != nil
-    }
+    var city: String
+    var station: String
 }

@@ -10,8 +10,10 @@ import SwiftUI
 
 final class ScheduleNavigationViewModel: ObservableObject {
     
-    @Published var originLocation = Location()
-    @Published var destinationLocation = Location()
+    @Published var originCity: String?
+    @Published var originStation: String?
+    @Published var destinationCity: String?
+    @Published var destinationStation: String?
     
     @Published var path: [PageType] = []
     
@@ -20,6 +22,60 @@ final class ScheduleNavigationViewModel: ObservableObject {
         "SPB" : ["station 1", "station 2", "station 3"],
         "Kazan": ["station 1", "station 2", "station 3"]
     ]
+    
+    func location(of type: LocationType) -> Location? {
+        switch type {
+        case .origin:
+            if let originCity, let originStation {
+                return Location(city: originCity, station: originStation)
+            } else {
+                return nil
+            }
+        case .destination:
+            if let destinationCity, let destinationStation {
+                return Location(city: destinationCity, station: destinationStation)
+            } else {
+                return nil
+            }
+        }
+    }
+
+    func description(for locationType: LocationType) -> String? {
+        let city: String?
+        let station: String?
+        switch locationType {
+        case .origin:
+            if let originCity, let originStation {
+                city = originCity
+                station = originStation
+            } else {
+                city = nil
+                station = nil
+            }
+        case .destination:
+            if let destinationCity, let destinationStation {
+                city = destinationCity
+                station = destinationStation
+            } else {
+                city = nil
+                station = nil
+            }
+        }
+        if let city, let station {
+            return "\(city) (\(station))"
+        } else {
+            return nil
+        }
+    }
+    
+    func isDefined(locationType: LocationType) -> Bool {
+        switch locationType {
+        case .origin:
+            return originCity != nil && originStation != nil
+        case .destination:
+            return destinationCity != nil && destinationStation != nil
+        }
+    }
     
     var cities: [String] {
         Array(citiesStations.keys)
@@ -32,15 +88,14 @@ final class ScheduleNavigationViewModel: ObservableObject {
     func city(of locationType: LocationType) -> String? {
         switch locationType {
         case .origin:
-            return originLocation.city
+            return originCity
         case .destination:
-            return destinationLocation.city
+            return destinationCity
         }
     }
     
     var searchIsEnabled: Bool {
-        return (originLocation.isDefined &&
-                destinationLocation.isDefined)
+        return [originCity, originStation, destinationCity, destinationStation].allSatisfy { $0 != nil }
     }
     
     func searchCity(for locationType: LocationType) {
@@ -50,9 +105,9 @@ final class ScheduleNavigationViewModel: ObservableObject {
     func selectCity(_ city: String, for locationType: LocationType) {
         switch locationType {
         case .origin:
-            originLocation.city = city
+            originCity = city
         case .destination:
-            destinationLocation.city = city
+            destinationCity = city
         }
         path.append(.stationSelection(locationType: locationType))
     }
@@ -60,20 +115,24 @@ final class ScheduleNavigationViewModel: ObservableObject {
     func selectStation(_ station: String, for locationType: LocationType) {
         switch locationType {
         case .origin:
-            originLocation.station = station
+            originStation = station
         case .destination:
-            destinationLocation.station = station
+            destinationStation = station
         }
         path = []
     }
     
     func swapLocationTypes() {
-        let temporary = originLocation
-        originLocation = destinationLocation
-        destinationLocation = temporary
+        let tempCity = originCity
+        let tempStation = originStation
+        originCity = destinationCity
+        destinationCity = tempCity
+        originStation = destinationStation
+        destinationStation = tempStation
     }
     
     func searchThreads() {
         path.append(.threadSelection)
     }
+
 }

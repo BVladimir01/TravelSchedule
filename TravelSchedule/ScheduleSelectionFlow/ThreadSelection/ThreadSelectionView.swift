@@ -12,15 +12,11 @@ import SwiftUI
 struct ThreadSelectionView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject private var viewModel = ThreadsViewModel()
+    @StateObject private var viewModel: ThreadsViewModel
     
-    private let originLocation: Location
-    private let destinationLocation: Location
-    
-    init(originLocation: Location, destinationLocation: Location, viewModel: ThreadsViewModel) {
-        self.originLocation = originLocation
-        self.destinationLocation = destinationLocation
-        self.viewModel = viewModel
+    init(origin: Location, destination: Location) {
+        _viewModel = StateObject(wrappedValue: ThreadsViewModel(origin: origin,
+                                                                destination: destination))
     }
     
     var body: some View {
@@ -51,7 +47,7 @@ struct ThreadSelectionView: View {
     }
     
     private var titleLabel: some View {
-        Text("\(originLocation.description ?? "") → \(destinationLocation.description ?? "")")
+        Text(viewModel.navigationBarTitle)
             .foregroundStyle(.ypBlack)
             .font(.system(size: 24, weight: .bold))
     }
@@ -166,8 +162,8 @@ struct ThreadSelectionView: View {
 
 
 #Preview {
-    ThreadSelectionView(originLocation: Location(city: "Moscow",
-                                                 station: "Kazanskiy"),
-                        destinationLocation: Location(city: "SpB",
-                                                      station: "Station number 3"), viewModel: ThreadsViewModel())
+    ThreadSelectionView(origin: Location(city: "some city",
+                                         station: "some station"),
+                        destination: Location(city: "Test city",
+                                              station: "test station"))
 }
