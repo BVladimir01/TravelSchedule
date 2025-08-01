@@ -10,7 +10,12 @@ import SwiftUI
 
 struct ScheduleNavigationRootView: View {
     
-    @StateObject private var viewModel = ScheduleNavigationViewModel()
+    @ObservedObject private var viewModel: ScheduleNavigationViewModel
+    @StateObject private var threadsViewModel = ThreadsViewModel()
+    
+    init(viewModel: ScheduleNavigationViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         NavigationStack(path: $viewModel.path) {
@@ -30,7 +35,9 @@ struct ScheduleNavigationRootView: View {
                 case .stationSelection(locationType: let locationType):
                     stationSelectionPage(for: locationType)
                 case .threadSelection:
-                    ThreadSelectionView(originLocation: viewModel.originLocation, destinationLocation: viewModel.destinationLocation)
+                    ThreadSelectionView(originLocation: viewModel.originLocation,
+                                        destinationLocation: viewModel.destinationLocation,
+                                        viewModel: threadsViewModel)
                 }
             }
             .navigationTitle("TravelSchedule")
@@ -142,5 +149,5 @@ struct ScheduleNavigationRootView: View {
 
 
 #Preview {
-    ScheduleNavigationRootView()
+    ScheduleNavigationRootView(viewModel: ScheduleNavigationViewModel())
 }

@@ -13,6 +13,8 @@ struct MainView: View {
     @State private var selectedTab: Tab = .schedule
     @Environment(\.colorScheme) private var colorScheme
     
+    @StateObject private var scheduleNavigationViewModel = ScheduleNavigationViewModel()
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             content
@@ -30,7 +32,7 @@ struct MainView: View {
     
     private var content: some View {
         TabView(selection: $selectedTab) {
-            ScheduleNavigationRootView()
+            ScheduleNavigationRootView(viewModel: scheduleNavigationViewModel)
                 .tabItem {
                     Image(.schedule)
                 }

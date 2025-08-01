@@ -12,15 +12,15 @@ import SwiftUI
 struct ThreadSelectionView: View {
     
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var viewModel = ThreadsViewModel()
     
     private let originLocation: Location
     private let destinationLocation: Location
     
-    @StateObject private var viewModel = ThreadsViewModel()
-    
-    init(originLocation: Location, destinationLocation: Location) {
+    init(originLocation: Location, destinationLocation: Location, viewModel: ThreadsViewModel) {
         self.originLocation = originLocation
         self.destinationLocation = destinationLocation
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -169,5 +169,5 @@ struct ThreadSelectionView: View {
     ThreadSelectionView(originLocation: Location(city: "Moscow",
                                                  station: "Kazanskiy"),
                         destinationLocation: Location(city: "SpB",
-                                                      station: "Station number 3"))
+                                                      station: "Station number 3"), viewModel: ThreadsViewModel())
 }
