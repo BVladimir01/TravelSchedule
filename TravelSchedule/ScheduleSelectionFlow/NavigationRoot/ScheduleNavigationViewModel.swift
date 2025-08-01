@@ -21,10 +21,13 @@ final class ScheduleNavigationViewModel: ObservableObject {
     
     init(client: APIProtocol) {
         allStationsProvider = AllStationsProvider(client: client)
+        startFetching()
     }
     
-    func startFetching() async {
-        await allStationsProvider.loadStations()
+    private func startFetching() {
+        Task {
+            await allStationsProvider.loadStations()
+        }
     }
     
     private let citiesStations = [

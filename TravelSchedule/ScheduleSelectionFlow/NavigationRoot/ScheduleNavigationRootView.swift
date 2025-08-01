@@ -45,12 +45,6 @@ struct ScheduleNavigationRootView: View {
             .navigationTitle("TravelSchedule")
             Spacer()
         }
-        .onAppear {
-            Task {
-                print("start fetching")
-                await viewModel.startFetching()
-            }
-        }
     }
     
     private func citySelectionPage(for locationType: LocationType) -> some View {
