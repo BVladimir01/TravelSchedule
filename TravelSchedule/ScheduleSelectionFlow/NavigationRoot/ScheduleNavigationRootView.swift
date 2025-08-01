@@ -49,6 +49,7 @@ struct ScheduleNavigationRootView: View {
     
     private func citySelectionPage(for locationType: LocationType) -> some View {
         CitySelectionView(cities: viewModel.cities,
+                          loadingState: viewModel.loadingState,
                           onCitySelection: { city in
             viewModel.selectCity(city, for: locationType)
         })
@@ -58,7 +59,9 @@ struct ScheduleNavigationRootView: View {
     private func stationSelectionPage(for locationType: LocationType) -> some View {
         if let selectedCity = viewModel.city(of: locationType) {
             StationSelectionView(stations: viewModel.stations(of: selectedCity), onStationSelection: { station in
+                print("selecting station")
                 viewModel.selectStation(station, for: locationType)
+                print("station selected")
             })
         } else {
             EmptyView()

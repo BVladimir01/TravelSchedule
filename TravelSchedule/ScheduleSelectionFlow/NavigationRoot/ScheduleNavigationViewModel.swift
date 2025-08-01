@@ -8,9 +8,10 @@
 import SwiftUI
 
 
+@MainActor
 final class ScheduleNavigationViewModel: ObservableObject {
     
-    @Published private(set) var loadingState: CitiesLoadingState = .idle
+    @Published var loadingState: CitiesLoadingState = .idle
     
     @Published var originCity: City?
     @Published var originStation: Station?
@@ -29,12 +30,18 @@ final class ScheduleNavigationViewModel: ObservableObject {
     
     private func startFetching() {
         Task {
-            loadingState = .loading
+            await MainActor.run {
+                loadingState = .loading
+            }
             do {
                 try await stationsAndCitiesProvider.fetchCitiesAndStations()
-                loadingState = .success
+                await MainActor.run {
+                    loadingState = .success
+                }
             } catch {
-                loadingState = .error(error)
+                await MainActor.run {
+                    loadingState = .error(error)
+                }
             }
         }
     }
@@ -126,6 +133,7 @@ final class ScheduleNavigationViewModel: ObservableObject {
             destinationCity = city
         }
         path.append(.stationSelection(locationType: locationType))
+//        path.removeAll()
     }
     
     func selectStation(_ station: Station, for locationType: LocationType) {
@@ -135,7 +143,18 @@ final class ScheduleNavigationViewModel: ObservableObject {
         case .destination:
             destinationStation = station
         }
-        path = []
+        // this is a walkaround
+        // popping all views causes ui to freeze
+        // don't know other solutions
+        Task {
+            await MainActor.run {
+                _ = path.popLast()
+            }
+            try await Task.sleep(nanoseconds: 5_000_000)
+            await MainActor.run {
+                _ = path.popLast()
+            }
+        }
     }
     
     func swapLocationTypes() {
