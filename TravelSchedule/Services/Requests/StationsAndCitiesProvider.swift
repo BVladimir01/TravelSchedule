@@ -41,8 +41,11 @@ final class StationsAndCitiesProvider {
     private func renderSettlement(_ settlement: Components.Schemas.Settlement) {
         guard let city = mapper.map(city: settlement) else { return }
         guard let stations = settlement.stations else { return }
-        cities.append(city)
-        self.stations[city] = stations.compactMap { mapper.map(station: $0) }
+        let trainStations = stations.filter({ $0.transport_type == .train}).compactMap { mapper.map(station: $0) }
+        if !trainStations.isEmpty {
+            cities.append(city)
+            self.stations[city] = trainStations
+        }
     }
     
 }
