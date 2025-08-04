@@ -19,7 +19,7 @@ final class StationsAndCitiesProvider {
     
     private var stations: [City:[Station]] = [:]
     private let allStationsService: AllStationsService
-    private let mapper = APIStructsMapper()
+    private let mapper = APIStationsAndCitiesMapper()
     
     // MARK: - Initializers
     

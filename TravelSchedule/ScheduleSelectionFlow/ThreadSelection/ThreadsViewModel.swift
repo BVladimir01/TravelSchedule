@@ -60,7 +60,7 @@ final class ThreadsViewModel: ObservableObject {
     
     private let threadsProvider: ThreadsProvider
     private var pageNumber = 0
-    private let threadMapper = ThreadModelMapper()
+    private let threadMapper = ThreadModelUIMapper()
     
     // MARK: - Initializers
     

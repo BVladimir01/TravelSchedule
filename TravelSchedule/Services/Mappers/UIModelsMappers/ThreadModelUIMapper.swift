@@ -1,5 +1,5 @@
 //
-//  ThreadModelMapper.swift
+//  ThreadModelUIMapper.swift
 //  TravelSchedule
 //
 //  Created by Vladimir on 31.07.2025.
@@ -8,8 +8,8 @@
 import Foundation
 
 
-// MARK: - ThreadModelMapper
-struct ThreadModelMapper {
+// MARK: - ThreadModelUIMapper
+struct ThreadModelUIMapper {
     
     // MARK: - Private Properties
     

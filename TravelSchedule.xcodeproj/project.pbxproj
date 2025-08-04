@@ -27,7 +27,6 @@
 		E74DCC8D2E3A115E00A0C415 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74DCC8B2E3A115C00A0C415 /* SettingsView.swift */; };
 		E74DCC982E3A134D00A0C415 /* ScheduleNavigationRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74DCC942E3A133F00A0C415 /* ScheduleNavigationRootView.swift */; };
 		E74DCCA62E3A142E00A0C415 /* ScheduleNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74DCCA22E3A142A00A0C415 /* ScheduleNavigationViewModel.swift */; };
-		E74DCCAC2E3A14C600A0C415 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74DCCAB2E3A148200A0C415 /* Location.swift */; };
 		E74DCCB02E3A157100A0C415 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74DCCAF2E3A156900A0C415 /* TimeInterval.swift */; };
 		E7CB388A2E3A296C00099A59 /* LocationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB38862E3A291300099A59 /* LocationType.swift */; };
 		E7CB38AE2E3A327D00099A59 /* PageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB38AD2E3A327D00099A59 /* PageType.swift */; };
@@ -40,15 +39,15 @@
 		E7CB3A9B2E3B564F00099A59 /* ThreadsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3A982E3B564800099A59 /* ThreadsViewModel.swift */; };
 		E7CB3A9F2E3B568100099A59 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3A9E2E3B567C00099A59 /* Thread.swift */; };
 		E7CB3AA82E3B5BC100099A59 /* Carrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AA72E3B5BBF00099A59 /* Carrier.swift */; };
-		E7CB3ABA2E3B5EF400099A59 /* ThreadModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AB92E3B5EEE00099A59 /* ThreadModelMapper.swift */; };
+		E7CB3ABA2E3B5EF400099A59 /* ThreadModelUIMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AB92E3B5EEE00099A59 /* ThreadModelUIMapper.swift */; };
 		E7CB3ADA2E3B6CBB00099A59 /* TimeSpecifierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AD82E3B6CAF00099A59 /* TimeSpecifierView.swift */; };
-		E7CB3AE52E3B6DF400099A59 /* TimeIntervalMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AE22E3B6DEF00099A59 /* TimeIntervalMapper.swift */; };
+		E7CB3AE52E3B6DF400099A59 /* TimeIntervalUIMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AE22E3B6DEF00099A59 /* TimeIntervalUIMapper.swift */; };
 		E7CB3AEB2E3B6E0400099A59 /* TimeIntervalUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3AEA2E3B6DFF00099A59 /* TimeIntervalUIModel.swift */; };
 		E7CB3B212E3BEE0100099A59 /* CarrierDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3B1E2E3BEDF600099A59 /* CarrierDetailView.swift */; };
 		E7CB3B742E3CAC8800099A59 /* StationsAndCitiesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3B732E3CAC8100099A59 /* StationsAndCitiesProvider.swift */; };
 		E7CB3B8B2E3CB5D700099A59 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3B8A2E3CB5D400099A59 /* City.swift */; };
 		E7CB3B8F2E3CB5DC00099A59 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3B8E2E3CB5DA00099A59 /* Station.swift */; };
-		E7CB3B962E3CB9BA00099A59 /* APIStructsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3B952E3CB9AF00099A59 /* APIStructsMapper.swift */; };
+		E7CB3B962E3CB9BA00099A59 /* APIStationsAndCitiesMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3B952E3CB9AF00099A59 /* APIStationsAndCitiesMapper.swift */; };
 		E7CB3B9F2E3CC3DD00099A59 /* DataLoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3B9E2E3CC3D700099A59 /* DataLoadingState.swift */; };
 		E7CB3BC82E3CDF4D00099A59 /* ServerErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3BC72E3CDF4900099A59 /* ServerErrorView.swift */; };
 		E7CB3C0A2E3CFDBC00099A59 /* ThreadsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3C092E3CFDB200099A59 /* ThreadsProvider.swift */; };
@@ -78,7 +77,6 @@
 		E74DCC8B2E3A115C00A0C415 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E74DCC942E3A133F00A0C415 /* ScheduleNavigationRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNavigationRootView.swift; sourceTree = "<group>"; };
 		E74DCCA22E3A142A00A0C415 /* ScheduleNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNavigationViewModel.swift; sourceTree = "<group>"; };
-		E74DCCAB2E3A148200A0C415 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		E74DCCAF2E3A156900A0C415 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		E7CB38862E3A291300099A59 /* LocationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationType.swift; sourceTree = "<group>"; };
 		E7CB38AD2E3A327D00099A59 /* PageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageType.swift; sourceTree = "<group>"; };
@@ -91,15 +89,15 @@
 		E7CB3A982E3B564800099A59 /* ThreadsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsViewModel.swift; sourceTree = "<group>"; };
 		E7CB3A9E2E3B567C00099A59 /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		E7CB3AA72E3B5BBF00099A59 /* Carrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carrier.swift; sourceTree = "<group>"; };
-		E7CB3AB92E3B5EEE00099A59 /* ThreadModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadModelMapper.swift; sourceTree = "<group>"; };
+		E7CB3AB92E3B5EEE00099A59 /* ThreadModelUIMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadModelUIMapper.swift; sourceTree = "<group>"; };
 		E7CB3AD82E3B6CAF00099A59 /* TimeSpecifierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSpecifierView.swift; sourceTree = "<group>"; };
-		E7CB3AE22E3B6DEF00099A59 /* TimeIntervalMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalMapper.swift; sourceTree = "<group>"; };
+		E7CB3AE22E3B6DEF00099A59 /* TimeIntervalUIMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalUIMapper.swift; sourceTree = "<group>"; };
 		E7CB3AEA2E3B6DFF00099A59 /* TimeIntervalUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalUIModel.swift; sourceTree = "<group>"; };
 		E7CB3B1E2E3BEDF600099A59 /* CarrierDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrierDetailView.swift; sourceTree = "<group>"; };
 		E7CB3B732E3CAC8100099A59 /* StationsAndCitiesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsAndCitiesProvider.swift; sourceTree = "<group>"; };
 		E7CB3B8A2E3CB5D400099A59 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		E7CB3B8E2E3CB5DA00099A59 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
-		E7CB3B952E3CB9AF00099A59 /* APIStructsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStructsMapper.swift; sourceTree = "<group>"; };
+		E7CB3B952E3CB9AF00099A59 /* APIStationsAndCitiesMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStationsAndCitiesMapper.swift; sourceTree = "<group>"; };
 		E7CB3B9E2E3CC3D700099A59 /* DataLoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoadingState.swift; sourceTree = "<group>"; };
 		E7CB3BC72E3CDF4900099A59 /* ServerErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorView.swift; sourceTree = "<group>"; };
 		E7CB3C092E3CFDB200099A59 /* ThreadsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsProvider.swift; sourceTree = "<group>"; };
@@ -198,7 +196,7 @@
 				E7CB3A7F2E3B545400099A59 /* StationSelection */,
 				E7CB3A7E2E3B544800099A59 /* CitySelection */,
 				E7CB3A842E3B547100099A59 /* ThreadSelection */,
-				E7CB3A422E3B53A300099A59 /* Models */,
+				E7CB3A422E3B53A300099A59 /* BasicModels */,
 			);
 			path = ScheduleSelectionFlow;
 			sourceTree = "<group>";
@@ -211,23 +209,18 @@
 			path = SettingsFlow;
 			sourceTree = "<group>";
 		};
-		E7CB3A422E3B53A300099A59 /* Models */ = {
+		E7CB3A422E3B53A300099A59 /* BasicModels */ = {
 			isa = PBXGroup;
 			children = (
-				E7CB3B9E2E3CC3D700099A59 /* DataLoadingState.swift */,
-				E7CB3B8E2E3CB5DA00099A59 /* Station.swift */,
 				E7CB3B8A2E3CB5D400099A59 /* City.swift */,
-				E7CB3AA72E3B5BBF00099A59 /* Carrier.swift */,
+				E7CB3B8E2E3CB5DA00099A59 /* Station.swift */,
 				E7CB3A9E2E3B567C00099A59 /* Thread.swift */,
-				E7CB39B52E3AB36600099A59 /* ThreadUIModel.swift */,
-				E74DCCAF2E3A156900A0C415 /* TimeInterval.swift */,
+				E7CB3AA72E3B5BBF00099A59 /* Carrier.swift */,
 				E7CB3C632E40CDEE00099A59 /* RelativeTimePoint.swift */,
-				E7CB3AEA2E3B6DFF00099A59 /* TimeIntervalUIModel.swift */,
-				E74DCCAB2E3A148200A0C415 /* Location.swift */,
-				E7CB38862E3A291300099A59 /* LocationType.swift */,
-				E7CB38AD2E3A327D00099A59 /* PageType.swift */,
+				E74DCCAF2E3A156900A0C415 /* TimeInterval.swift */,
+				E7CB3B9E2E3CC3D700099A59 /* DataLoadingState.swift */,
 			);
-			path = Models;
+			path = BasicModels;
 			sourceTree = "<group>";
 		};
 		E7CB3A722E3B542100099A59 /* NavigationRoot */ = {
@@ -235,6 +228,7 @@
 			children = (
 				E74DCCA22E3A142A00A0C415 /* ScheduleNavigationViewModel.swift */,
 				E74DCC942E3A133F00A0C415 /* ScheduleNavigationRootView.swift */,
+				E7CB3D2F2E413FD600099A59 /* Models */,
 			);
 			path = NavigationRoot;
 			sourceTree = "<group>";
@@ -262,6 +256,7 @@
 				E7CB39BB2E3AB40300099A59 /* ThreadSelectionView.swift */,
 				E7CB3AD82E3B6CAF00099A59 /* TimeSpecifierView.swift */,
 				E7CB3B1E2E3BEDF600099A59 /* CarrierDetailView.swift */,
+				E7CB3D262E413FC600099A59 /* Models */,
 			);
 			path = ThreadSelection;
 			sourceTree = "<group>";
@@ -269,18 +264,8 @@
 		E7CB3AAF2E3B5D9800099A59 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				E7CB3CA82E40FB3400099A59 /* DataFetchingError.swift */,
-				E7CB3C092E3CFDB200099A59 /* ThreadsProvider.swift */,
-				E7CB3B732E3CAC8100099A59 /* StationsAndCitiesProvider.swift */,
-				E71CA9A22E312DE2000AFDE0 /* NearestStationsService.swift */,
-				E71CAA472E379068000AFDE0 /* APIKeyMiddleware.swift */,
-				E71CAA322E33E82B000AFDE0 /* SearchService.swift */,
-				E71CAA272E33CCDC000AFDE0 /* ScheduleService.swift */,
-				E71CAA212E33B1DD000AFDE0 /* ThreadService.swift */,
-				E71CAA162E338D5C000AFDE0 /* NearestSettlementService.swift */,
-				E71CAA092E3381D1000AFDE0 /* CarrierService.swift */,
-				E71CA9D42E335537000AFDE0 /* AllStationsService.swift */,
-				E71CA9C42E32AFAF000AFDE0 /* CopyrightService.swift */,
+				E7CB3CFA2E413ED700099A59 /* HighLevelServices */,
+				E7CB3CEC2E413EAA00099A59 /* LowLevelServices */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -288,12 +273,88 @@
 		E7CB3AB82E3B5EE800099A59 /* Mappers */ = {
 			isa = PBXGroup;
 			children = (
-				E7CB3C0D2E3D03A200099A59 /* APIThreadMapper.swift */,
-				E7CB3B952E3CB9AF00099A59 /* APIStructsMapper.swift */,
-				E7CB3AE22E3B6DEF00099A59 /* TimeIntervalMapper.swift */,
-				E7CB3AB92E3B5EEE00099A59 /* ThreadModelMapper.swift */,
+				E7CB3D182E413F6A00099A59 /* APIModelsMappers */,
+				E7CB3D0D2E413F0400099A59 /* UIModelsMappers */,
 			);
 			path = Mappers;
+			sourceTree = "<group>";
+		};
+		E7CB3CEC2E413EAA00099A59 /* LowLevelServices */ = {
+			isa = PBXGroup;
+			children = (
+				E71CA9A22E312DE2000AFDE0 /* NearestStationsService.swift */,
+				E71CAA322E33E82B000AFDE0 /* SearchService.swift */,
+				E71CAA272E33CCDC000AFDE0 /* ScheduleService.swift */,
+				E71CAA212E33B1DD000AFDE0 /* ThreadService.swift */,
+				E71CAA162E338D5C000AFDE0 /* NearestSettlementService.swift */,
+				E71CAA092E3381D1000AFDE0 /* CarrierService.swift */,
+				E71CA9D42E335537000AFDE0 /* AllStationsService.swift */,
+				E71CA9C42E32AFAF000AFDE0 /* CopyrightService.swift */,
+				E7CB3CF02E413EBB00099A59 /* MiddleWare */,
+			);
+			path = LowLevelServices;
+			sourceTree = "<group>";
+		};
+		E7CB3CF02E413EBB00099A59 /* MiddleWare */ = {
+			isa = PBXGroup;
+			children = (
+				E71CAA472E379068000AFDE0 /* APIKeyMiddleware.swift */,
+			);
+			path = MiddleWare;
+			sourceTree = "<group>";
+		};
+		E7CB3CFA2E413ED700099A59 /* HighLevelServices */ = {
+			isa = PBXGroup;
+			children = (
+				E7CB3C092E3CFDB200099A59 /* ThreadsProvider.swift */,
+				E7CB3B732E3CAC8100099A59 /* StationsAndCitiesProvider.swift */,
+				E7CB3D042E413EF500099A59 /* Models */,
+			);
+			path = HighLevelServices;
+			sourceTree = "<group>";
+		};
+		E7CB3D042E413EF500099A59 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E7CB3CA82E40FB3400099A59 /* DataFetchingError.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E7CB3D0D2E413F0400099A59 /* UIModelsMappers */ = {
+			isa = PBXGroup;
+			children = (
+				E7CB3AE22E3B6DEF00099A59 /* TimeIntervalUIMapper.swift */,
+				E7CB3AB92E3B5EEE00099A59 /* ThreadModelUIMapper.swift */,
+			);
+			path = UIModelsMappers;
+			sourceTree = "<group>";
+		};
+		E7CB3D182E413F6A00099A59 /* APIModelsMappers */ = {
+			isa = PBXGroup;
+			children = (
+				E7CB3C0D2E3D03A200099A59 /* APIThreadMapper.swift */,
+				E7CB3B952E3CB9AF00099A59 /* APIStationsAndCitiesMapper.swift */,
+			);
+			path = APIModelsMappers;
+			sourceTree = "<group>";
+		};
+		E7CB3D262E413FC600099A59 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E7CB39B52E3AB36600099A59 /* ThreadUIModel.swift */,
+				E7CB3AEA2E3B6DFF00099A59 /* TimeIntervalUIModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E7CB3D2F2E413FD600099A59 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E7CB38862E3A291300099A59 /* LocationType.swift */,
+				E7CB38AD2E3A327D00099A59 /* PageType.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,14 +453,13 @@
 				E71CAA282E33CCE1000AFDE0 /* ScheduleService.swift in Sources */,
 				E7CB3B212E3BEE0100099A59 /* CarrierDetailView.swift in Sources */,
 				E71CA97E2E310F45000AFDE0 /* TravelScheduleApp.swift in Sources */,
-				E7CB3B962E3CB9BA00099A59 /* APIStructsMapper.swift in Sources */,
+				E7CB3B962E3CB9BA00099A59 /* APIStationsAndCitiesMapper.swift in Sources */,
 				E7CB3BC82E3CDF4D00099A59 /* ServerErrorView.swift in Sources */,
 				E71CA9D82E33553D000AFDE0 /* AllStationsService.swift in Sources */,
 				E7CB3B9F2E3CC3DD00099A59 /* DataLoadingState.swift in Sources */,
 				E74DCCA62E3A142E00A0C415 /* ScheduleNavigationViewModel.swift in Sources */,
-				E74DCCAC2E3A14C600A0C415 /* Location.swift in Sources */,
-				E7CB3AE52E3B6DF400099A59 /* TimeIntervalMapper.swift in Sources */,
-				E7CB3ABA2E3B5EF400099A59 /* ThreadModelMapper.swift in Sources */,
+				E7CB3AE52E3B6DF400099A59 /* TimeIntervalUIMapper.swift in Sources */,
+				E7CB3ABA2E3B5EF400099A59 /* ThreadModelUIMapper.swift in Sources */,
 				E7CB39DF2E3B343E00099A59 /* NavigationBackButton.swift in Sources */,
 				E71CA9A32E312DEA000AFDE0 /* NearestStationsService.swift in Sources */,
 				E71CAA4B2E379072000AFDE0 /* APIKeyMiddleware.swift in Sources */,

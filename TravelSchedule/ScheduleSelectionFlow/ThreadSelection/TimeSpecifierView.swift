@@ -19,7 +19,7 @@ struct TimeSpecifierView: View {
     // MARK: - Private Properties
     
     private let timeIntervals: [TimeInterval]
-    private let mapper = TimeIntervalMapper()
+    private let mapper = TimeIntervalUIMapper()
     
     // MARK: - Initializers
     

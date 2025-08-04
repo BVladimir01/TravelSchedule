@@ -1,5 +1,5 @@
 //
-//  TimeIntervalMapper.swift
+//  TimeIntervalUIMapper.swift
 //  TravelSchedule
 //
 //  Created by Vladimir on 31.07.2025.
@@ -8,8 +8,8 @@
 import Foundation
 
 
-// MARK: - TimeIntervalMapper
-struct TimeIntervalMapper {
+// MARK: - TimeIntervalUIMapper
+struct TimeIntervalUIMapper {
     
     // MARK: - Internal Methods
     

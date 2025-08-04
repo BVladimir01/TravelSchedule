@@ -1,12 +1,12 @@
 //
-//  ApiStructsMapper.swift
+//  APIStationsAndCitiesMapper.swift
 //  TravelSchedule
 //
 //  Created by Vladimir on 01.08.2025.
 //
 
-// MARK: - APIStructsMapper
-struct APIStructsMapper {
+// MARK: - APIStationsAndCitiesMapper
+struct APIStationsAndCitiesMapper {
     
     // MARK: - Types
     
