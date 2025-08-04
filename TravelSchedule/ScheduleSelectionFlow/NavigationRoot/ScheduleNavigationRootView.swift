@@ -112,7 +112,7 @@ struct ScheduleNavigationRootView: View {
             viewModel.showCitySelectionView(for: .origin)
         } label: {
             HStack {
-                Text(viewModel.description(for: .origin) ?? "Откуда")
+                Text(viewModel.originStation?.title ?? "Откуда")
                     .foregroundStyle(viewModel.isDefined(locationType: .origin) ? Color.ypBlackUniversal : Color.ypGray)
                     .lineLimit(1)
                 Spacer()
@@ -125,7 +125,7 @@ struct ScheduleNavigationRootView: View {
             viewModel.showCitySelectionView(for: .destination)
         } label: {
             HStack {
-                Text(viewModel.description(for: .destination) ?? "Куда")
+                Text(viewModel.destinationStation?.title ?? "Куда")
                     .foregroundStyle(viewModel.isDefined(locationType: .destination) ? Color.ypBlackUniversal : Color.ypGray)
                     .lineLimit(1)
                 Spacer()

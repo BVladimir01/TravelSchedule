@@ -54,24 +54,6 @@ final class ScheduleNavigationViewModel: ObservableObject {
         }
     }
     
-    func description(for locationType: LocationType) -> String? {
-        let cityTitle: String?
-        let stationTitle: String?
-        switch locationType {
-        case .origin:
-                cityTitle = originCity?.title
-                stationTitle = originStation?.title
-        case .destination:
-            cityTitle = destinationCity?.title
-            stationTitle = destinationStation?.title
-        }
-        if let cityTitle, let stationTitle {
-            return "\(cityTitle) (\(stationTitle))"
-        } else {
-            return nil
-        }
-    }
-    
     func isDefined(locationType: LocationType) -> Bool {
         switch locationType {
         case .origin:
