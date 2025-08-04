@@ -150,7 +150,7 @@ final class ScheduleNavigationViewModel: ObservableObject {
         destinationStation = tempStation
     }
     
-    func searchThreads() {
+    func showThreadsSelectionView() {
         path.append(.threadSelection)
     }
 

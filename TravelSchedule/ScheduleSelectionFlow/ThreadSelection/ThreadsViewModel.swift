@@ -53,6 +53,8 @@ final class ThreadsViewModel: ObservableObject {
     func configure(origin: Station, destination: Station) {
         self.origin = origin
         self.destination = destination
+        threads = []
+        loadingState = .idle
     }
 
     func threadUIModel(for thread: Thread) -> ThreadUIModel {
@@ -88,7 +90,7 @@ final class ThreadsViewModel: ObservableObject {
     
     func performInitialFetch() {
         guard let origin, let destination,
-              loadingState != .loading,
+              loadingState == .idle,
               threads.isEmpty
         else {
             return

@@ -41,12 +41,7 @@ struct ScheduleNavigationRootView: View {
                 case .stationSelection(locationType: let locationType):
                     stationSelectionPage(for: locationType)
                 case .threadSelection:
-                    if let origin = viewModel.originStation,
-                       let destination = viewModel.destinationStation {
-                        ThreadSelectionView(origin: origin,
-                                            destination: destination,
-                                            viewModel: threadsViewModel)
-                    }
+                    ThreadSelectionView(viewModel: threadsViewModel)
                 }
             }
             .navigationTitle("TravelSchedule")
@@ -143,7 +138,13 @@ struct ScheduleNavigationRootView: View {
     
     private var searchThreadsButton: some View {
         Button {
-            viewModel.searchThreads()
+            guard let origin = viewModel.originStation,
+                  let destination = viewModel.destinationStation
+            else {
+                return
+            }
+            threadsViewModel.configure(origin: origin, destination: destination)
+            viewModel.showThreadsSelectionView()
         } label: {
             Text("Найти")
                 .padding(.vertical, 20)

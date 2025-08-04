@@ -14,9 +14,8 @@ struct ThreadSelectionView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var viewModel: ThreadsViewModel
     
-    init(origin: Station, destination: Station, viewModel: ThreadsViewModel) {
+    init(viewModel: ThreadsViewModel) {
         self.viewModel = viewModel
-        viewModel.configure(origin: origin, destination: destination)
         viewModel.performInitialFetch()
     }
     
