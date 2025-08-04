@@ -38,20 +38,24 @@ struct CitySelectionView: View {
     
     // MARK: - Views
     var body: some View {
-        Group {
-            switch loadingState {
-            case .idle:
-                EmptyView()
-            case .loading:
-                loaderView
-            case .success:
-                if displayedCities.isEmpty {
-                    listEmptyView
-                } else {
-                    contentView
+        ZStack {
+            Color.ypWhite
+                .ignoresSafeArea()
+            Group {
+                switch loadingState {
+                case .idle:
+                    EmptyView()
+                case .loading:
+                    loaderView
+                case .success:
+                    if displayedCities.isEmpty {
+                        listEmptyView
+                    } else {
+                        contentView
+                    }
+                case .error(let error):
+                    errorView(for: error)
                 }
-            case .error(let error):
-                errorView(for: error)
             }
         }
         .navigationTitle(Text("Выбор города"))

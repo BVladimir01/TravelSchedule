@@ -24,13 +24,17 @@ struct CarrierDetailView: View {
     // MARK: - Views
     
     var body: some View {
-        VStack(spacing: 16) {
-            logoImage
-                .frame(height: 104)
-            infoView
-            Spacer()
+        ZStack {
+            Color.ypWhite
+                .ignoresSafeArea()
+            VStack(spacing: 16) {
+                logoImage
+                    .frame(height: 104)
+                infoView
+                Spacer()
+            }
+            .padding(.horizontal, 16)
         }
-        .padding(.horizontal, 16)
         .navigationTitle("Информация о перевозчике")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()

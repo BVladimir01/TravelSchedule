@@ -32,13 +32,17 @@ struct TimeSpecifierView: View {
     // MARK: - Views
     
     var body: some View {
-        VStack(spacing: 16) {
-            timeSpecification
-            transferSelection
-            Spacer()
+        ZStack {
+            Color.ypWhite
+                .ignoresSafeArea()
+            VStack(spacing: 16) {
+                timeSpecification
+                transferSelection
+                Spacer()
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 16)
         }
-        .padding(.horizontal, 16)
-        .padding(.top, 16)
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {

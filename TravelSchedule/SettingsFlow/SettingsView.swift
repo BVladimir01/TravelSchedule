@@ -17,13 +17,17 @@ struct SettingsView: View {
     // MARK: - Views
     
     var body: some View {
-        VStack {
-            Image(.serverError)
-                .resizable()
-                .frame(width: stubImageSize, height: stubImageSize)
-                .padding(.bottom, 16)
-            Text("Ошибка Сервера")
-                .font(.system(size: 24, weight: .bold))
+        ZStack {
+            Color.ypWhite
+                .ignoresSafeArea()
+            VStack {
+                Image(.serverError)
+                    .resizable()
+                    .frame(width: stubImageSize, height: stubImageSize)
+                    .padding(.bottom, 16)
+                Text("Ошибка Сервера")
+                    .font(.system(size: 24, weight: .bold))
+            }
         }
     }
     

@@ -50,10 +50,10 @@ struct MainView: View {
         TabView(selection: $selectedTab) {
             ScheduleNavigationRootView(viewModel: scheduleNavigationViewModel,
                                        client: client)
-                .tabItem {
+            .tabItem {
                     Image(.schedule)
                 }
-                .tag(Tab.schedule)
+            .tag(Tab.schedule)
             SettingsView()
                 .tabItem {
                     Image(.settings)

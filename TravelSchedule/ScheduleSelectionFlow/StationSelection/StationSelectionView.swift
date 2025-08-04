@@ -38,17 +38,22 @@ struct StationSelectionView: View {
     // MARK: - Views
     
     var body: some View {
-        Group {
-            if displayedStations.isEmpty {
-                Text("Станция не найдена")
-                    .foregroundStyle(.ypBlack)
-                    .font(.system(size: 24, weight: .bold))
-            } else {
-                VStack {
-                    ChevronItemListView(items: displayedStations, onItemSelection: { station in
-                        onStationSelection(station)
-                    })
-                    Spacer()
+        ZStack {
+            Color.ypWhite
+                .ignoresSafeArea()
+            Group {
+                if displayedStations.isEmpty {
+                    Text("Станция не найдена")
+                        .foregroundStyle(.ypBlack)
+                        .font(.system(size: 24, weight: .bold))
+                } else {
+                    VStack {
+                        ChevronItemListView(items: displayedStations, onItemSelection: { station in
+                            onStationSelection(station)
+                        })
+                        Spacer()
+                    }
+                    .background(.ypWhite)
                 }
             }
         }

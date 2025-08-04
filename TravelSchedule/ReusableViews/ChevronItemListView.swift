@@ -37,6 +37,7 @@ struct ChevronItemListView<Item: CustomStringConvertible & Hashable>: View {
                     .padding(.horizontal, 16)
                 }
             }
+            .background(.ypWhite)
         }
     }
     

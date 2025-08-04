@@ -39,7 +39,9 @@ struct ScheduleNavigationRootView: View {
                 if viewModel.searchIsEnabled {
                     searchThreadsButton
                 }
+                Spacer()
             }
+            .background(.ypWhite)
             .navigationDestination(for: PageType.self) { pageType in
                 switch pageType {
                 case .citySelection(locationType: let locationType):
@@ -54,7 +56,6 @@ struct ScheduleNavigationRootView: View {
                 }
             }
             .navigationTitle("TravelSchedule")
-            Spacer()
         }
     }
     
@@ -101,7 +102,7 @@ struct ScheduleNavigationRootView: View {
             .padding(.vertical, 14)
             .background {
                 RoundedRectangle(cornerRadius: 20)
-                    .fill(.ypWhite)
+                    .fill(.ypWhiteUniversal)
                     .frame(height: 96)
             }
     }
@@ -112,7 +113,7 @@ struct ScheduleNavigationRootView: View {
         } label: {
             HStack {
                 Text(viewModel.description(for: .origin) ?? "Откуда")
-                    .foregroundStyle(viewModel.isDefined(locationType: .origin) ? Color.ypBlack : Color.ypGray)
+                    .foregroundStyle(viewModel.isDefined(locationType: .origin) ? Color.ypBlackUniversal : Color.ypGray)
                     .lineLimit(1)
                 Spacer()
             }
@@ -125,7 +126,7 @@ struct ScheduleNavigationRootView: View {
         } label: {
             HStack {
                 Text(viewModel.description(for: .destination) ?? "Куда")
-                    .foregroundStyle(viewModel.isDefined(locationType: .destination) ? Color.ypBlack : Color.ypGray)
+                    .foregroundStyle(viewModel.isDefined(locationType: .destination) ? Color.ypBlackUniversal : Color.ypGray)
                     .lineLimit(1)
                 Spacer()
             }
@@ -137,7 +138,7 @@ struct ScheduleNavigationRootView: View {
             viewModel.swapLocationTypes()
         } label: {
             Circle()
-                .fill(.ypWhite)
+                .fill(.ypWhiteUniversal)
                 .frame(width: 36, height: 36)
                 .overlay {
                     Image(.сhange)
@@ -159,7 +160,7 @@ struct ScheduleNavigationRootView: View {
             Text("Найти")
                 .padding(.vertical, 20)
                 .padding(.horizontal, 47.5)
-                .foregroundStyle(.ypWhite)
+                .foregroundStyle(.ypWhiteUniversal)
                 .background {
                     RoundedRectangle(cornerRadius: 16)
                         .fill(.ypBlue)
