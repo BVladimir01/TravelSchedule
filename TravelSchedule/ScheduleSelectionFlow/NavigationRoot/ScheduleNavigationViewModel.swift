@@ -25,10 +25,11 @@ final class ScheduleNavigationViewModel: ObservableObject {
     
     init(client: APIProtocol) {
         stationsAndCitiesProvider = StationsAndCitiesProvider(client: client)
-        startFetching()
+        fetchCitiesAndStations()
     }
     
-    private func startFetching() {
+    func fetchCitiesAndStations() {
+        guard stationsAndCitiesProvider.cities.isEmpty else { return }
         Task {
             await MainActor.run {
                 loadingState = .loading
