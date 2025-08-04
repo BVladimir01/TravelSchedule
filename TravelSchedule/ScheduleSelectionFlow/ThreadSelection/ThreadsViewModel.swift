@@ -20,17 +20,33 @@ final class ThreadsViewModel: ObservableObject {
     
     private let threadMapper = ThreadModelMapper()
     
-    @Published private(set) var threads: [Thread] = [ ]
+    @Published private var threads: [Thread] = []
+    var displayedThreads: [Thread] {
+        threads.filter { thread in
+            let transfersConditionPassed = allowTransfers || !thread.hasTransfers
+            let timeConditionPassed = timeSpecifications.contains(where: { $0.contains(timePoint: thread.departureTime) })
+            return transfersConditionPassed && timeConditionPassed
+        }
+    }
     
-    @Published var timeSpecification: Set<TimeInterval> = []
+    @Published var timeSpecifications: Set<TimeInterval>
+    
+    let allTimeIntervals = [
+        TimeInterval(start: RelativeTimePoint(hour: 6, minute: 0), end: RelativeTimePoint(hour: 12, minute: 0), description: "Утро"),
+        TimeInterval(start: RelativeTimePoint(hour: 12, minute: 0), end: RelativeTimePoint(hour: 18, minute: 0), description: "День"),
+        TimeInterval(start: RelativeTimePoint(hour: 18, minute: 0), end: RelativeTimePoint(hour: 24, minute: 0), description: "Вечер"),
+        TimeInterval(start: RelativeTimePoint(hour: 0, minute: 0), end: RelativeTimePoint(hour: 6, minute: 0), description: "Ночь"),
+        
+    ]
     @Published var allowTransfers = true
     
     init(client: APIProtocol) {
         threadsProvider = ThreadsProvider(client: client)
+        timeSpecifications = Set(allTimeIntervals)
     }
     
     var isSearchSpecified: Bool {
-        !timeSpecification.isEmpty || !allowTransfers
+        timeSpecifications.count < allTimeIntervals.count || !allowTransfers
     }
     
     func configure(origin: Station, destination: Station) {

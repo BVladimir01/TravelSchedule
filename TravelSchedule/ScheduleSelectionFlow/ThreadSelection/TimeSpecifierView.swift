@@ -13,12 +13,13 @@ struct TimeSpecifierView: View {
     @Binding private var selection: Set<TimeInterval>
     @Binding private var allowsTransfers: Bool
     
-    private let timeIntervals = [TimeIntervals.morning, TimeIntervals.day, TimeIntervals.evening, TimeIntervals.night]
+    private let timeIntervals: [TimeInterval]
     private let mapper = TimeIntervalMapper()
     
-    init(selection: Binding<Set<TimeInterval>>, allowsTransfers: Binding<Bool>) {
+    init(selection: Binding<Set<TimeInterval>>, allowsTransfers: Binding<Bool>, timeIntervals: [TimeInterval]) {
         self._selection = selection
         self._allowsTransfers = allowsTransfers
+        self.timeIntervals = timeIntervals
     }
     
     var body: some View {

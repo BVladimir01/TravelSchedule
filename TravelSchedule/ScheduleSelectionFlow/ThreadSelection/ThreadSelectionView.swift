@@ -49,7 +49,7 @@ struct ThreadSelectionView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     titleLabel
-                    ForEach(viewModel.threads, id: \.self) { thread in
+                    ForEach(viewModel.displayedThreads, id: \.self) { thread in
                         NavigationLink {
                             CarrierDetailView(carrier: thread.carrier)
                         } label: {
@@ -91,8 +91,9 @@ struct ThreadSelectionView: View {
     
     private var specifyTimeButton: some View {
         NavigationLink{
-            TimeSpecifierView(selection: $viewModel.timeSpecification,
-                              allowsTransfers: $viewModel.allowTransfers)
+            TimeSpecifierView(selection: $viewModel.timeSpecifications,
+                              allowsTransfers: $viewModel.allowTransfers,
+                              timeIntervals: viewModel.allTimeIntervals)
         } label: {
             Text("Уточнить время")
                 .foregroundStyle(.ypWhiteUniversal)
