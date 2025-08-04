@@ -131,7 +131,7 @@ struct ThreadSelectionView: View {
     private func rowView(for thread: ThreadUIModel) -> some View {
         VStack(alignment: .leading) {
             HStack(spacing: 8) {
-                logoImage(url: thread.carrierLogoURL ?? "")
+                logoImage(url: thread.carrierLogoURL)
                     .frame(width: 38, height: 38)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(thread.carrierTitle)
@@ -187,22 +187,28 @@ struct ThreadSelectionView: View {
             .frame(maxWidth: .infinity)
     }
     
-    private func logoImage(url: String) -> some View {
-        AsyncImage(url: URL(string: url)) { phase in
-            switch phase {
-            case .empty:
-                ProgressView()
-                    .tint(.ypBlackUniversal)
-            case .success(let image):
-                image
-                    .resizable()
-                    .scaledToFit()
-            case .failure:
-                Image(systemName: "photo.circle")
-                    .resizable()
-                    .scaledToFit()
-            @unknown default:
-                ProgressView()
+    @ViewBuilder
+    private func logoImage(url: String?) -> some View {
+        let stub = Image(systemName: "photo.circle")
+            .resizable()
+            .scaledToFit()
+        if url == nil {
+            stub
+        } else {
+            AsyncImage(url: URL(string: url ?? "")) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .tint(.ypBlackUniversal)
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFit()
+                case .failure:
+                    stub
+                @unknown default:
+                    stub
+                }
             }
         }
     }

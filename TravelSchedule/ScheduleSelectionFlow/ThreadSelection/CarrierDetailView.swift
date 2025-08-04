@@ -19,6 +19,7 @@ struct CarrierDetailView: View {
     var body: some View {
         VStack(spacing: 16) {
             logoImage
+                .frame(height: 104)
             infoView
             Spacer()
         }
@@ -60,27 +61,34 @@ struct CarrierDetailView: View {
         .padding(.vertical, 12)
     }
     
+    @ViewBuilder
     private var logoImage: some View {
-        AsyncImage(url: URL(string: carrier.logoURL ?? "")) { phase in
-            switch phase {
-            case .empty:
-                ProgressView()
-                    .tint(.ypBlack)
-            case .success(let image):
-                image
-                    .resizable()
-                    .scaledToFit()
-            case .failure:
-                Image(.serverError)
-                    .resizable()
-                    .scaledToFit()
-            default:
-                Image(.serverError)
-                    .resizable()
-                    .scaledToFit()
+        let stub = Image(systemName: "photo.circle")
+            .resizable()
+            .scaledToFit()
+        if carrier.logoURL == nil {
+            stub
+        } else {
+            AsyncImage(url: URL(string: carrier.logoURL ?? "")) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .tint(.ypBlack)
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFit()
+                case .failure:
+                    Image(.serverError)
+                        .resizable()
+                        .scaledToFit()
+                default:
+                    Image(.serverError)
+                        .resizable()
+                        .scaledToFit()
+                }
             }
         }
-        .frame(height: 104)
     }
     
 }
