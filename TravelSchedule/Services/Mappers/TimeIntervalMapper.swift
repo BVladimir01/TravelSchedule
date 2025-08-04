@@ -8,7 +8,10 @@
 import Foundation
 
 
+// MARK: - TimeIntervalMapper
 struct TimeIntervalMapper {
+    
+    // MARK: - Internal Methods
     
     func map(_ timeInterval: TimeInterval) -> TimeIntervalUIModel {
 
@@ -17,11 +20,12 @@ struct TimeIntervalMapper {
                                    description: timeInterval.description)
     }
     
+    // MARK: - Private Methods
+    
     private func render(_ timePoint: RelativeTimePoint) -> String {
         let hour = timePoint.hour == 0 ? "00" : timePoint.hour.formatted()
         let minute = timePoint.minute == 0 ? "00" : timePoint.minute.formatted()
         return "\(hour):\(minute)"
     }
-    
     
 }

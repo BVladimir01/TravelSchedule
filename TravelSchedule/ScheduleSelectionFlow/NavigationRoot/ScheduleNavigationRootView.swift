@@ -8,17 +8,26 @@
 import SwiftUI
 
 
-
+// MARK: - ScheduleNavigationRootView
 struct ScheduleNavigationRootView: View {
     
+    
+    // MARK: - Private Properties - State
+    
     @ObservedObject private var viewModel: ScheduleNavigationViewModel
+    
+    // MARK: - Private Properties - State
+    
     @StateObject private var threadsViewModel: ThreadsViewModel
     
+    // MARK: - Initializers
     
     init(viewModel: ScheduleNavigationViewModel, client: APIProtocol) {
         self.viewModel = viewModel
         _threadsViewModel = StateObject(wrappedValue: ThreadsViewModel(client: client))
     }
+    
+    // MARK: - Views
     
     var body: some View {
         NavigationStack(path: $viewModel.path) {
@@ -60,7 +69,8 @@ struct ScheduleNavigationRootView: View {
     @ViewBuilder
     private func stationSelectionPage(for locationType: LocationType) -> some View {
         if let selectedCity = viewModel.city(of: locationType) {
-            StationSelectionView(stations: viewModel.stations(of: selectedCity), onStationSelection: { station in
+            StationSelectionView(stations: viewModel.stations(of: selectedCity),
+                                 onStationSelection: { station in
                 viewModel.selectStation(station, for: locationType)
             })
         } else {
@@ -98,7 +108,7 @@ struct ScheduleNavigationRootView: View {
     
     private var originTextField: some View {
         Button {
-            viewModel.searchCity(for: .origin)
+            viewModel.showCitySelectionView(for: .origin)
         } label: {
             HStack {
                 Text(viewModel.description(for: .origin) ?? "Откуда")
@@ -111,7 +121,7 @@ struct ScheduleNavigationRootView: View {
     
     private var destinationTextField: some View {
         Button {
-            viewModel.searchCity(for: .destination)
+            viewModel.showCitySelectionView(for: .destination)
         } label: {
             HStack {
                 Text(viewModel.description(for: .destination) ?? "Куда")

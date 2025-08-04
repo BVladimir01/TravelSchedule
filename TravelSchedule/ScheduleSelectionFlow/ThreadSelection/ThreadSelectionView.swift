@@ -9,15 +9,25 @@
 import SwiftUI
 
 
+// MARK: ThreadSelectionView
 struct ThreadSelectionView: View {
     
-    @Environment(\.dismiss) private var dismiss
+    // MARK: - Private Properties - State
+    
     @ObservedObject private var viewModel: ThreadsViewModel
+    
+    // MARK: - Private Properties
+    
+    @Environment(\.dismiss) private var dismiss
+    
+    // MARK: - Initializers
     
     init(viewModel: ThreadsViewModel) {
         self.viewModel = viewModel
         viewModel.performInitialFetch()
     }
+    
+    // MARK: - Views
     
     var body: some View {
         Group {

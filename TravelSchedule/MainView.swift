@@ -5,20 +5,31 @@
 //  Created by Vladimir on 23.07.2025.
 //
 
-import SwiftUI
 import OpenAPIURLSession
+import SwiftUI
 
+
+// MARK: - MainView
 struct MainView: View {
     
+    // MARK: - Private Properties - State
+    
     @State private var selectedTab: Tab = .schedule
-    @Environment(\.colorScheme) private var colorScheme
     @StateObject private var scheduleNavigationViewModel: ScheduleNavigationViewModel
+    
+    // MARK: - Private Properties
+    
+    @Environment(\.colorScheme) private var colorScheme
     private let client: APIProtocol
+    
+    // MARK: - Initializers
     
     init(client: APIProtocol) {
         self._scheduleNavigationViewModel = StateObject(wrappedValue: ScheduleNavigationViewModel(client: client))
         self.client = client
     }
+    
+    // MARK: - Views
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -54,7 +65,7 @@ struct MainView: View {
     
 }
 
-
+// MARK: - Tabs
 extension MainView {
     private enum Tab {
         case schedule, settings

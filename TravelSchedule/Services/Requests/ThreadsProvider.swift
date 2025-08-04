@@ -8,16 +8,24 @@
 import Foundation
 
 
+// MARK: - ThreadsProvider
 final class ThreadsProvider {
+    
+    // MARK: - Private Properties
     
     private let searchService: SearchService
     private let mapper = APIThreadMapper()
     
-    private let threadsPerPage = 20
+    private let threadsPerPage: Int
     
-    init(client: APIProtocol) {
+    // MARK: - Initializers
+    
+    init(client: APIProtocol, threadsPerPage: Int = 20) {
         self.searchService = SearchService(client: client)
+        self.threadsPerPage = threadsPerPage
     }
+    
+    // MARK: - Internal Methods
     
     func fetchTreads(from origin: Station, to destination: Station, pageNumber: Int) async throws -> [Thread] {
         do {

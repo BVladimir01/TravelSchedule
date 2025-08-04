@@ -7,17 +7,27 @@
 
 import Foundation
 
+
+// MARK: - StationsAndCitiesProvider
 final class StationsAndCitiesProvider {
     
+    // MARK: - Internal Properties
+    
     private(set) var cities: [City] = []
+    
+    // MARK: - Private Properties
     
     private var stations: [City:[Station]] = [:]
     private let allStationsService: AllStationsService
     private let mapper = APIStructsMapper()
     
+    // MARK: - Initializers
+    
     init(client: APIProtocol) {
         self.allStationsService = AllStationsService(client: client)
     }
+    
+    // MARK: - Internal Methods
     
     func fetchCitiesAndStations() async throws {
         do {
@@ -54,6 +64,8 @@ final class StationsAndCitiesProvider {
     func stations(of city: City) -> [Station] {
         return stations[city] ?? []
     }
+    
+    // MARK: - Private Methods
     
     private func renderSettlement(_ settlement: Components.Schemas.Settlement) {
         guard let city = mapper.map(city: settlement) else { return }

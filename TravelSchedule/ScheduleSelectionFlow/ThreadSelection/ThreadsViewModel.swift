@@ -5,22 +5,30 @@
 //  Created by Vladimir on 31.07.2025.
 //
 
-import SwiftUI
 import HTTPTypes
+import SwiftUI
 
+
+// MARK: - ThreadsViewModel
 final class ThreadsViewModel: ObservableObject {
     
-    private var origin: Station?
-    private var destination: Station?
+    // MARK: - Internal Properties - State
     
     @Published private(set) var loadingState: DataLoadingState = .idle
     
-    private let threadsProvider: ThreadsProvider
-    private var pageNumber = 0
+    @Published var timeSpecifications: Set<TimeInterval>
+
+    @Published var allowTransfers = true
     
-    private let threadMapper = ThreadModelMapper()
+    // MARK: - Internal Properties
     
-    @Published private var threads: [Thread] = []
+    let allTimeIntervals = [
+        TimeInterval(start: RelativeTimePoint(hour: 6, minute: 0), end: RelativeTimePoint(hour: 12, minute: 0), description: "Утро"),
+        TimeInterval(start: RelativeTimePoint(hour: 12, minute: 0), end: RelativeTimePoint(hour: 18, minute: 0), description: "День"),
+        TimeInterval(start: RelativeTimePoint(hour: 18, minute: 0), end: RelativeTimePoint(hour: 24, minute: 0), description: "Вечер"),
+        TimeInterval(start: RelativeTimePoint(hour: 0, minute: 0), end: RelativeTimePoint(hour: 6, minute: 0), description: "Ночь"),
+        
+    ]
     
     var displayedThreads: [Thread] {
         threads.filter { thread in
@@ -30,35 +38,44 @@ final class ThreadsViewModel: ObservableObject {
         }
     }
     
-    @Published var timeSpecifications: Set<TimeInterval>
+    var isSearchSpecified: Bool {
+        timeSpecifications.count < allTimeIntervals.count || !allowTransfers
+    }
     
-    let allTimeIntervals = [
-        TimeInterval(start: RelativeTimePoint(hour: 6, minute: 0), end: RelativeTimePoint(hour: 12, minute: 0), description: "Утро"),
-        TimeInterval(start: RelativeTimePoint(hour: 12, minute: 0), end: RelativeTimePoint(hour: 18, minute: 0), description: "День"),
-        TimeInterval(start: RelativeTimePoint(hour: 18, minute: 0), end: RelativeTimePoint(hour: 24, minute: 0), description: "Вечер"),
-        TimeInterval(start: RelativeTimePoint(hour: 0, minute: 0), end: RelativeTimePoint(hour: 6, minute: 0), description: "Ночь"),
-        
-    ]
-    @Published var allowTransfers = true
+    var navigationBarTitle: String {
+        guard let origin, let destination else {
+            return ""
+        }
+        return "\(origin.title) → \(destination.title)"
+    }
+    
+    // MARK: - Private Properties - State
+    
+    @Published private var threads: [Thread] = []
+    
+    // MARK: - Private Properties
+    
+    private var origin: Station?
+    private var destination: Station?
+    
+    private let threadsProvider: ThreadsProvider
+    private var pageNumber = 0
+    private let threadMapper = ThreadModelMapper()
+    
+    // MARK: - Initializers
     
     init(client: APIProtocol) {
         threadsProvider = ThreadsProvider(client: client)
         timeSpecifications = Set(allTimeIntervals)
     }
     
-    var isSearchSpecified: Bool {
-        timeSpecifications.count < allTimeIntervals.count || !allowTransfers
-    }
+    // MARK: - Internal Methods
     
     func configure(origin: Station, destination: Station) {
         self.origin = origin
         self.destination = destination
         threads = []
         loadingState = .idle
-    }
-
-    func threadUIModel(for thread: Thread) -> ThreadUIModel {
-        threadMapper.map(thread)
     }
     
     func fetchThreads() {
@@ -116,11 +133,8 @@ final class ThreadsViewModel: ObservableObject {
         }
     }
     
-    var navigationBarTitle: String {
-        guard let origin, let destination else {
-            return ""
-        }
-        return "\(origin.title) → \(destination.title)"
+    func threadUIModel(for thread: Thread) -> ThreadUIModel {
+        threadMapper.map(thread)
     }
     
 }

@@ -7,10 +7,17 @@
 
 import Foundation
 
+
+// MARK: - APIThreadMapper
+
 struct APIThreadMapper {
+    
+    // MARK: - Types
     
     typealias APIThread = Components.Schemas.SearchSegmentThread
     typealias APISegment = Components.Schemas.SearchSegment
+    
+    // MARK: - Private Properties
     
     private let timeFormatter: DateFormatter = {
        let formatter = DateFormatter()
@@ -23,6 +30,8 @@ struct APIThreadMapper {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
+    
+    // MARK: - Internal Methods
     
     func map(segment: APISegment) -> Thread? {
         guard let departure = segment.departure,
@@ -70,6 +79,8 @@ struct APIThreadMapper {
                                            codes: Station.Codes(esr_code: nil,
                                                                 yandex_code: destinationCode)))
     }
+    
+    // MARK: - Private Methods
     
     private func timePoint(from components: DateComponents) -> RelativeTimePoint? {
         guard let hour = components.hour, let minute = components.minute else { return nil }

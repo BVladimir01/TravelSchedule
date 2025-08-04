@@ -8,11 +8,16 @@
 import SwiftUI
 
 
+// MARK: - StationSelectionView
 struct StationSelectionView: View {
     
-    @Environment(\.dismiss) private var dismiss
+    // MARK: - Private Properties - State
+    
     @State private var searchText: String = ""
     
+    // MARK: - Private Properties
+    
+    @Environment(\.dismiss) private var dismiss
     private let stations: [Station]
     private let onStationSelection: (Station) -> ()
     
@@ -23,10 +28,14 @@ struct StationSelectionView: View {
         }
     }
     
+    // MARK: - Initializers
+    
     init(stations: [Station], onStationSelection: @escaping (Station) -> ()) {
         self.stations = stations
         self.onStationSelection = onStationSelection
     }
+    
+    // MARK: - Views
     
     var body: some View {
         Group {

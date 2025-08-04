@@ -8,15 +8,22 @@
 import SwiftUI
 
 
+// MARK: - ChevronItemListView
 struct ChevronItemListView<Item: CustomStringConvertible & Hashable>: View {
+    
+    // MARK: - Private Properties
     
     private let items: [Item]
     private let onItemSelection: (Item) -> ()
+    
+    // MARK: - Initializers
     
     init(items: [Item], onItemSelection: @escaping (Item) -> Void) {
         self.items = items
         self.onItemSelection = onItemSelection
     }
+    
+    // MARK: - Views
     
     var body: some View {
         ScrollView {

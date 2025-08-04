@@ -8,13 +8,20 @@
 import SwiftUI
 
 
+// MARK: - CarrierDetailView
 struct CarrierDetailView: View {
     
+    // MARK: - Private Properties
+    
     private let carrier: Carrier
+    
+    // MARK: - Initializers
     
     init(carrier: Carrier) {
         self.carrier = carrier
     }
+    
+    // MARK: - Views
     
     var body: some View {
         VStack(spacing: 16) {

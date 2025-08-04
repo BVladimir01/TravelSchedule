@@ -8,19 +8,28 @@
 import SwiftUI
 
 
+// MARK: - TimeSpecifierView
 struct TimeSpecifierView: View {
+    
+    // MARK: - Private Properties - State
     
     @Binding private var selection: Set<TimeInterval>
     @Binding private var allowsTransfers: Bool
     
+    // MARK: - Private Properties
+    
     private let timeIntervals: [TimeInterval]
     private let mapper = TimeIntervalMapper()
+    
+    // MARK: - Initializers
     
     init(selection: Binding<Set<TimeInterval>>, allowsTransfers: Binding<Bool>, timeIntervals: [TimeInterval]) {
         self._selection = selection
         self._allowsTransfers = allowsTransfers
         self.timeIntervals = timeIntervals
     }
+    
+    // MARK: - Views
     
     var body: some View {
         VStack(spacing: 16) {

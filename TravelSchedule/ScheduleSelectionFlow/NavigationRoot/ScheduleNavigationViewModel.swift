@@ -8,10 +8,12 @@
 import SwiftUI
 
 
-@MainActor
+// MARK: - ScheduleNavigationViewModel
 final class ScheduleNavigationViewModel: ObservableObject {
     
-    @Published var loadingState: DataLoadingState = .idle
+    // MARK: - Internal Properties - State
+    
+    @Published private(set) var loadingState: DataLoadingState = .idle
     
     @Published var originCity: City?
     @Published var originStation: Station?
@@ -20,13 +22,18 @@ final class ScheduleNavigationViewModel: ObservableObject {
     
     @Published var path: [PageType] = []
     
+    // MARK: - Private Properties
     
     private let stationsAndCitiesProvider: StationsAndCitiesProvider
+    
+    // MARK: - Initializers
     
     init(client: APIProtocol) {
         stationsAndCitiesProvider = StationsAndCitiesProvider(client: client)
         fetchCitiesAndStations()
     }
+    
+    // MARK: Internal Methods
     
     func fetchCitiesAndStations() {
         guard stationsAndCitiesProvider.cities.isEmpty else { return }
@@ -46,12 +53,6 @@ final class ScheduleNavigationViewModel: ObservableObject {
             }
         }
     }
-    
-    private let citiesStations = [
-        "Moscow" : ["Yaroslavskiy", "Kazanskiy", "Belorusskiy"],
-        "SPB" : ["station 1", "station 2", "station 3"],
-        "Kazan": ["station 1", "station 2", "station 3"]
-    ]
     
     func description(for locationType: LocationType) -> String? {
         let cityTitle: String?
@@ -105,7 +106,7 @@ final class ScheduleNavigationViewModel: ObservableObject {
                 )
     }
     
-    func searchCity(for locationType: LocationType) {
+    func showCitySelectionView(for locationType: LocationType) {
         path.append(.citySelection(locationType: locationType))
     }
     
@@ -117,7 +118,6 @@ final class ScheduleNavigationViewModel: ObservableObject {
             destinationCity = city
         }
         path.append(.stationSelection(locationType: locationType))
-//        path.removeAll()
     }
     
     func selectStation(_ station: Station, for locationType: LocationType) {

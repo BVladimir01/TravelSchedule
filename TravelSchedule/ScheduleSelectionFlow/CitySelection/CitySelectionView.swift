@@ -7,12 +7,17 @@
 
 import SwiftUI
 
+// MARK: - CitySelectionView
 struct CitySelectionView: View {
     
-    @Environment(\.dismiss) private var dismiss
-    @State private var searchText: String = ""
-    private var loadingState: DataLoadingState
+    // MARK: - Private Properties - State
     
+    @State private var searchText: String = ""
+    
+    // MARK: - Private Properties
+    
+    @Environment(\.dismiss) private var dismiss
+    private var loadingState: DataLoadingState
     private let cities: [City]
     private let onCitySelection: (City) -> ()
     
@@ -23,12 +28,15 @@ struct CitySelectionView: View {
         }
     }
     
+    // MARK: - Initializers
+    
     init(cities: [City], loadingState: DataLoadingState, onCitySelection: @escaping (City) -> ()) {
         self.cities = cities
         self.onCitySelection = onCitySelection
         self.loadingState = loadingState
     }
     
+    // MARK: - Views
     var body: some View {
         Group {
             switch loadingState {

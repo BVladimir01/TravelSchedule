@@ -9,8 +9,12 @@ import SwiftUI
 
 
 struct SettingsView: View {
+
+    // MARK: - Private Properties
     
     private let stubImageSize: Double = 223
+    
+    // MARK: - Views
     
     var body: some View {
         VStack {

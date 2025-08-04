@@ -8,7 +8,10 @@
 import Foundation
 
 
+// MARK: - ThreadModelMapper
 struct ThreadModelMapper {
+    
+    // MARK: - Private Properties
     
     private let departureDayFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -23,6 +26,7 @@ struct ThreadModelMapper {
         return formatter
     }()
     
+    // MARK: - Internal Methods
     
     func map(_ thread: Thread) -> ThreadUIModel {
         let departureTime = render(thread.departureTime)
@@ -39,6 +43,8 @@ struct ThreadModelMapper {
                              duration: duration,
                              departureDay: departureDateString)
     }
+    
+    // MARK: - Private Methods
     
     private func render(_ timePoint: RelativeTimePoint) -> String {
         let hour = timePoint.hour == 0 ? "00" : timePoint.hour.formatted()
