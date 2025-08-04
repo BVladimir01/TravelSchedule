@@ -50,10 +50,19 @@ struct ThreadSelectionView: View {
     
     private var content: some View {
         ZStack(alignment: .bottom) {
-            ScrollView {
-                listOfThreads
-                .padding(.horizontal, 16)
-                .padding(.bottom, 80)
+            VStack {
+                titleLabel
+                if viewModel.displayedThreads.count > 0 {
+                    ScrollView {
+                        listOfThreads
+                            .padding(.horizontal, 16)
+                            .padding(.bottom, 80)
+                        Spacer()
+                    }
+                } else {
+                    listEmptyView
+                        .frame(maxHeight: .infinity)
+                }
             }
             specifyTimeButton
                 .padding(.horizontal, 16)
@@ -69,7 +78,6 @@ struct ThreadSelectionView: View {
     
     private var listOfThreads: some View {
         LazyVStack(spacing: 16) {
-            titleLabel
             ForEach(viewModel.displayedThreads, id: \.self) { thread in
                 NavigationLink {
                     CarrierDetailView(carrier: thread.carrier)
@@ -83,7 +91,6 @@ struct ThreadSelectionView: View {
                     }
                 }
             }
-            Spacer()
         }
     }
     
