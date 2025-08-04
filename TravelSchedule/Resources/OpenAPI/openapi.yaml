@@ -493,7 +493,7 @@ components:
           type: string
           description: Ссылка на мобильную версию расписания
     
-    
+  
     CopyrightResponse:
       type: object
       properties:
@@ -869,28 +869,6 @@ components:
         code:
           type: string
           description: Код подтипа транспорта
-          enum:
-            - helicopter
-            - rex
-            - sputnik
-            - skiarrow
-            - shezh
-            - skirus
-            - city
-            - kalina
-            - vostok
-            - prostoryaltaya
-            - 14vag
-            - last
-            - exprdal
-            - volzhex
-            - stdplus
-            - express
-            - skor
-            - fiztekh
-            - vag6
-            - river
-            - sea
         title:
           type: string
           description: Описание подтипа транспорта на естественном языке

@@ -9,7 +9,7 @@ typealias SearchResponse = Components.Schemas.SearchResponse
 
 
 protocol SearchServiceProtocol {
-    func getSchedules(from: String, to: String) async throws -> SearchResponse
+    func getSchedules(from: String, to: String, limit: Int, offset: Int) async throws -> SearchResponse
 }
 
 
@@ -21,8 +21,12 @@ struct SearchService: SearchServiceProtocol {
         self.client = client
     }
     
-    func getSchedules(from departure: String, to destination: String) async throws -> SearchResponse {
-        let query = Operations.searchSchedules.Input.Query(from: departure, to: destination)
+    func getSchedules(from departure: String, to destination: String, limit: Int, offset: Int) async throws -> SearchResponse {
+        let query = Operations.searchSchedules.Input.Query(from: departure,
+                                                           to: destination,
+                                                           transport_types: [.train],
+                                                           offset: offset,
+                                                           limit: limit)
         let request = try await client.searchSchedules(query: query)
         return try request.ok.body.json
     }

@@ -12,11 +12,12 @@ struct MainView: View {
     
     @State private var selectedTab: Tab = .schedule
     @Environment(\.colorScheme) private var colorScheme
-    
     @StateObject private var scheduleNavigationViewModel: ScheduleNavigationViewModel
+    private let client: APIProtocol
     
     init(client: APIProtocol) {
         self._scheduleNavigationViewModel = StateObject(wrappedValue: ScheduleNavigationViewModel(client: client))
+        self.client = client
     }
     
     var body: some View {
@@ -36,7 +37,8 @@ struct MainView: View {
     
     private var content: some View {
         TabView(selection: $selectedTab) {
-            ScheduleNavigationRootView(viewModel: scheduleNavigationViewModel)
+            ScheduleNavigationRootView(viewModel: scheduleNavigationViewModel,
+                                       client: client)
                 .tabItem {
                     Image(.schedule)
                 }

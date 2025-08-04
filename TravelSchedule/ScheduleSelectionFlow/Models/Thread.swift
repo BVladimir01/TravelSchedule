@@ -12,6 +12,6 @@ struct Thread: Hashable {
     let arrivalTime: Date
     let hasTransfers: Bool
     let carrier: Carrier
-    let origin: Location
-    let destination: Location
+    let origin: Station
+    let destination: Station
 }

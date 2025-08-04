@@ -7,7 +7,7 @@
 
 struct Carrier: Hashable {
     let title: String
-    let email: String
-    let phone: String
-    let logoURL: String
+    let email: String?
+    let phone: String?
+    let logoURL: String?
 }

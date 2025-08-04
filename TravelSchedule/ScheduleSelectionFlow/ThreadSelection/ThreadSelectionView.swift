@@ -12,11 +12,11 @@ import SwiftUI
 struct ThreadSelectionView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var viewModel: ThreadsViewModel
+    @ObservedObject private var viewModel: ThreadsViewModel
     
-    init(origin: Location, destination: Location) {
-        _viewModel = StateObject(wrappedValue: ThreadsViewModel(origin: origin,
-                                                                destination: destination))
+    init(origin: Station, destination: Station, viewModel: ThreadsViewModel) {
+        self.viewModel = viewModel
+        viewModel.configure(origin: origin, destination: destination)
     }
     
     var body: some View {
@@ -36,6 +36,9 @@ struct ThreadSelectionView: View {
             specifyTimeButton
                 .padding(.horizontal, 16)
                 .padding(.bottom, 24)
+        }
+        .onAppear {
+            viewModel.fetchThreads()
         }
         .navigationBarBackButtonHidden()
         .toolbar {
@@ -82,7 +85,7 @@ struct ThreadSelectionView: View {
     private func rowView(for thread: ThreadUIModel) -> some View {
         VStack(alignment: .leading) {
             HStack(spacing: 8) {
-                logoImage(url: thread.carrierLogoURL)
+                logoImage(url: thread.carrierLogoURL ?? "")
                     .frame(width: 38, height: 38)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(thread.carrierTitle)

@@ -12,9 +12,12 @@ import SwiftUI
 struct ScheduleNavigationRootView: View {
     
     @ObservedObject private var viewModel: ScheduleNavigationViewModel
+    @StateObject private var threadsViewModel: ThreadsViewModel
     
-    init(viewModel: ScheduleNavigationViewModel) {
+    
+    init(viewModel: ScheduleNavigationViewModel, client: APIProtocol) {
         self.viewModel = viewModel
+        _threadsViewModel = StateObject(wrappedValue: ThreadsViewModel(client: client))
     }
     
     var body: some View {
@@ -35,10 +38,11 @@ struct ScheduleNavigationRootView: View {
                 case .stationSelection(locationType: let locationType):
                     stationSelectionPage(for: locationType)
                 case .threadSelection:
-                    if let origin = viewModel.location(of: .origin),
-                       let destination = viewModel.location(of: .destination) {
+                    if let origin = viewModel.originStation,
+                       let destination = viewModel.destinationStation {
                         ThreadSelectionView(origin: origin,
-                                            destination: destination)
+                                            destination: destination,
+                                            viewModel: threadsViewModel)
                     }
                 }
             }

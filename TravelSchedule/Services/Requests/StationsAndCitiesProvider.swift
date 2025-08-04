@@ -19,11 +19,11 @@ final class StationsAndCitiesProvider {
     
     func fetchCitiesAndStations() async throws {
         guard let countries = try? await allStationsService.getAllStations().countries else {
-            throw AllStationsFetchingError.serverError
+            throw DataFetchingError.serverError
         }
         guard let russia = countries.first(where: { $0.title?.lowercased() == "россия" }),
               let regions = russia.regions else {
-            throw AllStationsFetchingError.parsingError
+            throw DataFetchingError.parsingError
         }
         for region in regions {
             if let settlements = region.settlements {

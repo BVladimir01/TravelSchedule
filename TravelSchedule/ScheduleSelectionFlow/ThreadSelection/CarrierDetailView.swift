@@ -39,8 +39,8 @@ struct CarrierDetailView: View {
                 .font(.system(size: 24, weight: .bold))
                 .foregroundStyle(.ypBlack)
             VStack {
-                rowView(title: "E-Mail", headline: carrier.email)
-                rowView(title: "Телефон", headline: carrier.phone)
+                rowView(title: "E-Mail", headline: carrier.email ?? "")
+                rowView(title: "Телефон", headline: carrier.phone ?? "")
             }
         }
     }
@@ -61,7 +61,7 @@ struct CarrierDetailView: View {
     }
     
     private var logoImage: some View {
-        AsyncImage(url: URL(string: carrier.logoURL)) { phase in
+        AsyncImage(url: URL(string: carrier.logoURL ?? "")) { phase in
             switch phase {
             case .empty:
                 ProgressView()

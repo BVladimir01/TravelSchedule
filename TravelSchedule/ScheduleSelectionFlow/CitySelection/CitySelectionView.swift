@@ -11,7 +11,7 @@ struct CitySelectionView: View {
     
     @Environment(\.dismiss) private var dismiss
     @State private var searchText: String = ""
-    private var loadingState: CitiesLoadingState
+    private var loadingState: DataLoadingState
     
     private let cities: [City]
     private let onCitySelection: (City) -> ()
@@ -23,7 +23,7 @@ struct CitySelectionView: View {
         }
     }
     
-    init(cities: [City], loadingState: CitiesLoadingState, onCitySelection: @escaping (City) -> ()) {
+    init(cities: [City], loadingState: DataLoadingState, onCitySelection: @escaping (City) -> ()) {
         self.cities = cities
         self.onCitySelection = onCitySelection
         self.loadingState = loadingState

@@ -11,7 +11,7 @@ import SwiftUI
 @MainActor
 final class ScheduleNavigationViewModel: ObservableObject {
     
-    @Published var loadingState: CitiesLoadingState = .idle
+    @Published var loadingState: DataLoadingState = .idle
     
     @Published var originCity: City?
     @Published var originStation: Station?
@@ -52,23 +52,6 @@ final class ScheduleNavigationViewModel: ObservableObject {
         "Kazan": ["station 1", "station 2", "station 3"]
     ]
     
-    func location(of type: LocationType) -> Location? {
-        switch type {
-        case .origin:
-            if let originCity, let originStation {
-                return Location(city: originCity, station: originStation)
-            } else {
-                return nil
-            }
-        case .destination:
-            if let destinationCity, let destinationStation {
-                return Location(city: destinationCity, station: destinationStation)
-            } else {
-                return nil
-            }
-        }
-    }
-
     func description(for locationType: LocationType) -> String? {
         let cityTitle: String?
         let stationTitle: String?

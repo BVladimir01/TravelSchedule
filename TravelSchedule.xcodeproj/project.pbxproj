@@ -49,10 +49,11 @@
 		E7CB3B8B2E3CB5D700099A59 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3B8A2E3CB5D400099A59 /* City.swift */; };
 		E7CB3B8F2E3CB5DC00099A59 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3B8E2E3CB5DA00099A59 /* Station.swift */; };
 		E7CB3B962E3CB9BA00099A59 /* APIStructsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3B952E3CB9AF00099A59 /* APIStructsMapper.swift */; };
-		E7CB3B9F2E3CC3DD00099A59 /* CitiesLoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3B9E2E3CC3D700099A59 /* CitiesLoadingState.swift */; };
-		E7CB3BA32E3CC45A00099A59 /* AllStationsFetchingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3BA22E3CC45000099A59 /* AllStationsFetchingError.swift */; };
+		E7CB3B9F2E3CC3DD00099A59 /* DataLoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3B9E2E3CC3D700099A59 /* DataLoadingState.swift */; };
+		E7CB3BA32E3CC45A00099A59 /* DataFetchingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3BA22E3CC45000099A59 /* DataFetchingError.swift */; };
 		E7CB3BC82E3CDF4D00099A59 /* ServerErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3BC72E3CDF4900099A59 /* ServerErrorView.swift */; };
-		E7CB3BDA2E3CE5C800099A59 /* CitiesLoadingStateContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3BD92E3CE5BA00099A59 /* CitiesLoadingStateContainer.swift */; };
+		E7CB3C0A2E3CFDBC00099A59 /* ThreadsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3C092E3CFDB200099A59 /* ThreadsProvider.swift */; };
+		E7CB3C0E2E3D03AA00099A59 /* APIThreadMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB3C0D2E3D03A200099A59 /* APIThreadMapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,10 +98,11 @@
 		E7CB3B8A2E3CB5D400099A59 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		E7CB3B8E2E3CB5DA00099A59 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		E7CB3B952E3CB9AF00099A59 /* APIStructsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStructsMapper.swift; sourceTree = "<group>"; };
-		E7CB3B9E2E3CC3D700099A59 /* CitiesLoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesLoadingState.swift; sourceTree = "<group>"; };
-		E7CB3BA22E3CC45000099A59 /* AllStationsFetchingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsFetchingError.swift; sourceTree = "<group>"; };
+		E7CB3B9E2E3CC3D700099A59 /* DataLoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoadingState.swift; sourceTree = "<group>"; };
+		E7CB3BA22E3CC45000099A59 /* DataFetchingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetchingError.swift; sourceTree = "<group>"; };
 		E7CB3BC72E3CDF4900099A59 /* ServerErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorView.swift; sourceTree = "<group>"; };
-		E7CB3BD92E3CE5BA00099A59 /* CitiesLoadingStateContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesLoadingStateContainer.swift; sourceTree = "<group>"; };
+		E7CB3C092E3CFDB200099A59 /* ThreadsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadsProvider.swift; sourceTree = "<group>"; };
+		E7CB3C0D2E3D03A200099A59 /* APIThreadMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIThreadMapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,8 +209,7 @@
 		E7CB3A422E3B53A300099A59 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E7CB3BD92E3CE5BA00099A59 /* CitiesLoadingStateContainer.swift */,
-				E7CB3B9E2E3CC3D700099A59 /* CitiesLoadingState.swift */,
+				E7CB3B9E2E3CC3D700099A59 /* DataLoadingState.swift */,
 				E7CB3B8E2E3CB5DA00099A59 /* Station.swift */,
 				E7CB3B8A2E3CB5D400099A59 /* City.swift */,
 				E7CB3AA72E3B5BBF00099A59 /* Carrier.swift */,
@@ -262,7 +263,8 @@
 		E7CB3AAF2E3B5D9800099A59 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				E7CB3BA22E3CC45000099A59 /* AllStationsFetchingError.swift */,
+				E7CB3C092E3CFDB200099A59 /* ThreadsProvider.swift */,
+				E7CB3BA22E3CC45000099A59 /* DataFetchingError.swift */,
 				E7CB3B732E3CAC8100099A59 /* StationsAndCitiesProvider.swift */,
 				E71CA9A22E312DE2000AFDE0 /* NearestStationsService.swift */,
 				E71CAA472E379068000AFDE0 /* APIKeyMiddleware.swift */,
@@ -280,6 +282,7 @@
 		E7CB3AB82E3B5EE800099A59 /* Mappers */ = {
 			isa = PBXGroup;
 			children = (
+				E7CB3C0D2E3D03A200099A59 /* APIThreadMapper.swift */,
 				E7CB3B952E3CB9AF00099A59 /* APIStructsMapper.swift */,
 				E7CB3AE22E3B6DEF00099A59 /* TimeIntervalMapper.swift */,
 				E7CB3AB92E3B5EEE00099A59 /* ThreadModelMapper.swift */,
@@ -375,7 +378,6 @@
 				E7CB3A9F2E3B568100099A59 /* Thread.swift in Sources */,
 				E7CB39772E3A9A1100099A59 /* StationSelectionView.swift in Sources */,
 				E71CAA172E338D67000AFDE0 /* NearestSettlementService.swift in Sources */,
-				E7CB3BDA2E3CE5C800099A59 /* CitiesLoadingStateContainer.swift in Sources */,
 				E7CB3B742E3CAC8800099A59 /* StationsAndCitiesProvider.swift in Sources */,
 				E7CB3B8F2E3CB5DC00099A59 /* Station.swift in Sources */,
 				E71CAA0D2E3381D8000AFDE0 /* CarrierService.swift in Sources */,
@@ -385,9 +387,9 @@
 				E71CA97E2E310F45000AFDE0 /* TravelScheduleApp.swift in Sources */,
 				E7CB3B962E3CB9BA00099A59 /* APIStructsMapper.swift in Sources */,
 				E7CB3BC82E3CDF4D00099A59 /* ServerErrorView.swift in Sources */,
-				E7CB3BA32E3CC45A00099A59 /* AllStationsFetchingError.swift in Sources */,
+				E7CB3BA32E3CC45A00099A59 /* DataFetchingError.swift in Sources */,
 				E71CA9D82E33553D000AFDE0 /* AllStationsService.swift in Sources */,
-				E7CB3B9F2E3CC3DD00099A59 /* CitiesLoadingState.swift in Sources */,
+				E7CB3B9F2E3CC3DD00099A59 /* DataLoadingState.swift in Sources */,
 				E74DCCA62E3A142E00A0C415 /* ScheduleNavigationViewModel.swift in Sources */,
 				E74DCCAC2E3A14C600A0C415 /* Location.swift in Sources */,
 				E7CB3AE52E3B6DF400099A59 /* TimeIntervalMapper.swift in Sources */,
@@ -406,8 +408,10 @@
 				E7CB3A9B2E3B564F00099A59 /* ThreadsViewModel.swift in Sources */,
 				E7CB38AE2E3A327D00099A59 /* PageType.swift in Sources */,
 				E74DCCB02E3A157100A0C415 /* TimeInterval.swift in Sources */,
+				E7CB3C0A2E3CFDBC00099A59 /* ThreadsProvider.swift in Sources */,
 				E71CA9C52E32AFB6000AFDE0 /* CopyrightService.swift in Sources */,
 				E7CB3ADA2E3B6CBB00099A59 /* TimeSpecifierView.swift in Sources */,
+				E7CB3C0E2E3D03AA00099A59 /* APIThreadMapper.swift in Sources */,
 				E7CB39B62E3AB37500099A59 /* ThreadUIModel.swift in Sources */,
 				E71CAA222E33B1E1000AFDE0 /* ThreadService.swift in Sources */,
 			);

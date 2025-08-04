@@ -8,7 +8,7 @@
 import Foundation
 
 struct ThreadUIModel {
-    let carrierLogoURL: String
+    let carrierLogoURL: String?
     let carrierTitle: String
     let departureTime: String
     let arrivalTime: String
