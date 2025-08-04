@@ -52,6 +52,7 @@ struct ThreadSelectionView: View {
         ZStack(alignment: .bottom) {
             VStack {
                 titleLabel
+                    .padding(.horizontal, 16)
                 if viewModel.displayedThreads.count > 0 {
                     ScrollView {
                         listOfThreads
