@@ -23,9 +23,10 @@ struct ThreadModelMapper {
         return formatter
     }()
     
+    
     func map(_ thread: Thread) -> ThreadUIModel {
-        let departureTime = "\(thread.departureTime.hour):\(thread.departureTime.minute)"
-        let arrivalTime = "\(thread.arrivalTime.hour):\(thread.arrivalTime.minute)"
+        let departureTime = render(thread.departureTime)
+        let arrivalTime = render(thread.arrivalTime)
         let departureDay: String
         if let synthesizedDepartureDay = Calendar.current.date(from: thread.departureDay) {
             departureDay = departureDayFormatter.string(from: synthesizedDepartureDay)
@@ -42,6 +43,12 @@ struct ThreadModelMapper {
                              hasTransfers: thread.hasTransfers,
                              duration: duration,
                              departureDay: departureDay)
+    }
+    
+    private func render(_ timePoint: RelativeTimePoint) -> String {
+        let hour = timePoint.hour == 0 ? "00" : timePoint.hour.formatted()
+        let minute = timePoint.minute == 0 ? "00" : timePoint.minute.formatted()
+        return "\(hour):\(minute)"
     }
     
 }
