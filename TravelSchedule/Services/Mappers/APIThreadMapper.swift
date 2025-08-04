@@ -53,11 +53,10 @@ struct APIThreadMapper {
         else {
             return nil
         }
-        let departureDayComponents = calendar.dateComponents([.day, .month], from: departureDate)
         let hasTransfers = segment.has_transfers ?? false
         return Thread(departureTime: departureTimePoint,
                       arrivalTime: arrivalTimePoint,
-                      departureDay: departureDayComponents,
+                      departureDate: departureDate,
                       duration: duration,
                       hasTransfers: hasTransfers,
                       carrier: Carrier(title: carrierTitle,
