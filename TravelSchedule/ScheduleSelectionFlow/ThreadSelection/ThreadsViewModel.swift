@@ -21,6 +21,7 @@ final class ThreadsViewModel: ObservableObject {
     private let threadMapper = ThreadModelMapper()
     
     @Published private var threads: [Thread] = []
+    
     var displayedThreads: [Thread] {
         threads.filter { thread in
             let transfersConditionPassed = allowTransfers || !thread.hasTransfers
@@ -59,7 +60,9 @@ final class ThreadsViewModel: ObservableObject {
     }
     
     func fetchThreads() {
-        guard let origin, let destination else {
+        guard let origin, let destination,
+              loadingState != .loading
+        else {
             return
         }
         Task {
@@ -73,9 +76,36 @@ final class ThreadsViewModel: ObservableObject {
                 await MainActor.run {
                     threads.append(contentsOf: newThreads)
                     loadingState = .success
-                    print(threads)
                 }
-            } catch {
+            } catch let error as DataFetchingError {
+                await MainActor.run {
+                    print(error)
+                    loadingState = .error(error)
+                }
+            }
+        }
+    }
+    
+    func performInitialFetch() {
+        guard let origin, let destination,
+              loadingState != .loading,
+              threads.isEmpty
+        else {
+            return
+        }
+        Task {
+            await MainActor.run {
+                loadingState = .loading
+            }
+            do {
+                let newThreads = try await threadsProvider.fetchTreads(from: origin,
+                                                                       to: destination,
+                                                                       pageNumber: pageNumber)
+                await MainActor.run {
+                    threads.append(contentsOf: newThreads)
+                    loadingState = .success
+                }
+            } catch let error as DataFetchingError {
                 await MainActor.run {
                     print(error)
                     loadingState = .error(error)

@@ -38,7 +38,7 @@ final class ScheduleNavigationViewModel: ObservableObject {
                 await MainActor.run {
                     loadingState = .success
                 }
-            } catch {
+            } catch let error as DataFetchingError {
                 await MainActor.run {
                     loadingState = .error(error)
                 }

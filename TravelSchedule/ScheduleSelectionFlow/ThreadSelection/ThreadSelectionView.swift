@@ -17,21 +17,16 @@ struct ThreadSelectionView: View {
     init(origin: Station, destination: Station, viewModel: ThreadsViewModel) {
         self.viewModel = viewModel
         viewModel.configure(origin: origin, destination: destination)
+        viewModel.performInitialFetch()
     }
     
     var body: some View {
         Group {
             switch viewModel.loadingState {
-            case .idle:
-                loaderView.onAppear {
-                    viewModel.fetchThreads()
-                }
-            case .loading:
-                loaderView
-            case .success:
-                content
             case .error:
                 errorView
+            default:
+                content
             }
         }
         .navigationBarBackButtonHidden()
@@ -47,23 +42,39 @@ struct ThreadSelectionView: View {
     private var content: some View {
         ZStack(alignment: .bottom) {
             ScrollView {
-                VStack(spacing: 16) {
-                    titleLabel
-                    ForEach(viewModel.displayedThreads, id: \.self) { thread in
-                        NavigationLink {
-                            CarrierDetailView(carrier: thread.carrier)
-                        } label: {
-                            rowView(for: viewModel.threadUIModel(for: thread))
-                        }
-                    }
-                    Spacer()
-                }
+                listOfThreads
                 .padding(.horizontal, 16)
                 .padding(.bottom, 80)
             }
             specifyTimeButton
                 .padding(.horizontal, 16)
                 .padding(.bottom, 24)
+        }
+        .overlay {
+            if viewModel.loadingState == .loading {
+                loaderView
+                    .tint(.ypBlack)
+            }
+        }
+    }
+    
+    private var listOfThreads: some View {
+        LazyVStack(spacing: 16) {
+            titleLabel
+            ForEach(viewModel.displayedThreads, id: \.self) { thread in
+                NavigationLink {
+                    CarrierDetailView(carrier: thread.carrier)
+                } label: {
+                    rowView(for: viewModel.threadUIModel(for: thread))
+                }
+                .onAppear {
+                    guard let lastThread = viewModel.displayedThreads.last else { return }
+                    if thread == lastThread {
+                        viewModel.fetchThreads()
+                    }
+                }
+            }
+            Spacer()
         }
     }
     
