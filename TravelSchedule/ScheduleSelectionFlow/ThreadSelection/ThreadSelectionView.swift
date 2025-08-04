@@ -125,7 +125,7 @@ struct ThreadSelectionView: View {
                 .fill(.ypLightGray)
         }
         .overlay(alignment: .topTrailing) {
-            Text(thread.departureDate)
+            Text(thread.departureDay)
                 .foregroundStyle(.ypBlackUniversal)
                 .font(.system(size: 12, weight: .regular))
                 .padding(.top, 15)

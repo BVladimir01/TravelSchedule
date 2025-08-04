@@ -10,18 +10,12 @@ import Foundation
 
 struct ThreadModelMapper {
     
-    private let timeFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter
-    }()
-    
-    private let departureDateFormatter: DateFormatter = {
+    private let departureDayFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "d MMMM"
         return formatter
     }()
-    
+   
     private let durationFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour]
@@ -30,13 +24,24 @@ struct ThreadModelMapper {
     }()
     
     func map(_ thread: Thread) -> ThreadUIModel {
+        let departureTime = "\(thread.departureTime.hour):\(thread.departureTime.minute)"
+        let arrivalTime = "\(thread.arrivalTime.hour):\(thread.arrivalTime.minute)"
+        let departureDay: String
+        if let synthesizedDepartureDay = Calendar.current.date(from: thread.departureDay) {
+            departureDay = departureDayFormatter.string(from: synthesizedDepartureDay)
+        } else {
+            departureDay = ""
+        }
+        var durationComponents = DateComponents()
+        durationComponents.second = thread.duration
+        let duration = durationFormatter.string(from: durationComponents) ?? ""
         return ThreadUIModel(carrierLogoURL: thread.carrier.logoURL,
                              carrierTitle: thread.carrier.title,
-                             departureTime: timeFormatter.string(from: thread.departureTime),
-                             arrivalTime: timeFormatter.string(from: thread.arrivalTime),
+                             departureTime: departureTime,
+                             arrivalTime: arrivalTime,
                              hasTransfers: thread.hasTransfers,
-                             duration: durationFormatter.string(from: thread.departureTime, to: thread.arrivalTime) ?? "",
-                             departureDate: departureDateFormatter.string(from: thread.departureTime))
+                             duration: duration,
+                             departureDay: departureDay)
     }
     
 }

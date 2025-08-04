@@ -18,14 +18,13 @@ struct APIThreadMapper {
         return formatter
     }()
     
-    private let dateTimeFormatter: DateFormatter = {
+    private let dateFormatter: DateFormatter = {
        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
     
     func map(segment: APISegment) -> Thread? {
-        print(segment)
         guard let departure = segment.departure,
               let arrival = segment.arrival,
               let originTitle = segment.from?.title,
@@ -35,19 +34,31 @@ struct APIThreadMapper {
               let thread = segment.thread,
               let carrier = thread.carrier,
               let carrierTitle = carrier.title,
-              let startDate = segment.start_date
+              let startDate = segment.start_date,
+              let duration = segment.duration
         else {
             return nil
         }
-        print(departure)
-        guard let departureTime = dateTimeFormatter.date(from: "\(startDate) \(departure)"),
-              let arrivalTime = timeFormatter.date(from: arrival)
+        guard let departureTime = timeFormatter.date(from: departure),
+              let arrivalTime = timeFormatter.date(from: arrival),
+              let departureDate = dateFormatter.date(from: startDate)
         else {
             return nil
         }
+        let calendar = Calendar.current
+        let departureTimeComponents = calendar.dateComponents([.hour, .minute], from: departureTime)
+        let arrivalTimeComponents = calendar.dateComponents([.hour, .minute], from: arrivalTime)
+        guard let departureTimePoint = timePoint(from: departureTimeComponents),
+              let arrivalTimePoint = timePoint(from: arrivalTimeComponents)
+        else {
+            return nil
+        }
+        let departureDayComponents = calendar.dateComponents([.day, .month], from: departureDate)
         let hasTransfers = segment.has_transfers ?? false
-        return Thread(departureTime: departureTime,
-                      arrivalTime: arrivalTime,
+        return Thread(departureTime: departureTimePoint,
+                      arrivalTime: arrivalTimePoint,
+                      departureDay: departureDayComponents,
+                      duration: duration,
                       hasTransfers: hasTransfers,
                       carrier: Carrier(title: carrierTitle,
                                        email: carrier.email,
@@ -60,4 +71,10 @@ struct APIThreadMapper {
                                            codes: Station.Codes(esr_code: nil,
                                                                 yandex_code: destinationCode)))
     }
+    
+    private func timePoint(from components: DateComponents) -> RelativeTimePoint? {
+        guard let hour = components.hour, let minute = components.minute else { return nil }
+        return RelativeTimePoint(hour: hour, minute: minute)
+    }
+    
 }

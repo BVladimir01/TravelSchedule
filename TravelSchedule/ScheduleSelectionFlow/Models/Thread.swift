@@ -8,8 +8,10 @@
 import Foundation
 
 struct Thread: Hashable {
-    let departureTime: Date
-    let arrivalTime: Date
+    let departureTime: RelativeTimePoint
+    let arrivalTime: RelativeTimePoint
+    let departureDay: DateComponents
+    let duration: Int
     let hasTransfers: Bool
     let carrier: Carrier
     let origin: Station

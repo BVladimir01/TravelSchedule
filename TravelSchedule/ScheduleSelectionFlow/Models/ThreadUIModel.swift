@@ -14,5 +14,5 @@ struct ThreadUIModel {
     let arrivalTime: String
     let hasTransfers: Bool
     let duration: String
-    let departureDate: String
+    let departureDay: String
 }
