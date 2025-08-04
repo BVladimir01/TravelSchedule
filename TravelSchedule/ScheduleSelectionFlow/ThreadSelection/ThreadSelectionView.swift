@@ -20,25 +20,19 @@ struct ThreadSelectionView: View {
     }
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            VStack(spacing: 16) {
-                titleLabel
-                ForEach(viewModel.threads, id: \.self) { thread in
-                    NavigationLink {
-                        CarrierDetailView(carrier: thread.carrier)
-                    } label: {
-                        rowView(for: viewModel.threadUIModel(for: thread))
-                    }
+        Group {
+            switch viewModel.loadingState {
+            case .idle:
+                loaderView.onAppear {
+                    viewModel.fetchThreads()
                 }
-                Spacer()
+            case .loading:
+                loaderView
+            case .success:
+                content
+            case .error:
+                errorView
             }
-            .padding(.horizontal, 16)
-            specifyTimeButton
-                .padding(.horizontal, 16)
-                .padding(.bottom, 24)
-        }
-        .onAppear {
-            viewModel.fetchThreads()
         }
         .navigationBarBackButtonHidden()
         .toolbar {
@@ -47,6 +41,46 @@ struct ThreadSelectionView: View {
             }
         }
         .toolbar(.hidden, for: .tabBar)
+    }
+    
+    
+    private var content: some View {
+        ZStack(alignment: .bottom) {
+            ScrollView {
+                VStack(spacing: 16) {
+                    titleLabel
+                    ForEach(viewModel.threads, id: \.self) { thread in
+                        NavigationLink {
+                            CarrierDetailView(carrier: thread.carrier)
+                        } label: {
+                            rowView(for: viewModel.threadUIModel(for: thread))
+                        }
+                    }
+                    Spacer()
+                }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 80)
+            }
+            specifyTimeButton
+                .padding(.horizontal, 16)
+                .padding(.bottom, 24)
+        }
+    }
+    
+    private var loaderView: some View {
+        ProgressView()
+            .tint(.ypBlack)
+            .scaleEffect(2)
+    }
+    
+    private var errorView: some View {
+        ServerErrorView()
+    }
+    
+    private var listEmptyView: some View {
+        Text("Вариантов нет")
+            .foregroundStyle(.ypBlack)
+            .font(.system(size: 24, weight: .bold))
     }
     
     private var titleLabel: some View {

@@ -13,7 +13,7 @@ final class ThreadsViewModel: ObservableObject {
     private var origin: Station?
     private var destination: Station?
     
-    @Published private var loadingState: DataLoadingState = .idle
+    @Published private(set) var loadingState: DataLoadingState = .idle
     
     private let threadsProvider: ThreadsProvider
     private var pageNumber = 0
