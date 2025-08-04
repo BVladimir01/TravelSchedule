@@ -42,8 +42,8 @@ struct CitySelectionView: View {
                 } else {
                     contentView
                 }
-            case .error:
-                errorView
+            case .error(let error):
+                errorView(for: error)
             }
         }
         .navigationTitle(Text("Выбор города"))
@@ -79,8 +79,16 @@ struct CitySelectionView: View {
             .scaleEffect(2)
     }
     
-    private var errorView: some View {
-        ServerErrorView()
+    @ViewBuilder
+    private func errorView(for error: DataFetchingError) -> some View {
+        switch error {
+        case .noInternetError:
+            NoInternetErrorView()
+        case .serverError(error: let error):
+            ServerErrorView()
+        case .parsingError:
+            ServerErrorView()
+        }
     }
     
 }

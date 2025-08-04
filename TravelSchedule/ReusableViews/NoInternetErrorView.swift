@@ -1,5 +1,5 @@
 //
-//  NoInternetError.swift
+//  NoInternetErrorView.swift
 //  TravelSchedule
 //
 //  Created by Vladimir on 04.08.2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NoInternetError: View {
+struct NoInternetErrorView: View {
     var body: some View {
         VStack {
             Image(.noInternet)

@@ -5,6 +5,8 @@
 //  Created by Vladimir on 01.08.2025.
 //
 
+import Foundation
+
 final class StationsAndCitiesProvider {
     
     private(set) var cities: [City] = []
@@ -18,19 +20,34 @@ final class StationsAndCitiesProvider {
     }
     
     func fetchCitiesAndStations() async throws {
-        guard let countries = try? await allStationsService.getAllStations().countries else {
-            throw DataFetchingError.serverError
-        }
-        guard let russia = countries.first(where: { $0.title?.lowercased() == "россия" }),
-              let regions = russia.regions else {
-            throw DataFetchingError.parsingError
-        }
-        for region in regions {
-            if let settlements = region.settlements {
-                for settlement in settlements {
-                    renderSettlement(settlement)
+        do {
+            let countriesResponse = try await allStationsService.getAllStations()
+            guard let countries = countriesResponse.countries,
+                  let russia = countries.first(where: { $0.title?.lowercased() == "россия" }),
+                  let regions = russia.regions
+            else {
+                throw DataFetchingError.parsingError
+            }
+            for region in regions {
+                if let settlements = region.settlements {
+                    for settlement in settlements {
+                        renderSettlement(settlement)
+                    }
                 }
             }
+        } catch let urlError as URLError {
+            print(urlError)
+            switch urlError.code {
+            case .notConnectedToInternet :
+                throw DataFetchingError.noInternetError
+            case .timedOut:
+                throw DataFetchingError.noInternetError
+            default:
+                throw DataFetchingError.serverError(error: urlError)
+            }
+        } catch {
+            print(error)
+            throw DataFetchingError.serverError(error: error)
         }
     }
     
