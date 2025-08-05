@@ -41,21 +41,7 @@ struct StationSelectionView: View {
         ZStack {
             Color.ypWhite
                 .ignoresSafeArea()
-            Group {
-                if displayedStations.isEmpty {
-                    Text("Станция не найдена")
-                        .foregroundStyle(.ypBlack)
-                        .font(.system(size: 24, weight: .bold))
-                } else {
-                    VStack {
-                        ChevronItemListView(items: displayedStations, onItemSelection: { station in
-                            onStationSelection(station)
-                        })
-                        Spacer()
-                    }
-                    .background(.ypWhite)
-                }
-            }
+            mainContentView
         }
         .navigationTitle(Text("Выбор станции"))
         .navigationBarTitleDisplayMode(.inline)
@@ -67,6 +53,32 @@ struct StationSelectionView: View {
         }
         .toolbar(.hidden, for: .tabBar)
         .searchable(text: $searchText, placement: .automatic, prompt: Text("Введите запрос"))
+    }
+    
+    @ViewBuilder
+    private var mainContentView: some View {
+        if displayedStations.isEmpty {
+            listEmptyView
+        } else {
+            scrollableStationsView
+        }
+    }
+    
+    private var listEmptyView: some View {
+        Text("Станция не найдена")
+            .foregroundStyle(.ypBlack)
+            .font(.system(size: 24, weight: .bold))
+    }
+    
+    private var scrollableStationsView: some View {
+        ScrollView {
+            VStack {
+                ChevronItemListView(items: displayedStations, onItemSelection: { station in
+                    onStationSelection(station)
+                })
+                Spacer()
+            }
+        }
     }
     
 }

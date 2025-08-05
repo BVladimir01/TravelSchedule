@@ -26,19 +26,17 @@ struct ChevronItemListView<Item: CustomStringConvertible & Hashable>: View {
     // MARK: - Views
     
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                ForEach(items, id: \.self) { item in
-                    Button {
-                        onItemSelection(item)
-                    } label: {
-                        rowView(for: item)
-                    }
-                    .padding(.horizontal, 16)
+        LazyVStack {
+            ForEach(items, id: \.self) { item in
+                Button {
+                    onItemSelection(item)
+                } label: {
+                    rowView(for: item)
                 }
+                .padding(.horizontal, 16)
             }
-            .background(.ypWhite)
         }
+        .background(.ypWhite)
     }
     
     private func rowView(for item: Item) -> some View {

@@ -41,22 +41,7 @@ struct CitySelectionView: View {
         ZStack {
             Color.ypWhite
                 .ignoresSafeArea()
-            Group {
-                switch loadingState {
-                case .idle:
-                    EmptyView()
-                case .loading:
-                    loaderView
-                case .success:
-                    if displayedCities.isEmpty {
-                        listEmptyView
-                    } else {
-                        contentView
-                    }
-                case .error(let error):
-                    ErrorView(errorType: error)
-                }
-            }
+            mainContentView
         }
         .navigationTitle(Text("Выбор города"))
         .navigationBarTitleDisplayMode(.inline)
@@ -69,6 +54,24 @@ struct CitySelectionView: View {
         .toolbar(.hidden, for: .tabBar)
         .searchable(text: $searchText, placement: .automatic, prompt: Text("Введите запрос"))
     }
+    
+    @ViewBuilder
+    private var mainContentView: some View {
+        switch loadingState {
+        case .idle:
+            EmptyView()
+        case .loading:
+            loaderView
+        case .success:
+            if displayedCities.isEmpty {
+                listEmptyView
+            } else {
+                scrollableCitiesView
+            }
+        case .error(let dataFetchingError):
+            ErrorView(errorType: dataFetchingError)
+        }
+    }
 
     private var listEmptyView: some View {
         Text("Город не найден")
@@ -76,12 +79,14 @@ struct CitySelectionView: View {
             .font(.system(size: 24, weight: .bold))
     }
     
-    private var contentView: some View {
-        VStack {
-            ChevronItemListView(items: displayedCities, onItemSelection: { city in
-                onCitySelection(city)
-            })
-            Spacer()
+    private var scrollableCitiesView: some View {
+        ScrollView {
+            VStack {
+                ChevronItemListView(items: displayedCities, onItemSelection: { city in
+                    onCitySelection(city)
+                })
+                Spacer()
+            }
         }
     }
     
