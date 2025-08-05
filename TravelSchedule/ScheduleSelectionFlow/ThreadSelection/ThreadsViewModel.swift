@@ -133,8 +133,4 @@ final class ThreadsViewModel: ObservableObject {
         }
     }
     
-    func threadUIModel(for thread: Thread) -> ThreadUIModel {
-        threadMapper.map(thread)
-    }
-    
 }

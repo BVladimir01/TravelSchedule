@@ -19,6 +19,7 @@ struct ThreadSelectionView: View {
     // MARK: - Private Properties
     
     @Environment(\.dismiss) private var dismiss
+    private let threadFormatter = ThreadModelUIMapper()
     
     // MARK: - Initializers
     
@@ -87,7 +88,7 @@ struct ThreadSelectionView: View {
                 NavigationLink {
                     CarrierDetailView(carrier: thread.carrier)
                 } label: {
-                    rowView(for: viewModel.threadUIModel(for: thread))
+                    rowView(for: threadFormatter.map(thread))
                 }
                 .onAppear {
                     guard let lastThread = viewModel.displayedThreads.last else { return }
