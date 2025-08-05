@@ -45,11 +45,11 @@ final class ThreadsProvider {
             case .timedOut:
                 throw DataFetchingError.noInternetError
             default:
-                throw DataFetchingError.serverError(error: urlError)
+                throw DataFetchingError.serverError(description: urlError.localizedDescription)
             }
         } catch {
             print(error)
-            throw DataFetchingError.serverError(error: error)
+            throw DataFetchingError.serverError(description: error.localizedDescription)
         }
     }
     

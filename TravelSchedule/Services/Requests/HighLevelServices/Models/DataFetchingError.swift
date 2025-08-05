@@ -8,7 +8,7 @@
 enum DataFetchingError: Error, Equatable {
     
     case parsingError
-    case serverError(error: Error)
+    case serverError(description: String?)
     case noInternetError
     
     static func == (lhs: DataFetchingError, rhs: DataFetchingError) -> Bool {
@@ -17,8 +17,8 @@ enum DataFetchingError: Error, Equatable {
             return true
         case (.noInternetError, .noInternetError):
             return true
-        case (.serverError(error: let lhsError), .serverError(error: let rhsError)):
-            return lhsError.localizedDescription == rhsError.localizedDescription
+        case (.serverError(description: let lhsDescription), .serverError(description: let rhsDescription)):
+            return lhsDescription == rhsDescription
         default:
             return false
         }

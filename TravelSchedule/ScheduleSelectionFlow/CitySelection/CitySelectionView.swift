@@ -54,7 +54,7 @@ struct CitySelectionView: View {
                         contentView
                     }
                 case .error(let error):
-                    errorView(for: error)
+                    ErrorView(errorType: error)
                 }
             }
         }
@@ -90,17 +90,4 @@ struct CitySelectionView: View {
             .tint(.ypBlack)
             .scaleEffect(2)
     }
-    
-    @ViewBuilder
-    private func errorView(for error: DataFetchingError) -> some View {
-        switch error {
-        case .noInternetError:
-            NoInternetErrorView()
-        case .serverError(error: let error):
-            ServerErrorView()
-        case .parsingError:
-            ServerErrorView()
-        }
-    }
-    
 }

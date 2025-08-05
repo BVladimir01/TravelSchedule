@@ -35,8 +35,8 @@ struct ThreadSelectionView: View {
                 .ignoresSafeArea()
             Group {
                 switch viewModel.loadingState {
-                case .error:
-                    errorView
+                case .error(let error):
+                    ErrorView(errorType: error)
                 default:
                     content
                 }
@@ -103,10 +103,6 @@ struct ThreadSelectionView: View {
         ProgressView()
             .tint(.ypBlack)
             .scaleEffect(2)
-    }
-    
-    private var errorView: some View {
-        ServerErrorView()
     }
     
     private var listEmptyView: some View {
