@@ -81,7 +81,7 @@ struct CitySelectionView: View {
     
     private var scrollableCitiesView: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: .zero) {
                 ChevronItemListView(items: displayedCities, onItemSelection: { city in
                     onCitySelection(city)
                 })

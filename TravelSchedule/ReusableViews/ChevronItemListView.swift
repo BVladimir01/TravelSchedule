@@ -26,7 +26,7 @@ struct ChevronItemListView<Item: CustomStringConvertible & Hashable>: View {
     // MARK: - Views
     
     var body: some View {
-        LazyVStack {
+        LazyVStack(spacing: .zero) {
             ForEach(items, id: \.self) { item in
                 Button {
                     onItemSelection(item)

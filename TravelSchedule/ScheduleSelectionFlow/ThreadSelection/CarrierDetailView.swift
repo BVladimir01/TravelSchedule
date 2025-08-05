@@ -50,7 +50,7 @@ struct CarrierDetailView: View {
             Text(carrier.title)
                 .font(.system(size: 24, weight: .bold))
                 .foregroundStyle(.ypBlack)
-            VStack {
+            VStack(spacing: .zero) {
                 rowView(title: "E-Mail", headline: carrier.email ?? "")
                 rowView(title: "Телефон", headline: carrier.phone ?? "")
             }

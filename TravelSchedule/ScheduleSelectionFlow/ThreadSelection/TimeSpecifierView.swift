@@ -55,7 +55,7 @@ struct TimeSpecifierView: View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Время отправления")
                 .font(.system(size: 24, weight: .bold))
-            VStack {
+            VStack(spacing: .zero) {
                 ForEach(timeIntervals, id: \.self) { interval in
                     timeIntervalSelectionRow(for: interval)
                 }
@@ -88,7 +88,7 @@ struct TimeSpecifierView: View {
             Text("Показывать варианты с пересадками")
                 .font(.system(size: 24, weight: .bold))
                 .foregroundStyle(.ypBlack)
-            VStack {
+            VStack(spacing: .zero) {
                 HStack(spacing: 4) {
                     Text("Да")
                     Spacer()

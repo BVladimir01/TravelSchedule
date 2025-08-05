@@ -54,7 +54,7 @@ struct ThreadSelectionView: View {
     
     private var content: some View {
         ZStack(alignment: .bottom) {
-            VStack {
+            VStack(spacing: .zero) {
                 titleLabel
                     .padding(.horizontal, 16)
                 if viewModel.displayedThreads.count > 0 {

@@ -72,7 +72,7 @@ struct StationSelectionView: View {
     
     private var scrollableStationsView: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: .zero) {
                 ChevronItemListView(items: displayedStations, onItemSelection: { station in
                     onStationSelection(station)
                 })

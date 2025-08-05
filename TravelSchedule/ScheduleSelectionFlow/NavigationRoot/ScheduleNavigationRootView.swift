@@ -31,7 +31,7 @@ struct ScheduleNavigationRootView: View {
     
     var body: some View {
         NavigationStack(path: $viewModel.path) {
-            VStack {
+            VStack(spacing: .zero) {
                 locationsSelector
                     .padding(.top, 20)
                     .padding(.horizontal, 16)
