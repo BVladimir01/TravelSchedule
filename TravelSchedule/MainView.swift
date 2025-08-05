@@ -14,7 +14,7 @@ struct MainView: View {
     
     // MARK: - Private Properties - State
     
-    @State private var selectedTab: Tab = .schedule
+    @State private var selectedTab: MainTab = .schedule
     @StateObject private var scheduleNavigationViewModel: ScheduleNavigationViewModel
     
     // MARK: - Private Properties
@@ -52,12 +52,12 @@ struct MainView: View {
             .tabItem {
                     Image(.schedule)
                 }
-            .tag(Tab.schedule)
+            .tag(MainTab.schedule)
             SettingsView()
                 .tabItem {
                     Image(.settings)
                 }
-                .tag(Tab.settings)
+                .tag(MainTab.settings)
         }
         .tint(.ypBlack)
     }
@@ -66,7 +66,7 @@ struct MainView: View {
 
 // MARK: - Tabs
 extension MainView {
-    private enum Tab {
+    private enum MainTab {
         case schedule, settings
     }
 }
