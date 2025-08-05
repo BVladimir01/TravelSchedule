@@ -22,6 +22,20 @@ final class ScheduleNavigationViewModel: ObservableObject {
     
     @Published var path: [PageType] = []
     
+    // MARK: - Internal Properties - Computed
+    
+    var cities: [City] {
+        stationsAndCitiesProvider.cities
+    }
+    
+    var searchIsEnabled: Bool {
+        return (originCity != nil &&
+                originStation != nil &&
+                destinationCity != nil &&
+                destinationStation != nil
+                )
+    }
+    
     // MARK: - Private Properties
     
     private let stationsAndCitiesProvider: StationsAndCitiesProvider
@@ -54,6 +68,10 @@ final class ScheduleNavigationViewModel: ObservableObject {
         }
     }
     
+    func stations(of city: City) -> [Station] {
+        stationsAndCitiesProvider.stations(of: city)
+    }
+    
     func isDefined(locationType: LocationType) -> Bool {
         switch locationType {
         case .origin:
@@ -63,14 +81,6 @@ final class ScheduleNavigationViewModel: ObservableObject {
         }
     }
     
-    var cities: [City] {
-        stationsAndCitiesProvider.cities
-    }
-    
-    func stations(of city: City) -> [Station] {
-        stationsAndCitiesProvider.stations(of: city)
-    }
-    
     func city(of locationType: LocationType) -> City? {
         switch locationType {
         case .origin:
@@ -78,14 +88,6 @@ final class ScheduleNavigationViewModel: ObservableObject {
         case .destination:
             return destinationCity
         }
-    }
-    
-    var searchIsEnabled: Bool {
-        return (originCity != nil &&
-                originStation != nil &&
-                destinationCity != nil &&
-                destinationStation != nil
-                )
     }
     
     func showCitySelectionView(for locationType: LocationType) {
