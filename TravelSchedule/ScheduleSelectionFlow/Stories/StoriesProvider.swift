@@ -14,6 +14,7 @@ final class StoriesProvider {
     private init() { }
     
     private var stories: [Story] = []
+    private var authors: [StoryAuthor] = []
     
     func watch(story: Story) -> Bool{
         guard let index = stories.firstIndex(where: { $0.id == story.id} ) else {
@@ -25,6 +26,10 @@ final class StoriesProvider {
     
     func fetchStories() -> [Story] {
         stories
+    }
+    
+    func author(with id: StoryAuthor.ID) -> StoryAuthor? {
+        authors.first(where: { $0.id == id})
     }
     
 }
