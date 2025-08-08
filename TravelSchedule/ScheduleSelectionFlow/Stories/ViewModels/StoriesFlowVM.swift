@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 final class StoriesFlowVM: ObservableObject {
     
@@ -17,12 +18,27 @@ final class StoriesFlowVM: ObservableObject {
         authors[currentAuthorIndex]
     }
     
-    @Published private(set) var currentStoryIndex: Int
-    @Published private(set) var currentAuthorIndex: Int
+    var numberOfDisplayedStories: Int {
+        stories.filter { $0.authorID == currentAuthor.id }.count
+    }
+    
+    var currentStoryLocalIndex: Int {
+        stories(by: currentAuthor).firstIndex(where: { $0.id == currentStory.id }) ?? 0
+    }
+    
+    @Published var currentProgress: Double = 0
+    
+    @Published private var currentStoryIndex: Int
+    @Published private var currentAuthorIndex: Int
     @Published private(set) var isShowingStoriesFlow = false
     
-    private(set) var stories: [Story]
-    private(set) var authors: [StoryAuthor]
+    private var timer: Timer.TimerPublisher
+    private var cancellable: Cancellable?
+    
+    private let timerConfig = TimerConfiguration(frameRate: 60, duration: 5)
+    
+    private var stories: [Story]
+    private var authors: [StoryAuthor]
     
     private let onEvent: (Event) -> ()
 
@@ -32,6 +48,7 @@ final class StoriesFlowVM: ObservableObject {
         self.stories = stories
         self.authors = authors
         self.onEvent = onEvent
+        self.timer = Timer.publish(every: timerConfig.tickInterval, on: .main, in: .common)
         sortAuthors()
         sortStories()
         currentStoryIndex = stories.firstIndex(where: { $0.id == currentStory.id }) ?? 0
@@ -119,10 +136,57 @@ final class StoriesFlowVM: ObservableObject {
         stories = newStories
     }
     
+    private func startTimer() {
+        cancellable = timer
+            .autoconnect()
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.incrementProgress(by: self.timerConfig.progressStep)
+            }
+    }
+    
+    private func stopTimer() {
+        cancellable?.cancel()
+    }
+    
+    private func resetTimer() {
+        timer = Timer.publish(every: timerConfig.tickInterval, on: .main, in: .common)
+    }
+    
+    private func incrementProgress(by value: Double) {
+        if currentProgress + value >= 1 {
+            showNextStory()
+        }
+    }
+    
 }
 
 extension StoriesFlowVM {
     enum Event {
         case storyWatched(story: Story)
     }
+}
+
+extension StoriesFlowVM {
+    
+    struct TimerConfiguration {
+        
+        private let frameRate: Double
+        private let duration: Double
+        
+        var progressStep: Double {
+            1/(frameRate*duration)
+        }
+        
+        var tickInterval: Double {
+            1/frameRate
+        }
+        
+        init(frameRate: Double, duration: Double) {
+            self.frameRate = frameRate
+            self.duration = duration
+        }
+        
+    }
+    
 }
