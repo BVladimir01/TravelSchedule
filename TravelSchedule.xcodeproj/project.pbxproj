@@ -66,6 +66,7 @@
 		E7CD1F002E45DE6D00A88980 /* StoriesFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1EFD2E45DE6600A88980 /* StoriesFlowView.swift */; };
 		E7CD1F052E45E06B00A88980 /* StoriesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1F042E45E06100A88980 /* StoriesProvider.swift */; };
 		E7CD1F152E46537900A88980 /* ProgressSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1F142E46537900A88980 /* ProgressSegmentView.swift */; };
+		E7CD1F192E4653E700A88980 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1F182E4653E700A88980 /* ProgressBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,6 +128,7 @@
 		E7CD1EFD2E45DE6600A88980 /* StoriesFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesFlowView.swift; sourceTree = "<group>"; };
 		E7CD1F042E45E06100A88980 /* StoriesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesProvider.swift; sourceTree = "<group>"; };
 		E7CD1F142E46537900A88980 /* ProgressSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSegmentView.swift; sourceTree = "<group>"; };
+		E7CD1F182E4653E700A88980 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -425,6 +427,7 @@
 		E7CD1F0D2E46536E00A88980 /* ProgressBarView */ = {
 			isa = PBXGroup;
 			children = (
+				E7CD1F182E4653E700A88980 /* ProgressBarView.swift */,
 				E7CD1F142E46537900A88980 /* ProgressSegmentView.swift */,
 			);
 			path = ProgressBarView;
@@ -550,6 +553,7 @@
 				E74DCC982E3A134D00A0C415 /* ScheduleNavigationRootView.swift in Sources */,
 				E7CB3D922E41ECD500099A59 /* ErrorView.swift in Sources */,
 				E7CD1EE42E45DE2400A88980 /* Story.swift in Sources */,
+				E7CD1F192E4653E700A88980 /* ProgressBarView.swift in Sources */,
 				E7CD1EF72E45DE5A00A88980 /* StoriesView.swift in Sources */,
 				E74DCC8D2E3A115E00A0C415 /* SettingsView.swift in Sources */,
 				E7CB3B8B2E3CB5D700099A59 /* City.swift in Sources */,
