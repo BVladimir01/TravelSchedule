@@ -65,6 +65,7 @@
 		E7CD1EF72E45DE5A00A88980 /* StoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1EF42E45DE5300A88980 /* StoriesView.swift */; };
 		E7CD1EFA2E45DE6200A88980 /* StoryPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1EF92E45DE6000A88980 /* StoryPageView.swift */; };
 		E7CD1F002E45DE6D00A88980 /* StoriesFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1EFD2E45DE6600A88980 /* StoriesFlowView.swift */; };
+		E7CD1F052E45E06B00A88980 /* StoriesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1F042E45E06100A88980 /* StoriesProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -125,6 +126,7 @@
 		E7CD1EF42E45DE5300A88980 /* StoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesView.swift; sourceTree = "<group>"; };
 		E7CD1EF92E45DE6000A88980 /* StoryPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPageView.swift; sourceTree = "<group>"; };
 		E7CD1EFD2E45DE6600A88980 /* StoriesFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesFlowView.swift; sourceTree = "<group>"; };
+		E7CD1F042E45E06100A88980 /* StoriesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -380,6 +382,7 @@
 		E7CD1ECE2E45DDC000A88980 /* Stories */ = {
 			isa = PBXGroup;
 			children = (
+				E7CD1F042E45E06100A88980 /* StoriesProvider.swift */,
 				E7CD1EF02E45DE4600A88980 /* Views */,
 				E7CD1EE22E45DE1900A88980 /* Models */,
 				E7CD1ECF2E45DDD300A88980 /* ViewModels */,
@@ -508,6 +511,7 @@
 				E7CB39772E3A9A1100099A59 /* StationSelectionView.swift in Sources */,
 				E7CD1EEA2E45DE2C00A88980 /* StoryPageContent.swift in Sources */,
 				E71CAA172E338D67000AFDE0 /* NearestSettlementService.swift in Sources */,
+				E7CD1F052E45E06B00A88980 /* StoriesProvider.swift in Sources */,
 				E7CB3B742E3CAC8800099A59 /* StationsAndCitiesProvider.swift in Sources */,
 				E7CB3CA92E40FB3900099A59 /* DataFetchingError.swift in Sources */,
 				E7CB3B8F2E3CB5DC00099A59 /* Station.swift in Sources */,
