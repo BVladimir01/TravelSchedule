@@ -13,12 +13,18 @@ final class StoriesProvider {
     
     private init() { }
     
-    let stories: [Story] = []
-    let authors: [StoryAuthor] = []
-    private(set) var watchedStories: Set<UUID> = []
+    private var stories: [Story] = []
     
-    func watch(story: Story) {
-        watchedStories.insert(story.id)
+    func watch(story: Story) -> Bool{
+        guard let index = stories.firstIndex(where: { $0.id == story.id} ) else {
+            return false
+        }
+        stories[index] = Story(id: story.id, authorID: story.authorID, content: story.content, watched: true)
+        return true
+    }
+    
+    func fetchStories() -> [Story] {
+        stories
     }
     
 }

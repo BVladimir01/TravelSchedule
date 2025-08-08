@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct Story {
+struct Story: Identifiable {
     let id: UUID
     let authorID: UUID
     let content: StoryPageContent
+    let watched: Bool
 }

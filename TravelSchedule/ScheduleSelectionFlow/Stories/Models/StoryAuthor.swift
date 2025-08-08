@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct StoryAuthor {
+struct StoryAuthor: Identifiable {
     let id: UUID
 }
