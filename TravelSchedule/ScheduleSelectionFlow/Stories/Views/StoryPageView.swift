@@ -21,17 +21,29 @@ struct StoryPageView: View {
             Image(story.imageName)
                 .resizable()
                 .scaledToFit()
-            VStack(spacing: 16) {
-                Text(story.title)
-                    .foregroundStyle(.ypWhiteUniversal)
-                    .font(.system(size: 34, weight: .bold))
-                Text(story.text)
-                    .foregroundStyle(.ypWhiteUniversal)
-                    .font(.system(size: 20, weight: .regular))
+            HStack(spacing: .zero) {
+                VStack(alignment: .leading, spacing: 16) {
+                    Text(story.title)
+                        .foregroundStyle(.ypWhiteUniversal)
+                        .font(.system(size: 34, weight: .bold))
+                        .lineLimit(2)
+                    Text(story.text)
+                        .foregroundStyle(.ypWhiteUniversal)
+                        .font(.system(size: 20, weight: .regular))
+                        .lineLimit(2)
+                }
+                Spacer()
             }
             .padding(.horizontal, 16)
             .padding(.bottom, 40)
         }
     }
     
+}
+
+
+#Preview {
+    StoryPageView(story: StoryPageContent(title: "Title 1 Title 1 Title 1 Title 1 Title 1 Title 1 Title 1 Title 1 ",
+                                          text: "Text 1 Text 1 Text 1 Text 1 Text 1 Text 1 Text 1 Text 1 ",
+                                          imageName: "Story1"))
 }
