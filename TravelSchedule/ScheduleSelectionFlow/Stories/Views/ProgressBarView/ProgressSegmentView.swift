@@ -22,9 +22,9 @@ struct ProgressSegmentView: View {
                 radius + max(min(progress, 1), 0)*(geometry.size.width - radius)
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: radius)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.ypWhiteUniversal)
                 RoundedRectangle(cornerRadius: radius)
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(.ypBlue)
                     .frame(width: width)
             }
         }
