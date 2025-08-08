@@ -30,11 +30,9 @@ final class StoriesMainVM: ObservableObject {
                                watched: true)
     }
     
-    
     init(storiesProvider: StoriesProvider) {
         self.storiesProvider = storiesProvider
         self.stories = storiesProvider.fetchStories()
-        
     }
     
     convenience init() {
