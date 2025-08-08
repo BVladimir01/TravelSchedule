@@ -26,6 +26,10 @@ final class StoriesFlowVM: ObservableObject {
         stories(by: currentAuthor).firstIndex(where: { $0.id == currentStory.id }) ?? 0
     }
     
+    var currentNumberOfDisplayedStories: Int {
+        stories(by: currentAuthor).count
+    }
+    
     @Published var currentProgress: Double = 0
     
     @Published private var currentStoryIndex: Int
@@ -78,6 +82,14 @@ final class StoriesFlowVM: ObservableObject {
     
     func didSlideToPreviousAuthor() {
         showPreviousAuthor()
+    }
+    
+    func closeView() {
+        isShowingStoriesFlow = false
+    }
+    
+    func viewAppeared() {
+        startTimer()
     }
     
     private func showNextStory() {
