@@ -17,7 +17,7 @@ struct StoryPageView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            Color.ypBlack.ignoresSafeArea()
+            Color.ypBlackUniversal.ignoresSafeArea()
             Image(story.imageName)
                 .resizable()
                 .scaledToFit()

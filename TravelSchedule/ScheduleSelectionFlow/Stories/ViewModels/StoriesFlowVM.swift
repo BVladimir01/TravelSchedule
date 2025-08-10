@@ -34,7 +34,6 @@ final class StoriesFlowVM: ObservableObject {
     
     @Published private var currentStoryIndex: Int
     @Published private var currentAuthorIndex: Int
-    @Published private(set) var isShowingStoriesFlow = false
     
     private var timer: Timer.TimerPublisher
     private var cancellable: Cancellable?
@@ -46,6 +45,8 @@ final class StoriesFlowVM: ObservableObject {
     
     private var onEvent: ((Event) -> ())?
     
+    private let storiesProvider: StoriesProvider
+    
     init(storiesProvider: StoriesProvider) {
         stories = storiesProvider.fetchStories()
         let authorIDs = Array(Set<StoryAuthor.ID>(stories.map { $0.authorID }))
@@ -53,6 +54,7 @@ final class StoriesFlowVM: ObservableObject {
         self.currentStoryIndex = 0
         self.currentAuthorIndex = 0
         self.timer = Timer.publish(every: timerConfig.tickInterval, on: .main, in: .common)
+        self.storiesProvider = storiesProvider
         sortAuthors()
         sortStories()
     }
@@ -92,22 +94,35 @@ final class StoriesFlowVM: ObservableObject {
     }
     
     func closeView() {
-        isShowingStoriesFlow = false
+        stopTimer()
+        onEvent?(.dismiss)
     }
     
     func viewAppeared() {
+        resetTimer()
         startTimer()
     }
     
     private func showNextStory() {
-        storyWatched(story: currentStory)
-        if currentStoryIndex == stories.count - 1 {
-            isShowingStoriesFlow = false
+        print(currentStoryIndex)
+        if storiesProvider.watch(story: currentStory) {
+            if let index = stories.firstIndex(where: { $0.id == currentStory.id }) {
+                stories[index] = Story(id: currentStory.id,
+                                       authorID: currentStory.authorID,
+                                       content: currentStory.content,
+                                       watched: true)
+            }
         }
-        if stories[currentStoryIndex].authorID != currentAuthor.id {
+        if currentStoryIndex == stories.count - 1 {
+            closeView()
+            return
+        }
+        else if stories[currentStoryIndex + 1].authorID != currentAuthor.id {
             showNextAuthor()
         } else {
             currentStoryIndex += 1
+            resetTimer()
+            startTimer()
         }
     }
     
@@ -115,28 +130,36 @@ final class StoriesFlowVM: ObservableObject {
         guard currentStoryIndex > 0 else { return }
         if stories[currentStoryIndex - 1].authorID != currentAuthor.id { return }
         currentStoryIndex -= 1
+        resetTimer()
+        startTimer()
     }
     
     private func showNextAuthor() {
         if currentAuthorIndex == authors.count - 1 {
-            isShowingStoriesFlow = false
+            closeView()
+            return
         }
         currentAuthorIndex += 1
         if let firstNewStory = stories(by: currentAuthor).first(where: { !$0.watched }),
            let newStoryIndex = stories.firstIndex(where: { $0.id == firstNewStory.id }) {
             currentStoryIndex = newStoryIndex
         }
+        resetTimer()
+        startTimer()
     }
     
     private func showPreviousAuthor() {
         if currentAuthorIndex == 0 {
-            isShowingStoriesFlow = false
+            closeView()
+            return
         }
         currentAuthorIndex -= 1
         if let firstNewStory = stories(by: currentAuthor).first(where: { !$0.watched }),
            let newStoryIndex = stories.firstIndex(where: { $0.id == firstNewStory.id }) {
             currentStoryIndex = newStoryIndex
         }
+        resetTimer()
+        startTimer()
     }
     
     private func sortAuthors() {
@@ -144,6 +167,9 @@ final class StoriesFlowVM: ObservableObject {
             fatalError()
         }
         authors.sort(by: { $0.id < $1.id })
+        let newAuthors = authors.filter { author($0, hasNewContent: true) }
+        let watchedAuthors = authors.filter { author($0, hasNewContent: false) }
+        authors = newAuthors + watchedAuthors
     }
     
     private func sortStories() {
@@ -156,6 +182,7 @@ final class StoriesFlowVM: ObservableObject {
     }
     
     private func startTimer() {
+        currentProgress = 0
         cancellable = timer
             .autoconnect()
             .sink { [weak self] _ in
@@ -176,6 +203,11 @@ final class StoriesFlowVM: ObservableObject {
         if currentProgress + value >= 1 {
             showNextStory()
         }
+        currentProgress += value
+    }
+    
+    private func author(_ author: StoryAuthor, hasNewContent: Bool) -> Bool {
+        stories.filter { $0.authorID == author.id}.contains(where: { !$0.watched }) == hasNewContent
     }
     
 }
@@ -183,6 +215,7 @@ final class StoriesFlowVM: ObservableObject {
 extension StoriesFlowVM {
     enum Event {
         case storyWatched(story: Story)
+        case dismiss
     }
 }
 
