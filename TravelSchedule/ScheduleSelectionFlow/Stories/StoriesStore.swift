@@ -74,10 +74,6 @@ final class StoriesStore {
             return false
         }
         stories[index] = Story(id: story.id, authorID: story.authorID, content: story.content, watched: true)
-        print("markedWatched")
-        print(authors[0].id)
-        print(story.authorID)
-        print(hasNewContent(authors[0]))
         return true
     }
     

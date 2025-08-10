@@ -72,7 +72,8 @@ final class StoriesFlowVM: ObservableObject {
     
     func setAuthor(_ author: StoryAuthor) {
         currentAuthorIndex = authors.firstIndex(where: { $0.id == author.id }) ?? 0
-        currentStoryIndex = stories.firstIndex(where: { $0.authorID == author.id && !$0.watched }) ?? 0
+        currentStoryIndex = (stories.firstIndex(where: { $0.authorID == author.id && !$0.watched }) ??
+                             stories.firstIndex(where: { $0.authorID == author.id }) ?? 0)
     }
     
     func setActions(_ actions: @escaping (Event) -> ()) {
