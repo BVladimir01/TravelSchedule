@@ -18,27 +18,24 @@ struct StoriesPreviewCard: View {
     }
     
     var body: some View {
-        ZStack(alignment: .bottom) {
+        ZStack(alignment: .bottomLeading) {
             Image(story.imageName)
                 .resizable()
                 .scaledToFill()
-            HStack(spacing: .zero) {
-                Text(story.title)
-                    .lineLimit(3)
-                    .font(.system(size: 12, weight: .regular))
-                    .foregroundStyle(.ypWhiteUniversal)
-                Spacer()
-            }
-            .padding(.horizontal, 8)
-            .padding(.bottom, 12)
+                .frame(width: 92, height: 140)
+            Text(story.title)
+                .lineLimit(3)
+                .font(.system(size: 12, weight: .regular))
+                .foregroundStyle(.ypWhiteUniversal)
+                .padding(.horizontal, 8)
+                .padding(.bottom, 12)
         }
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .contentShape(RoundedRectangle(cornerRadius: 16))
         .overlay {
             RoundedRectangle(cornerRadius: 16)
-                .stroke(.ypBlue, lineWidth: hasNewContent ? 4 : 0)
+                .strokeBorder(.ypBlue, lineWidth: 4)
         }
-        .aspectRatio(92/140, contentMode: .fit)
     }
     
 }
@@ -49,7 +46,6 @@ struct StoriesPreviewCard: View {
         .ignoresSafeArea()
         .overlay {
             StoriesPreviewCard(story: StoryPageContent(title: "Title 1", text: "Text 1", imageName: "Story1"), hasNewContent: true)
-                .frame(width: 200)
                 .padding()
         }
 }

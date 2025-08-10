@@ -33,17 +33,7 @@ struct ScheduleNavigationRootView: View {
     
     var body: some View {
         NavigationStack(path: $viewModel.path) {
-            VStack(spacing: .zero) {
-                StoriesPreview(viewModel: storiesPreviewVM)
-                locationsSelector
-                    .padding(.top, 20)
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 16)
-                if viewModel.searchIsEnabled {
-                    searchThreadsButton
-                }
-                Spacer()
-            }
+            content
             .background(.ypWhite)
             .navigationDestination(for: PageType.self) { pageType in
                 switch pageType {
@@ -73,6 +63,23 @@ struct ScheduleNavigationRootView: View {
                     break
                 }
             }
+        }
+    }
+    
+    private var content: some View {
+        VStack(spacing: 20) {
+            StoriesPreview(viewModel: storiesPreviewVM)
+                .frame(height: 140)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 24)
+            VStack(spacing: 16) {
+                locationsSelector
+                if viewModel.searchIsEnabled {
+                    searchThreadsButton
+                }
+            }
+            .padding(.horizontal, 16)
+            Spacer()
         }
     }
     
