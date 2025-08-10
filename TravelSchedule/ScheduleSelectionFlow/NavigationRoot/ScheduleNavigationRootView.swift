@@ -70,7 +70,6 @@ struct ScheduleNavigationRootView: View {
         VStack(spacing: 20) {
             StoriesPreview(viewModel: storiesPreviewVM)
                 .frame(height: 140)
-                .padding(.horizontal, 16)
                 .padding(.vertical, 24)
             VStack(spacing: 16) {
                 locationsSelector

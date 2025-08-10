@@ -15,7 +15,7 @@ final class StoriesProvider {
     private var authors: [StoryAuthor] = []
     
     private init() {
-        authors = [StoryAuthor(id: UUID()),StoryAuthor(id: UUID()),StoryAuthor(id: UUID())]
+        authors = [StoryAuthor(id: UUID()), StoryAuthor(id: UUID()), StoryAuthor(id: UUID()), StoryAuthor(id: UUID())]
         stories = [
             Story(id: UUID(),
                   authorID: authors[0].id,
@@ -52,6 +52,18 @@ final class StoriesProvider {
             Story(id: UUID(),
                   authorID: authors[2].id,
                   content: StoryPageContent(title: "Title 9", text: "Text 9", imageName: "Story4"),
+                  watched: false),
+            Story(id: UUID(),
+                  authorID: authors[3].id,
+                  content: StoryPageContent(title: "Title 10", text: "Text 10", imageName: "Story5"),
+                  watched: false),
+            Story(id: UUID(),
+                  authorID: authors[3].id,
+                  content: StoryPageContent(title: "Title 11", text: "Text 11", imageName: "Story1"),
+                  watched: false),
+            Story(id: UUID(),
+                  authorID: authors[3].id,
+                  content: StoryPageContent(title: "Title 12", text: "Text 12", imageName: "Story2"),
                   watched: false),
         ]
     }

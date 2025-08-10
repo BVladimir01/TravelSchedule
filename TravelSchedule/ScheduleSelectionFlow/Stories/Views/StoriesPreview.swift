@@ -22,7 +22,9 @@ struct StoriesPreview: View {
                     renderedPreviewCard(for: author, withNewContent: vm.authorsWithNewContent.contains(where: { $0.id == author.id }))
                 }
             }
+            .padding(.horizontal, 16)
         }
+        .scrollIndicators(.hidden)
     }
     
     private func renderedPreviewCard(for author: StoryAuthor, withNewContent: Bool) -> some View {
