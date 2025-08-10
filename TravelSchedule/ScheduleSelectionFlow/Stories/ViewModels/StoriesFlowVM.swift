@@ -173,7 +173,6 @@ final class StoriesFlowVM: ObservableObject {
     }
     
     private func startTimer() {
-        currentProgress = 0
         cancellable = timer
             .autoconnect()
             .sink { [weak self] _ in
@@ -188,6 +187,7 @@ final class StoriesFlowVM: ObservableObject {
     
     private func resetTimer() {
         timer = Timer.publish(every: timerConfig.tickInterval, on: .main, in: .common)
+        currentProgress = 0
     }
     
     private func incrementProgress(by value: Double) {
