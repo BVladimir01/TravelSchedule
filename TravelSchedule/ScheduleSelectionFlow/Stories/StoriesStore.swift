@@ -1,5 +1,5 @@
 //
-//  StoriesProvider.swift
+//  StoriesStore.swift
 //  TravelSchedule
 //
 //  Created by Vladimir on 08.08.2025.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-final class StoriesProvider {
+final class StoriesStore {
     
-    static let shared = StoriesProvider()
+    static let shared = StoriesStore()
     
-    private var stories: [Story] = []
-    private var authors: [StoryAuthor] = []
+    @Published private(set) var stories: [Story] = []
+    @Published private(set) var authors: [StoryAuthor] = []
     
     private init() {
         authors = [StoryAuthor(id: UUID()), StoryAuthor(id: UUID()), StoryAuthor(id: UUID()), StoryAuthor(id: UUID())]
@@ -66,21 +66,39 @@ final class StoriesProvider {
                   content: StoryPageContent(title: "Title 12", text: "Text 12", imageName: "Story2"),
                   watched: false),
         ]
+        sort()
     }
     
-    func watch(story: Story) -> Bool{
+    func watch(story: Story) -> Bool {
         guard let index = stories.firstIndex(where: { $0.id == story.id} ) else {
             return false
         }
         stories[index] = Story(id: story.id, authorID: story.authorID, content: story.content, watched: true)
+        print("markedWatched")
+        print(authors[0].id)
+        print(story.authorID)
+        print(hasNewContent(authors[0]))
         return true
     }
     
-    func fetchStories() -> [Story] {
-        stories
+    func hasNewContent(_ author: StoryAuthor) -> Bool {
+        stories.filter { $0.authorID == author.id}.contains(where: { !$0.watched })
     }
     
-    func author(with id: StoryAuthor.ID) -> StoryAuthor? {
+    func sort() {
+        authors.sort(by: { $0.id < $1.id })
+        let authorsWithNewContent = authors.filter({ hasNewContent($0) })
+        let watchedAuthors = authors.filter({ !hasNewContent($0) })
+        authors = authorsWithNewContent + watchedAuthors
+        stories.sort(by: { $0.id < $1.id} )
+        var sortedStories: [Story] = []
+        for author in authors {
+            sortedStories.append(contentsOf: stories.filter( {$0.authorID == author.id }))
+        }
+        stories = sortedStories
+    }
+    
+    private func author(with id: StoryAuthor.ID) -> StoryAuthor? {
         authors.first(where: { $0.id == id})
     }
     

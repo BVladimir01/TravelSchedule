@@ -6,34 +6,40 @@
 //
 
 import SwiftUI
-
+import Combine
 
 final class StoriesPreviewVM: ObservableObject {
     
-    private let stories: [Story]
-    private let authors: [StoryAuthor]
+    private let storiesStore: StoriesStore
+    private var stories: [Story]
+    private var authors: [StoryAuthor]
     private var onEvent: ((Event) -> ())?
+    private var cancellables = Set<AnyCancellable>()
     
     var authorsWithNewContent: [StoryAuthor] {
-        let ids = Set<StoryAuthor.ID>(stories.filter { !$0.watched }.map { $0.authorID })
-        return authors.filter { ids.contains( $0.id ) }
+        authors.filter { storiesStore.hasNewContent($0) }
     }
     
     var authorsWithoutNewContent: [StoryAuthor] {
-        let ids = Set<StoryAuthor.ID>(stories.filter { !$0.watched }.map { $0.authorID })
-        return authors.filter { !ids.contains( $0.id ) }
+        authors.filter { !storiesStore.hasNewContent($0) }
     }
     
-    init(stories: [Story], authors: [StoryAuthor], onEvent: @escaping (Event) -> Void) {
-        self.stories = stories
-        self.authors = authors.sorted(by: { $0.id < $1.id })
-        self.onEvent = onEvent
+    init(storiesStore: StoriesStore) {
+        self.storiesStore = storiesStore
+        self.stories = storiesStore.stories
+        self.authors = storiesStore.authors
+        subscribeToUpdates()
     }
     
-    init(storiesProvider: StoriesProvider) {
-        stories = storiesProvider.fetchStories()
-        let authorIDs = Array(Set<StoryAuthor.ID>(stories.map { $0.authorID }))
-        authors = authorIDs.compactMap { storiesProvider.author(with: $0)}
+    private func subscribeToUpdates() {
+        storiesStore.$stories
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.stories, on: self)
+            .store(in: &cancellables)
+        storiesStore.$authors
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.authors, on: self)
+            .store(in: &cancellables)
     }
     
     func authorTapped(_ author: StoryAuthor) {

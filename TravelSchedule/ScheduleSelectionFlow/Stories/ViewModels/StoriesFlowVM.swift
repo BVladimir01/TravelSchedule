@@ -40,23 +40,34 @@ final class StoriesFlowVM: ObservableObject {
     
     private let timerConfig = TimerConfiguration(frameRate: 60, duration: 5)
     
-    private var stories: [Story]
-    private var authors: [StoryAuthor]
+    @Published private var stories: [Story]
+    @Published private var authors: [StoryAuthor]
+    
+    private var cancellables = Set<AnyCancellable>()
     
     private var onEvent: ((Event) -> ())?
     
-    private let storiesProvider: StoriesProvider
+    private let storiesStore: StoriesStore
     
-    init(storiesProvider: StoriesProvider) {
-        stories = storiesProvider.fetchStories()
-        let authorIDs = Array(Set<StoryAuthor.ID>(stories.map { $0.authorID }))
-        authors = authorIDs.compactMap { storiesProvider.author(with: $0)}
+    init(storiesStore: StoriesStore) {
         self.currentStoryIndex = 0
         self.currentAuthorIndex = 0
         self.timer = Timer.publish(every: timerConfig.tickInterval, on: .main, in: .common)
-        self.storiesProvider = storiesProvider
-        sortAuthors()
-        sortStories()
+        self.storiesStore = storiesStore
+        self.stories = storiesStore.stories
+        self.authors = storiesStore.authors
+        subscribeToUpdates()
+    }
+    
+    private func subscribeToUpdates() {
+        storiesStore.$stories
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.stories, on: self)
+            .store(in: &cancellables)
+        storiesStore.$authors
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.authors, on: self)
+            .store(in: &cancellables)
     }
     
     func setAuthor(_ author: StoryAuthor) {
@@ -95,6 +106,7 @@ final class StoriesFlowVM: ObservableObject {
     
     func closeView() {
         stopTimer()
+        storiesStore.sort()
         onEvent?(.dismiss)
     }
     
@@ -104,14 +116,9 @@ final class StoriesFlowVM: ObservableObject {
     }
     
     private func showNextStory() {
-        print(currentStoryIndex)
-        if storiesProvider.watch(story: currentStory) {
-            if let index = stories.firstIndex(where: { $0.id == currentStory.id }) {
-                stories[index] = Story(id: currentStory.id,
-                                       authorID: currentStory.authorID,
-                                       content: currentStory.content,
-                                       watched: true)
-            }
+        guard storiesStore.watch(story: currentStory) else {
+            closeView()
+            return
         }
         if currentStoryIndex == stories.count - 1 {
             closeView()
@@ -160,25 +167,6 @@ final class StoriesFlowVM: ObservableObject {
         }
         resetTimer()
         startTimer()
-    }
-    
-    private func sortAuthors() {
-        guard Set(authors.map { $0.id} ).count == authors.count else {
-            fatalError()
-        }
-        authors.sort(by: { $0.id < $1.id })
-        let newAuthors = authors.filter { author($0, hasNewContent: true) }
-        let watchedAuthors = authors.filter { author($0, hasNewContent: false) }
-        authors = newAuthors + watchedAuthors
-    }
-    
-    private func sortStories() {
-        stories.sort(by: { $0.id < $1.id })
-        var newStories: [Story] = []
-        authors.forEach { author in
-            newStories.append(contentsOf: stories(by: author))
-        }
-        stories = newStories
     }
     
     private func startTimer() {

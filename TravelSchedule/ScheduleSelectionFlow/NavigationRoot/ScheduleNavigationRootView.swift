@@ -19,8 +19,8 @@ struct ScheduleNavigationRootView: View {
     // MARK: - Private Properties - State
     
     @StateObject private var threadsViewModel: ThreadsViewModel
-    @StateObject private var storiesPreviewVM = StoriesPreviewVM(storiesProvider: .shared)
-    @StateObject private var storiesFlowVM = StoriesFlowVM(storiesProvider: .shared)
+    @StateObject private var storiesPreviewVM = StoriesPreviewVM(storiesStore: .shared)
+    @StateObject private var storiesFlowVM = StoriesFlowVM(storiesStore: .shared)
     @State private var isShowingStoriesFlow = false
     
     // MARK: - Initializers
