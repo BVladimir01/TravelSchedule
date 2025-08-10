@@ -12,7 +12,7 @@ final class StoriesPreviewVM: ObservableObject {
     
     private let stories: [Story]
     private let authors: [StoryAuthor]
-    private let onEvent: (Event) -> ()
+    private var onEvent: ((Event) -> ())?
     
     var authorsWithNewContent: [StoryAuthor] {
         let ids = Set<StoryAuthor.ID>(stories.filter { !$0.watched }.map { $0.authorID })
@@ -30,15 +30,18 @@ final class StoriesPreviewVM: ObservableObject {
         self.onEvent = onEvent
     }
     
-    init(storiesProvider: StoriesProvider, onEvent: @escaping (Event) -> Void) {
+    init(storiesProvider: StoriesProvider) {
         stories = storiesProvider.fetchStories()
         let authorIDs = Array(Set<StoryAuthor.ID>(stories.map { $0.authorID }))
         authors = authorIDs.compactMap { storiesProvider.author(with: $0)}
-        self.onEvent = onEvent
     }
     
     func authorTapped(_ author: StoryAuthor) {
-        onEvent(.authorTapped(author: author))
+        onEvent?(.authorTapped(author: author))
+    }
+    
+    func setActions(_ actions: @escaping (Event) -> ()) {
+        self.onEvent = actions
     }
     
     func previewStory(of author: StoryAuthor) -> Story? {

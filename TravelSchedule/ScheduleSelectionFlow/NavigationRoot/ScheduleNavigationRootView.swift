@@ -19,6 +19,8 @@ struct ScheduleNavigationRootView: View {
     // MARK: - Private Properties - State
     
     @StateObject private var threadsViewModel: ThreadsViewModel
+    @StateObject private var storiesPreviewVM = StoriesPreviewVM(storiesProvider: .shared)
+    @StateObject private var storiesFlowVM = StoriesFlowVM(storiesProvider: .shared)
     
     // MARK: - Initializers
     
@@ -32,6 +34,7 @@ struct ScheduleNavigationRootView: View {
     var body: some View {
         NavigationStack(path: $viewModel.path) {
             VStack(spacing: .zero) {
+                StoriesPreview(viewModel: storiesPreviewVM)
                 locationsSelector
                     .padding(.top, 20)
                     .padding(.horizontal, 16)
@@ -56,6 +59,20 @@ struct ScheduleNavigationRootView: View {
                 }
             }
             .navigationTitle("TravelSchedule")
+        }
+        .onAppear {
+            storiesPreviewVM.setActions { event in
+                switch event {
+                case .authorTapped(let author):
+                    self.storiesFlowVM.setAuthor(author)
+                }
+            }
+            storiesFlowVM.setActions { event in
+                switch event {
+                case .storyWatched(let story):
+                    break
+                }
+            }
         }
     }
     
