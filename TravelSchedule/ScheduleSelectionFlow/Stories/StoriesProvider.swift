@@ -11,10 +11,50 @@ final class StoriesProvider {
     
     static let shared = StoriesProvider()
     
-    private init() { }
-    
     private var stories: [Story] = []
     private var authors: [StoryAuthor] = []
+    
+    private init() {
+        authors = [StoryAuthor(id: UUID()),StoryAuthor(id: UUID()),StoryAuthor(id: UUID())]
+        stories = [
+            Story(id: UUID(),
+                  authorID: authors[0].id,
+                  content: StoryPageContent(title: "Title 1", text: "Text 1", imageName: "Story1"),
+                  watched: false),
+            Story(id: UUID(),
+                  authorID: authors[0].id,
+                  content: StoryPageContent(title: "Title 2", text: "Text 2", imageName: "Story2"),
+                  watched: false),
+            Story(id: UUID(),
+                  authorID: authors[0].id,
+                  content: StoryPageContent(title: "Title 3", text: "Text 3", imageName: "Story3"),
+                  watched: false),
+            Story(id: UUID(),
+                  authorID: authors[1].id,
+                  content: StoryPageContent(title: "Title 4", text: "Text 4", imageName: "Story4"),
+                  watched: false),
+            Story(id: UUID(),
+                  authorID: authors[1].id,
+                  content: StoryPageContent(title: "Title 5", text: "Text 5", imageName: "Story5"),
+                  watched: false),
+            Story(id: UUID(),
+                  authorID: authors[1].id,
+                  content: StoryPageContent(title: "Title 6", text: "Text 6", imageName: "Story1"),
+                  watched: false),
+            Story(id: UUID(),
+                  authorID: authors[0].id,
+                  content: StoryPageContent(title: "Title 7", text: "Text 7", imageName: "Story2"),
+                  watched: false),
+            Story(id: UUID(),
+                  authorID: authors[0].id,
+                  content: StoryPageContent(title: "Title 8", text: "Text 8", imageName: "Story3"),
+                  watched: false),
+            Story(id: UUID(),
+                  authorID: authors[0].id,
+                  content: StoryPageContent(title: "Title 9", text: "Text 9", imageName: "Story4"),
+                  watched: false),
+        ]
+    }
     
     func watch(story: Story) -> Bool{
         guard let index = stories.firstIndex(where: { $0.id == story.id} ) else {
