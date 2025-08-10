@@ -45,18 +45,22 @@ final class StoriesFlowVM: ObservableObject {
     private var authors: [StoryAuthor]
     
     private let onEvent: (Event) -> ()
-
-    init(currentAuthor: StoryAuthor, stories: [Story], authors: [StoryAuthor], onEvent: @escaping (Event) -> Void) {
+    
+    init(storiesProvider: StoriesProvider, onEvent: @escaping (Event) -> Void) {
+        stories = storiesProvider.fetchStories()
+        let authorIDs = Array(Set<StoryAuthor.ID>(stories.map { $0.authorID }))
+        authors = authorIDs.compactMap { storiesProvider.author(with: $0)}
+        self.onEvent = onEvent
         self.currentStoryIndex = 0
         self.currentAuthorIndex = 0
-        self.stories = stories
-        self.authors = authors
-        self.onEvent = onEvent
         self.timer = Timer.publish(every: timerConfig.tickInterval, on: .main, in: .common)
         sortAuthors()
         sortStories()
-        currentAuthorIndex = authors.firstIndex(where: { $0.id == currentAuthor.id }) ?? 0
-        currentStoryIndex = stories.firstIndex(where: { $0.authorID == currentAuthor.id && !$0.watched} ) ?? 0
+    }
+    
+    func setAuthor(_ author: StoryAuthor) {
+        currentAuthorIndex = authors.firstIndex(where: { $0.id == author.id }) ?? 0
+        currentStoryIndex = stories.firstIndex(where: { $0.authorID == author.id && !$0.watched }) ?? 0
     }
     
     func stories(by author: StoryAuthor) -> [Story] {

@@ -30,6 +30,13 @@ final class StoriesPreviewVM: ObservableObject {
         self.onEvent = onEvent
     }
     
+    init(storiesProvider: StoriesProvider, onEvent: @escaping (Event) -> Void) {
+        stories = storiesProvider.fetchStories()
+        let authorIDs = Array(Set<StoryAuthor.ID>(stories.map { $0.authorID }))
+        authors = authorIDs.compactMap { storiesProvider.author(with: $0)}
+        self.onEvent = onEvent
+    }
+    
     func authorTapped(_ author: StoryAuthor) {
         onEvent(.authorTapped(author: author))
     }
