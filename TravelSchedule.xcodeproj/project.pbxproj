@@ -66,6 +66,7 @@
 		E7CD1F052E45E06B00A88980 /* StoriesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1F042E45E06100A88980 /* StoriesProvider.swift */; };
 		E7CD1F152E46537900A88980 /* ProgressSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1F142E46537900A88980 /* ProgressSegmentView.swift */; };
 		E7CD1F192E4653E700A88980 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1F182E4653E700A88980 /* ProgressBarView.swift */; };
+		E7CD1F392E48DAB400A88980 /* StoriesPreviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1F382E48DAAD00A88980 /* StoriesPreviewCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,6 +128,7 @@
 		E7CD1F042E45E06100A88980 /* StoriesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesProvider.swift; sourceTree = "<group>"; };
 		E7CD1F142E46537900A88980 /* ProgressSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSegmentView.swift; sourceTree = "<group>"; };
 		E7CD1F182E4653E700A88980 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		E7CD1F382E48DAAD00A88980 /* StoriesPreviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesPreviewCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -417,6 +419,7 @@
 				E7CD1EF92E45DE6000A88980 /* StoryPageView.swift */,
 				E7CD1F0D2E46536E00A88980 /* ProgressBarView */,
 				E7CD1EF12E45DE4B00A88980 /* StoriesPreview.swift */,
+				E7CD1F382E48DAAD00A88980 /* StoriesPreviewCard.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				E7CB39712E3A9A0A00099A59 /* CitySelectionView.swift in Sources */,
 				E7CB3A9F2E3B568100099A59 /* Thread.swift in Sources */,
 				E7CB39772E3A9A1100099A59 /* StationSelectionView.swift in Sources */,
+				E7CD1F392E48DAB400A88980 /* StoriesPreviewCard.swift in Sources */,
 				E7CD1EEA2E45DE2C00A88980 /* StoryPageContent.swift in Sources */,
 				E71CAA172E338D67000AFDE0 /* NearestSettlementService.swift in Sources */,
 				E7CD1F052E45E06B00A88980 /* StoriesProvider.swift in Sources */,
