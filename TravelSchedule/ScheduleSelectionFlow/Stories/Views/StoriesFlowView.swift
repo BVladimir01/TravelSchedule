@@ -16,14 +16,34 @@ struct StoriesFlowView: View {
     }
     
     var body: some View {
-        ZStack(alignment: .top) {
-            StoryPageView(story: vm.currentStory.content)
-            ProgressBar(totalSegmentsNumber: vm.currentNumberOfDisplayedStories,
-                        currentSegmentIndex: vm.currentStoryLocalIndex,
-                        spacing: 6,
-                        currentProgress: vm.currentProgress)
-            .frame(height: 6)
-            .padding(.horizontal, 12)
+        GeometryReader { geometry in
+            ZStack(alignment: .top) {
+                StoryPageView(story: vm.currentStory.content)
+                ProgressBar(totalSegmentsNumber: vm.currentNumberOfDisplayedStories,
+                            currentSegmentIndex: vm.currentStoryLocalIndex,
+                            spacing: 6,
+                            currentProgress: vm.currentProgress)
+                .frame(height: 6)
+                .padding(.horizontal, 12)
+            }
+            .gesture(
+                SpatialTapGesture(count: 1)
+                    .onEnded { value in
+                        if value.location.x <= geometry.size.width/2 {
+                            vm.previousStoryTapped()
+                        } else {
+                            vm.nextStoryTapped()
+                        }
+                    }
+            )
+            .gesture(DragGesture()
+                .onEnded { value in
+                    if value.predictedEndTranslation.width > 0 {
+                        vm.didSlideToPreviousAuthor()
+                    } else if value.predictedEndTranslation.width < 0 {
+                        vm.didSlideToNextAuthor()
+                    }
+                })
         }
         .overlay(alignment: .topTrailing) {
             closeButton
