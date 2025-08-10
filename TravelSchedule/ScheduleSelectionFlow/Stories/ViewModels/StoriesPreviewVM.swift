@@ -11,8 +11,8 @@ import Combine
 final class StoriesPreviewVM: ObservableObject {
     
     private let storiesStore: StoriesStore
-    private var stories: [Story]
-    private var authors: [StoryAuthor]
+    @Published private var stories: [Story]
+    @Published private var authors: [StoryAuthor]
     private var onEvent: ((Event) -> ())?
     private var cancellables = Set<AnyCancellable>()
     

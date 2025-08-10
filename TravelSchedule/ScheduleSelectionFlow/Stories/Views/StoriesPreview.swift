@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StoriesPreview: View {
     
-    private let vm: StoriesPreviewVM
+    @ObservedObject private var vm: StoriesPreviewVM
 
     init(viewModel: StoriesPreviewVM) {
         vm = viewModel
@@ -18,8 +18,11 @@ struct StoriesPreview: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack(alignment: .top, spacing: 12) {
-                ForEach(vm.authorsWithNewContent + vm.authorsWithoutNewContent, id: \.id) { author in
-                    renderedPreviewCard(for: author, withNewContent: vm.authorsWithNewContent.contains(where: { $0.id == author.id }))
+                ForEach(vm.authorsWithNewContent, id: \.id) { author in
+                    renderedPreviewCard(for: author, withNewContent: true)
+                }
+                ForEach(vm.authorsWithoutNewContent, id: \.id) { author in
+                    renderedPreviewCard(for: author, withNewContent: false)
                 }
             }
             .padding(.horizontal, 16)
@@ -48,6 +51,6 @@ extension StoriesPreview {
 
 #Preview {
     
-    StoriesPreview(viewModel: StoriesPreviewVM(storiesProvider: .shared))
+    StoriesPreview(viewModel: StoriesPreviewVM(storiesStore: .shared))
         .frame(height: 200)
 }

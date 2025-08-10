@@ -34,7 +34,7 @@ struct StoriesPreviewCard: View {
         .contentShape(RoundedRectangle(cornerRadius: 16))
         .overlay {
             RoundedRectangle(cornerRadius: 16)
-                .strokeBorder(.ypBlue, lineWidth: 4)
+                .strokeBorder(.ypBlue, lineWidth: hasNewContent ? 4 : 0)
         }
     }
     
