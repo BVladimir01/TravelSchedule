@@ -66,6 +66,7 @@
 		E7CD1F152E46537900A88980 /* ProgressSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1F142E46537900A88980 /* ProgressSegmentView.swift */; };
 		E7CD1F192E4653E700A88980 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1F182E4653E700A88980 /* ProgressBarView.swift */; };
 		E7CD1F392E48DAB400A88980 /* StoriesPreviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1F382E48DAAD00A88980 /* StoriesPreviewCard.swift */; };
+		E7CD1FF02E4A01A300A88980 /* StationsSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1FEF2E4A019800A88980 /* StationsSelectorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,6 +128,7 @@
 		E7CD1F142E46537900A88980 /* ProgressSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSegmentView.swift; sourceTree = "<group>"; };
 		E7CD1F182E4653E700A88980 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		E7CD1F382E48DAAD00A88980 /* StoriesPreviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesPreviewCard.swift; sourceTree = "<group>"; };
+		E7CD1FEF2E4A019800A88980 /* StationsSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsSelectorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,7 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				E74DCCA22E3A142A00A0C415 /* ScheduleNavigationViewModel.swift */,
-				E74DCC942E3A133F00A0C415 /* ScheduleNavigationRootView.swift */,
+				E7CD1FEC2E4A00CD00A88980 /* Views */,
 				E7CB3D2F2E413FD600099A59 /* Models */,
 			);
 			path = NavigationRoot;
@@ -430,6 +432,15 @@
 			path = ProgressBarView;
 			sourceTree = "<group>";
 		};
+		E7CD1FEC2E4A00CD00A88980 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E7CD1FEF2E4A019800A88980 /* StationsSelectorView.swift */,
+				E74DCC942E3A133F00A0C415 /* ScheduleNavigationRootView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -534,6 +545,7 @@
 				E71CA9D82E33553D000AFDE0 /* AllStationsService.swift in Sources */,
 				E7CB3B9F2E3CC3DD00099A59 /* DataLoadingState.swift in Sources */,
 				E74DCCA62E3A142E00A0C415 /* ScheduleNavigationViewModel.swift in Sources */,
+				E7CD1FF02E4A01A300A88980 /* StationsSelectorView.swift in Sources */,
 				E7CB3AE52E3B6DF400099A59 /* TimeIntervalUIMapper.swift in Sources */,
 				E7CB3ABA2E3B5EF400099A59 /* ThreadModelUIMapper.swift in Sources */,
 				E7CB39DF2E3B343E00099A59 /* NavigationBackButton.swift in Sources */,

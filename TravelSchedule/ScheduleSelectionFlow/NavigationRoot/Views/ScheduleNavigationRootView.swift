@@ -56,7 +56,7 @@ struct ScheduleNavigationRootView: View {
                 .frame(height: 140)
                 .padding(.vertical, 24)
             VStack(spacing: 16) {
-                locationsSelector
+                stationsSelector
                 if viewModel.searchIsEnabled {
                     searchThreadsButton
                 }
@@ -89,71 +89,16 @@ struct ScheduleNavigationRootView: View {
         }
     }
     
-    private var locationsSelector: some View {
-        HStack(spacing: 16) {
-            textFields
-            swapButton
-        }
-        .padding(16)
-        .background {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(.ypBlue)
-        }
-    }
-    
-    
-    private var textFields: some View {
-            VStack(spacing: 28) {
-                originTextField
-                destinationTextField
+    private var stationsSelector: some View {
+        StationsSelectorView(origin: viewModel.originStation?.title, destination: viewModel.destinationStation?.title) { event in
+            switch event {
+            case .originTapped:
+                viewModel.showCitySelectionView(for: .origin)
+            case .destinationTapped:
+                viewModel.showCitySelectionView(for: .destination)
+            case .swapTapped:
+                viewModel.swapLocationTypes()
             }
-            .padding(.leading, 16)
-            .padding(.trailing, 13)
-            .padding(.vertical, 14)
-            .background {
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(.ypWhiteUniversal)
-                    .frame(height: 96)
-            }
-    }
-    
-    private var originTextField: some View {
-        Button {
-            viewModel.showCitySelectionView(for: .origin)
-        } label: {
-            HStack {
-                Text(viewModel.originStation?.title ?? "Откуда")
-                    .foregroundStyle(viewModel.isDefined(locationType: .origin) ? Color.ypBlackUniversal : Color.ypGray)
-                    .lineLimit(1)
-                Spacer()
-            }
-        }
-    }
-    
-    private var destinationTextField: some View {
-        Button {
-            viewModel.showCitySelectionView(for: .destination)
-        } label: {
-            HStack {
-                Text(viewModel.destinationStation?.title ?? "Куда")
-                    .foregroundStyle(viewModel.isDefined(locationType: .destination) ? Color.ypBlackUniversal : Color.ypGray)
-                    .lineLimit(1)
-                Spacer()
-            }
-        }
-    }
-    
-    private var swapButton: some View {
-        Button {
-            viewModel.swapLocationTypes()
-        } label: {
-            Circle()
-                .fill(.ypWhiteUniversal)
-                .frame(width: 36, height: 36)
-                .overlay {
-                    Image(.сhange)
-                        .tint(.ypBlue)
-                }
         }
     }
     
