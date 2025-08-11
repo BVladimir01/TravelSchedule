@@ -56,7 +56,7 @@ struct SettingsView: View {
     
     private var userAgreementLink: some View {
         NavigationLink {
-            UserAgreementView()
+            UserAgreementPageView()
         } label: {
             HStack(spacing: 4) {
                 Text("Пользовательское соглашение")

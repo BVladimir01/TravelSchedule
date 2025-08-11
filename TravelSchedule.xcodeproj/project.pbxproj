@@ -71,6 +71,8 @@
 		E7CD204A2E4A2BCE00A88980 /* TabSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD20472E4A2BBD00A88980 /* TabSelectionViewModel.swift */; };
 		E7CD205E2E4A338B00A88980 /* ColorSchemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD205D2E4A338000A88980 /* ColorSchemeStore.swift */; };
 		E7CD208C2E4A3DF000A88980 /* UserAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD208B2E4A3DE600A88980 /* UserAgreementView.swift */; };
+		E7CD20F72E4A7E3300A88980 /* UserAgreementUIKitWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD20F52E4A7E2800A88980 /* UserAgreementUIKitWebView.swift */; };
+		E7CD20FB2E4A7E9300A88980 /* UserAgreementPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD20FA2E4A7E8E00A88980 /* UserAgreementPageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,6 +139,8 @@
 		E7CD20472E4A2BBD00A88980 /* TabSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSelectionViewModel.swift; sourceTree = "<group>"; };
 		E7CD205D2E4A338000A88980 /* ColorSchemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemeStore.swift; sourceTree = "<group>"; };
 		E7CD208B2E4A3DE600A88980 /* UserAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgreementView.swift; sourceTree = "<group>"; };
+		E7CD20F52E4A7E2800A88980 /* UserAgreementUIKitWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgreementUIKitWebView.swift; sourceTree = "<group>"; };
+		E7CD20FA2E4A7E8E00A88980 /* UserAgreementPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgreementPageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,8 +241,8 @@
 		E7CB3A2E2E3B536A00099A59 /* SettingsFlow */ = {
 			isa = PBXGroup;
 			children = (
+				E7CD20F32E4A7E1D00A88980 /* UserAgreementView */,
 				E74DCC8B2E3A115C00A0C415 /* SettingsView.swift */,
-				E7CD208B2E4A3DE600A88980 /* UserAgreementView.swift */,
 			);
 			path = SettingsFlow;
 			sourceTree = "<group>";
@@ -509,6 +513,16 @@
 			path = Stores;
 			sourceTree = "<group>";
 		};
+		E7CD20F32E4A7E1D00A88980 /* UserAgreementView */ = {
+			isa = PBXGroup;
+			children = (
+				E7CD20FA2E4A7E8E00A88980 /* UserAgreementPageView.swift */,
+				E7CD20F52E4A7E2800A88980 /* UserAgreementUIKitWebView.swift */,
+				E7CD208B2E4A3DE600A88980 /* UserAgreementView.swift */,
+			);
+			path = UserAgreementView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -602,6 +616,7 @@
 				E7CD1F052E45E06B00A88980 /* StoriesStore.swift in Sources */,
 				E7CB3B742E3CAC8800099A59 /* StationsAndCitiesProvider.swift in Sources */,
 				E7CB3CA92E40FB3900099A59 /* DataFetchingError.swift in Sources */,
+				E7CD20F72E4A7E3300A88980 /* UserAgreementUIKitWebView.swift in Sources */,
 				E7CB3B8F2E3CB5DC00099A59 /* Station.swift in Sources */,
 				E71CAA0D2E3381D8000AFDE0 /* CarrierService.swift in Sources */,
 				E71CA97D2E310F45000AFDE0 /* TabSelectionView.swift in Sources */,
@@ -632,6 +647,7 @@
 				E7CD1EEE2E45DE3900A88980 /* StoryAuthor.swift in Sources */,
 				E74DCC982E3A134D00A0C415 /* ScheduleNavigationRootView.swift in Sources */,
 				E7CD208C2E4A3DF000A88980 /* UserAgreementView.swift in Sources */,
+				E7CD20FB2E4A7E9300A88980 /* UserAgreementPageView.swift in Sources */,
 				E7CB3D922E41ECD500099A59 /* ErrorView.swift in Sources */,
 				E7CD1EE42E45DE2400A88980 /* Story.swift in Sources */,
 				E7CD1F192E4653E700A88980 /* ProgressBarView.swift in Sources */,
