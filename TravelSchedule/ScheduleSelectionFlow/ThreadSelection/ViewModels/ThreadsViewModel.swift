@@ -15,10 +15,13 @@ final class ThreadsViewModel: ObservableObject {
     // MARK: - Internal Properties - State
     
     @Published private(set) var loadingState: DataLoadingState = .idle
-    
+
     @Published var timeSpecifications: Set<TimeInterval>
 
     @Published var allowTransfers = true
+    
+    let origin: Station
+    let destination: Station
     
     // MARK: - Internal Properties
     
@@ -41,19 +44,12 @@ final class ThreadsViewModel: ObservableObject {
     var isSearchSpecified: Bool {
         timeSpecifications.count < allTimeIntervals.count || !allowTransfers
     }
-    
-    var navigationBarTitle: String {
-        "\(origin.title) → \(destination.title)"
-    }
-    
+
     // MARK: - Private Properties - State
     
     @Published private var threads: [Thread] = []
     
     // MARK: - Private Properties
-    
-    private let origin: Station
-    private let destination: Station
     
     private let threadsProvider: ThreadsProvider
     private var pageNumber = 0
@@ -66,33 +62,12 @@ final class ThreadsViewModel: ObservableObject {
         self.destination = destination
         threadsProvider = ThreadsProvider(client: client)
         timeSpecifications = Set(allTimeIntervals)
+        fetchThreads()
     }
     
     // MARK: - Internal Methods
 
     func fetchThreads() {
-        Task {
-            await MainActor.run {
-                loadingState = .loading
-            }
-            do {
-                let newThreads = try await threadsProvider.fetchTreads(from: origin,
-                                                                       to: destination,
-                                                                       pageNumber: pageNumber)
-                await MainActor.run {
-                    threads.append(contentsOf: newThreads)
-                    loadingState = .success
-                }
-            } catch let error as DataFetchingError {
-                await MainActor.run {
-                    print(error)
-                    loadingState = .error(error)
-                }
-            }
-        }
-    }
-    
-    func performInitialFetch() {
         Task {
             await MainActor.run {
                 loadingState = .loading

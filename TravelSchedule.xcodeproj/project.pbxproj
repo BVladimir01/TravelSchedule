@@ -277,11 +277,10 @@
 		E7CB3A842E3B547100099A59 /* ThreadSelection */ = {
 			isa = PBXGroup;
 			children = (
-				E7CB3A982E3B564800099A59 /* ThreadsViewModel.swift */,
-				E7CB39BB2E3AB40300099A59 /* ThreadSelectionView.swift */,
-				E7CB3AD82E3B6CAF00099A59 /* TimeSpecifierView.swift */,
-				E7CB3B1E2E3BEDF600099A59 /* CarrierDetailView.swift */,
+				E7CD20172E4A10DE00A88980 /* Views */,
+				E7CD201D2E4A10EC00A88980 /* ViewModels */,
 				E7CB3D262E413FC600099A59 /* Models */,
+				E7CD20242E4A10F500A88980 /* Services */,
 			);
 			path = ThreadSelection;
 			sourceTree = "<group>";
@@ -299,7 +298,6 @@
 			isa = PBXGroup;
 			children = (
 				E7CB3D182E413F6A00099A59 /* APIModelsMappers */,
-				E7CB3D0D2E413F0400099A59 /* UIModelsMappers */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -346,19 +344,9 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		E7CB3D0D2E413F0400099A59 /* UIModelsMappers */ = {
-			isa = PBXGroup;
-			children = (
-				E7CB3AE22E3B6DEF00099A59 /* TimeIntervalUIMapper.swift */,
-				E7CB3AB92E3B5EEE00099A59 /* ThreadModelUIMapper.swift */,
-			);
-			path = UIModelsMappers;
-			sourceTree = "<group>";
-		};
 		E7CB3D182E413F6A00099A59 /* APIModelsMappers */ = {
 			isa = PBXGroup;
 			children = (
-				E7CB3C0D2E3D03A200099A59 /* APIThreadMapper.swift */,
 				E7CB3B952E3CB9AF00099A59 /* APIStationsAndCitiesMapper.swift */,
 			);
 			path = APIModelsMappers;
@@ -461,6 +449,34 @@
 			isa = PBXGroup;
 			children = (
 				E7CD1F042E45E06100A88980 /* StoriesStore.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E7CD20172E4A10DE00A88980 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E7CB39BB2E3AB40300099A59 /* ThreadSelectionView.swift */,
+				E7CB3AD82E3B6CAF00099A59 /* TimeSpecifierView.swift */,
+				E7CB3B1E2E3BEDF600099A59 /* CarrierDetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E7CD201D2E4A10EC00A88980 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E7CB3A982E3B564800099A59 /* ThreadsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E7CD20242E4A10F500A88980 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E7CB3C0D2E3D03A200099A59 /* APIThreadMapper.swift */,
+				E7CB3AB92E3B5EEE00099A59 /* ThreadModelUIMapper.swift */,
+				E7CB3AE22E3B6DEF00099A59 /* TimeIntervalUIMapper.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";

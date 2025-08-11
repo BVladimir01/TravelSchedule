@@ -25,7 +25,6 @@ struct ThreadSelectionView: View {
     
     init(viewModel: ThreadsViewModel) {
         self.viewModel = viewModel
-        viewModel.performInitialFetch()
     }
     
     // MARK: - Views
@@ -113,7 +112,7 @@ struct ThreadSelectionView: View {
     }
     
     private var titleLabel: some View {
-        Text(viewModel.navigationBarTitle)
+        Text("\(viewModel.origin.title) → \(viewModel.destination.title)")
             .foregroundStyle(.ypBlack)
             .font(.system(size: 24, weight: .bold))
     }
