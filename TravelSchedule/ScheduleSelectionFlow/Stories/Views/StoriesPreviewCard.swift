@@ -43,6 +43,7 @@ struct StoriesPreviewCard: View {
             RoundedRectangle(cornerRadius: 16)
                 .strokeBorder(.ypBlue, lineWidth: hasNewContent ? 4 : 0)
         }
+        .opacity(hasNewContent ? 1 : 0.5)
     }
     
 }
