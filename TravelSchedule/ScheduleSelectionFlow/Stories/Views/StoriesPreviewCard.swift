@@ -7,15 +7,22 @@
 
 import SwiftUI
 
+// MARK: - StoriesPreviewCard
 struct StoriesPreviewCard: View {
+    
+    // MARK: - Private Properties
     
     private let story: StoryPageContent
     private let hasNewContent: Bool
+    
+    // MARK: - Initializer
     
     init(story: StoryPageContent, hasNewContent: Bool) {
         self.story = story
         self.hasNewContent = hasNewContent
     }
+    
+    // MARK: - Views
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {

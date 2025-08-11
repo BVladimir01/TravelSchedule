@@ -1,5 +1,5 @@
 //
-//  ProgressBar.swift
+//  ProgressBarView.swift
 //  StoriesViewPractice
 //
 //  Created by Vladimir on 06.08.2025.
@@ -8,12 +8,17 @@
 import SwiftUI
 
 
-struct ProgressBar: View {
+// MARK: - ProgressBarView
+struct ProgressBarView: View {
+    
+    // MARK: - Private Properties
     
     private let totalSegmentsNumber: Int
     private let currentSegmentIndex: Int
     private let spacing: Double
     private let currentProgress: Double
+    
+    // MARK: - Initializer
     
     init(totalSegmentsNumber: Int, currentSegmentIndex: Int, spacing: Double, currentProgress: Double) {
         self.totalSegmentsNumber = totalSegmentsNumber
@@ -21,6 +26,8 @@ struct ProgressBar: View {
         self.spacing = spacing
         self.currentProgress = currentProgress
     }
+    
+    // MARK: - Views
     
     var body: some View {
         HStack(spacing: spacing) {
@@ -46,7 +53,7 @@ struct ProgressBar: View {
 #Preview {
     Color.black
         .overlay {
-            ProgressBar(totalSegmentsNumber: 6,
+            ProgressBarView(totalSegmentsNumber: 6,
                         currentSegmentIndex: 3,
                         spacing: 10,
                         currentProgress: 0.5)

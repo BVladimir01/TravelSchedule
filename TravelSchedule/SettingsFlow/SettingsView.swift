@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-
+// MARK: - SettingsView
 struct SettingsView: View {
 
     // MARK: - Private Properties

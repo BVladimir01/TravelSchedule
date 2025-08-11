@@ -7,13 +7,21 @@
 
 import SwiftUI
 
+
+// MARK: - StoriesPreview
 struct StoriesPreview: View {
+    
+    // MARK: - Private Properties
     
     @ObservedObject private var vm: StoriesPreviewVM
 
+    // MARK: - Initializer
+    
     init(viewModel: StoriesPreviewVM) {
         vm = viewModel
     }
+    
+    // MARK: - Views
     
     var body: some View {
         ScrollView(.horizontal) {

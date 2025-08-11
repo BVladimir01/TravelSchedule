@@ -20,10 +20,10 @@ final class ThreadsViewModel: ObservableObject {
 
     @Published var allowTransfers = true
     
+    // MARK: - Internal Properties
+    
     let origin: Station
     let destination: Station
-    
-    // MARK: - Internal Properties
     
     let allTimeIntervals = [
         TimeInterval(start: RelativeTimePoint(hour: 6, minute: 0), end: RelativeTimePoint(hour: 12, minute: 0), description: "Утро"),

@@ -7,13 +7,21 @@
 
 import SwiftUI
 
+
+// MARK: - StoryPageView
 struct StoryPageView: View {
     
+    // MARK: - Private Properties
+    
     private let story: StoryPageContent
+    
+    // MARK: - Initializer
     
     init(story: StoryPageContent) {
         self.story = story
     }
+    
+    // MARK: - Views
     
     var body: some View {
         GeometryReader { geometry in

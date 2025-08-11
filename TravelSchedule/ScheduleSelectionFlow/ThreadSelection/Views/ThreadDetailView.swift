@@ -7,13 +7,21 @@
 
 import SwiftUI
 
+
+// MARK: - ThreadDetailView
 struct ThreadDetailView: View {
     
+    // MARK: - Private Properties
+    
     private let thread: ThreadUIModel
+    
+    // MARK: - Initializer
     
     init(thread: ThreadUIModel) {
         self.thread = thread
     }
+    
+    // MARK: - Views
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {

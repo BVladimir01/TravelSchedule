@@ -7,13 +7,21 @@
 
 import SwiftUI
 
+
+// MARK: - ProgressSegmentView
 struct ProgressSegmentView: View {
     
+    // MARK: - Private Properties
+    
     private let progress: Double
+    
+    // MARK: - Initializer
     
     init(progress: Double) {
         self.progress = progress
     }
+    
+    // MARK: - Views
     
     var body: some View {
         GeometryReader { geometry in

@@ -7,17 +7,25 @@
 
 import SwiftUI
 
+
+// MARK: - StationsSelectorView
 struct StationsSelectorView: View {
+    
+    // MARK: - Private Properties
     
     private let origin: String?
     private let destination: String?
     private let onEvent: (Event) -> ()
+    
+    // MARK: - Initializer
     
     init(origin: String?, destination: String?, onEvent: @escaping (Event) -> Void) {
         self.origin = origin
         self.destination = destination
         self.onEvent = onEvent
     }
+    
+    // MARK: - Views
     
     var body: some View {
         HStack(spacing: 16) {
@@ -73,7 +81,6 @@ struct StationsSelectorView: View {
         }
     }
     
-    
     private var swapButton: some View {
         Button {
             onEvent(.swapTapped)
@@ -88,12 +95,16 @@ struct StationsSelectorView: View {
         }
     }
     
+    // MARK: - Private Methods
+    
     private func isDefined(_ place: String?) -> Bool {
         if place == nil { false } else { true }
     }
     
 }
 
+
+// MARK: Event
 extension StationsSelectorView {
     enum Event {
         case originTapped, destinationTapped, swapTapped

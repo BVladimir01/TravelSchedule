@@ -7,14 +7,23 @@
 
 import Foundation
 
+
+// MARK: - StoriesStore
 final class StoriesStore {
     
+    // MARK: - Internal Properties
+    
     static let shared = StoriesStore()
+    
+    // MARK: - Internal Properties - State
     
     @Published private(set) var stories: [Story] = []
     @Published private(set) var authors: [StoryAuthor] = []
     
+    // MARK: - Initializer
+    
     private init() {
+        // mock data
         authors = [StoryAuthor(id: UUID()), StoryAuthor(id: UUID()), StoryAuthor(id: UUID()), StoryAuthor(id: UUID())]
         stories = [
             Story(id: UUID(),
@@ -69,6 +78,8 @@ final class StoriesStore {
         sort()
     }
     
+    // MARK: - Internal Methods
+    
     func watch(story: Story) -> Bool {
         guard let index = stories.firstIndex(where: { $0.id == story.id} ) else {
             return false
@@ -92,10 +103,6 @@ final class StoriesStore {
             sortedStories.append(contentsOf: stories.filter( {$0.authorID == author.id }))
         }
         stories = sortedStories
-    }
-    
-    private func author(with id: StoryAuthor.ID) -> StoryAuthor? {
-        authors.first(where: { $0.id == id})
     }
     
 }

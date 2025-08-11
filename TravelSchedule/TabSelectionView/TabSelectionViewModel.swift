@@ -7,10 +7,16 @@
 
 import SwiftUI
 
+// MARK: - TabSelectionViewModel
+
 final class TabSelectionViewModel: ObservableObject {
+    
+    // MARK: - Internal Properties
     
     @Published var currentTab: Tab = .scheduleSelection
     let scheduleNavigationVM: ScheduleNavigationViewModel
+    
+    // MARK: - Initializer
     
     init(client: APIProtocol) {
         scheduleNavigationVM = ScheduleNavigationViewModel(client: client)
@@ -18,6 +24,8 @@ final class TabSelectionViewModel: ObservableObject {
     
 }
 
+
+// MARK: - Tab
 extension TabSelectionViewModel {
     enum Tab {
         case scheduleSelection, settings

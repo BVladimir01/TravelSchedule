@@ -8,7 +8,11 @@
 import SwiftUI
 import Combine
 
+
+// MARK: - StoriesFlowVM
 final class StoriesFlowVM: ObservableObject {
+    
+    // MARK: - InternalProperties
     
     var currentStory: Story {
         stories[currentStoryIndex]
@@ -16,10 +20,6 @@ final class StoriesFlowVM: ObservableObject {
 
     var currentAuthor: StoryAuthor {
         authors[currentAuthorIndex]
-    }
-    
-    var numberOfDisplayedStories: Int {
-        stories.filter { $0.authorID == currentAuthor.id }.count
     }
     
     var currentStoryLocalIndex: Int {
@@ -30,24 +30,30 @@ final class StoriesFlowVM: ObservableObject {
         stories(by: currentAuthor).count
     }
     
+    // MARK: - Internal Properties - State
+    
     @Published var currentProgress: Double = 0
+    
+    // MARK: - Private Properties - State
     
     @Published private var currentStoryIndex: Int
     @Published private var currentAuthorIndex: Int
+    @Published private var stories: [Story]
+    @Published private var authors: [StoryAuthor]
+    
+    // MARK: - Private Properties
     
     private var timer: Timer.TimerPublisher
     private var cancellable: Cancellable?
-    
     private let timerConfig = TimerConfiguration(frameRate: 60, duration: 5)
-    
-    @Published private var stories: [Story]
-    @Published private var authors: [StoryAuthor]
     
     private var cancellables = Set<AnyCancellable>()
     
     private var onEvent: ((Event) -> ())?
     
     private let storiesStore: StoriesStore
+    
+    // MARK: - Initializer
     
     init(storiesStore: StoriesStore) {
         self.currentStoryIndex = 0
@@ -59,16 +65,7 @@ final class StoriesFlowVM: ObservableObject {
         subscribeToUpdates()
     }
     
-    private func subscribeToUpdates() {
-        storiesStore.$stories
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.stories, on: self)
-            .store(in: &cancellables)
-        storiesStore.$authors
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.authors, on: self)
-            .store(in: &cancellables)
-    }
+    // MARK: - Internal Methods
     
     func setAuthor(_ author: StoryAuthor) {
         currentAuthorIndex = authors.firstIndex(where: { $0.id == author.id }) ?? 0
@@ -110,6 +107,8 @@ final class StoriesFlowVM: ObservableObject {
         resetTimer()
         startTimer()
     }
+    
+    // MARK: Private Methods - Intentions
     
     private func showNextStory() {
         guard storiesStore.watch(story: currentStory) else {
@@ -167,6 +166,19 @@ final class StoriesFlowVM: ObservableObject {
         startTimer()
     }
     
+    // MARK: - Private Methods - Helpers
+    
+    private func subscribeToUpdates() {
+        storiesStore.$stories
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.stories, on: self)
+            .store(in: &cancellables)
+        storiesStore.$authors
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.authors, on: self)
+            .store(in: &cancellables)
+    }
+    
     private func assignCurrentStoryIndex() {
         currentStoryIndex = (stories.firstIndex(where: { $0.authorID == currentAuthor.id && !$0.watched }) ??
                              stories.firstIndex(where: { $0.authorID == currentAuthor.id }) ?? 0)
@@ -203,12 +215,14 @@ final class StoriesFlowVM: ObservableObject {
     
 }
 
+// MARK: - Event
 extension StoriesFlowVM {
     enum Event {
         case dismiss
     }
 }
 
+// MARK: - TimerConfiguration
 extension StoriesFlowVM {
     
     struct TimerConfiguration {

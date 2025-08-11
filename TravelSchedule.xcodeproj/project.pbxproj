@@ -267,7 +267,6 @@
 				E7CD1FEC2E4A00CD00A88980 /* Views */,
 				E7CD1FF92E4A0A9400A88980 /* ViewModels */,
 				E7CB3D2F2E413FD600099A59 /* Models */,
-				E7CD1FFC2E4A0A9E00A88980 /* Services */,
 			);
 			path = NavigationRoot;
 			sourceTree = "<group>";
@@ -311,7 +310,7 @@
 		E7CB3AB82E3B5EE800099A59 /* Mappers */ = {
 			isa = PBXGroup;
 			children = (
-				E7CB3D182E413F6A00099A59 /* APIModelsMappers */,
+				E7CB3B952E3CB9AF00099A59 /* APIStationsAndCitiesMapper.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -356,14 +355,6 @@
 				E7CB3CA82E40FB3400099A59 /* DataFetchingError.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		E7CB3D182E413F6A00099A59 /* APIModelsMappers */ = {
-			isa = PBXGroup;
-			children = (
-				E7CB3B952E3CB9AF00099A59 /* APIStationsAndCitiesMapper.swift */,
-			);
-			path = APIModelsMappers;
 			sourceTree = "<group>";
 		};
 		E7CB3D262E413FC600099A59 /* Models */ = {
@@ -450,13 +441,6 @@
 				E74DCCA22E3A142A00A0C415 /* ScheduleNavigationViewModel.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		E7CD1FFC2E4A0A9E00A88980 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		E7CD20012E4A0AA900A88980 /* Services */ = {

@@ -7,13 +7,21 @@
 
 import SwiftUI
 
+
+// MARK: - StoriesFlowView
 struct StoriesFlowView: View {
     
+    // MARK: - Private Properties
+    
     @ObservedObject private var vm: StoriesFlowVM
+    
+    // MARK: - Initializer
     
     init(vm: StoriesFlowVM) {
         self.vm = vm
     }
+    
+    // MARK: - Views
     
     var body: some View {
         GeometryReader { geometry in
@@ -21,7 +29,7 @@ struct StoriesFlowView: View {
                 Color.ypBlackUniversal.ignoresSafeArea()
                 StoryPageView(story: vm.currentStory.content)
                     .clipShape(RoundedRectangle(cornerRadius: 40))
-                ProgressBar(totalSegmentsNumber: vm.currentNumberOfDisplayedStories,
+                ProgressBarView(totalSegmentsNumber: vm.currentNumberOfDisplayedStories,
                             currentSegmentIndex: vm.currentStoryLocalIndex,
                             spacing: 6,
                             currentProgress: vm.currentProgress)
