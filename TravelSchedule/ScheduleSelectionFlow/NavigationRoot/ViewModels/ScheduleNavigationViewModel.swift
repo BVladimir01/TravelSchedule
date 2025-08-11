@@ -14,8 +14,12 @@ final class ScheduleNavigationViewModel: ObservableObject {
     // MARK: - Internal Properties
     
     private(set) var threadSelectionVM: ThreadsViewModel?
-    let storiesFlowVM = StoriesFlowVM(storiesStore: .shared)
-    let storiesPreviewVM = StoriesPreviewVM(storiesStore: .shared)
+    private(set) var storiesFlowVM: StoriesFlowVM?
+    private(set) lazy var storiesPreviewVM: StoriesPreviewVM = {
+        StoriesPreviewVM(storiesStore: .shared, onAuthorSelection: { [weak self] author in
+            self?.storyTapped(with: author)
+        })
+    }()
     
     // MARK: - Internal Properties - State
     
@@ -48,6 +52,7 @@ final class ScheduleNavigationViewModel: ObservableObject {
     
     private let client: APIProtocol
     private let stationsAndCitiesProvider: StationsAndCitiesProvider
+    private var selectedAuthor: StoryAuthor?
     
     // MARK: - Initializers
     
@@ -55,19 +60,6 @@ final class ScheduleNavigationViewModel: ObservableObject {
         self.client = client
         stationsAndCitiesProvider = StationsAndCitiesProvider(client: client)
         fetchCitiesAndStations()
-        storiesFlowVM.setActions { [weak self] event in
-            switch event {
-            case .dismiss:
-                self?.isShowingStories = false
-            }
-        }
-        storiesPreviewVM.setActions { [weak self] event in
-            switch event {
-            case .authorTapped(let author):
-                self?.storiesFlowVM.setAuthor(author)
-                self?.isShowingStories = true
-            }
-        }
     }
     
     // MARK: Internal Methods
@@ -153,6 +145,15 @@ final class ScheduleNavigationViewModel: ObservableObject {
               let destination = destinationStation else { return }
         threadSelectionVM = ThreadsViewModel(origin: origin, destination: destination, client: client)
         path.append(.threadSelection)
+    }
+    
+    // MARK: - Private Methods
+    
+    func storyTapped(with author: StoryAuthor) {
+        storiesFlowVM = StoriesFlowVM(storiesStore: .shared, author: author, onDismiss: { [weak self] in
+            self?.isShowingStories = false
+        })
+        isShowingStories = true
     }
 
 }

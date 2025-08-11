@@ -17,8 +17,8 @@ struct StoriesFlowView: View {
     
     // MARK: - Initializer
     
-    init(vm: StoriesFlowVM) {
-        self.vm = vm
+    init(viewModel: StoriesFlowVM) {
+        self.vm = viewModel
     }
     
     // MARK: - Views

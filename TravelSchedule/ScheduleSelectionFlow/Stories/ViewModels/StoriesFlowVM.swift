@@ -49,34 +49,26 @@ final class StoriesFlowVM: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
-    private var onEvent: ((Event) -> ())?
+    private var onDismiss: () -> ()
     
     private let storiesStore: StoriesStore
     
     // MARK: - Initializer
     
-    init(storiesStore: StoriesStore) {
+    init(storiesStore: StoriesStore, author: StoryAuthor, onDismiss: @escaping () -> ()) {
         self.currentStoryIndex = 0
         self.currentAuthorIndex = 0
         self.timer = Timer.publish(every: timerConfig.tickInterval, on: .main, in: .common)
         self.storiesStore = storiesStore
         self.stories = storiesStore.stories
         self.authors = storiesStore.authors
+        self.onDismiss = onDismiss
+        setAuthor(author)
         subscribeToUpdates()
     }
     
     // MARK: - Internal Methods
-    
-    func setAuthor(_ author: StoryAuthor) {
-        currentAuthorIndex = authors.firstIndex(where: { $0.id == author.id }) ?? 0
-        currentStoryIndex = (stories.firstIndex(where: { $0.authorID == author.id && !$0.watched }) ??
-                             stories.firstIndex(where: { $0.authorID == author.id }) ?? 0)
-    }
-    
-    func setActions(_ actions: @escaping (Event) -> ()) {
-        self.onEvent = actions
-    }
-    
+
     func stories(by author: StoryAuthor) -> [Story] {
         stories.filter { $0.authorID == author.id }
     }
@@ -100,7 +92,7 @@ final class StoriesFlowVM: ObservableObject {
     func closeView() {
         stopTimer()
         storiesStore.sort()
-        onEvent?(.dismiss)
+        onDismiss()
     }
     
     func viewAppeared() {
@@ -179,6 +171,12 @@ final class StoriesFlowVM: ObservableObject {
             .store(in: &cancellables)
     }
     
+    private func setAuthor(_ author: StoryAuthor) {
+        currentAuthorIndex = authors.firstIndex(where: { $0.id == author.id }) ?? 0
+        currentStoryIndex = (stories.firstIndex(where: { $0.authorID == author.id && !$0.watched }) ??
+                             stories.firstIndex(where: { $0.authorID == author.id }) ?? 0)
+    }
+    
     private func assignCurrentStoryIndex() {
         currentStoryIndex = (stories.firstIndex(where: { $0.authorID == currentAuthor.id && !$0.watched }) ??
                              stories.firstIndex(where: { $0.authorID == currentAuthor.id }) ?? 0)
@@ -213,13 +211,6 @@ final class StoriesFlowVM: ObservableObject {
         stories.filter { $0.authorID == author.id}.contains(where: { !$0.watched }) == hasNewContent
     }
     
-}
-
-// MARK: - Event
-extension StoriesFlowVM {
-    enum Event {
-        case dismiss
-    }
 }
 
 // MARK: - TimerConfiguration

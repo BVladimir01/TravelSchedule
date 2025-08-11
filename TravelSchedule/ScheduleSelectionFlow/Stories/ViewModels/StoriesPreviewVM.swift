@@ -30,24 +30,21 @@ final class StoriesPreviewVM: ObservableObject {
     // MARK: - Private Properties
     
     private let storiesStore: StoriesStore
-    private var onEvent: ((Event) -> ())?
+    private var onAuthorSelection: (StoryAuthor) -> ()
     private var cancellables = Set<AnyCancellable>()
 
-    init(storiesStore: StoriesStore) {
+    init(storiesStore: StoriesStore, onAuthorSelection: @escaping (StoryAuthor) -> ()) {
         self.storiesStore = storiesStore
         self.stories = storiesStore.stories
         self.authors = storiesStore.authors
+        self.onAuthorSelection = onAuthorSelection
         subscribeToUpdates()
     }
     
     // MARK: - Internal Methods
     
     func authorTapped(_ author: StoryAuthor) {
-        onEvent?(.authorTapped(author: author))
-    }
-    
-    func setActions(_ actions: @escaping (Event) -> ()) {
-        self.onEvent = actions
+        onAuthorSelection(author)
     }
     
     func previewStory(of author: StoryAuthor) -> Story? {
@@ -67,12 +64,4 @@ final class StoriesPreviewVM: ObservableObject {
             .store(in: &cancellables)
     }
     
-}
-
-
-// MARK: - Event
-extension StoriesPreviewVM {
-    enum Event {
-        case authorTapped(author: StoryAuthor)
-    }
 }

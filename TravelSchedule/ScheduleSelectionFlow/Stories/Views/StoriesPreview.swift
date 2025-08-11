@@ -59,6 +59,6 @@ extension StoriesPreview {
 
 #Preview {
     
-    StoriesPreview(viewModel: StoriesPreviewVM(storiesStore: .shared))
+    StoriesPreview(viewModel: StoriesPreviewVM(storiesStore: .shared, onAuthorSelection: { _ in }))
         .frame(height: 200)
 }

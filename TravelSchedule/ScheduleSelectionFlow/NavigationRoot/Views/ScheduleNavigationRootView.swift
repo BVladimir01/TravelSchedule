@@ -62,7 +62,9 @@ struct ScheduleNavigationRootView: View {
             Spacer()
         }
         .fullScreenCover(isPresented: $viewModel.isShowingStories) {
-            StoriesFlowView(vm: viewModel.storiesFlowVM)
+            if let vm = viewModel.storiesFlowVM {
+                StoriesFlowView(viewModel: vm)
+            }
         }
     }
     
