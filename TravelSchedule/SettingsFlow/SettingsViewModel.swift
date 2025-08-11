@@ -11,6 +11,7 @@ import Combine
 final class SettingsViewModel: ObservableObject {
     
     @Published var isUsingDarkTheme: Bool
+    @Published var isPresentingUserAgreement =  false
     
     private let themeStore: ColorSchemeStore
     private var cancellable: Cancellable?
