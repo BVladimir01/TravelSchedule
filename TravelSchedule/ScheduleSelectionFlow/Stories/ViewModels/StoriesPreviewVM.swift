@@ -58,5 +58,4 @@ final class StoriesPreviewVM: ObservableObject {
         case authorTapped(author: StoryAuthor)
     }
     
-    
 }

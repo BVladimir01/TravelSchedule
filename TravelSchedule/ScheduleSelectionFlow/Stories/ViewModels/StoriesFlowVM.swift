@@ -84,12 +84,7 @@ final class StoriesFlowVM: ObservableObject {
         stories.filter { $0.authorID == author.id }
     }
     
-    func storyWatched(story: Story) {
-        showNextStory()
-    }
-    
     func nextStoryTapped() {
-        onEvent?(.storyWatched(story: currentStory))
         showNextStory()
     }
     
@@ -210,7 +205,6 @@ final class StoriesFlowVM: ObservableObject {
 
 extension StoriesFlowVM {
     enum Event {
-        case storyWatched(story: Story)
         case dismiss
     }
 }

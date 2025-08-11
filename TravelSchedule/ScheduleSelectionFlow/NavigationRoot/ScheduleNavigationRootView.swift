@@ -61,8 +61,6 @@ struct ScheduleNavigationRootView: View {
             }
             storiesFlowVM.setActions { event in
                 switch event {
-                case .storyWatched(let story):
-                    break
                 case .dismiss:
                     isShowingStoriesFlow = false
                 }
