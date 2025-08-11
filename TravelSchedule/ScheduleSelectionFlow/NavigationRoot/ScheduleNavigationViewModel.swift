@@ -22,6 +22,11 @@ final class ScheduleNavigationViewModel: ObservableObject {
     
     @Published var path: [PageType] = []
     
+    @Published var isShowingStories = false
+    
+    var storiesFlowVM = StoriesFlowVM(storiesStore: .shared)
+    var storiesPreviewVM = StoriesPreviewVM(storiesStore: .shared)
+    
     // MARK: - Internal Properties - Computed
     
     var cities: [City] {
@@ -45,6 +50,19 @@ final class ScheduleNavigationViewModel: ObservableObject {
     init(client: APIProtocol) {
         stationsAndCitiesProvider = StationsAndCitiesProvider(client: client)
         fetchCitiesAndStations()
+        storiesFlowVM.setActions { [weak self] event in
+            switch event {
+            case .dismiss:
+                self?.isShowingStories = false
+            }
+        }
+        storiesPreviewVM.setActions { [weak self] event in
+            switch event {
+            case .authorTapped(let author):
+                self?.storiesFlowVM.setAuthor(author)
+                self?.isShowingStories = true
+            }
+        }
     }
     
     // MARK: Internal Methods

@@ -19,9 +19,6 @@ struct ScheduleNavigationRootView: View {
     // MARK: - Private Properties - State
     
     @StateObject private var threadsViewModel: ThreadsViewModel
-    @StateObject private var storiesPreviewVM = StoriesPreviewVM(storiesStore: .shared)
-    @StateObject private var storiesFlowVM = StoriesFlowVM(storiesStore: .shared)
-    @State private var isShowingStoriesFlow = false
     
     // MARK: - Initializers
     
@@ -51,26 +48,11 @@ struct ScheduleNavigationRootView: View {
             }
             .navigationTitle("TravelSchedule")
         }
-        .onAppear {
-            storiesPreviewVM.setActions { event in
-                switch event {
-                case .authorTapped(let author):
-                    self.storiesFlowVM.setAuthor(author)
-                    isShowingStoriesFlow = true
-                }
-            }
-            storiesFlowVM.setActions { event in
-                switch event {
-                case .dismiss:
-                    isShowingStoriesFlow = false
-                }
-            }
-        }
     }
     
     private var content: some View {
         VStack(spacing: 20) {
-            StoriesPreview(viewModel: storiesPreviewVM)
+            StoriesPreview(viewModel: viewModel.storiesPreviewVM)
                 .frame(height: 140)
                 .padding(.vertical, 24)
             VStack(spacing: 16) {
@@ -82,8 +64,8 @@ struct ScheduleNavigationRootView: View {
             .padding(.horizontal, 16)
             Spacer()
         }
-        .fullScreenCover(isPresented: $isShowingStoriesFlow) {
-            StoriesFlowView(vm: storiesFlowVM)
+        .fullScreenCover(isPresented: $viewModel.isShowingStories) {
+            StoriesFlowView(vm: viewModel.storiesFlowVM)
         }
     }
     
