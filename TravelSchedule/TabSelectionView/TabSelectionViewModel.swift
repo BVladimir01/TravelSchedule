@@ -11,11 +11,9 @@ final class TabSelectionViewModel: ObservableObject {
     
     @Published var currentTab: Tab = .scheduleSelection
     let scheduleNavigationVM: ScheduleNavigationViewModel
-    let settingsVM: SettingsViewModel
     
     init(client: APIProtocol) {
         scheduleNavigationVM = ScheduleNavigationViewModel(client: client)
-        settingsVM = SettingsViewModel(themeStore: .shared)
     }
     
 }

@@ -8,20 +8,11 @@
 import SwiftUI
 
 
-final class ColorSchemeStore {
-    
-    var isDarkTheme: Bool {
-        get {
-            isDarkThemeStored
-        }
-        set {
-            isDarkThemeStored = newValue
-        }
-    }
+final class ColorSchemeStore: ObservableObject {
     
     static let shared = ColorSchemeStore()
     
-    @AppStorage(storageKey) private var isDarkThemeStored = false
+    @AppStorage(storageKey) var isDarkTheme = false
     
     private static let storageKey = "isDarkTheme"
     

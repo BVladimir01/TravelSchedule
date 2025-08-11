@@ -12,10 +12,13 @@ import OpenAPIURLSession
 struct TravelScheduleApp: App {
     
     @StateObject private var tabSelectionVM: TabSelectionViewModel
+    @StateObject private var colorSchemeStore = ColorSchemeStore.shared
     
     var body: some Scene {
         WindowGroup {
             MainView(viewModel: tabSelectionVM)
+                .environmentObject(ColorSchemeStore.shared)
+                .preferredColorScheme(colorSchemeStore.isDarkTheme ? .dark : .light)
         }
     }
     

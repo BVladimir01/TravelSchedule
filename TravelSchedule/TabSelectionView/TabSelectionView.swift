@@ -49,7 +49,7 @@ struct MainView: View {
                     Image(.schedule)
                 }
             .tag(TabSelectionViewModel.Tab.scheduleSelection)
-            SettingsView(viewModel: vm.settingsVM)
+            SettingsView()
                 .tabItem {
                     Image(.settings)
                 }

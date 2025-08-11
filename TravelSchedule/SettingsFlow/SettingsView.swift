@@ -11,12 +11,8 @@ import SwiftUI
 struct SettingsView: View {
 
     // MARK: - Private Properties
-    
-    @ObservedObject private var vm: SettingsViewModel
-    
-    init(viewModel: SettingsViewModel) {
-        self.vm = viewModel
-    }
+
+    @EnvironmentObject private var themeStore: ColorSchemeStore
     
     // MARK: - Views
     
@@ -48,7 +44,7 @@ struct SettingsView: View {
     
     private var darkThemeToggle: some View {
         HStack(spacing: .zero) {
-            Toggle(isOn: $vm.isUsingDarkTheme) {
+            Toggle(isOn: $themeStore.isDarkTheme) {
                 Text("Темная тема")
                     .foregroundStyle(.ypBlack)
                     .font(.system(size: 17, weight: .regular))
@@ -91,5 +87,5 @@ struct SettingsView: View {
 
 
 #Preview {
-    SettingsView(viewModel: SettingsViewModel(themeStore: .shared))
+    SettingsView()
 }
