@@ -18,13 +18,16 @@ struct StoriesFlowView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .top) {
+                Color.ypBlackUniversal.ignoresSafeArea()
                 StoryPageView(story: vm.currentStory.content)
+                    .clipShape(RoundedRectangle(cornerRadius: 40))
                 ProgressBar(totalSegmentsNumber: vm.currentNumberOfDisplayedStories,
                             currentSegmentIndex: vm.currentStoryLocalIndex,
                             spacing: 6,
                             currentProgress: vm.currentProgress)
                 .frame(height: 6)
                 .padding(.horizontal, 12)
+                .padding(.top, 28)
             }
             .gesture(
                 SpatialTapGesture(count: 1)
