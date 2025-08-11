@@ -40,10 +40,11 @@ struct StoriesPreview: View {
     
     private func renderedPreviewCard(for author: StoryAuthor, withNewContent: Bool) -> some View {
         let storyContent = vm.previewStory(of: author)?.content ?? StoryPageContent(title: "", text: "", imageName: "")
-        return StoriesPreviewCard(story: storyContent, hasNewContent: withNewContent)
-            .onTapGesture {
-                vm.authorTapped(author)
-            }
+        return Button {
+            vm.authorTapped(author)
+        } label: {
+            StoriesPreviewCard(story: storyContent, hasNewContent: withNewContent)
+        }
     }
     
 }
