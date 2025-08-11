@@ -382,10 +382,10 @@
 		E7CD1ECE2E45DDC000A88980 /* Stories */ = {
 			isa = PBXGroup;
 			children = (
-				E7CD1F042E45E06100A88980 /* StoriesStore.swift */,
 				E7CD1EF02E45DE4600A88980 /* Views */,
-				E7CD1EE22E45DE1900A88980 /* Models */,
 				E7CD1ECF2E45DDD300A88980 /* ViewModels */,
+				E7CD1EE22E45DE1900A88980 /* Models */,
+				E7CD1F042E45E06100A88980 /* StoriesStore.swift */,
 			);
 			path = Stories;
 			sourceTree = "<group>";
