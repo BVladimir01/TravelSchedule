@@ -67,6 +67,7 @@
 		E7CD1F192E4653E700A88980 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1F182E4653E700A88980 /* ProgressBarView.swift */; };
 		E7CD1F392E48DAB400A88980 /* StoriesPreviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1F382E48DAAD00A88980 /* StoriesPreviewCard.swift */; };
 		E7CD1FF02E4A01A300A88980 /* StationsSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1FEF2E4A019800A88980 /* StationsSelectorView.swift */; };
+		E7CD20372E4A136B00A88980 /* ThreadDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD20362E4A136500A88980 /* ThreadDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +130,7 @@
 		E7CD1F182E4653E700A88980 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		E7CD1F382E48DAAD00A88980 /* StoriesPreviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesPreviewCard.swift; sourceTree = "<group>"; };
 		E7CD1FEF2E4A019800A88980 /* StationsSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsSelectorView.swift; sourceTree = "<group>"; };
+		E7CD20362E4A136500A88980 /* ThreadDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -459,6 +461,7 @@
 				E7CB39BB2E3AB40300099A59 /* ThreadSelectionView.swift */,
 				E7CB3AD82E3B6CAF00099A59 /* TimeSpecifierView.swift */,
 				E7CB3B1E2E3BEDF600099A59 /* CarrierDetailView.swift */,
+				E7CD20362E4A136500A88980 /* ThreadDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 				E7CB3B8F2E3CB5DC00099A59 /* Station.swift in Sources */,
 				E71CAA0D2E3381D8000AFDE0 /* CarrierService.swift in Sources */,
 				E71CA97D2E310F45000AFDE0 /* MainView.swift in Sources */,
+				E7CD20372E4A136B00A88980 /* ThreadDetailView.swift in Sources */,
 				E7CD1EDB2E45DDF800A88980 /* StoriesFlowVM.swift in Sources */,
 				E71CAA282E33CCE1000AFDE0 /* ScheduleService.swift in Sources */,
 				E7CB3B212E3BEE0100099A59 /* CarrierDetailView.swift in Sources */,
