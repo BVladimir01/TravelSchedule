@@ -33,13 +33,11 @@ struct ThreadSelectionView: View {
         ZStack {
             Color.ypWhite
                 .ignoresSafeArea()
-            Group {
-                switch viewModel.loadingState {
-                case .error(let error):
-                    ErrorView(errorType: error)
-                default:
-                    content
-                }
+            switch viewModel.loadingState {
+            case .error(let error):
+                ErrorView(errorType: error)
+            default:
+                content
             }
         }
         .navigationBarBackButtonHidden()
