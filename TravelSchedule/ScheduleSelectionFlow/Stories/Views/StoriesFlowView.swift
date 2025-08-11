@@ -46,15 +46,15 @@ struct StoriesFlowView: View {
                             vm.nextStoryTapped()
                         }
                     }
+                    .simultaneously(with: DragGesture()
+                        .onEnded { value in
+                            if value.predictedEndTranslation.width > 60 {
+                                vm.didSlideToPreviousAuthor()
+                            } else if value.predictedEndTranslation.width < -60 {
+                                vm.didSlideToNextAuthor()
+                            }
+                        })
             )
-            .gesture(DragGesture()
-                .onEnded { value in
-                    if value.predictedEndTranslation.width > 0 {
-                        vm.didSlideToPreviousAuthor()
-                    } else if value.predictedEndTranslation.width < 0 {
-                        vm.didSlideToNextAuthor()
-                    }
-                })
         }
         .overlay(alignment: .topTrailing) {
             closeButton
