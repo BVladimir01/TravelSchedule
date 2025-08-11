@@ -16,15 +16,10 @@ struct ScheduleNavigationRootView: View {
     
     @ObservedObject private var viewModel: ScheduleNavigationViewModel
     
-    // MARK: - Private Properties - State
-    
-    @StateObject private var threadsViewModel: ThreadsViewModel
-    
     // MARK: - Initializers
     
-    init(viewModel: ScheduleNavigationViewModel, client: APIProtocol) {
+    init(viewModel: ScheduleNavigationViewModel) {
         self.viewModel = viewModel
-        _threadsViewModel = StateObject(wrappedValue: ThreadsViewModel(client: client))
     }
     
     // MARK: - Views
@@ -43,7 +38,9 @@ struct ScheduleNavigationRootView: View {
                 case .stationSelection(locationType: let locationType):
                     stationSelectionPage(for: locationType)
                 case .threadSelection:
-                    ThreadSelectionView(viewModel: threadsViewModel)
+                    if let threadsVM = viewModel.threadSelectionVM {
+                        ThreadSelectionView(viewModel: threadsVM)
+                    }
                 }
             }
             .navigationTitle("TravelSchedule")
@@ -104,12 +101,6 @@ struct ScheduleNavigationRootView: View {
     
     private var searchThreadsButton: some View {
         Button {
-            guard let origin = viewModel.originStation,
-                  let destination = viewModel.destinationStation
-            else {
-                return
-            }
-            threadsViewModel.configure(origin: origin, destination: destination)
             viewModel.showThreadsSelectionView()
         } label: {
             Text("Найти")

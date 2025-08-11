@@ -43,10 +43,7 @@ final class ThreadsViewModel: ObservableObject {
     }
     
     var navigationBarTitle: String {
-        guard let origin, let destination else {
-            return ""
-        }
-        return "\(origin.title) → \(destination.title)"
+        "\(origin.title) → \(destination.title)"
     }
     
     // MARK: - Private Properties - State
@@ -55,8 +52,8 @@ final class ThreadsViewModel: ObservableObject {
     
     // MARK: - Private Properties
     
-    private var origin: Station?
-    private var destination: Station?
+    private let origin: Station
+    private let destination: Station
     
     private let threadsProvider: ThreadsProvider
     private var pageNumber = 0
@@ -64,26 +61,16 @@ final class ThreadsViewModel: ObservableObject {
     
     // MARK: - Initializers
     
-    init(client: APIProtocol) {
+    init(origin: Station, destination: Station, client: APIProtocol) {
+        self.origin = origin
+        self.destination = destination
         threadsProvider = ThreadsProvider(client: client)
         timeSpecifications = Set(allTimeIntervals)
     }
     
     // MARK: - Internal Methods
-    
-    func configure(origin: Station, destination: Station) {
-        self.origin = origin
-        self.destination = destination
-        threads = []
-        loadingState = .idle
-    }
-    
+
     func fetchThreads() {
-        guard let origin, let destination,
-              loadingState != .loading
-        else {
-            return
-        }
         Task {
             await MainActor.run {
                 loadingState = .loading
@@ -106,12 +93,6 @@ final class ThreadsViewModel: ObservableObject {
     }
     
     func performInitialFetch() {
-        guard let origin, let destination,
-              loadingState == .idle,
-              threads.isEmpty
-        else {
-            return
-        }
         Task {
             await MainActor.run {
                 loadingState = .loading

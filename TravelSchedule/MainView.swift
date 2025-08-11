@@ -47,8 +47,7 @@ struct MainView: View {
     
     private var content: some View {
         TabView(selection: $selectedTab) {
-            ScheduleNavigationRootView(viewModel: scheduleNavigationViewModel,
-                                       client: client)
+            ScheduleNavigationRootView(viewModel: scheduleNavigationViewModel)
             .tabItem {
                     Image(.schedule)
                 }

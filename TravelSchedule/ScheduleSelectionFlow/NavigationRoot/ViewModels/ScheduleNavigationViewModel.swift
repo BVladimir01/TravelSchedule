@@ -24,8 +24,11 @@ final class ScheduleNavigationViewModel: ObservableObject {
     
     @Published var isShowingStories = false
     
-    var storiesFlowVM = StoriesFlowVM(storiesStore: .shared)
-    var storiesPreviewVM = StoriesPreviewVM(storiesStore: .shared)
+    private let client: APIProtocol
+    
+    let storiesFlowVM = StoriesFlowVM(storiesStore: .shared)
+    let storiesPreviewVM = StoriesPreviewVM(storiesStore: .shared)
+    private(set) var threadSelectionVM: ThreadsViewModel?
     
     // MARK: - Internal Properties - Computed
     
@@ -48,6 +51,7 @@ final class ScheduleNavigationViewModel: ObservableObject {
     // MARK: - Initializers
     
     init(client: APIProtocol) {
+        self.client = client
         stationsAndCitiesProvider = StationsAndCitiesProvider(client: client)
         fetchCitiesAndStations()
         storiesFlowVM.setActions { [weak self] event in
@@ -153,6 +157,9 @@ final class ScheduleNavigationViewModel: ObservableObject {
     }
     
     func showThreadsSelectionView() {
+        guard let origin = originStation,
+              let destination = destinationStation else { return }
+        threadSelectionVM = ThreadsViewModel(origin: origin, destination: destination, client: client)
         path.append(.threadSelection)
     }
 
