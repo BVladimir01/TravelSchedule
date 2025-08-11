@@ -14,19 +14,16 @@ struct MainView: View {
     
     // MARK: - Private Properties - State
     
-    @State private var selectedTab: MainTab = .schedule
-    @StateObject private var scheduleNavigationViewModel: ScheduleNavigationViewModel
+    @ObservedObject private var vm: TabSelectionViewModel
     
     // MARK: - Private Properties
     
     @Environment(\.colorScheme) private var colorScheme
-    private let client: APIProtocol
     
     // MARK: - Initializers
     
-    init(client: APIProtocol) {
-        self._scheduleNavigationViewModel = StateObject(wrappedValue: ScheduleNavigationViewModel(client: client))
-        self.client = client
+    init(viewModel: TabSelectionViewModel) {
+        self.vm = viewModel
     }
     
     // MARK: - Views
@@ -46,33 +43,27 @@ struct MainView: View {
     }
     
     private var content: some View {
-        TabView(selection: $selectedTab) {
-            ScheduleNavigationRootView(viewModel: scheduleNavigationViewModel)
+        TabView(selection: $vm.currentTab) {
+            ScheduleNavigationRootView(viewModel: vm.scheduleNavigationVM)
             .tabItem {
                     Image(.schedule)
                 }
-            .tag(MainTab.schedule)
+            .tag(TabSelectionViewModel.Tab.scheduleSelection)
             SettingsView()
                 .tabItem {
                     Image(.settings)
                 }
-                .tag(MainTab.settings)
+                .tag(TabSelectionViewModel.Tab.settings)
         }
         .tint(.ypBlack)
     }
     
 }
 
-// MARK: - Tabs
-extension MainView {
-    private enum MainTab {
-        case schedule, settings
-    }
-}
-
 #Preview {
     let apiKey = "f5fad011-aeea-4dab-a7a8-872458a66b1f"
     let apiKeyMiddleware = APIKeyMiddleware(apiKey: apiKey)
     let client = try! Client(serverURL: Servers.Server1.url(), transport: URLSessionTransport(), middlewares: [apiKeyMiddleware])
-    MainView(client: client)
+    let viewModel = TabSelectionViewModel(client: client)
+    MainView(viewModel: viewModel)
 }
