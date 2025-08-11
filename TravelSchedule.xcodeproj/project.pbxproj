@@ -69,6 +69,8 @@
 		E7CD1FF02E4A01A300A88980 /* StationsSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD1FEF2E4A019800A88980 /* StationsSelectorView.swift */; };
 		E7CD20372E4A136B00A88980 /* ThreadDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD20362E4A136500A88980 /* ThreadDetailView.swift */; };
 		E7CD204A2E4A2BCE00A88980 /* TabSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD20472E4A2BBD00A88980 /* TabSelectionViewModel.swift */; };
+		E7CD20582E4A308F00A88980 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD20562E4A308800A88980 /* SettingsViewModel.swift */; };
+		E7CD205E2E4A338B00A88980 /* ColorSchemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD205D2E4A338000A88980 /* ColorSchemeStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -133,6 +135,8 @@
 		E7CD1FEF2E4A019800A88980 /* StationsSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsSelectorView.swift; sourceTree = "<group>"; };
 		E7CD20362E4A136500A88980 /* ThreadDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadDetailView.swift; sourceTree = "<group>"; };
 		E7CD20472E4A2BBD00A88980 /* TabSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSelectionViewModel.swift; sourceTree = "<group>"; };
+		E7CD20562E4A308800A88980 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		E7CD205D2E4A338000A88980 /* ColorSchemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemeStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +204,7 @@
 		E71CA9982E312C98000AFDE0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E7CD205C2E4A337C00A88980 /* Stores */,
 				E7CB3AB82E3B5EE800099A59 /* Mappers */,
 				E7CB3AAF2E3B5D9800099A59 /* Requests */,
 			);
@@ -232,6 +237,7 @@
 		E7CB3A2E2E3B536A00099A59 /* SettingsFlow */ = {
 			isa = PBXGroup;
 			children = (
+				E7CD20562E4A308800A88980 /* SettingsViewModel.swift */,
 				E74DCC8B2E3A115C00A0C415 /* SettingsView.swift */,
 			);
 			path = SettingsFlow;
@@ -495,6 +501,14 @@
 			path = TabSelectionView;
 			sourceTree = "<group>";
 		};
+		E7CD205C2E4A337C00A88980 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				E7CD205D2E4A338000A88980 /* ColorSchemeStore.swift */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -583,6 +597,7 @@
 				E7CB3A9F2E3B568100099A59 /* Thread.swift in Sources */,
 				E7CB39772E3A9A1100099A59 /* StationSelectionView.swift in Sources */,
 				E7CD1F392E48DAB400A88980 /* StoriesPreviewCard.swift in Sources */,
+				E7CD20582E4A308F00A88980 /* SettingsViewModel.swift in Sources */,
 				E7CD1EEA2E45DE2C00A88980 /* StoryPageContent.swift in Sources */,
 				E71CAA172E338D67000AFDE0 /* NearestSettlementService.swift in Sources */,
 				E7CD1F052E45E06B00A88980 /* StoriesStore.swift in Sources */,
@@ -603,6 +618,7 @@
 				E7CD1FF02E4A01A300A88980 /* StationsSelectorView.swift in Sources */,
 				E7CD204A2E4A2BCE00A88980 /* TabSelectionViewModel.swift in Sources */,
 				E7CB3AE52E3B6DF400099A59 /* TimeIntervalUIMapper.swift in Sources */,
+				E7CD205E2E4A338B00A88980 /* ColorSchemeStore.swift in Sources */,
 				E7CB3ABA2E3B5EF400099A59 /* ThreadModelUIMapper.swift in Sources */,
 				E7CB39DF2E3B343E00099A59 /* NavigationBackButton.swift in Sources */,
 				E71CA9A32E312DEA000AFDE0 /* NearestStationsService.swift in Sources */,
