@@ -135,7 +135,11 @@ final class StoriesFlowVM: ObservableObject {
     }
     
     private func showPreviousStory() {
-        guard currentStoryIndex > 0 else { return }
+        guard currentStoryIndex > 0 else {
+            resetTimer()
+            startTimer()
+            return
+        }
         if stories[currentStoryIndex - 1].authorID != currentAuthor.id {
             resetTimer()
             startTimer()
@@ -152,8 +156,7 @@ final class StoriesFlowVM: ObservableObject {
             return
         }
         currentAuthorIndex += 1
-        currentStoryIndex = (stories.firstIndex(where: { $0.authorID == currentAuthor.id && !$0.watched }) ??
-                             stories.firstIndex(where: { $0.authorID == currentAuthor.id }) ?? 0)
+        assignCurrentStoryIndex()
         resetTimer()
         startTimer()
     }
@@ -164,12 +167,14 @@ final class StoriesFlowVM: ObservableObject {
             return
         }
         currentAuthorIndex -= 1
-        if let firstNewStory = stories(by: currentAuthor).first(where: { !$0.watched }),
-           let newStoryIndex = stories.firstIndex(where: { $0.id == firstNewStory.id }) {
-            currentStoryIndex = newStoryIndex
-        }
+        assignCurrentStoryIndex()
         resetTimer()
         startTimer()
+    }
+    
+    private func assignCurrentStoryIndex() {
+        currentStoryIndex = (stories.firstIndex(where: { $0.authorID == currentAuthor.id && !$0.watched }) ??
+                             stories.firstIndex(where: { $0.authorID == currentAuthor.id }) ?? 0)
     }
     
     private func startTimer() {
