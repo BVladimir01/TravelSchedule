@@ -43,7 +43,6 @@ struct ScheduleNavigationRootView: View {
                     }
                 }
             }
-            .navigationTitle("TravelSchedule")
         }
     }
     
