@@ -19,6 +19,8 @@ final class ColorSchemeStore {
         }
     }
     
+    static let shared = ColorSchemeStore()
+    
     @AppStorage(storageKey) private var isDarkThemeStored = false
     
     private static let storageKey = "isDarkTheme"
