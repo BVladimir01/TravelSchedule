@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-class UserAgreementUIKitWebView: UIView {
+final class UserAgreementUIKitWebView: UIView {
     
     private let webView = WKWebView()
     private let request = URLRequest(url: URL(string: "https://yandex.ru/legal/practicum_offer/ru/")!)

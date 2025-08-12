@@ -13,7 +13,7 @@ final class TabSelectionViewModel: ObservableObject {
     
     // MARK: - Internal Properties
     
-    @Published var currentTab: Tab = .scheduleSelection
+    @Published var currentTab: MainViewTab = .scheduleSelection
     let scheduleNavigationVM: ScheduleNavigationViewModel
     
     // MARK: - Initializer
@@ -22,12 +22,4 @@ final class TabSelectionViewModel: ObservableObject {
         scheduleNavigationVM = ScheduleNavigationViewModel(client: client)
     }
     
-}
-
-
-// MARK: - Tab
-extension TabSelectionViewModel {
-    enum Tab {
-        case scheduleSelection, settings
-    }
 }

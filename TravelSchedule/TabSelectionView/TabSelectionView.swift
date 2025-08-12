@@ -48,12 +48,12 @@ struct MainView: View {
             .tabItem {
                     Image(.schedule)
                 }
-            .tag(TabSelectionViewModel.Tab.scheduleSelection)
+            .tag(MainViewTab.scheduleSelection)
             SettingsView()
                 .tabItem {
                     Image(.settings)
                 }
-                .tag(TabSelectionViewModel.Tab.settings)
+                .tag(MainViewTab.settings)
         }
         .tint(.ypBlack)
     }

@@ -15,11 +15,11 @@ struct StationsSelectorView: View {
     
     private let origin: String?
     private let destination: String?
-    private let onEvent: (Event) -> ()
+    private let onEvent: (StationsSelectorEvent) -> ()
     
     // MARK: - Initializer
     
-    init(origin: String?, destination: String?, onEvent: @escaping (Event) -> Void) {
+    init(origin: String?, destination: String?, onEvent: @escaping (StationsSelectorEvent) -> Void) {
         self.origin = origin
         self.destination = destination
         self.onEvent = onEvent
@@ -101,12 +101,4 @@ struct StationsSelectorView: View {
         if place == nil { false } else { true }
     }
     
-}
-
-
-// MARK: Event
-extension StationsSelectorView {
-    enum Event {
-        case originTapped, destinationTapped, swapTapped
-    }
 }

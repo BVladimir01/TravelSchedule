@@ -73,6 +73,8 @@
 		E7CD208C2E4A3DF000A88980 /* UserAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD208B2E4A3DE600A88980 /* UserAgreementView.swift */; };
 		E7CD20F72E4A7E3300A88980 /* UserAgreementUIKitWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD20F52E4A7E2800A88980 /* UserAgreementUIKitWebView.swift */; };
 		E7CD20FB2E4A7E9300A88980 /* UserAgreementPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD20FA2E4A7E8E00A88980 /* UserAgreementPageView.swift */; };
+		E7CD212F2E4B218700A88980 /* StationsSelectorEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD212E2E4B218000A88980 /* StationsSelectorEvent.swift */; };
+		E7CD21332E4B21C200A88980 /* MainViewTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD21322E4B21BB00A88980 /* MainViewTab.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,6 +143,8 @@
 		E7CD208B2E4A3DE600A88980 /* UserAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgreementView.swift; sourceTree = "<group>"; };
 		E7CD20F52E4A7E2800A88980 /* UserAgreementUIKitWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgreementUIKitWebView.swift; sourceTree = "<group>"; };
 		E7CD20FA2E4A7E8E00A88980 /* UserAgreementPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgreementPageView.swift; sourceTree = "<group>"; };
+		E7CD212E2E4B218000A88980 /* StationsSelectorEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsSelectorEvent.swift; sourceTree = "<group>"; };
+		E7CD21322E4B21BB00A88980 /* MainViewTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewTab.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -369,6 +373,7 @@
 		E7CB3D2F2E413FD600099A59 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E7CD212E2E4B218000A88980 /* StationsSelectorEvent.swift */,
 				E7CB38862E3A291300099A59 /* LocationType.swift */,
 				E7CB38AD2E3A327D00099A59 /* PageType.swift */,
 			);
@@ -483,6 +488,7 @@
 		E7CD20442E4A2B8500A88980 /* TabSelectionView */ = {
 			isa = PBXGroup;
 			children = (
+				E7CD21322E4B21BB00A88980 /* MainViewTab.swift */,
 				E7CD20472E4A2BBD00A88980 /* TabSelectionViewModel.swift */,
 				E71CA9792E310F45000AFDE0 /* TabSelectionView.swift */,
 			);
@@ -620,6 +626,7 @@
 				E7CB3ABA2E3B5EF400099A59 /* ThreadModelUIMapper.swift in Sources */,
 				E7CB39DF2E3B343E00099A59 /* NavigationBackButton.swift in Sources */,
 				E71CA9A32E312DEA000AFDE0 /* NearestStationsService.swift in Sources */,
+				E7CD212F2E4B218700A88980 /* StationsSelectorEvent.swift in Sources */,
 				E7CD1ED62E45DDE800A88980 /* StoriesPreviewVM.swift in Sources */,
 				E71CAA4B2E379072000AFDE0 /* APIKeyMiddleware.swift in Sources */,
 				E7CB39BF2E3AB40900099A59 /* ThreadSelectionView.swift in Sources */,
@@ -646,6 +653,7 @@
 				E7CD1F002E45DE6D00A88980 /* StoriesFlowView.swift in Sources */,
 				E7CD1EF22E45DE5000A88980 /* StoriesPreview.swift in Sources */,
 				E7CB3ADA2E3B6CBB00099A59 /* TimeSpecifierView.swift in Sources */,
+				E7CD21332E4B21C200A88980 /* MainViewTab.swift in Sources */,
 				E7CB3C0E2E3D03AA00099A59 /* APIThreadMapper.swift in Sources */,
 				E7CB39B62E3AB37500099A59 /* ThreadUIModel.swift in Sources */,
 				E7CD1EFA2E45DE6200A88980 /* StoryPageView.swift in Sources */,
