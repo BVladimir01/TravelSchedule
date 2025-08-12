@@ -37,24 +37,7 @@ struct StoriesFlowView: View {
                 .padding(.horizontal, 12)
                 .padding(.top, 28)
             }
-            .gesture(
-                SpatialTapGesture(count: 1)
-                    .onEnded { value in
-                        if value.location.x <= geometry.size.width/2 {
-                            vm.previousStoryTapped()
-                        } else {
-                            vm.nextStoryTapped()
-                        }
-                    }
-                    .simultaneously(with: DragGesture()
-                        .onEnded { value in
-                            if value.predictedEndTranslation.width > 60 {
-                                vm.didSlideToPreviousAuthor()
-                            } else if value.predictedEndTranslation.width < -60 {
-                                vm.didSlideToNextAuthor()
-                            }
-                        })
-            )
+            .gesture(gesture(in: geometry))
         }
         .overlay(alignment: .topTrailing) {
             closeButton
@@ -76,6 +59,27 @@ struct StoriesFlowView: View {
                 .scaledToFit()
         }
         .contentShape(.circle)
+    }
+    
+    // MARK: - Gesture
+    
+    private func gesture(in geometry: GeometryProxy) -> some Gesture {
+        SpatialTapGesture(count: 1)
+            .onEnded { value in
+                if value.location.x <= geometry.size.width/2 {
+                    vm.previousStoryTapped()
+                } else {
+                    vm.nextStoryTapped()
+                }
+            }
+            .simultaneously(with: DragGesture()
+                .onEnded { value in
+                    if value.predictedEndTranslation.width > 60 {
+                        vm.didSlideToPreviousAuthor()
+                    } else if value.predictedEndTranslation.width < -60 {
+                        vm.didSlideToNextAuthor()
+                    }
+                })
     }
     
 }
