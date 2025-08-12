@@ -11,6 +11,16 @@ import SwiftUI
 // MARK: - ScheduleNavigationViewModel
 final class ScheduleNavigationViewModel: ObservableObject {
     
+    // MARK: - Internal Properties
+    
+    private(set) var threadSelectionVM: ThreadsViewModel?
+    private(set) var storiesFlowVM: StoriesFlowVM?
+    private(set) lazy var storiesPreviewVM: StoriesPreviewVM = {
+        StoriesPreviewVM(storiesStore: .shared, onAuthorSelection: { [weak self] author in
+            self?.storyTapped(with: author)
+        })
+    }()
+    
     // MARK: - Internal Properties - State
     
     @Published private(set) var loadingState: DataLoadingState = .idle
@@ -21,6 +31,8 @@ final class ScheduleNavigationViewModel: ObservableObject {
     @Published var destinationStation: Station?
     
     @Published var path: [PageType] = []
+    
+    @Published var isShowingStories = false
     
     // MARK: - Internal Properties - Computed
     
@@ -38,11 +50,14 @@ final class ScheduleNavigationViewModel: ObservableObject {
     
     // MARK: - Private Properties
     
+    private let client: APIProtocol
     private let stationsAndCitiesProvider: StationsAndCitiesProvider
+    private var selectedAuthor: StoryAuthor?
     
     // MARK: - Initializers
     
     init(client: APIProtocol) {
+        self.client = client
         stationsAndCitiesProvider = StationsAndCitiesProvider(client: client)
         fetchCitiesAndStations()
     }
@@ -70,15 +85,6 @@ final class ScheduleNavigationViewModel: ObservableObject {
     
     func stations(of city: City) -> [Station] {
         stationsAndCitiesProvider.stations(of: city)
-    }
-    
-    func isDefined(locationType: LocationType) -> Bool {
-        switch locationType {
-        case .origin:
-            return originCity != nil && originStation != nil
-        case .destination:
-            return destinationCity != nil && destinationStation != nil
-        }
     }
     
     func city(of locationType: LocationType) -> City? {
@@ -135,7 +141,19 @@ final class ScheduleNavigationViewModel: ObservableObject {
     }
     
     func showThreadsSelectionView() {
+        guard let origin = originStation,
+              let destination = destinationStation else { return }
+        threadSelectionVM = ThreadsViewModel(origin: origin, destination: destination, client: client)
         path.append(.threadSelection)
+    }
+    
+    // MARK: - Private Methods
+    
+    func storyTapped(with author: StoryAuthor) {
+        storiesFlowVM = StoriesFlowVM(storiesStore: .shared, author: author, onDismiss: { [weak self] in
+            self?.isShowingStories = false
+        })
+        isShowingStories = true
     }
 
 }

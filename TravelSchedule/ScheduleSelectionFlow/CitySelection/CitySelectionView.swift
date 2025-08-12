@@ -17,7 +17,7 @@ struct CitySelectionView: View {
     // MARK: - Private Properties
     
     @Environment(\.dismiss) private var dismiss
-    private var loadingState: DataLoadingState
+    private let loadingState: DataLoadingState
     private let cities: [City]
     private let onCitySelection: (City) -> ()
     
