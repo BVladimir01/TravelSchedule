@@ -82,7 +82,7 @@ struct ThreadSelectionView: View {
     
     private var listOfThreads: some View {
         LazyVStack(spacing: 16) {
-            ForEach(viewModel.displayedThreads, id: \.self) { thread in
+            ForEach(viewModel.displayedThreads, id: \.id) { thread in
                 NavigationLink {
                     CarrierDetailView(carrier: thread.carrier)
                 } label: {

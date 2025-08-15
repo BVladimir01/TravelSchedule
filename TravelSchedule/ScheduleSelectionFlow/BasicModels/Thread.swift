@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Thread: Hashable, Sendable {
+struct Thread: Identifiable, Hashable, Sendable {
+    let id = UUID()
     let departureTime: RelativeTimePoint
     let arrivalTime: RelativeTimePoint
     let departureDate: Date
