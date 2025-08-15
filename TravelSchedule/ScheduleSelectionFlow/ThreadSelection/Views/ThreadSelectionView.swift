@@ -88,10 +88,10 @@ struct ThreadSelectionView: View {
                 } label: {
                     ThreadDetailView(thread: threadFormatter.map(thread))
                 }
-                .onAppear {
+                .task {
                     guard let lastThread = viewModel.displayedThreads.last else { return }
                     if thread == lastThread {
-                        viewModel.fetchThreads()
+                        await viewModel.fetchThreads()
                     }
                 }
             }

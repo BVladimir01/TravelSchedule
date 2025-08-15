@@ -63,24 +63,26 @@ final class ThreadsViewModel: ObservableObject {
         self.destination = destination
         threadsProvider = ThreadsProvider(client: client)
         timeSpecifications = Set(allTimeIntervals)
-        fetchThreads()
+        Task {
+            await fetchThreads()
+        }
     }
     
     // MARK: - Internal Methods
 
-    func fetchThreads() {
-        Task {
-            loadingState = .loading
-            do {
-                let newThreads = try await threadsProvider.fetchTreads(from: origin,
-                                                                       to: destination,
-                                                                       pageNumber: pageNumber)
-                threads.append(contentsOf: newThreads)
-                loadingState = .success
-            } catch let error as DataFetchingError {
-                print(error)
-                loadingState = .error(error)
-            }
+    func fetchThreads() async {
+        loadingState = .loading
+        do {
+            let newThreads = try await threadsProvider.fetchTreads(from: origin,
+                                                                   to: destination,
+                                                                   pageNumber: pageNumber)
+            threads.append(contentsOf: newThreads)
+            loadingState = .success
+        } catch let error as DataFetchingError {
+            print(error)
+            loadingState = .error(error)
+        } catch {
+            loadingState = .error(.serverError(description: error.localizedDescription))
         }
     }
     
