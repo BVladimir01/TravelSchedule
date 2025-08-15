@@ -88,10 +88,12 @@ struct ThreadSelectionView: View {
                 } label: {
                     ThreadDetailView(thread: threadFormatter.map(thread))
                 }
-                .task {
-                    guard let lastThread = viewModel.displayedThreads.last else { return }
-                    if thread == lastThread {
-                        await viewModel.fetchThreads()
+                // intentional: Task should not be cancelled when row disappears
+                .onAppear {
+                    if thread == viewModel.displayedThreads.last {
+                        Task {
+                            await viewModel.fetchThreads()
+                        }
                     }
                 }
             }

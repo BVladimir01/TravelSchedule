@@ -71,6 +71,7 @@ final class ThreadsViewModel: ObservableObject {
     // MARK: - Internal Methods
 
     func fetchThreads() async {
+        guard loadingState != .loading else { return }
         loadingState = .loading
         do {
             let newThreads = try await threadsProvider.fetchTreads(from: origin,
