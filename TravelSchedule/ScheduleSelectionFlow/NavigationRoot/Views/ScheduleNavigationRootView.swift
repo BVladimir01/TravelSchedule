@@ -31,9 +31,6 @@ struct ScheduleNavigationRootView: View {
                 switch pageType {
                 case .citySelection(locationType: let locationType):
                     citySelectionPage(for: locationType)
-                        .onAppear {
-                            viewModel.fetchCitiesAndStations()
-                        }
                 case .stationSelection(locationType: let locationType):
                     stationSelectionPage(for: locationType)
                 case .threadSelection:

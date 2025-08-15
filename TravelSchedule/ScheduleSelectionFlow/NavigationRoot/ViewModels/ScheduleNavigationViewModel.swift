@@ -61,23 +61,12 @@ final class ScheduleNavigationViewModel: ObservableObject {
     init(client: APIProtocol) {
         self.client = client
         stationsAndCitiesProvider = StationsAndCitiesProvider(client: client)
-        fetchCitiesAndStations()
+        Task {
+            await fetchCitiesAndStations()
+        }
     }
     
     // MARK: Internal Methods
-    
-    func fetchCitiesAndStations() {
-        guard cities.isEmpty else { return }
-        Task {
-            loadingState = .loading
-            do {
-                citiesAndStations = try await stationsAndCitiesProvider.fetchCitiesAndStations()
-                loadingState = .success
-            } catch let error as DataFetchingError {
-                loadingState = .error(error)
-            }
-        }
-    }
     
     func stations(of city: City) -> [Station] {
         citiesAndStations[city] ?? []
@@ -140,6 +129,19 @@ final class ScheduleNavigationViewModel: ObservableObject {
     }
     
     // MARK: - Private Methods
+    
+    private func fetchCitiesAndStations() async {
+        guard cities.isEmpty else { return }
+        loadingState = .loading
+        do {
+            citiesAndStations = try await stationsAndCitiesProvider.fetchCitiesAndStations()
+            loadingState = .success
+        } catch let error as DataFetchingError {
+            loadingState = .error(error)
+        } catch {
+            loadingState = .error(.serverError(description: error.localizedDescription))
+        }
+    }
     
     func storyTapped(with author: StoryAuthor) {
         storiesFlowVM = StoriesFlowVM(storiesStore: .shared, author: author, onDismiss: { [weak self] in
