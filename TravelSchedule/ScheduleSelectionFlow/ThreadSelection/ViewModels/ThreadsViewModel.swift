@@ -10,6 +10,7 @@ import SwiftUI
 
 
 // MARK: - ThreadsViewModel
+@MainActor
 final class ThreadsViewModel: ObservableObject {
     
     // MARK: - Internal Properties - State
@@ -69,22 +70,16 @@ final class ThreadsViewModel: ObservableObject {
 
     func fetchThreads() {
         Task {
-            await MainActor.run {
-                loadingState = .loading
-            }
+            loadingState = .loading
             do {
                 let newThreads = try await threadsProvider.fetchTreads(from: origin,
                                                                        to: destination,
                                                                        pageNumber: pageNumber)
-                await MainActor.run {
-                    threads.append(contentsOf: newThreads)
-                    loadingState = .success
-                }
+                threads.append(contentsOf: newThreads)
+                loadingState = .success
             } catch let error as DataFetchingError {
-                await MainActor.run {
-                    print(error)
-                    loadingState = .error(error)
-                }
+                print(error)
+                loadingState = .error(error)
             }
         }
     }

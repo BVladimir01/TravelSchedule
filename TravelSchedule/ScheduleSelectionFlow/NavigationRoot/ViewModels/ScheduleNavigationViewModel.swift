@@ -9,6 +9,7 @@ import SwiftUI
 
 
 // MARK: - ScheduleNavigationViewModel
+@MainActor
 final class ScheduleNavigationViewModel: ObservableObject {
     
     // MARK: - Internal Properties
@@ -67,18 +68,12 @@ final class ScheduleNavigationViewModel: ObservableObject {
     func fetchCitiesAndStations() {
         guard stationsAndCitiesProvider.cities.isEmpty else { return }
         Task {
-            await MainActor.run {
-                loadingState = .loading
-            }
+            loadingState = .loading
             do {
                 try await stationsAndCitiesProvider.fetchCitiesAndStations()
-                await MainActor.run {
-                    loadingState = .success
-                }
+                loadingState = .success
             } catch let error as DataFetchingError {
-                await MainActor.run {
-                    loadingState = .error(error)
-                }
+                loadingState = .error(error)
             }
         }
     }
@@ -121,13 +116,9 @@ final class ScheduleNavigationViewModel: ObservableObject {
         // popping all views causes ui to freeze
         // don't know other solutions
         Task {
-            await MainActor.run {
-                _ = path.popLast()
-            }
+            _ = path.popLast()
             try await Task.sleep(nanoseconds: 5_000_000)
-            await MainActor.run {
-                _ = path.popLast()
-            }
+            _ = path.popLast()
         }
     }
     

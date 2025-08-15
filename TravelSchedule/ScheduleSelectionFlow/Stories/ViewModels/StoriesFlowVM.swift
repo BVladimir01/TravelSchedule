@@ -10,6 +10,7 @@ import Combine
 
 
 // MARK: - StoriesFlowVM
+@MainActor
 final class StoriesFlowVM: ObservableObject {
     
     // MARK: - InternalProperties
