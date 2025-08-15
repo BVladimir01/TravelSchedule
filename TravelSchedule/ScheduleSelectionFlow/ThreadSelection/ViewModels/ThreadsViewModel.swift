@@ -53,7 +53,6 @@ final class ThreadsViewModel: ObservableObject {
     // MARK: - Private Properties
     
     private let threadsProvider: ThreadsProvider
-    private var pageNumber = 0
     private let threadMapper = ThreadModelUIMapper()
     
     // MARK: - Initializers
@@ -76,7 +75,7 @@ final class ThreadsViewModel: ObservableObject {
         do {
             let newThreads = try await threadsProvider.fetchTreads(from: origin,
                                                                    to: destination,
-                                                                   pageNumber: pageNumber)
+                                                                   numberOfFetchedItems: threads.count)
             threads.append(contentsOf: newThreads)
             loadingState = .success
         } catch let error as DataFetchingError {
