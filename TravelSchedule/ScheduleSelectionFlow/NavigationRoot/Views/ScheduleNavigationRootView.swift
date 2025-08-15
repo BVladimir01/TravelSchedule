@@ -11,7 +11,6 @@ import SwiftUI
 // MARK: - ScheduleNavigationRootView
 struct ScheduleNavigationRootView: View {
     
-    
     // MARK: - Private Properties - State
     
     @ObservedObject private var viewModel: ScheduleNavigationViewModel
