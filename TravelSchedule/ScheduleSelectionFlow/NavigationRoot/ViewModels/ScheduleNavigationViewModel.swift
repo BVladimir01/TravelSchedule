@@ -38,7 +38,7 @@ final class ScheduleNavigationViewModel: ObservableObject {
     // MARK: - Internal Properties - Computed
     
     var cities: [City] {
-        stationsAndCitiesProvider.cities
+        citiesAndStations.keys.sorted(by: { $0.title < $1.title })
     }
     
     var searchIsEnabled: Bool {
@@ -51,6 +51,7 @@ final class ScheduleNavigationViewModel: ObservableObject {
     
     // MARK: - Private Properties
     
+    private var citiesAndStations: [City: [Station]] = [:]
     private let client: APIProtocol
     private let stationsAndCitiesProvider: StationsAndCitiesProvider
     private var selectedAuthor: StoryAuthor?
@@ -66,11 +67,11 @@ final class ScheduleNavigationViewModel: ObservableObject {
     // MARK: Internal Methods
     
     func fetchCitiesAndStations() {
-        guard stationsAndCitiesProvider.cities.isEmpty else { return }
+        guard cities.isEmpty else { return }
         Task {
             loadingState = .loading
             do {
-                try await stationsAndCitiesProvider.fetchCitiesAndStations()
+                citiesAndStations = try await stationsAndCitiesProvider.fetchCitiesAndStations()
                 loadingState = .success
             } catch let error as DataFetchingError {
                 loadingState = .error(error)
@@ -79,7 +80,7 @@ final class ScheduleNavigationViewModel: ObservableObject {
     }
     
     func stations(of city: City) -> [Station] {
-        stationsAndCitiesProvider.stations(of: city)
+        citiesAndStations[city] ?? []
     }
     
     func city(of locationType: LocationType) -> City? {
