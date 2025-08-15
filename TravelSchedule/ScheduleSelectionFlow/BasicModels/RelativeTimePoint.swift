@@ -5,7 +5,7 @@
 //  Created by Vladimir on 04.08.2025.
 //
 
-struct RelativeTimePoint: Hashable, Comparable {
+struct RelativeTimePoint: Hashable, Comparable, Sendable {
     
     let hour: Int
     let minute: Int

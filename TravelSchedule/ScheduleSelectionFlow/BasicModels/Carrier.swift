@@ -5,7 +5,7 @@
 //  Created by Vladimir on 31.07.2025.
 //
 
-struct Carrier: Hashable {
+struct Carrier: Hashable, Sendable {
     let title: String
     let email: String?
     let phone: String?
