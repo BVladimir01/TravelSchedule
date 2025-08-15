@@ -9,7 +9,7 @@ import Foundation
 
 
 // MARK: - ThreadsProvider
-final class ThreadsProvider {
+final class ThreadsProvider: Sendable {
     
     // MARK: - Private Properties
     
@@ -27,12 +27,13 @@ final class ThreadsProvider {
     
     // MARK: - Internal Methods
     
-    func fetchTreads(from origin: Station, to destination: Station, pageNumber: Int) async throws -> [Thread] {
+    func fetchTreads(from origin: Station, to destination: Station, numberOfFetchedItems: Int) async throws -> [Thread] {
         do {
+            print("offset \(numberOfFetchedItems)")
             let segmentsResponse = try await searchService.getSchedules(from: origin.codes.yandex_code,
                                                                         to: destination.codes.yandex_code,
                                                                         limit: threadsPerPage,
-                                                                        offset: pageNumber*threadsPerPage)
+                                                                        offset: numberOfFetchedItems)
             guard let segments = segmentsResponse.segments else {
                 throw DataFetchingError.parsingError
             }

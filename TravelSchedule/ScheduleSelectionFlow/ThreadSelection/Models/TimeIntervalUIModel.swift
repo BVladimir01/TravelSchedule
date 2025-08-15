@@ -5,7 +5,7 @@
 //  Created by Vladimir on 31.07.2025.
 //
 
-struct TimeIntervalUIModel: Hashable {
+struct TimeIntervalUIModel: Hashable, Sendable {
     let start: String
     let end: String
     let description: String

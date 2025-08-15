@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: - TabSelectionViewModel
 
+@MainActor
 final class TabSelectionViewModel: ObservableObject {
     
     // MARK: - Internal Properties

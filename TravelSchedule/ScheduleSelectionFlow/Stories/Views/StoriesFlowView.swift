@@ -74,6 +74,12 @@ struct StoriesFlowView: View {
             }
             .simultaneously(with: DragGesture()
                 .onEnded { value in
+                    guard abs(value.predictedEndTranslation.width) > abs(value.predictedEndTranslation.height) else {
+                        if value.predictedEndTranslation.height > 60 {
+                            vm.closeView()
+                        }
+                        return
+                    }
                     if value.predictedEndTranslation.width > 60 {
                         vm.didSlideToPreviousAuthor()
                     } else if value.predictedEndTranslation.width < -60 {

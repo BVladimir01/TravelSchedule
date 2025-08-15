@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ThreadUIModel {
+struct ThreadUIModel: Sendable {
     let carrierLogoURL: String?
     let carrierTitle: String
     let departureTime: String

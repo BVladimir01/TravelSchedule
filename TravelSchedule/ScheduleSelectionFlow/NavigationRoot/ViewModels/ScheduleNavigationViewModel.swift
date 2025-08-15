@@ -9,6 +9,7 @@ import SwiftUI
 
 
 // MARK: - ScheduleNavigationViewModel
+@MainActor
 final class ScheduleNavigationViewModel: ObservableObject {
     
     // MARK: - Internal Properties
@@ -37,7 +38,7 @@ final class ScheduleNavigationViewModel: ObservableObject {
     // MARK: - Internal Properties - Computed
     
     var cities: [City] {
-        stationsAndCitiesProvider.cities
+        citiesAndStations.keys.sorted(by: { $0.title < $1.title })
     }
     
     var searchIsEnabled: Bool {
@@ -50,6 +51,7 @@ final class ScheduleNavigationViewModel: ObservableObject {
     
     // MARK: - Private Properties
     
+    private var citiesAndStations: [City: [Station]] = [:]
     private let client: APIProtocol
     private let stationsAndCitiesProvider: StationsAndCitiesProvider
     private var selectedAuthor: StoryAuthor?
@@ -59,32 +61,15 @@ final class ScheduleNavigationViewModel: ObservableObject {
     init(client: APIProtocol) {
         self.client = client
         stationsAndCitiesProvider = StationsAndCitiesProvider(client: client)
-        fetchCitiesAndStations()
+        Task {
+            await fetchCitiesAndStations()
+        }
     }
     
     // MARK: Internal Methods
     
-    func fetchCitiesAndStations() {
-        guard stationsAndCitiesProvider.cities.isEmpty else { return }
-        Task {
-            await MainActor.run {
-                loadingState = .loading
-            }
-            do {
-                try await stationsAndCitiesProvider.fetchCitiesAndStations()
-                await MainActor.run {
-                    loadingState = .success
-                }
-            } catch let error as DataFetchingError {
-                await MainActor.run {
-                    loadingState = .error(error)
-                }
-            }
-        }
-    }
-    
     func stations(of city: City) -> [Station] {
-        stationsAndCitiesProvider.stations(of: city)
+        citiesAndStations[city] ?? []
     }
     
     func city(of locationType: LocationType) -> City? {
@@ -121,13 +106,9 @@ final class ScheduleNavigationViewModel: ObservableObject {
         // popping all views causes ui to freeze
         // don't know other solutions
         Task {
-            await MainActor.run {
-                _ = path.popLast()
-            }
+            _ = path.popLast()
             try await Task.sleep(nanoseconds: 5_000_000)
-            await MainActor.run {
-                _ = path.popLast()
-            }
+            _ = path.popLast()
         }
     }
     
@@ -148,6 +129,19 @@ final class ScheduleNavigationViewModel: ObservableObject {
     }
     
     // MARK: - Private Methods
+    
+    private func fetchCitiesAndStations() async {
+        guard cities.isEmpty else { return }
+        loadingState = .loading
+        do {
+            citiesAndStations = try await stationsAndCitiesProvider.fetchCitiesAndStations()
+            loadingState = .success
+        } catch let error as DataFetchingError {
+            loadingState = .error(error)
+        } catch {
+            loadingState = .error(.serverError(description: error.localizedDescription))
+        }
+    }
     
     func storyTapped(with author: StoryAuthor) {
         storiesFlowVM = StoriesFlowVM(storiesStore: .shared, author: author, onDismiss: { [weak self] in

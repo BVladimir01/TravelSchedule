@@ -10,6 +10,7 @@ import Combine
 
 
 // MARK: - StoriesPreviewVM
+@MainActor
 final class StoriesPreviewVM: ObservableObject {
     
     // MARK: - Internal Properties
