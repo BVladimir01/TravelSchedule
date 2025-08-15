@@ -9,7 +9,7 @@ import Foundation
 
 
 // MARK: - ThreadsProvider
-final class ThreadsProvider {
+final class ThreadsProvider: Sendable {
     
     // MARK: - Private Properties
     
