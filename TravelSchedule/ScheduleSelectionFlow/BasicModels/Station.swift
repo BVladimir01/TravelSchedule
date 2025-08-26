@@ -5,7 +5,7 @@
 //  Created by Vladimir on 01.08.2025.
 //
 
-struct Station: Hashable, CustomStringConvertible {
+struct Station: Hashable, CustomStringConvertible, Sendable {
     
     let title: String
     let codes: Codes

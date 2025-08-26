@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-
+@MainActor
 final class ColorSchemeStore: ObservableObject {
     
     static let shared = ColorSchemeStore()

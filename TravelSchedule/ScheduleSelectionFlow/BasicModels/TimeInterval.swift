@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TimeInterval: Hashable, Comparable {
+struct TimeInterval: Hashable, Comparable, Sendable {
     
     let start: RelativeTimePoint
     let end: RelativeTimePoint

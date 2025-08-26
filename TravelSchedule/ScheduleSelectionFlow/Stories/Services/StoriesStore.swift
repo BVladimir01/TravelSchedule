@@ -9,6 +9,7 @@ import Foundation
 
 
 // MARK: - StoriesStore
+@MainActor
 final class StoriesStore {
     
     // MARK: - Internal Properties

@@ -10,6 +10,7 @@ import SwiftUI
 
 
 // MARK: - ThreadsViewModel
+@MainActor
 final class ThreadsViewModel: ObservableObject {
     
     // MARK: - Internal Properties - State
@@ -52,7 +53,6 @@ final class ThreadsViewModel: ObservableObject {
     // MARK: - Private Properties
     
     private let threadsProvider: ThreadsProvider
-    private var pageNumber = 0
     private let threadMapper = ThreadModelUIMapper()
     
     // MARK: - Initializers
@@ -62,30 +62,27 @@ final class ThreadsViewModel: ObservableObject {
         self.destination = destination
         threadsProvider = ThreadsProvider(client: client)
         timeSpecifications = Set(allTimeIntervals)
-        fetchThreads()
+        Task {
+            await fetchThreads()
+        }
     }
     
     // MARK: - Internal Methods
 
-    func fetchThreads() {
-        Task {
-            await MainActor.run {
-                loadingState = .loading
-            }
-            do {
-                let newThreads = try await threadsProvider.fetchTreads(from: origin,
-                                                                       to: destination,
-                                                                       pageNumber: pageNumber)
-                await MainActor.run {
-                    threads.append(contentsOf: newThreads)
-                    loadingState = .success
-                }
-            } catch let error as DataFetchingError {
-                await MainActor.run {
-                    print(error)
-                    loadingState = .error(error)
-                }
-            }
+    func fetchThreads() async {
+        guard loadingState != .loading else { return }
+        loadingState = .loading
+        do {
+            let newThreads = try await threadsProvider.fetchTreads(from: origin,
+                                                                   to: destination,
+                                                                   numberOfFetchedItems: threads.count)
+            threads.append(contentsOf: newThreads)
+            loadingState = .success
+        } catch let error as DataFetchingError {
+            print(error)
+            loadingState = .error(error)
+        } catch {
+            loadingState = .error(.serverError(description: error.localizedDescription))
         }
     }
     

@@ -9,15 +9,10 @@ import Foundation
 
 
 // MARK: - StationsAndCitiesProvider
-final class StationsAndCitiesProvider {
-    
-    // MARK: - Internal Properties
-    
-    private(set) var cities: [City] = []
+final class StationsAndCitiesProvider: Sendable {
     
     // MARK: - Private Properties
-    
-    private var stations: [City:[Station]] = [:]
+
     private let allStationsService: AllStationsService
     private let mapper = APIStationsAndCitiesMapper()
     
@@ -29,7 +24,7 @@ final class StationsAndCitiesProvider {
     
     // MARK: - Internal Methods
     
-    func fetchCitiesAndStations() async throws {
+    func fetchCitiesAndStations() async throws -> [City:[Station]] {
         do {
             let countriesResponse = try await allStationsService.getAllStations()
             guard let countries = countriesResponse.countries,
@@ -38,13 +33,14 @@ final class StationsAndCitiesProvider {
             else {
                 throw DataFetchingError.parsingError
             }
-            for region in regions {
-                if let settlements = region.settlements {
-                    for settlement in settlements {
-                        renderSettlement(settlement)
-                    }
+            let citiesAndStations: [City: [Station]] = try regions
+                .compactMap { $0.settlements }
+                .flatMap { $0 }
+                .compactMap { try stations(at: $0 )}
+                .reduce(into: [City: [Station]]()) { result, next in
+                    result[next.city] = next.stations
                 }
-            }
+            return citiesAndStations
         } catch let urlError as URLError {
             print(urlError)
             switch urlError.code {
@@ -61,19 +57,21 @@ final class StationsAndCitiesProvider {
         }
     }
     
-    func stations(of city: City) -> [Station] {
-        return stations[city] ?? []
-    }
-    
     // MARK: - Private Methods
     
-    private func renderSettlement(_ settlement: Components.Schemas.Settlement) {
-        guard let city = mapper.map(city: settlement) else { return }
-        guard let stations = settlement.stations else { return }
-        let trainStations = stations.filter({ $0.transport_type == .train}).compactMap { mapper.map(station: $0) }
-        if !trainStations.isEmpty {
-            cities.append(city)
-            self.stations[city] = trainStations
+    private func stations(at settlement: Components.Schemas.Settlement) throws -> (city: City, stations: [Station])? {
+        guard let city = mapper.map(city: settlement),
+              let allStations = settlement.stations
+        else {
+            return nil
+        }
+        let trainStations = allStations
+            .filter({ $0.transport_type == .train})
+            .compactMap { mapper.map(station: $0) }
+        if trainStations.isEmpty {
+            return nil
+        } else {
+            return (city: city, stations: trainStations)
         }
     }
     
