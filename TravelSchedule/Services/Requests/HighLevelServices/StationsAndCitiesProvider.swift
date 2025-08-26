@@ -33,16 +33,13 @@ final class StationsAndCitiesProvider: Sendable {
             else {
                 throw DataFetchingError.parsingError
             }
-            var citiesAndStations: [City:[Station]] = [:]
-            for region in regions {
-                if let settlements = region.settlements {
-                    for settlement in settlements {
-                        if let (city, stations) = try stations(at: settlement) {
-                            citiesAndStations[city] = stations
-                        }
-                    }
+            let citiesAndStations: [City: [Station]] = try regions
+                .compactMap { $0.settlements }
+                .flatMap { $0 }
+                .compactMap { try stations(at: $0 )}
+                .reduce(into: [City: [Station]]()) { result, next in
+                    result[next.city] = next.stations
                 }
-            }
             return citiesAndStations
         } catch let urlError as URLError {
             print(urlError)
@@ -68,7 +65,9 @@ final class StationsAndCitiesProvider: Sendable {
         else {
             return nil
         }
-        let trainStations = allStations.filter({ $0.transport_type == .train}).compactMap { mapper.map(station: $0) }
+        let trainStations = allStations
+            .filter({ $0.transport_type == .train})
+            .compactMap { mapper.map(station: $0) }
         if trainStations.isEmpty {
             return nil
         } else {
