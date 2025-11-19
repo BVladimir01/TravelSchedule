@@ -12,7 +12,7 @@ An app for searching train trips and schedules.
 ## Tech Stack
 - **Language:** Swift
 - **Architecture:** MVVM
-- **Frameworks:** SwiftUI, Swift Open API Generator, Combine, UIKit
+- **Frameworks & Libraries:** SwiftUI, Swift Open API Generator, Combine, UIKit
 - **Tools:** Swagger
 
 ## Installation
