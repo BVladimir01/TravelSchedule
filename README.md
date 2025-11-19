@@ -33,8 +33,7 @@ open TravelSchedule.xcodeproj
 |:--------------:|:--------:|:-------:|
 | ![Trip](PreviewGifs/TravelSchedule_Trains.gif) | ![Settings](PreviewGifs/TravelSchedule_Settings.gif) | ![Stories](PreviewGifs/TravelSchedule_Stories.gif) |
 
-![Trip](PreviewGIFs/TravelSchedule_Trains.gif) 
-## 📁 Project Structure
+##  Project Structure
 
 **TravelSchedule/** \
 ├ **TabSelectionView/** *# Main tab view* \
@@ -52,5 +51,5 @@ open TravelSchedule.xcodeproj
 - [ ] Add UI tests
 - [ ] Add documentation
 
-## 🙌 Acknowledgements
+## Acknowledgements
 Big thanks to Yandex Practicum reviewers.
