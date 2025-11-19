@@ -28,6 +28,7 @@ open TravelSchedule.xcodeproj
 - Xcode 16+
 
 ## Preview
+
 <table>
 <tr>
   <th>Trip selection</th>
@@ -35,9 +36,9 @@ open TravelSchedule.xcodeproj
   <th>Stories</th>
 </tr>
 <tr>
-  <td><img src="PreviewGIFs/TravelSchedule_Trains.gif" alt="Trip"></td>
-  <td><img src="PreviewGIFs/TravelSchedule_Settings.gif" alt="Settings"></td>
-  <td><img src="PreviewGIFs/TravelSchedule_Stories.gif" alt="Stories"></td>
+  <td><img src="PreviewGIFs/TravelSchedule_Trains.gif"></td>
+  <td><img src="PreviewGIFs/TravelSchedule_Settings.gif"></td>
+  <td><img src="PreviewGIFs/TravelSchedule_Stories.gif"></td>
 </tr>
 </table>
 
