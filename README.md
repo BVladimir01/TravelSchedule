@@ -31,8 +31,9 @@ open TravelSchedule.xcodeproj
 
 | Trip selection | Settings | Stories |
 |:--------------:|:--------:|:-------:|
-| ![Trip](PreviewGIFs/TravelSchedule_Trains.gif) | ![Settings](PreviewGIFs/TravelSchedule_Settings.gif) | ![Stories](PreviewGIFs/TravelSchedule_Stories.gif) |
+| ![Trip](PreviewGifs/TravelSchedule_Trains.gif) | ![Settings](PreviewGifs/TravelSchedule_Settings.gif) | ![Stories](PreviewGifs/TravelSchedule_Stories.gif) |
 
+![Trip](PreviewGIFs/TravelSchedule_Trains.gif) 
 ## 📁 Project Structure
 
 **TravelSchedule/** \
