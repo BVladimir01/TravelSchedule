@@ -29,18 +29,9 @@ open TravelSchedule.xcodeproj
 
 ## Preview
 
-<table>
-<tr>
-  <th>Trip selection</th>
-  <th>Settings</th>
-  <th>Stories</th>
-</tr>
-<tr>
-  <td><img src="PreviewGIFs/TravelSchedule_Trains.gif"></td>
-  <td><img src="PreviewGIFs/TravelSchedule_Settings.gif"></td>
-  <td><img src="PreviewGIFs/TravelSchedule_Stories.gif"></td>
-</tr>
-</table>
+| Trip selection | Settings | Stories |
+|:--------------:|:--------:|:-------:|
+| ![Trip](PreviewGIFs/TravelSchedule_Trains.gif) | ![Settings](PreviewGIFs/TravelSchedule_Settings.gif) | ![Stories](PreviewGIFs/TravelSchedule_Stories.gif) |
 
 ## 📁 Project Structure
 
