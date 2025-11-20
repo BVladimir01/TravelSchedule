@@ -17,7 +17,7 @@ An app for searching train trips and schedules.
 
 ## Installation
 ```bash
-git clone https://github.com/BVladimir01/TravelSchedule
+git clone https://github.com/BVladimir01/TravelSchedule.git
 cd TravelSchedule
 open TravelSchedule.xcodeproj
 ```
